@@ -2,7 +2,7 @@
 #include <cmath>
 #include "coordinata.h"
 #include "utility.h"
-
+#include "json.hpp"
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 
@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
 	cout<<"angolo xy = "<<ACxy<<endl<<"angolo xz = "<<ACxz<<endl;	
 	cout<<endl<<"DIFFERENZA:"<<endl;
 	cout<<"angolo xy = "<<d_angolo(ABxy,ACxy)<<endl<<"angolo xz = "<<d_angolo(ABxz,ACxz)<<endl;
+    
+
 	return 0;
 }
 
