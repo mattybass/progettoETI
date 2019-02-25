@@ -9,9 +9,9 @@
 
 int main(int argc, char** argv) {
 
-	Coordinata B(-10,30,0);
-	Coordinata A(-30,10,0);
-	Coordinata C(10,20,0);
+	Coordinata B(0,0,0);
+	Coordinata A(9,4,0);
+	Coordinata C(-2,4,0);
 	double differenza=angolo_azimut(A,B,C);
 	cout<<differenza;
 	return 0;

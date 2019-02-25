@@ -1,71 +1,94 @@
 #include "utility.h"
 
-
-
-double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3){
-    double angoloc1c2;
-    double angoloc2c3;
-    
- // ANOGOLO C1 C2
-    if(c1.get_x()-c2.get_x()!=0){
-        double m_c1c2= ((c1.get_y()-c2.get_y())/(c1.get_x()-c2.get_x()));
-        angoloc1c2= atan(m_c1c2)*180/PI;
+double angolo_XY(Coordinata &c1,Coordinata &c2){
+	double angolo;
+	if(c1.get_x()-c2.get_x()!=0){
+        double m= ((c1.get_y()-c2.get_y())/(c1.get_x()-c2.get_x()));
+        angolo= atan(m)*180/PI;
         
-        if(angoloc1c2>0){
+        if(angolo>0){
             if(c1.get_y()<c2.get_y()){
-                angoloc1c2+=180;
+                angolo+=180;
             }
-        }else{
+        }
+		else{
             if(c1.get_y()<c2.get_y()){
-                angoloc1c2=360+angoloc1c2;
-            }else{
-                angoloc1c2+=180;
+                angolo+=360;
+            }
+			else{
+                angolo+=180;
             }
         }
         
     }else{
         
         if(c1.get_y()>c2.get_y()){
-            angoloc1c2= 90.0;
+            angolo= 90.0;
         }else{
-            angoloc1c2= 270.0;
+            angolo= 270.0;
         }
     }
-//ANGOLO C2 C3
-    
-    if((c3.get_x()-c2.get_x())!=0){
-        double m_c2c3= ((c3.get_y()-c2.get_y())/(c3.get_x()-c2.get_x()));
-        angoloc2c3= atan(m_c2c3)*180/PI;
+    return angolo;
+}
+
+double angolo_XZ(Coordinata &c1,Coordinata &c2){
+	double angolo;
+	if(c1.get_x()-c2.get_x()!=0){
+        double m= ((c1.get_z()-c2.get_z())/(c1.get_x()-c2.get_x()));
+        angolo= atan(m)*180/PI;
         
-        if(angoloc2c3>0){
-            if(c3.get_y()<c2.get_y()){
-                angoloc2c3+=180;
+        if(angolo>0){
+            if(c1.get_z()<c2.get_z()){
+                angolo+=180;
             }
-        }else{
-            if(c3.get_y()<c2.get_y()){
-                angoloc2c3=360+angoloc2c3;
-            }else{
-                angoloc2c3+=180;
+        }
+		else{
+            if(c1.get_z()<c2.get_z()){
+                angolo+=360;
+            }
+			else{
+                angolo+=180;
             }
         }
         
     }else{
-        if(c3.get_y()>c2.get_y()){
-            angoloc2c3= 90.0;
+        
+        if(c1.get_z()>c2.get_z()){
+            angolo= 90.0;
         }else{
-            angoloc2c3= 270.0;
+            angolo= 270.0;
         }
     }
+    return angolo;	
+}
+
+
+double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3){
+    double angoloc1c2=angolo_XY(c1,c2);
+    double angoloc2c3=angolo_XY(c2,c3);
+    
 //DIFFERENZA TRA I DUE ANGOLI = AZIMUT
-    double azimut=0;
-    
-    
+    double azimut;
+      
     azimut=angoloc2c3-angoloc1c2;
     if(azimut<0){
         azimut=360+azimut;
     }
     
     return azimut;
+}
+
+double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3){
+    double angoloc1c2=angolo_XZ(c1,c2);
+    double angoloc2c3=angolo_XZ(c2,c3);
+    
+//DIFFERENZA TRA I DUE ANGOLI = AZIMUT
+    double zenit=angoloc2c3-angoloc1c2;
+    if(zenit<0){
+        zenit+=360;
+    }
+    
+    return zenit;
 }
 
 
