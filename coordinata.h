@@ -16,20 +16,11 @@ class Coordinata{
 		double y;
 		double z;
 	public:
-		Coordinata(double _x,double _y,double _z){
-			x=_x;
-			y=_y;
-			z=_z;
-		}
-		double get_x()const{
-			return x;
-		}
-		double get_y()const{
-			return y;
-		}
-		double get_z()const{
-			return z;
-		}
+    Coordinata(double _x,double _y,double _z);
+    double get_x()const;
+    double get_y()const;
+    double get_z()const;
+    
     friend ostream& operator << (ostream& os,const Coordinata& _punto);
 };
 
