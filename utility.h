@@ -4,10 +4,17 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include "coordinata.h"
 #define PI 3.14159265
 using namespace std;
 
-#include "coordinata.h"
+
+
+double angolo_azimut(const Coordinata& c1, const Coordinata& c2, const Coordinata& c3);
+//La cordianta c2 deve essere la coordinata in comune alle due rette.
+
+double angolo_zenit(double _x, double _z );
+
 
 
 double angolo_XY(Coordinata &c1,Coordinata &c2){

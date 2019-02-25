@@ -8,7 +8,8 @@
 using namespace std;
 
 
-ostream& operator << (ostream& os,const Cordinata& _punto);
+
+
 class Coordinata{
 	private:
 		double x;
@@ -29,13 +30,10 @@ class Coordinata{
 		double get_z()const{
 			return z;
 		}
-    friend ostream& operator << (ostream& os,const Cordinata& _punto);
+    friend ostream& operator << (ostream& os,const Coordinata& _punto);
 };
 
-ostream& operator << (ostream& os,const Cordinata& _punto){
-    return os<<"["<<_punto.x<<";"<<_punto.y<<";"<<_punto.z<<"]";
-    
-}
+ostream& operator << (ostream& os,const Coordinata& _punto);
 
 
 
