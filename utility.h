@@ -13,7 +13,7 @@ using namespace std;
 double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3);
 //La cordianta c2 deve essere la coordinata in comune alle due rette.
 
-//double angolo_zenit(double _x, double _z );
+double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3);
 
 
 
