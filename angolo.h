@@ -17,9 +17,7 @@ class Angolo{
 		double azimut; //Posizione (X-Y)
 	public:
 		Angolo(const Coordinata& c1, const Coordinata& c2, const Coordinata& c3){
-			
 		}
-    
     
 		double get_zenit()const{
 			return zenit;
