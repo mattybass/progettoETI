@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <climits>
 #include <cmath>
 #define PI 3.14159265
 using namespace std;
@@ -17,6 +18,7 @@ class Coordinata{
 		double z;
 	public:
     Coordinata(double _x,double _y,double _z);
+    Coordinata();
     double get_x()const;
     double get_y()const;
     double get_z()const;
