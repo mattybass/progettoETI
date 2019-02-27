@@ -32,6 +32,7 @@ map<string,Angolo>::const_iterator Frame::get_enditer_angolo()const{
 
 void Frame::insert_coordinata(int _numerojoint, double _x, double _y, double _z){
     coordinatejoint.insert(pair<int,Coordinata> (_numerojoint, Coordinata(_x,_y,_z)));
+    
 }
 
 void Frame::insert_angolo(string joint,int a,int b,int c){

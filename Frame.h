@@ -12,6 +12,7 @@ private:
     int numeroframe;
     map<int,Coordinata> coordinatejoint;
     map<string,Angolo> angolijoint;
+    void insert_angolo(string joint,int a,int b,int c); 
 public:
     explicit Frame(int _numeroframe);
     int get_numeroframe()const;
@@ -23,7 +24,7 @@ public:
     map<string,Angolo>::const_iterator get_enditer_angolo()const;
     
     void insert_coordinata(int _numerojoint, double _x, double _y, double _z);
-    void insert_angolo(string joint,int a,int b,int c);
+
     void completa_angoli();
     
     friend ostream& operator <<(ostream& os, const Frame& f);
