@@ -51,7 +51,7 @@ void Frame::insert_angolo(string joint,int a,int b,int c){
 		c3=itera->second;
 	}
 	
-	angolijoint.insert(pair<string,Angolo> (joint,Angolo(c1,c2,c3)));	
+	angolijoint.insert(pair<string,Angolo> (joint,Angolo(c1,c2,c3,numeroframe)));	
 }
 
 void Frame::completa_angoli(){
@@ -68,7 +68,6 @@ void Frame::completa_angoli(){
 	insert_angolo("9",8,9,10);
 	insert_angolo("12",11,12,13);
 	insert_angolo("5",0,5,6);	
-	
 }
 
 ostream& operator <<(ostream& os, const Frame& f){
