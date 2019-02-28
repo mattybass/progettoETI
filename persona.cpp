@@ -24,6 +24,19 @@ void Persona::completa_angoli(int _numeroframe){
     }else{
         cout<<"ERRORE: frame non trovato, angoli non creati\n";
     }
+}
+
+void Persona::popola_sequenzaangolo(){
+    map<int,Frame>::iterator iter;
+    int _numeroframe=0;
+    for (iter=sequenzaframe.begin(); iter!=sequenzaframe.end(); ++iter) {
+        _numeroframe=iter->first;
+        
+        //DA FINIRE, DEVO RIPASSARE COME CREARE MAP DI LISTE.
+        
+        
+    }
+    
     
     
     
