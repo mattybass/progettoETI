@@ -12,14 +12,14 @@ using namespace std;
 
 class Angolo{
 	private:
-		int frame;
+		int numeroframe;
 		double zenit; //Altezza (Y-Z)
 		double azimut; //Posizione (X-Y)
 	public:
-    Angolo(Coordinata& c1,Coordinata& c2,Coordinata& c3,int _frame);
-    double get_zenit()const;
-    double get_azimut()const;
-    int get_frame()const;
+    Angolo(Coordinata& c1,Coordinata& c2,Coordinata& c3,int _numeroframe); //Costruttore 4 parametri
+    double get_zenit()const; //Ritorna l'angolo zenit
+    double get_azimut()const; //Ritorna l'angolo azimut
+    int get_numeroframe()const; //Ritorna il numero di Frame associato all'angolo
     friend ostream& operator << (ostream& os,const Angolo& _angolo);
 };
 

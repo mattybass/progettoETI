@@ -17,19 +17,6 @@ Coordinata Frame::get_coordinata(int _numerojoint){
     return c;
 }
 
-map<int,Coordinata>::const_iterator Frame::get_beginiter_cord()const{
-    return coordinatejoint.begin();
-}
-map<int,Coordinata>::const_iterator Frame::get_enditer_cord()const{
-    return coordinatejoint.end();
-}
-map<string,Angolo>::const_iterator Frame::get_beginiter_angolo()const{
-    return angolijoint.begin();
-}
-map<string,Angolo>::const_iterator Frame::get_enditer_angolo()const{
-    return angolijoint.end();
-}
-
 void Frame::insert_coordinata(int _numerojoint, double _x, double _y, double _z){
     coordinatejoint.insert(pair<int,Coordinata> (_numerojoint, Coordinata(_x,_y,_z)));
     
@@ -37,22 +24,27 @@ void Frame::insert_coordinata(int _numerojoint, double _x, double _y, double _z)
 
 void Frame::insert_angolo(string joint,int a,int b,int c){
     map<int,Coordinata>::iterator itera;
+    map<int,Coordinata>::iterator itera2;
+    map<int,Coordinata>::iterator itera3;
 	Coordinata c1,c2,c3;
 	
 	itera=coordinatejoint.find(a);
 	if(itera!=coordinatejoint.end()){
 		c1=itera->second;
 	}
-	itera=coordinatejoint.find(b);
-	if(itera!=coordinatejoint.end()){
-		c2=itera->second;
+	itera2=coordinatejoint.find(b);
+	if(itera2!=coordinatejoint.end()){
+		c2=itera2->second;
 	}
-	itera=coordinatejoint.find(c);
-	if(itera!=coordinatejoint.end()){
-		c3=itera->second;
+	itera3=coordinatejoint.find(c);
+	if(itera3!=coordinatejoint.end()){
+		c3=itera3->second;
 	}
+
+    if(itera!=coordinatejoint.end() && itera2!=coordinatejoint.end() && itera3!=coordinatejoint.end()){
+        angolijoint.insert(pair<string,Angolo> (joint,Angolo(c1,c2,c3,numeroframe)));
+    }
 	
-	angolijoint.insert(pair<string,Angolo> (joint,Angolo(c1,c2,c3,numeroframe)));	
 }
 
 void Frame::completa_angoli(){

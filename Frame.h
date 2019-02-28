@@ -10,22 +10,16 @@
 class Frame{
 private:
     int numeroframe;
-    map<int,Coordinata> coordinatejoint;
-    map<string,Angolo> angolijoint;
-    void insert_angolo(string joint,int a,int b,int c); 
+    map<int,Coordinata> coordinatejoint; //MAP con chiave numero di joint e argomento la Coordinata relativa
+    map<string,Angolo> angolijoint; ////MAP con chiave nome angolo e argomento l'Angolo relativo
+    void insert_angolo(string joint,int a,int b,int c); //Funzione che trasforma 3 coordiante in un'angolo, usata nella funzione public "void completa_angoli();"
 public:
-    explicit Frame(int _numeroframe);
-    int get_numeroframe()const;
-    Coordinata get_coordinata(int _numerojoint);
-    Angolo get_anogolo(int _numeroangolo);
-    map<int,Coordinata>::const_iterator get_beginiter_cord()const;
-    map<int,Coordinata>::const_iterator get_enditer_cord()const;
-    map<string,Angolo>::const_iterator get_beginiter_angolo()const;
-    map<string,Angolo>::const_iterator get_enditer_angolo()const;
-    
-    void insert_coordinata(int _numerojoint, double _x, double _y, double _z);
-
-    void completa_angoli();
+    explicit Frame(int _numeroframe); //Costruttore ad un parametro esplicito
+    int get_numeroframe()const; //Ritorna il numero di frame
+    Coordinata get_coordinata(int _numerojoint); // Ritorna la coordinata relativa ad uno specifico joint
+    Angolo get_anogolo(int _numeroangolo);// Ritorna l'angolo relativo ad uno specifico joint
+    void insert_coordinata(int _numerojoint, double _x, double _y, double _z);//Inserisce coordinate nella map di interi coordinata
+    void completa_angoli();//da richiamare dopo l'inserimento di tutte le coordinate, popola la map di stringhe e angoli utilizzando la funzione private "insert_angolo"
     
     friend ostream& operator <<(ostream& os, const Frame& f);
     

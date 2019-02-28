@@ -11,24 +11,18 @@
 
 class Persona{
 private:
-    map<int,Frame> sequenzaframe;
+    map<int,Frame> sequenzaframe; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
     map<string,list<Angolo>> sequenzaangolo;
-    set<int> framedaanalizzare;
     map<string,set<int>> framexangolo;
-    void insert_maplist(Frame);
-    void insert_set();
-    void insert_mapset();
+    set<int> framedaanalizzare;
+    
 public:
-    map<int,Frame>::const_iterator get_beginiter_frame()const;
-    map<int,Frame>::const_iterator get_enditer_frame()const;
-    set<int>::const_iterator get_beginiter_anal()const;
-    set<int>::const_iterator get_enditer_anal()const;
-    void insert(Frame);
+    void insert_frame(int _numeroframe); //Crea un frame vuoto e lo insrisce nella map.
+    void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
+    void completa_angoli(int _numeroframe); // Crea e popola la map degli angoli inserita in un determinato frame.
     
     
     friend ostream& operator <<(ostream& os, const Frame& f);
-    
-    
 };
 
 ostream& operator <<(ostream& os, const Frame& f);
