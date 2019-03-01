@@ -1,6 +1,6 @@
 #include "utility.h"
 #include "angolo.h"
-#define FINESTRARICERCAMASSIMI=2
+
 
 double angolo_XY(Coordinata &c1,Coordinata &c2){
 	double angolo;
@@ -93,13 +93,39 @@ double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3){
     return zenit;
 }
 
+float medialista(list<int> _lista){
+    float media =0;
+    list<int>::iterator iter;
+    int index=0;
+    int somma=0;
+    
+    for (iter=_lista.begin(); iter!=_lista.end(); ++iter) {
+        ++index;
+        somma=somma+(*iter);
+    }
+    media=(float)somma/index;
+
+    return media;
+}
 
 
-int ricercamassimo(map<string,list<Angolo>>){
+pair<float,float> medialista(list<Angolo> _lista){
+    float mediazenit =0;
+    float mediaazimut=0;
+    list<Angolo>::iterator iter;
+    int index=0;
+    float sommazenit=0;
+    float sommaazimut=0;
     
+    for (iter=_lista.begin(); iter!=_lista.end(); ++iter) {
+        ++index;
+        sommazenit=sommazenit + iter->get_zenit();
+        sommaazimut=sommaazimut + iter->get_azimut();
+    }
     
+    mediazenit=(float)sommazenit/index;
+    mediaazimut=(float)sommaazimut/index;
     
-    
-    
+    return pair<float, float> (sommaazimut,sommazenit);
     
 }

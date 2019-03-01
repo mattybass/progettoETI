@@ -23,6 +23,6 @@ double angolo_XY(Coordinata &c1,Coordinata &c2);
 
 double angolo_XZ(Coordinata &c1,Coordinata &c2);
 
-int ricercamassimo(map<string,list<Angolo>>);
+pair<float,float> medialista(list<Angolo> _lista); //Calcola la media della lista DI ANGOLO
 
 #endif

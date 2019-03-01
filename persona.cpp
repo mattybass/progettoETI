@@ -36,8 +36,16 @@ void Persona::popola_sequenzaangolo(){
             sequenzaangolo[itertmp->first].push_back(itertmp->second);
         }
     }
-    
-    
-    
-    
+
+}
+
+void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, float _toleranzazenit){
+    list<int> listavariazioni;
+    map<string,list<Angolo>>::iterator iter;
+    iter= sequenzaangolo.find(_angolo);
+    if(iter!=sequenzaangolo.end()){
+     
+        
+        //DIOPORCO SONO INCHIODATO, FACCIO IO DOPO. _Sergio
+    }
 }
