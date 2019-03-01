@@ -33,14 +33,8 @@ void Persona::popola_sequenzaangolo(){
     for (iter=sequenzaframe.begin(); iter!=sequenzaframe.end(); ++iter) {
         tmp=iter->second.get_angolijoint();
         for(itertmp=tmp.begin();itertmp!=tmp.end();++itertmp){
-            
-            
+            sequenzaangolo[itertmp->first].push_back(itertmp->second);
         }
-        
-        
-        //DA FINIRE, DEVO RIPASSARE COME CREARE MAP DI LISTE.
-        
-        
     }
     
     

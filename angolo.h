@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <cmath>
 #include "coordinata.h"
-#include "utility.h"
 #define PI 3.14159265
 
 using namespace std;

@@ -1,4 +1,5 @@
 #include "angolo.h"
+#include "utility.h"
 
 Angolo::Angolo(Coordinata& _c1,Coordinata& _c2,Coordinata& _c3, int _numeroframe){
     azimut = angolo_azimut(_c1, _c2, _c3);

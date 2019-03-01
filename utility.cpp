@@ -1,4 +1,6 @@
 #include "utility.h"
+#include "angolo.h"
+#define FINESTRARICERCAMASSIMI=2
 
 double angolo_XY(Coordinata &c1,Coordinata &c2){
 	double angolo;
@@ -93,3 +95,11 @@ double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3){
 
 
 
+int ricercamassimo(map<string,list<Angolo>>){
+    
+    
+    
+    
+    
+    
+}

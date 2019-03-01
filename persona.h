@@ -13,6 +13,7 @@ class Persona{
 private:
     map<int,Frame> sequenzaframe; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
     map<string,list<Angolo>> sequenzaangolo; //MAP con chaive nome dell'angolo e argomento lista di Angolo. Rappresenta l'andamento temporale dei vari angolii. [Variazione nel empo: NB siamo nel discreto]
+    map<string,set<int>> max_min_angoli; //MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi
     set<int> framedaanalizzare;
     map<string,set<int>> framexangolo;
     
