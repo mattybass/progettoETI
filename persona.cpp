@@ -28,9 +28,15 @@ void Persona::completa_angoli(int _numeroframe){
 
 void Persona::popola_sequenzaangolo(){
     map<int,Frame>::iterator iter;
-    int _numeroframe=0;
+    map<string,Angolo> tmp;
+    map<string,Angolo>::iterator itertmp;
     for (iter=sequenzaframe.begin(); iter!=sequenzaframe.end(); ++iter) {
-        _numeroframe=iter->first;
+        tmp=iter->second.get_angolijoint();
+        for(itertmp=tmp.begin();itertmp!=tmp.end();++itertmp){
+            
+            
+        }
+        
         
         //DA FINIRE, DEVO RIPASSARE COME CREARE MAP DI LISTE.
         

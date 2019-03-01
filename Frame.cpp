@@ -47,6 +47,11 @@ void Frame::insert_angolo(string joint,int a,int b,int c){
 	
 }
 
+
+map<string,Angolo> Frame::get_angolijoint()const{
+    return angolijoint;
+}
+
 void Frame::completa_angoli(){
 	insert_angolo("3",4,3,2);
 	insert_angolo("2",3,2,1);

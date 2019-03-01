@@ -20,7 +20,8 @@ public:
     void insert_frame(int _numeroframe); //Crea un frame vuoto e lo insrisce nella map.
     void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
     void completa_angoli(int _numeroframe); // Crea e popola la map degli angoli inserita in un determinato frame.
-    void popola_sequenzaangolo();
+    void popola_sequenzaangolo(); //Da richiamare una volta popolati tutta la map "suqenezaframe" e dopo aver richiamato le varie completa_angoli
+    
     
     friend ostream& operator <<(ostream& os, const Frame& f);
 };

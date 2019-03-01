@@ -20,6 +20,7 @@ public:
     Angolo get_anogolo(int _numeroangolo);// Ritorna l'angolo relativo ad uno specifico joint
     void insert_coordinata(int _numerojoint, double _x, double _y, double _z);//Inserisce coordinate nella map di interi coordinata
     void completa_angoli();//da richiamare dopo l'inserimento di tutte le coordinate, popola la map di stringhe e angoli utilizzando la funzione private "insert_angolo"
+    map<string,Angolo> get_angolijoint()const; //Ritorna una copia della MAP "angolijoint"
     
     friend ostream& operator <<(ostream& os, const Frame& f);
     
