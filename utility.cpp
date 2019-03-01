@@ -126,6 +126,6 @@ pair<float,float> medialista(list<Angolo> _lista){
     mediazenit=(float)sommazenit/index;
     mediaazimut=(float)sommaazimut/index;
     
-    return pair<float, float> (sommaazimut,sommazenit);
+    return pair<float, float> (mediazenit,mediaazimut);
     
 }

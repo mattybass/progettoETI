@@ -10,7 +10,7 @@ void Persona::insert_coordinata(int _numeroframe,int _numerojoint,double _x, dou
     if(iter!=sequenzaframe.end()){
         iter->second.insert_coordinata(_numerojoint, _x, _y, _z);
     }else{
-        cout<<"ERRORE: frame non trovato, coordinata non inserita\n";
+        cout<<"ERRORE: frame non trovato, coordinata non inserita"<<endl;
     }
 }
 
@@ -22,7 +22,7 @@ void Persona::completa_angoli(int _numeroframe){
     if(iter!=sequenzaframe.end()){
         iter->second.completa_angoli();
     }else{
-        cout<<"ERRORE: frame non trovato, angoli non creati\n";
+        cout<<"ERRORE: frame non trovato, angoli non creati"<<endl;
     }
 }
 
@@ -40,12 +40,35 @@ void Persona::popola_sequenzaangolo(){
 }
 
 void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, float _toleranzazenit){
-    list<int> listavariazioni;
+    list<double> listavariazioniazimut;
+    list<double> listavariazionizenit;
     map<string,list<Angolo>>::iterator iter;
     iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
-     
+        list<Angolo>::iterator iterl;
+        for(iterl=iter->second.begin();iterl!=iter->second.end();++iterl){
+            listavariazioniazimut.push_back(iterl->get_azimut());
+            listavariazionizenit.push_back(iterl->get_zenit());
+        }
+        float mediaazimut=medialista(iter->second).second;
+        float mediazenit=medialista(iter->second).first;
+        list<double>::iterator iterd;
+        iterd=listavariazionizenit.begin();
+        iterd++;
         
-        //DIOPORCO SONO INCHIODATO, FACCIO IO DOPO. _Sergio
+        while (iterd!=listavariazionizenit.end()) {
+            double a= *(iterd--);
+            double b= *(iterd);
+            double c= *(iterd++);
+            
+            if(a<b && b>c && b>(mediazenit+_toleranzazenit*mediazenit) ){
+                
+            }
+        }
+    
+    }else{
+        cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
+        
+        
     }
 }
