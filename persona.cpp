@@ -17,9 +17,12 @@ Persona::Persona(string nome_file) {
 
 		if (line.find("{") != std::string::npos)
 			exit_value++;
-		if (line.find("}") != std::string::npos  && frame!=0) {
+		if (line.find("}") != std::string::npos) {
 			exit_value--;
-			completa_angoli(frame);
+			if (exit_value == 1 && frame != 0) {
+				completa_angoli(frame);
+			}
+
 		}
 			
 
