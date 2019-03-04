@@ -22,7 +22,7 @@ void Frame::insert_coordinata(int _numerojoint, double _x, double _y, double _z)
     
 }
 
-void Frame::insert_angolo(string joint,int a,int b,int c){
+void Frame::insert_angolo(string _joint,int a,int b,int c){
     map<int,Coordinata>::iterator itera;
     map<int,Coordinata>::iterator itera2;
     map<int,Coordinata>::iterator itera3;
@@ -42,7 +42,7 @@ void Frame::insert_angolo(string joint,int a,int b,int c){
 	}
 
     if(itera!=coordinatejoint.end() && itera2!=coordinatejoint.end() && itera3!=coordinatejoint.end()){
-        angolijoint.insert(pair<string,Angolo> (joint,Angolo(c1,c2,c3,numeroframe)));
+		angolijoint.insert(pair<string,Angolo> (_joint,Angolo(c1,c2,c3,numeroframe)));
     }
 	
 }
@@ -55,17 +55,12 @@ map<string,Angolo> Frame::get_angolijoint()const{
 void Frame::completa_angoli(){
 	insert_angolo("3",4,3,2);
 	insert_angolo("2",3,2,1);
-	insert_angolo("1a",2,1,0);
-	insert_angolo("1b",0,1,5);
-	insert_angolo("1c",0,1,11);
-	insert_angolo("1d",2,1,8);
-	insert_angolo("1e",2,1,0);
+	insert_angolo("1",2,1,8);
 	insert_angolo("6",5,6,7);
 	insert_angolo("8",1,8,9);
 	insert_angolo("11",1,11,12);
 	insert_angolo("9",8,9,10);
 	insert_angolo("12",11,12,13);
-	insert_angolo("5",0,5,6);	
 }
 
 ostream& operator <<(ostream& os, const Frame& f){
@@ -77,7 +72,8 @@ ostream& operator <<(ostream& os, const Frame& f){
     os<<endl;
     map<string,Angolo>::const_iterator iteran;
     for(iteran=f.angolijoint.begin();iteran!=f.angolijoint.end();++iteran){
-        os<<iter->first<<": "<<iter->second<<endl;
+//	iteran = f.angolijoint.find("1a");
+	os << iteran->first << ": "<<iteran->second<<endl;
     }
     return os;
 }
