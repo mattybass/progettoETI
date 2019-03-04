@@ -67,7 +67,7 @@ double angolo_XZ(Coordinata &c1,Coordinata &c2){
 
 double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3){
     double angoloc1c2=angolo_XY(c1,c2);
-    double angoloc2c3=angolo_XY(c2,c3);
+    double angoloc2c3=angolo_XY(c3,c2);
     
 //DIFFERENZA TRA I DUE ANGOLI = AZIMUT
     double azimut;
@@ -82,7 +82,7 @@ double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3){
 
 double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3){
     double angoloc1c2=angolo_XZ(c1,c2);
-    double angoloc2c3=angolo_XZ(c2,c3);
+    double angoloc2c3=angolo_XZ(c3,c2);
     
 //DIFFERENZA TRA I DUE ANGOLI = AZIMUT
     double zenit=angoloc2c3-angoloc1c2;
