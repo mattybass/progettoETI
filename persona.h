@@ -19,14 +19,14 @@ using namespace std;
 class Persona{
 private:
     map<int,Frame> sequenzaframe; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
-    map<string,list<Angolo>> sequenzaangolo; //MAP con chaive nome dell'angolo e argomento lista di Angolo. Rappresenta l'andamento temporale dei vari angolii. [Variazione nel empo: NB siamo nel discreto]
-    map<string,set<int>> max_min_angoli_zenit; //MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi che si discostano di una percentuale x dalla media dell'angolo.
-    map<string,set<int>> max_min_angoli_azimut;
+    map<int,list<Angolo>> sequenzaangolo; //MAP con chaive nome dell'angolo e argomento lista di Angolo. Rappresenta l'andamento temporale dei vari angolii. [Variazione nel empo: NB siamo nel discreto]
+    map<int,set<int>> max_min_angoli_zenit; //MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi che si discostano di una percentuale x dalla media dell'angolo.
+    map<int,set<int>> max_min_angoli_azimut;
     set<int> framedaanalizzare;
-    map<string,set<int>> framexangolo;
+    map<int,set<int>> framexangolo;
     
     
-    void popola_max_min_angolo_zenit(string _angolo, float _tolleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
+    void popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
 public:
 	Persona(string nome_file);
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
