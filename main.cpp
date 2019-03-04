@@ -16,6 +16,6 @@ int main(int argc, char** argv) {
 	double differenza=angolo_azimut(A,B,C);
 	cout<<differenza;*/
 	Persona p("spallagomitoModello.json");
+	cout << p;
 	return 0;
 }
-

@@ -30,8 +30,6 @@ Persona::Persona(string nome_file) {
 		found = line.find("frame");
 		if (found != std::string::npos) {
 			//estrai frame;
-			if (exit_value == 1)
-				completa_angoli(frame);
 
 			found2 = line.find(str_r, 5); //il primo " è in posizione 4
 			if (found2 != std::string::npos) { //questa condizione è sempre verificata
@@ -100,6 +98,7 @@ Persona::Persona(string nome_file) {
 	}
 
 	i.close();
+	popola_sequenzaangolo();
 
 }
 
@@ -163,4 +162,12 @@ void Persona:: popola_max_min_angolo_zenit(string _angolo, float _toleranzazenit
         
         
     }
+}
+
+ostream& operator <<(ostream& os, const Persona& p) {
+	map<int, Frame>::const_iterator citer;
+	for (citer = p.sequenzaframe.begin(); citer != p.sequenzaframe.end(); citer++) {
+		os << citer->second;
+	}
+	return os;
 }

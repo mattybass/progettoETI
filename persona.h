@@ -36,8 +36,8 @@ public:
     
     
     
-    friend ostream& operator <<(ostream& os, const Frame& f);
+    friend ostream& operator <<(ostream& os, const Persona& p);
 };
 
-ostream& operator <<(ostream& os, const Frame& f);
+ostream& operator <<(ostream& os, const Persona& p);
 #endif
