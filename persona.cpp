@@ -139,25 +139,37 @@ void Persona::popola_sequenzaangolo(){
     }
 }
 
-void Persona:: popola_max_min_angolo_zenit(string _angolo, float _toleranzazenit){
-    list<double> listavariazionizenit;
-    map<string,list<Angolo>>::iterator iter;
-    iter= sequenzaangolo.find(_angolo);
+void Persona:: popola_max_min_angolo_zenit(string _angolo, float _tolleranzazenit){
+ map<string,list<Angolo>>::iterator iter;
+ iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
         list<Angolo>::iterator iterl;
-        for(iterl=iter->second.begin();iterl!=iter->second.end();++iterl){
-            listavariazionizenit.push_back(iterl->get_zenit());
-        }
         float mediazenit=medialista(iter->second).first;
-        
-        
-        
+        for(iterl=iter->second.begin();iterl!=iter->second.end();++iterl){
+            ++iterl;
+            list<Angolo>::iterator iterla=--iterl;
+            ++iterl;
+            list<Angolo>::iterator iterlb=iterl;
+            list<Angolo>::iterator iterlc=++iterl;
+            --iterl;
+            
+            //se da problemi con questa funzione basta togliere gli incrementi dove non c'è assegnazione
+            Angolo a=*(iterla);
+            Angolo b=*(iterlb);
+            Angolo c=*(iterlc);
+            if(a.get_zenit()<b.get_zenit() && b.get_zenit()>c.get_zenit() && b.get_zenit()>(mediazenit+_tolleranzazenit*mediazenit)){
+                max_min_angoli_zenit[_angolo].insert(b.get_numeroframe());
+            }else if (b.get_zenit()<a.get_zenit() && b.get_zenit()<c.get_zenit() && b.get_zenit()<(mediazenit-(mediazenit*_tolleranzazenit))){
+                max_min_angoli_zenit[_angolo].insert(b.get_numeroframe());
+            }
+            
+            
+        }
+    
         
         
         
     }else{
         cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
-        
-        
     }
 }

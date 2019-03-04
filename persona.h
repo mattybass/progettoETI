@@ -26,7 +26,7 @@ private:
     map<string,set<int>> framexangolo;
     
     
-    void popola_max_min_angolo_zenit(string _angolo, float _toleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
+    void popola_max_min_angolo_zenit(string _angolo, float _tolleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
 public:
 	Persona(string nome_file);
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
