@@ -36,10 +36,9 @@ void Persona::popola_sequenzaangolo(){
             sequenzaangolo[itertmp->first].push_back(itertmp->second);
         }
     }
-
 }
 
-void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, float _toleranzazenit){
+/*void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, float _toleranzazenit){
     list<double> listavariazioniazimut;
     list<double> listavariazionizenit;
     map<string,list<Angolo>>::iterator iter;
@@ -56,7 +55,7 @@ void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, flo
         iterd=listavariazionizenit.begin();
         iterd++;
         
-        while (iterd!=listavariazionizenit.end()) {
+        while (iterd!=listavariazionizenit.end()){
             double a= *(iterd--);
             double b= *(iterd);
             double c= *(iterd++);
@@ -71,4 +70,12 @@ void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, flo
         
         
     }
+} */
+
+void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, float _toleranzazenit){
+    
+
+
+
+
 }
