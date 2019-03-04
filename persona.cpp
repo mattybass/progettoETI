@@ -164,17 +164,77 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
             }else if (b.get_zenit()<a.get_zenit() && b.get_zenit()<c.get_zenit() && b.get_zenit()<(mediazenit-(mediazenit*_tolleranzazenit))){
                 max_min_angoli_zenit[_angolo].insert(b.get_numeroframe());
             }
-            
-            
         }
-    
-        
-        
-        
     }else{
         cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
     }
 }
+
+void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut){
+    map<int,list<Angolo>>::iterator iter;
+    iter= sequenzaangolo.find(_angolo);
+    if(iter!=sequenzaangolo.end()){
+        list<Angolo>::iterator iterl;
+        float mediaazimut=medialista(iter->second).second;
+        for(iterl=iter->second.begin();iterl!=iter->second.end();++iterl){
+            ++iterl;
+            list<Angolo>::iterator iterla=--iterl;
+            ++iterl;
+            list<Angolo>::iterator iterlb=iterl;
+            list<Angolo>::iterator iterlc=++iterl;
+            --iterl;
+            
+            //se da problemi con questa funzione basta togliere gli incrementi dove non c'è assegnazione
+            Angolo a=*(iterla);
+            Angolo b=*(iterlb);
+            Angolo c=*(iterlc);
+            if(a.get_azimut()<b.get_azimut() && b.get_azimut()>c.get_azimut() && b.get_azimut()>(mediaazimut+_tolleranzaazimut*mediaazimut)){
+                max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
+            }else if (b.get_azimut()<a.get_azimut() && b.get_azimut()<c.get_azimut() && b.get_azimut()<(mediaazimut-(mediaazimut*_tolleranzaazimut))){
+                max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
+            }
+        }
+    }else{
+        cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
+    }
+}
+
+void Persona::popola_framedaanalizzare(){
+    popola_max_min_angolo_azimut(3,0.05);
+    popola_max_min_angolo_azimut(2,0.05);
+    popola_max_min_angolo_azimut(1,0.05);
+    popola_max_min_angolo_azimut(8,0.05);
+    popola_max_min_angolo_azimut(6,0.05);
+    popola_max_min_angolo_azimut(11,0.05);
+    popola_max_min_angolo_azimut(12,0.05);
+    popola_max_min_angolo_azimut(9,0.05);
+    
+    popola_max_min_angolo_zenit(3,0.05);
+    popola_max_min_angolo_zenit(2,0.05);
+    popola_max_min_angolo_zenit(1,0.05);
+    popola_max_min_angolo_zenit(8,0.05);
+    popola_max_min_angolo_zenit(6,0.05);
+    popola_max_min_angolo_zenit(11,0.05);
+    popola_max_min_angolo_zenit(12,0.05);
+    popola_max_min_angolo_zenit(9,0.05);
+    
+    
+    map<int,set<int>>::iterator iter1;
+    set<int>::iterator iter2;
+    
+    for(iter1=max_min_angoli_azimut.begin();iter1!=max_min_angoli_azimut.end();++iter1){
+        for(iter2=iter1->second.begin();iter2!=iter1->second.end();++iter2){
+            framedaanalizzare.insert((*iter2));
+        }
+    }
+    
+    for(iter1=max_min_angoli_zenit.begin();iter1!=max_min_angoli_zenit.end();++iter1){
+        for(iter2=iter1->second.begin();iter2!=iter1->second.end();++iter2){
+            framedaanalizzare.insert((*iter2));
+        }
+    }
+}
+
 
 ostream& operator <<(ostream& os, const Persona& p) {
 	map<int, Frame>::const_iterator citer;
