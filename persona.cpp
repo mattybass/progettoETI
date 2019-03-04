@@ -170,8 +170,8 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
     }
 }
 
-void Persona::popola_max_min_angolo_azimut(string _angolo, float _tolleranzaazimut){
-    map<string,list<Angolo>>::iterator iter;
+void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut){
+    map<int,list<Angolo>>::iterator iter;
     iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
         list<Angolo>::iterator iterl;
@@ -200,26 +200,26 @@ void Persona::popola_max_min_angolo_azimut(string _angolo, float _tolleranzaazim
 }
 
 void Persona::popola_framedaanalizzare(){
-    popola_max_min_angolo_azimut("3",0.05);
-    popola_max_min_angolo_azimut("2",0.05);
-    popola_max_min_angolo_azimut("1",0.05);
-    popola_max_min_angolo_azimut("8",0.05);
-    popola_max_min_angolo_azimut("6",0.05);
-    popola_max_min_angolo_azimut("11",0.05);
-    popola_max_min_angolo_azimut("12",0.05);
-    popola_max_min_angolo_azimut("9",0.05);
+    popola_max_min_angolo_azimut(3,0.05);
+    popola_max_min_angolo_azimut(2,0.05);
+    popola_max_min_angolo_azimut(1,0.05);
+    popola_max_min_angolo_azimut(8,0.05);
+    popola_max_min_angolo_azimut(6,0.05);
+    popola_max_min_angolo_azimut(11,0.05);
+    popola_max_min_angolo_azimut(12,0.05);
+    popola_max_min_angolo_azimut(9,0.05);
     
-    popola_max_min_angolo_zenit("3",0.05);
-    popola_max_min_angolo_zenit("2",0.05);
-    popola_max_min_angolo_zenit("1",0.05);
-    popola_max_min_angolo_zenit("8",0.05);
-    popola_max_min_angolo_zenit("6",0.05);
-    popola_max_min_angolo_zenit("11",0.05);
-    popola_max_min_angolo_zenit("12",0.05);
-    popola_max_min_angolo_zenit("9",0.05);
+    popola_max_min_angolo_zenit(3,0.05);
+    popola_max_min_angolo_zenit(2,0.05);
+    popola_max_min_angolo_zenit(1,0.05);
+    popola_max_min_angolo_zenit(8,0.05);
+    popola_max_min_angolo_zenit(6,0.05);
+    popola_max_min_angolo_zenit(11,0.05);
+    popola_max_min_angolo_zenit(12,0.05);
+    popola_max_min_angolo_zenit(9,0.05);
     
     
-    map<string,set<int>>::iterator iter1;
+    map<int,set<int>>::iterator iter1;
     set<int>::iterator iter2;
     
     for(iter1=max_min_angoli_azimut.begin();iter1!=max_min_angoli_azimut.end();++iter1){
