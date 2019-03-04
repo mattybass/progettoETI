@@ -131,8 +131,8 @@ void Persona::completa_angoli(int _numeroframe){
 
 void Persona::popola_sequenzaangolo(){
     map<int,Frame>::iterator iter;
-    map<string,Angolo> tmp;
-    map<string,Angolo>::iterator itertmp;
+    map<int,Angolo> tmp;
+    map<int,Angolo>::iterator itertmp;
     for (iter=sequenzaframe.begin(); iter!=sequenzaframe.end(); ++iter) {
         tmp=iter->second.get_angolijoint();
         for(itertmp=tmp.begin();itertmp!=tmp.end();++itertmp){
@@ -141,8 +141,8 @@ void Persona::popola_sequenzaangolo(){
     }
 }
 
-void Persona:: popola_max_min_angolo_zenit(string _angolo, float _tolleranzazenit){
- map<string,list<Angolo>>::iterator iter;
+void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
+ map<int,list<Angolo>>::iterator iter;
  iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
         list<Angolo>::iterator iterl;
