@@ -7,7 +7,8 @@ Persona::Persona(string nome_file) {
 
 	string str_r = "\"";
 	size_t found, found2;
-	int cont = 0, frame, joint;
+    int frame=0;
+    int joint;
 	int exit_value=0; 
 	/*per sapere se posso andare a utilizzare completa_angoli
 	+1 se trovo {, -1 se trovo }*/
@@ -139,36 +140,24 @@ void Persona::popola_sequenzaangolo(){
             sequenzaangolo[itertmp->first].push_back(itertmp->second);
         }
     }
-
 }
 
-void Persona::popola_max_min_angolo(string _angolo, float _tolleranzaazimut, float _toleranzazenit){
-    list<double> listavariazioniazimut;
+void Persona:: popola_max_min_angolo_zenit(string _angolo, float _toleranzazenit){
     list<double> listavariazionizenit;
     map<string,list<Angolo>>::iterator iter;
     iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
         list<Angolo>::iterator iterl;
         for(iterl=iter->second.begin();iterl!=iter->second.end();++iterl){
-            listavariazioniazimut.push_back(iterl->get_azimut());
             listavariazionizenit.push_back(iterl->get_zenit());
         }
-        float mediaazimut=medialista(iter->second).second;
         float mediazenit=medialista(iter->second).first;
-        list<double>::iterator iterd;
-        iterd=listavariazionizenit.begin();
-        iterd++;
         
-        while (iterd!=listavariazionizenit.end()) {
-            double a= *(iterd--);
-            double b= *(iterd);
-            double c= *(iterd++);
-            
-            if(a<b && b>c && b>(mediazenit+_toleranzazenit*mediazenit) ){
-                
-            }
-        }
-    
+        
+        
+        
+        
+        
     }else{
         cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
         
