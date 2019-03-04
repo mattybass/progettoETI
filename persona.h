@@ -22,7 +22,7 @@ private:
     map<int,list<Angolo>> sequenzaangolo; //MAP con chaive nome dell'angolo e argomento lista di Angolo. Rappresenta l'andamento temporale dei vari angolii. [Variazione nel empo: NB siamo nel discreto]
     map<int,set<int>> max_min_angoli_zenit; //MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi che si discostano di una percentuale x dalla media dell'angolo. Per angolo Zenit
     map<int,set<int>> max_min_angoli_azimut;//MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi che si discostano di una percentuale x dalla media dell'angolo. Per angolo Azimut
-    set<int> framedaanalizzare; //Frame da analizzare, merge dei due sete delle map.
+    set<int> framedaanalizzare; //Frame da analizzare, merge dei due set delle map.
     
     //Funzioni
     void popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.

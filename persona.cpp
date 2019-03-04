@@ -99,6 +99,7 @@ Persona::Persona(string nome_file) {
 
 	i.close();
 	popola_sequenzaangolo();
+    popola_framedaanalizzare();
 
 }
 
@@ -237,9 +238,17 @@ void Persona::popola_framedaanalizzare(){
 
 
 ostream& operator <<(ostream& os, const Persona& p) {
-	map<int, Frame>::const_iterator citer;
-	for (citer = p.sequenzaframe.begin(); citer != p.sequenzaframe.end(); citer++) {
-		os << citer->second;
-	}
-	return os;
+    map<int,set<int>>::const_iterator iter;
+    set<int>::const_iterator iter1;
+    cout<<"Massimi/minimi Zenit joint 1: "<<endl;
+    iter=p.max_min_angoli_zenit.find(1);
+    for(iter1=iter->second.begin();iter1!=iter->second.end();++iter1){
+        cout<<(*iter1)<<"; ";
+    }
+    cout<<"Massimi/minimi Azimut joint 1: "<<endl;
+    iter=p.max_min_angoli_azimut.find(1);
+    for(iter1=iter->second.begin();iter1!=iter->second.end();++iter1){
+        cout<<(*iter1)<<"; ";
+    }
+    return os;
 }

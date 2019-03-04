@@ -9,13 +9,7 @@
 
 
 int main(int argc, char** argv) {
-	/*
-	Coordinata B(0,0,0);
-	Coordinata A(9,4,0);
-	Coordinata C(-2,4,0);
-	double differenza=angolo_azimut(A,B,C);
-	cout<<differenza;*/
-	Persona p("spallagomitoModello.json");
-	cout << p;
+    Persona p("spallagomitoModello.json");
+    
 	return 0;
 }
