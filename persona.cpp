@@ -148,18 +148,18 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
     if(iter!=sequenzaangolo.end()){
         list<Angolo>::iterator iterl;
         float mediazenit=medialista(iter->second).first;
-        for(iterl=iter->second.begin();iterl!=iter->second.end();++iterl){
-            ++iterl;
-            list<Angolo>::iterator iterla=--iterl;
-            ++iterl;
-            list<Angolo>::iterator iterlb=iterl;
-            list<Angolo>::iterator iterlc=++iterl;
-            --iterl;
+        for(iterl=++(iter->second.begin());iterl!=--(iter->second.end());++iterl){
+			list<Angolo>::iterator iterla = iterl;
+			--iterla;
+			list<Angolo>::iterator iterlb = iterl;
+			iterlb;
+			list<Angolo>::iterator iterlc = iterl;
+			++iterlc;
             
             //se da problemi con questa funzione basta togliere gli incrementi dove non c'è assegnazione
-            Angolo a=*(iterla);
-            Angolo b=*(iterlb);
-            Angolo c=*(iterlc);
+            Angolo a=(Angolo)*(iterla);
+            Angolo b=(Angolo)*(iterlb);
+            Angolo c=(Angolo)*(iterlc);
             if(a.get_zenit()<b.get_zenit() && b.get_zenit()>c.get_zenit() && b.get_zenit()>(mediazenit+_tolleranzazenit*mediazenit)){
                 max_min_angoli_zenit[_angolo].insert(b.get_numeroframe());
             }else if (b.get_zenit()<a.get_zenit() && b.get_zenit()<c.get_zenit() && b.get_zenit()<(mediazenit-(mediazenit*_tolleranzazenit))){
@@ -172,32 +172,34 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
 }
 
 void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut){
-    map<int,list<Angolo>>::iterator iter;
-    iter= sequenzaangolo.find(_angolo);
-    if(iter!=sequenzaangolo.end()){
-        list<Angolo>::iterator iterl;
-        float mediaazimut=medialista(iter->second).second;
-        for(iterl=iter->second.begin();iterl!=iter->second.end();++iterl){
-            ++iterl;
-            list<Angolo>::iterator iterla=--iterl;
-            ++iterl;
-            list<Angolo>::iterator iterlb=iterl;
-            list<Angolo>::iterator iterlc=++iterl;
-            --iterl;
-            
-            //se da problemi con questa funzione basta togliere gli incrementi dove non c'è assegnazione
-            Angolo a=*(iterla);
-            Angolo b=*(iterlb);
-            Angolo c=*(iterlc);
-            if(a.get_azimut()<b.get_azimut() && b.get_azimut()>c.get_azimut() && b.get_azimut()>(mediaazimut+_tolleranzaazimut*mediaazimut)){
-                max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
-            }else if (b.get_azimut()<a.get_azimut() && b.get_azimut()<c.get_azimut() && b.get_azimut()<(mediaazimut-(mediaazimut*_tolleranzaazimut))){
-                max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
-            }
-        }
-    }else{
-        cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
-    }
+	map<int, list<Angolo>>::iterator iter;
+	iter = sequenzaangolo.find(_angolo);
+	if (iter != sequenzaangolo.end()) {
+		list<Angolo>::iterator iterl;
+		float mediaazimut = medialista(iter->second).second;
+		for (iterl = ++(iter->second.begin()); iterl != --(iter->second.end()); ++iterl) {
+			list<Angolo>::iterator iterla = iterl;
+			--iterla;
+			list<Angolo>::iterator iterlb = iterl;
+			iterlb;
+			list<Angolo>::iterator iterlc = iterl;
+			++iterlc;
+
+			//se da problemi con questa funzione basta togliere gli incrementi dove non c'è assegnazione
+			Angolo a = (Angolo)*(iterla);
+			Angolo b = (Angolo)*(iterlb);
+			Angolo c = (Angolo)*(iterlc);
+			if (a.get_azimut() < b.get_azimut() && b.get_azimut() > c.get_azimut() && b.get_azimut() > (mediaazimut + _tolleranzaazimut * mediaazimut)) {
+				max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
+			}
+			else if (b.get_azimut() < a.get_azimut() && b.get_azimut() < c.get_azimut() && b.get_azimut() < (mediaazimut - (mediaazimut*_tolleranzaazimut))) {
+				max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
+			}
+		}
+	}
+	else {
+		cout << "Angolo " << _angolo << " non trovato." << endl;
+	}
 }
 
 void Persona::popola_framedaanalizzare(){
@@ -236,19 +238,55 @@ void Persona::popola_framedaanalizzare(){
     }
 }
 
+void Persona::stampa_max(int n) {
+	map<int, set<int>>::const_iterator iter1;
+	set<int>::const_iterator iter1a;
+	map<int, set<int>>::const_iterator iter2;
+	set<int>::const_iterator iter2a;
+	cout << "JOINT " << n << ": massimi e minimi" << endl;
+	cout << "zenit-> ";
+	iter1 = max_min_angoli_zenit.find(n);
+	if (iter1 != max_min_angoli_zenit.end()) {
+		for (iter1a = iter1->second.begin(); iter1a != iter1->second.end(); ++iter1a) {
+			cout << (*iter1a) << "; ";
+		}
+	}
+	cout << endl;
+
+	cout << "azimut-> ";
+	iter2 = max_min_angoli_azimut.find(n);
+	if (iter2 != max_min_angoli_azimut.end()) {
+		for (iter2a = iter2->second.begin(); iter2a != iter2->second.end(); ++iter2a) {
+			cout << (*iter2a) << "; ";
+		}
+	}
+	cout << endl;
+}
+
+void Persona::stampa_angoli(int n) {
+	map<int, list<Angolo>>::const_iterator miter;
+	list<Angolo>::const_iterator liter;
+	miter = sequenzaangolo.find(n);
+	cout <<"JOINT "<< miter->first << ": "<< endl;
+	cout << "frame; azimut; zenit" << endl;
+	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
+		cout << (*liter)<<endl;
+	}
+}
 
 ostream& operator <<(ostream& os, const Persona& p) {
-    map<int,set<int>>::const_iterator iter;
-    set<int>::const_iterator iter1;
-    cout<<"Massimi/minimi Zenit joint 1: "<<endl;
-    iter=p.max_min_angoli_zenit.find(1);
-    for(iter1=iter->second.begin();iter1!=iter->second.end();++iter1){
-        cout<<(*iter1)<<"; ";
-    }
+    map<int,set<int>>::const_iterator iter1;
+    set<int>::const_iterator iter1a;
+	map<int, set<int>>::const_iterator iter2;
+	set<int>::const_iterator iter2a;
+   
+
     cout<<"Massimi/minimi Azimut joint 1: "<<endl;
-    iter=p.max_min_angoli_azimut.find(1);
-    for(iter1=iter->second.begin();iter1!=iter->second.end();++iter1){
-        cout<<(*iter1)<<"; ";
-    }
+    iter2=p.max_min_angoli_azimut.find(1);
+	if (iter2 != p.max_min_angoli_azimut.end()) {
+		for (iter2a = iter2->second.begin(); iter2a != iter2->second.end(); ++iter2a) {
+			cout << (*iter2a) << "; ";
+		}
+	}
     return os;
 }

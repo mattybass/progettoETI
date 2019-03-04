@@ -56,6 +56,7 @@ void Frame::completa_angoli(){
 	insert_angolo(3,4,3,2);
 	insert_angolo(2,3,2,1);
 	insert_angolo(1,2,1,8);
+	insert_angolo(5, 1, 5, 6);
 	insert_angolo(6,5,6,7);
 	insert_angolo(8,1,8,9);
 	insert_angolo(11,1,11,12);

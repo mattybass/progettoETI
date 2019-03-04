@@ -12,5 +12,6 @@ double Angolo::get_azimut()const{ return azimut; }
 int Angolo::get_numeroframe()const{return numeroframe;}
 
 ostream& operator << (ostream& os,const Angolo& _angolo){
-    return os<<"[Azimut: "<<_angolo.azimut<<" Zenit: "<<_angolo.zenit<<"]";
+   // return os<<"[Azimut: "<<_angolo.azimut<<" Zenit: "<<_angolo.zenit<<"]";
+	return os << _angolo.numeroframe << "; " << _angolo.azimut << "; " << _angolo.zenit;
 }

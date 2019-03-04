@@ -34,7 +34,8 @@ public:
     void completa_angoli(int _numeroframe); // Crea e popola la map degli angoli inserita in un determinato frame.
     void popola_sequenzaangolo(); //Da richiamare una volta popolati tutta la map "sequenzaframe" e dopo aver richiamato le varie completa_angoli
     void popola_framedaanalizzare(); // Esegue tutte le funzioni popola_max_min_anogolo necessarie per popoalre le 2 MAP e inoltre popola la set di frame da analizzare.
-    
+	void stampa_max(int n);
+	void stampa_angoli(int n);
     
     friend ostream& operator <<(ostream& os, const Persona& p);
 };
