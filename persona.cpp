@@ -1,5 +1,105 @@
 #include "persona.h"
 
+Persona::Persona(string nome_file) {
+	ifstream i(nome_file);
+
+	string line, linecoord, estratta;
+
+	string str_r = "\"";
+	size_t found, found2;
+	int cont = 0, frame, joint;
+	int exit_value=0; 
+	/*per sapere se posso andare a utilizzare completa_angoli
+	+1 se trovo {, -1 se trovo }*/
+	double x, y, z;
+
+	while (getline(i, line)) {
+
+		if (line.find("{") != std::string::npos)
+			exit_value++;
+		if (line.find("}") != std::string::npos  && frame!=0) {
+			exit_value--;
+			completa_angoli(frame);
+		}
+			
+
+		found = line.find("frame");
+		if (found != std::string::npos) {
+			//estrai frame;
+			if (exit_value == 1)
+				completa_angoli(frame);
+
+			found2 = line.find(str_r, 5); //il primo " è in posizione 4
+			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+				estratta = line.substr(11, found2 - 11); //substr(inizio,nCaratteri)
+				//converto da string a int
+				stringstream s(estratta);
+				s >> frame;
+				insert_frame(frame);
+				//cout << "FRAME " << frame << endl;
+			}
+
+		}
+
+		/*		found = line.find("person");
+				if (found != std::string::npos) {
+					//estrai person;
+				}*/
+
+		found = line.find("joint");
+		if (found != std::string::npos) {
+			//estrai joint;
+
+			found2 = line.find(str_r, 13); //il primo " è in posizione 12
+			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+				estratta = line.substr(19, found2 - 19); //substr(inizio,nCaratteri)
+				//converto da string a int
+				stringstream s3(estratta);
+				s3 >> joint;
+				//cout << "JOINT " << joint << endl;
+			}
+
+			//estraggo x
+			getline(i, linecoord);
+			found2 = linecoord.find(str_r, 23); //il primo " è in posizione 4
+			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
+				//converto da string a double
+				stringstream s(estratta);
+				s >> x;
+				//cout << endl << "X="<<x;
+			}
+			//estraggo y
+			getline(i, linecoord);
+			found2 = linecoord.find(str_r, 23); //il primo " è in posizione 4
+			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
+				//converto da string a double
+				stringstream s(estratta);
+				s >> y;
+				//cout << endl << "Y="<<y;
+			}
+
+			//estraggo z
+			getline(i, linecoord);
+			found2 = linecoord.find(str_r, 23); //il primo " è in posizione 22
+			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
+				//converto da string a double
+				stringstream s(estratta);
+				s >> z;
+				//cout << endl << "Z=" << z;
+			}
+			insert_coordinata(frame, joint, x, y, z);
+		}
+
+	}
+
+	i.close();
+
+}
+
+
 void Persona::insert_frame(int _numeroframe){
     sequenzaframe.insert(pair<int,Frame> (_numeroframe,Frame(_numeroframe)));
 }
