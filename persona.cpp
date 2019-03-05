@@ -275,18 +275,30 @@ void Persona::stampa_angoli(int n) {
 }
 
 ostream& operator <<(ostream& os, const Persona& p) {
-    map<int,set<int>>::const_iterator iter1;
-    set<int>::const_iterator iter1a;
+	map<int, set<int>>::const_iterator iter1;
+	set<int>::const_iterator iter1a;
 	map<int, set<int>>::const_iterator iter2;
 	set<int>::const_iterator iter2a;
-   
 
-    cout<<"Massimi/minimi Azimut joint 1: "<<endl;
-    iter2=p.max_min_angoli_azimut.find(1);
+
+	cout << "Massimi/minimi Azimut joint 1: " << endl;
+	iter2 = p.max_min_angoli_azimut.find(1);
 	if (iter2 != p.max_min_angoli_azimut.end()) {
 		for (iter2a = iter2->second.begin(); iter2a != iter2->second.end(); ++iter2a) {
 			cout << (*iter2a) << "; ";
 		}
 	}
-    return os;
+	return os;
 }
+
+	void Persona::test_persona(int n) {
+		float azimut=0, zenit=0;
+		map<int, list<Angolo>>::iterator iter;
+		iter = sequenzaangolo.find(n);
+		if (iter != sequenzaangolo.end()) {
+			azimut = (devst_lista(iter->second)).second;
+			zenit = (devst_lista(iter->second)).first;
+		}
+		cout << endl << endl << "AZIMUT->" << azimut;
+		cout << endl << endl << "ZENIT->" << zenit;
+	}

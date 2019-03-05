@@ -24,5 +24,8 @@ double angolo_XY(Coordinata &c1,Coordinata &c2);
 double angolo_XZ(Coordinata &c1,Coordinata &c2);
 
 pair<float,float> medialista(list<Angolo> _lista); //Calcola la media della lista DI ANGOLO
+pair<float,float> devst_lista(list<Angolo> _lista);
+float devst_lista(list<int> _lista);
+float medialista(list<int> _lista);
 
 #endif

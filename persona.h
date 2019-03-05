@@ -36,6 +36,8 @@ public:
     void popola_framedaanalizzare(); // Esegue tutte le funzioni popola_max_min_anogolo necessarie per popoalre le 2 MAP e inoltre popola la set di frame da analizzare.
 	void stampa_max(int n);
 	void stampa_angoli(int n);
+
+	void test_persona(int n);
     
     friend ostream& operator <<(ostream& os, const Persona& p);
 };
