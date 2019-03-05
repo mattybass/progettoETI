@@ -9,13 +9,15 @@
 
 
 int main(int argc, char** argv) {
-    Persona p("spallagomitoModello.json");
+    Persona p("output_01-03-2019 10_09_52.json");
+	p.stampa_angoli(2);
+	cout << endl;	
 	p.stampa_max(1);
 	p.stampa_max(2);
 	p.stampa_max(3);
 	p.stampa_max(4);
 	p.stampa_max(5);
-	cout << endl;
-	p.stampa_angoli(2);
+
+
 	return 0;
 }

@@ -213,7 +213,7 @@ void Persona::popola_framedaanalizzare(){
     popola_max_min_angolo_azimut(9,0.05);
     
     popola_max_min_angolo_zenit(3,0.05);
-    popola_max_min_angolo_zenit(2,0.05);
+    popola_max_min_angolo_zenit(2,0.12);
     popola_max_min_angolo_zenit(1,0.05);
     popola_max_min_angolo_zenit(8,0.05);
     popola_max_min_angolo_zenit(6,0.05);
