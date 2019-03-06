@@ -146,25 +146,118 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
  map<int,list<Angolo>>::iterator iter;
  iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
+		int size = iter->second.size();
+		float mediazenit = medialista(iter->second).first;
+		float devst = devst_lista(iter->second).first;
+		int max_confronto = (int)200 / devst;
+		int how=0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
+	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
+
+		
         list<Angolo>::iterator iterl;
-        float mediazenit=medialista(iter->second).first;
-        for(iterl=++(iter->second.begin());iterl!=--(iter->second.end());++iterl){
-			list<Angolo>::iterator iterla = iterl;
-			--iterla;
-			list<Angolo>::iterator iterlb = iterl;
-			iterlb;
-			list<Angolo>::iterator iterlc = iterl;
-			++iterlc;
-            
-            //se da problemi con questa funzione basta togliere gli incrementi dove non c'è assegnazione
-            Angolo a=(Angolo)*(iterla);
-            Angolo b=(Angolo)*(iterlb);
-            Angolo c=(Angolo)*(iterlc);
-            if(a.get_zenit()<b.get_zenit() && b.get_zenit()>c.get_zenit() && b.get_zenit()>(mediazenit+_tolleranzazenit*mediazenit)){
-                max_min_angoli_zenit[_angolo].insert(b.get_numeroframe());
-            }else if (b.get_zenit()<a.get_zenit() && b.get_zenit()<c.get_zenit() && b.get_zenit()<(mediazenit-(mediazenit*_tolleranzazenit))){
-                max_min_angoli_zenit[_angolo].insert(b.get_numeroframe());
-            }
+		list<Angolo>::iterator a_iterl;//after
+		list<Angolo>::iterator b_iterl;//before
+		list<Angolo>::iterator na_iterl;
+		list<Angolo>::iterator nb_iterl;
+
+		//inserisco il primo elemento con max/min relativo??
+		int contl=1,cont1=1,cont2;
+        for(iterl=++(iter->second.begin());iterl!=--(iter->second.end());iterl++){
+		//	cont1 = contl;
+			cont2 = 2;//parte da 2 poichÈ entro nel while solo nel momento in cui vado ad analizzare le due celle successive o pi˘
+			//inizializzo iteratori
+			how = 0;
+			int dove = 0;//sinistra->1 //destra->2 //entrambi->3 //valore iniziale->0 //altro->4
+			a_iterl = iterl;
+			a_iterl++;
+			b_iterl = iterl;
+			b_iterl--;
+			na_iterl = iterl;
+			nb_iterl = iterl;
+			Angolo a = *(a_iterl);
+			Angolo b = *(b_iterl);
+			Angolo na = *(na_iterl);
+			Angolo nb = *(nb_iterl);
+			Angolo n = *(iterl);
+
+
+			if (na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit()) {
+				how = 1;
+			//	iterl++;
+			//	contl++;
+			}
+			if (na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()) {
+				how = 2;
+			//	iterl++;
+			//	contl++;
+			}
+				
+			while (cont2 < (size - cont1) && (cont1-cont2>0) && cont2 <= max_confronto && how!=0){
+				a_iterl++;	b_iterl--;	na_iterl++;	nb_iterl--;
+				a = *(a_iterl);	b = *(b_iterl);	na = *(na_iterl);	nb = *(nb_iterl);
+
+			/*	if ((how==1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit())||((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
+				//	iterl++;
+				//	contl++;
+					cont2++;
+				}*/
+				if (how == 1) {//massimo ipotetico
+					if (how == 1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 3)){
+						dove = 3;
+					}
+					else {
+						if (na.get_zenit() > a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
+							dove = 2;
+							//puoi guardare a destra
+						}
+						else {
+							if (nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
+								dove = 1;
+								//puoi guardare a sinistra
+							}
+							else {
+								dove = 4;
+							}
+						}
+					}
+				}
+				if (how == 2) {//minimo ipotetico
+					if (na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 3)) {
+						dove = 3;
+					}
+					else {
+						if (na.get_zenit() < a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
+							dove = 2;
+							//puoi guardare a destra
+						}
+						else {
+							if (nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
+								dove = 1;
+								//puoi guardare a sinistra
+							}
+							else {
+								dove = 4;
+							}
+						}
+					}
+				}
+
+
+				if (dove != 4) {
+					cont2++;
+				}
+				else{
+					how = 0;
+				}
+				
+			}
+			if (how != 0) {
+				max_min_angoli_zenit[_angolo].insert(n.get_numeroframe());
+			}
+
+			cont1++;
+			//contl++;
+		
         }
     }else{
         cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
@@ -175,26 +268,117 @@ void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut)
 	map<int, list<Angolo>>::iterator iter;
 	iter = sequenzaangolo.find(_angolo);
 	if (iter != sequenzaangolo.end()) {
-		list<Angolo>::iterator iterl;
+		int size = iter->second.size();
 		float mediaazimut = medialista(iter->second).second;
-		for (iterl = ++(iter->second.begin()); iterl != --(iter->second.end()); ++iterl) {
-			list<Angolo>::iterator iterla = iterl;
-			--iterla;
-			list<Angolo>::iterator iterlb = iterl;
-			iterlb;
-			list<Angolo>::iterator iterlc = iterl;
-			++iterlc;
+		float devst = devst_lista(iter->second).second;
+		int max_confronto = (int)300 / devst;
+		int how = 0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
+	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
 
-			//se da problemi con questa funzione basta togliere gli incrementi dove non c'è assegnazione
-			Angolo a = (Angolo)*(iterla);
-			Angolo b = (Angolo)*(iterlb);
-			Angolo c = (Angolo)*(iterlc);
-			if (a.get_azimut() < b.get_azimut() && b.get_azimut() > c.get_azimut() && b.get_azimut() > (mediaazimut + _tolleranzaazimut * mediaazimut)) {
-				max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
+
+		list<Angolo>::iterator iterl;
+		list<Angolo>::iterator a_iterl;//after
+		list<Angolo>::iterator b_iterl;//before
+		list<Angolo>::iterator na_iterl;
+		list<Angolo>::iterator nb_iterl;
+
+		//inserisco il primo elemento con max/min relativo??
+		int contl = 1, cont1 = 1, cont2;
+		for (iterl = ++(iter->second.begin()); iterl != --(iter->second.end()); iterl++) {
+			//	cont1 = contl;
+			cont2 = 2;//parte da 2 poichÈ entro nel while solo nel momento in cui vado ad analizzare le due celle successive o pi˘
+			//inizializzo iteratori
+			how = 0;
+			int dove = 0;//sinistra->1 //destra->2 //entrambi->3 //valore iniziale->0 //altro->4
+			a_iterl = iterl;
+			a_iterl++;
+			b_iterl = iterl;
+			b_iterl--;
+			na_iterl = iterl;
+			nb_iterl = iterl;
+			Angolo a = *(a_iterl);
+			Angolo b = *(b_iterl);
+			Angolo na = *(na_iterl);
+			Angolo nb = *(nb_iterl);
+			Angolo n = *(iterl);
+
+
+			if (na.get_azimut() > a.get_azimut() && nb.get_azimut() > b.get_azimut()) {
+				how = 1;
+				//	iterl++;
+				//	contl++;
 			}
-			else if (b.get_azimut() < a.get_azimut() && b.get_azimut() < c.get_azimut() && b.get_azimut() < (mediaazimut - (mediaazimut*_tolleranzaazimut))) {
-				max_min_angoli_azimut[_angolo].insert(b.get_numeroframe());
+			if (na.get_azimut() < a.get_azimut() && nb.get_azimut() < b.get_azimut()) {
+				how = 2;
+				//	iterl++;
+				//	contl++;
 			}
+
+			while (cont2 < (size - cont1) && (cont1 - cont2 > 0) && cont2 <= max_confronto && how != 0) {
+				a_iterl++;	b_iterl--;	na_iterl++;	nb_iterl--;
+				a = *(a_iterl);	b = *(b_iterl);	na = *(na_iterl);	nb = *(nb_iterl);
+
+				/*	if ((how==1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit())||((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
+					//	iterl++;
+					//	contl++;
+						cont2++;
+					}*/
+				if (how == 1) {//massimo ipotetico
+					if (na.get_azimut() > a.get_azimut() && nb.get_azimut() > b.get_azimut() && (dove == 0 || dove == 3)) {
+						dove = 3;
+					}
+					else {
+						if (na.get_azimut() > a.get_azimut() && (dove == 0 || dove == 2 || dove == 3)) {
+							dove = 2;
+							//puoi guardare a destra
+						}
+						else {
+							if (nb.get_azimut() > b.get_azimut() && (dove == 0 || dove == 1 || dove == 3)) {
+								dove = 1;
+								//puoi guardare a sinistra
+							}
+							else {
+								dove = 4;
+							}
+						}
+					}
+				}
+				if (how == 2) {//minimo ipotetico
+					if (na.get_azimut() < a.get_azimut() && nb.get_azimut() < b.get_azimut() && (dove == 0 || dove == 3)) {
+						dove = 3;
+					}
+					else {
+						if (na.get_azimut() < a.get_azimut() && (dove == 0 || dove == 2 || dove == 3)) {
+							dove = 2;
+							//puoi guardare a destra
+						}
+						else {
+							if (nb.get_azimut() < b.get_azimut() && (dove == 0 || dove == 1 || dove == 3)) {
+								dove = 1;
+								//puoi guardare a sinistra
+							}
+							else {
+								dove = 4;
+							}
+						}
+					}
+				}
+
+				if (dove != 4) {
+					cont2++;
+				}
+				else {
+					how = 0;
+				}
+
+			}
+			if (how != 0) {
+				max_min_angoli_azimut[_angolo].insert(n.get_numeroframe());
+			}
+
+			cont1++;
+			//contl++;
+
 		}
 	}
 	else {
