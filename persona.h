@@ -28,6 +28,7 @@ private:
     //Funzioni
     void popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
     void popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
+    void screma_frame_zenit();
 public:
 	Persona(string nome_file);
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
