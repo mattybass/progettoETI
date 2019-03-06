@@ -1,5 +1,4 @@
 #include "persona.h"
-
 Persona::Persona(string nome_file) {
 	ifstream i(nome_file);
 
@@ -149,7 +148,7 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
 		int size = iter->second.size();
 		float mediazenit = medialista(iter->second).first;
 		float devst = devst_lista(iter->second).first;
-		int max_confronto = (int)200 / devst;
+		int max_confronto = (int)500/ devst;
 		int how=0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
 	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
 
@@ -192,17 +191,21 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
 			//	contl++;
 			}
 				
-			while (cont2 < (size - cont1) && (cont1-cont2>0) && cont2 <= max_confronto && how!=0){
-				a_iterl++;	b_iterl--;	na_iterl++;	nb_iterl--;
+			while (cont2 < (size - cont1) && (cont1-cont2>=0) && cont2 <= max_confronto && how!=0){
+				a_iterl++;	b_iterl--;	
+				//na_iterl++;	nb_iterl--;
 				a = *(a_iterl);	b = *(b_iterl);	na = *(na_iterl);	nb = *(nb_iterl);
 
-			/*	if ((how==1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit())||((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
+				if ((how==1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit())||((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
 				//	iterl++;
 				//	contl++;
 					cont2++;
-				}*/
-				if (how == 1) {//massimo ipotetico
-					if (how == 1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 3)){
+				}
+				else {
+					how = 0;
+				}
+			/*	if (how == 1) {//massimo ipotetico
+					if (na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 3)){
 						dove = 3;
 					}
 					else {
@@ -249,7 +252,7 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
 				else{
 					how = 0;
 				}
-				
+			*/	
 			}
 			if (how != 0) {
 				max_min_angoli_zenit[_angolo].insert(n.get_numeroframe());
@@ -271,7 +274,7 @@ void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut)
 		int size = iter->second.size();
 		float mediaazimut = medialista(iter->second).second;
 		float devst = devst_lista(iter->second).second;
-		int max_confronto = (int)300 / devst;
+		int max_confronto = (int)1000 / devst;
 		int how = 0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
 	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
 
@@ -315,56 +318,13 @@ void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut)
 			}
 
 			while (cont2 < (size - cont1) && (cont1 - cont2 > 0) && cont2 <= max_confronto && how != 0) {
-				a_iterl++;	b_iterl--;	na_iterl++;	nb_iterl--;
+				a_iterl++;	b_iterl--;
+				//na_iterl++;	nb_iterl--;
 				a = *(a_iterl);	b = *(b_iterl);	na = *(na_iterl);	nb = *(nb_iterl);
 
-				/*	if ((how==1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit())||((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
+				if ((how == 1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit()) || ((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
 					//	iterl++;
 					//	contl++;
-						cont2++;
-					}*/
-				if (how == 1) {//massimo ipotetico
-					if (na.get_azimut() > a.get_azimut() && nb.get_azimut() > b.get_azimut() && (dove == 0 || dove == 3)) {
-						dove = 3;
-					}
-					else {
-						if (na.get_azimut() > a.get_azimut() && (dove == 0 || dove == 2 || dove == 3)) {
-							dove = 2;
-							//puoi guardare a destra
-						}
-						else {
-							if (nb.get_azimut() > b.get_azimut() && (dove == 0 || dove == 1 || dove == 3)) {
-								dove = 1;
-								//puoi guardare a sinistra
-							}
-							else {
-								dove = 4;
-							}
-						}
-					}
-				}
-				if (how == 2) {//minimo ipotetico
-					if (na.get_azimut() < a.get_azimut() && nb.get_azimut() < b.get_azimut() && (dove == 0 || dove == 3)) {
-						dove = 3;
-					}
-					else {
-						if (na.get_azimut() < a.get_azimut() && (dove == 0 || dove == 2 || dove == 3)) {
-							dove = 2;
-							//puoi guardare a destra
-						}
-						else {
-							if (nb.get_azimut() < b.get_azimut() && (dove == 0 || dove == 1 || dove == 3)) {
-								dove = 1;
-								//puoi guardare a sinistra
-							}
-							else {
-								dove = 4;
-							}
-						}
-					}
-				}
-
-				if (dove != 4) {
 					cont2++;
 				}
 				else {
@@ -457,6 +417,16 @@ void Persona::stampa_angoli(int n) {
 		cout << (*liter)<<endl;
 	}
 }
+void Persona::stampafile_angoli(int n) {
+	map<int, list<Angolo>>::const_iterator miter;
+	list<Angolo>::const_iterator liter;
+	ofstream file;
+	file.open("angolo.txt", ios::out);
+	miter = sequenzaangolo.find(n);
+	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
+		file << (*liter) << endl;
+	}
+}
 
 ostream& operator <<(ostream& os, const Persona& p) {
 	map<int, set<int>>::const_iterator iter1;
@@ -475,7 +445,7 @@ ostream& operator <<(ostream& os, const Persona& p) {
 	return os;
 }
 
-	void Persona::test_persona(int n) {
+void Persona::test_persona(int n) {
 		float azimut=0, zenit=0;
 		map<int, list<Angolo>>::iterator iter;
 		iter = sequenzaangolo.find(n);
@@ -486,3 +456,66 @@ ostream& operator <<(ostream& os, const Persona& p) {
 		cout << endl << endl << "AZIMUT->" << azimut;
 		cout << endl << endl << "ZENIT->" << zenit;
 	}
+
+void Persona::kamazenit_lista(int _angolo, int period, int fast_period, int slow_period) {//kaufman's adaptive moving average
+	map<int, list<Angolo>>::iterator iter;
+	list<Angolo>::iterator iterl;
+	list<Angolo>::iterator iterl_b;
+	int cont = 0;
+	iter = sequenzaangolo.find(_angolo);
+	if (iter != sequenzaangolo.end()) {
+		for (iterl = (iter->second).begin(); iterl != (iter->second).end(); iterl++) {
+			if (cont > period) {
+				iterl_b = iterl;
+				iterl_b--;
+				Angolo a = *(iterl);
+				Angolo b = *(iterl_b);
+				(*iterl).set_zenit(b.get_zenit() + pow((ERi_zenit(_angolo, cont, period)*(2 / (fast_period + 1))*(2 / (slow_period + 1))), 2)*(a.get_zenit() - b.get_zenit()));
+			}
+			cont++;
+		}
+	}
+	else {
+		cout << "Angolo " << _angolo << " non trovato." << endl;
+	} 
+}
+
+double Persona::ERi_zenit(int _angolo,int i,int n) {
+	
+	map<int, list<Angolo>>::const_iterator iter;
+	list<Angolo>::const_iterator iterl;
+	list<Angolo>::const_iterator iterl_1;
+	list<Angolo>::const_iterator iterl_n;
+	int cont = 0;
+	double den=0.0, num;
+	iter = sequenzaangolo.find(_angolo);
+	if (iter != sequenzaangolo.end()) {
+		cont = 0;
+		//faccio avanzare ad i-n il mio iteratore // fxcodebase.com/wiki/index.php/Kaufman's_Adaptive_Moving_Average_(KAMA)
+		
+		for (iterl = (iter->second).begin(); (iterl != (iter->second).end() && cont < (i-n)); iterl++) {
+			cont++;
+		}
+		Angolo ang_n = *(iterl);
+		Angolo ang = *(iterl);
+		iterl_1 = iterl;
+		iterl_1--;
+		Angolo ang_1 = *(iterl_1);
+		
+		while (iterl != (iter->second).end() && cont<(i)) {
+			ang = *(iterl);
+			iterl_1 = iterl;
+			iterl_1--;
+			ang_1 = *(iterl_1);
+			den = fabs(ang.get_zenit() - ang_1.get_zenit()) + den;
+			iterl++;
+			cont++;
+		}
+		num = fabs(ang.get_zenit() - ang_n.get_zenit());
+		return num / den;
+	}
+	else {
+		cout << "Angolo " << _angolo << " non trovato." << endl;
+		return 0;
+	}
+}
