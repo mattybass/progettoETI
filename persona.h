@@ -38,10 +38,12 @@ public:
     void popola_framedaanalizzare(); // Esegue tutte le funzioni popola_max_min_anogolo necessarie per popoalre le 2 MAP e inoltre popola la set di frame da analizzare.
 	void stampa_max(int n);
 	void stampa_angoli(int n);
-	void stampafile_angoli(int n);
-	double ERi_zenit(int _angolo, int i, int n);
+	void stampafile_angoli(int n,string name);
+	long double ERi_zenit(int _angolo, int i, int n);
+	long double ERi_azimut(int _angolo, int i, int n);
 	void test_persona(int n);
 	void kamazenit_lista(int _angolo,int period=10, int fast_period=2,int slow_period=30);
+	void kamaazimut_lista(int _angolo, int period = 10, int fast_period = 2, int slow_period = 30);
     
     friend ostream& operator <<(ostream& os, const Persona& p);
 };

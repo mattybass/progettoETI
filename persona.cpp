@@ -417,11 +417,11 @@ void Persona::stampa_angoli(int n) {
 		cout << (*liter)<<endl;
 	}
 }
-void Persona::stampafile_angoli(int n) {
+void Persona::stampafile_angoli(int n,string name) {
 	map<int, list<Angolo>>::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	ofstream file;
-	file.open("angolo.txt", ios::out);
+	file.open(name+".txt", ios::out);
 	miter = sequenzaangolo.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file << (*liter) << endl;
@@ -448,13 +448,15 @@ ostream& operator <<(ostream& os, const Persona& p) {
 void Persona::test_persona(int n) {
 		float azimut=0, zenit=0;
 		map<int, list<Angolo>>::iterator iter;
-		iter = sequenzaangolo.find(n);
+	/*	iter = sequenzaangolo.find(n);
 		if (iter != sequenzaangolo.end()) {
 			azimut = (devst_lista(iter->second)).second;
 			zenit = (devst_lista(iter->second)).first;
 		}
 		cout << endl << endl << "AZIMUT->" << azimut;
-		cout << endl << endl << "ZENIT->" << zenit;
+		cout << endl << endl << "ZENIT->" << zenit;*/
+		cout<<ERi_zenit(2, 50, 10);
+		cout << ERi_zenit(2, 500, 10);
 	}
 
 void Persona::kamazenit_lista(int _angolo, int period, int fast_period, int slow_period) {//kaufman's adaptive moving average
@@ -470,8 +472,13 @@ void Persona::kamazenit_lista(int _angolo, int period, int fast_period, int slow
 				iterl_b--;
 				Angolo a = *(iterl);
 				Angolo b = *(iterl_b);
-				(*iterl).set_zenit(b.get_zenit() + pow((ERi_zenit(_angolo, cont, period)*(2 / (fast_period + 1))*(2 / (slow_period + 1))), 2)*(a.get_zenit() - b.get_zenit()));
-			}
+				double fast = (2 / ((double)(fast_period + 1)));
+				double slow = (2 /( (double)(slow_period + 1)));
+				double sc = ERi_zenit(_angolo, cont, period)*(fast - slow) + slow;
+				double res = (b.get_zenit() + sc * (a.get_zenit() - b.get_zenit()));
+				(*iterl).set_zenit(res);
+			//	cout << sc << endl;
+			}	
 			cont++;
 		}
 	}
@@ -480,14 +487,42 @@ void Persona::kamazenit_lista(int _angolo, int period, int fast_period, int slow
 	} 
 }
 
-double Persona::ERi_zenit(int _angolo,int i,int n) {
+void Persona::kamaazimut_lista(int _angolo, int period, int fast_period, int slow_period) {//kaufman's adaptive moving average
+	map<int, list<Angolo>>::iterator iter;
+	list<Angolo>::iterator iterl;
+	list<Angolo>::iterator iterl_b;
+	int cont = 0;
+	iter = sequenzaangolo.find(_angolo);
+	if (iter != sequenzaangolo.end()) {
+		for (iterl = (iter->second).begin(); iterl != (iter->second).end(); iterl++) {
+			if (cont > period) {
+				iterl_b = iterl;
+				iterl_b--;
+				Angolo a = *(iterl);
+				Angolo b = *(iterl_b);
+				double fast = (2 / ((double)(fast_period + 1)));
+				double slow = (2 / ((double)(slow_period + 1)));
+				double sc = ERi_azimut(_angolo, cont, period)*(fast - slow) + slow;
+				double res = (b.get_azimut() + sc * (a.get_azimut() - b.get_azimut()));
+				(*iterl).set_azimut(res);
+				//	cout << sc << endl;
+			}
+			cont++;
+		}
+	}
+	else {
+		cout << "Angolo " << _angolo << " non trovato." << endl;
+	}
+}
+
+long double Persona::ERi_zenit(int _angolo,int i,int n) {
 	
 	map<int, list<Angolo>>::const_iterator iter;
 	list<Angolo>::const_iterator iterl;
 	list<Angolo>::const_iterator iterl_1;
 	list<Angolo>::const_iterator iterl_n;
 	int cont = 0;
-	double den=0.0, num;
+	long double den=0.0, num;
 	iter = sequenzaangolo.find(_angolo);
 	if (iter != sequenzaangolo.end()) {
 		cont = 0;
@@ -512,6 +547,46 @@ double Persona::ERi_zenit(int _angolo,int i,int n) {
 			cont++;
 		}
 		num = fabs(ang.get_zenit() - ang_n.get_zenit());
+		return num / den;
+	}
+	else {
+		cout << "Angolo " << _angolo << " non trovato." << endl;
+		return 0;
+	}
+}
+
+long double Persona::ERi_azimut(int _angolo, int i, int n) {
+
+	map<int, list<Angolo>>::const_iterator iter;
+	list<Angolo>::const_iterator iterl;
+	list<Angolo>::const_iterator iterl_1;
+	list<Angolo>::const_iterator iterl_n;
+	int cont = 0;
+	long double den = 0.0, num;
+	iter = sequenzaangolo.find(_angolo);
+	if (iter != sequenzaangolo.end()) {
+		cont = 0;
+		//faccio avanzare ad i-n il mio iteratore // fxcodebase.com/wiki/index.php/Kaufman's_Adaptive_Moving_Average_(KAMA)
+
+		for (iterl = (iter->second).begin(); (iterl != (iter->second).end() && cont < (i - n)); iterl++) {
+			cont++;
+		}
+		Angolo ang_n = *(iterl);
+		Angolo ang = *(iterl);
+		iterl_1 = iterl;
+		iterl_1--;
+		Angolo ang_1 = *(iterl_1);
+
+		while (iterl != (iter->second).end() && cont < (i)) {
+			ang = *(iterl);
+			iterl_1 = iterl;
+			iterl_1--;
+			ang_1 = *(iterl_1);
+			den = fabs(ang.get_azimut() - ang_1.get_azimut()) + den;
+			iterl++;
+			cont++;
+		}
+		num = fabs(ang.get_azimut() - ang_n.get_azimut());
 		return num / den;
 	}
 	else {
