@@ -142,13 +142,14 @@ void Persona::popola_sequenzaangolo(){
 }
 
 void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
- map<int,list<Angolo>>::iterator iter;
+	map<int,list<Angolo>>::iterator iter;
+	max_min_angoli_zenit.erase(max_min_angoli_zenit.begin(), max_min_angoli_zenit.end());
  iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
 		int size = iter->second.size();
 		float mediazenit = medialista(iter->second).first;
 		float devst = devst_lista(iter->second).first;
-		int max_confronto = (int)500/ devst;
+		int max_confronto = (int)200/ devst;
 		int how=0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
 	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
 
@@ -269,12 +270,13 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
 
 void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut){
 	map<int, list<Angolo>>::iterator iter;
+	max_min_angoli_azimut.erase(max_min_angoli_azimut.begin(), max_min_angoli_azimut.end());
 	iter = sequenzaangolo.find(_angolo);
 	if (iter != sequenzaangolo.end()) {
 		int size = iter->second.size();
 		float mediaazimut = medialista(iter->second).second;
 		float devst = devst_lista(iter->second).second;
-		int max_confronto = (int)1000 / devst;
+		int max_confronto = (int)500 / devst;
 		int how = 0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
 	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
 
@@ -322,11 +324,59 @@ void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut)
 				//na_iterl++;	nb_iterl--;
 				a = *(a_iterl);	b = *(b_iterl);	na = *(na_iterl);	nb = *(nb_iterl);
 
+				if (how == 1) {//massimo ipotetico
+					if (na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 3)){
+						dove = 3;
+					}
+					else {
+						if (na.get_zenit() > a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
+							dove = 2;
+							//puoi guardare a destra
+						}
+						else {
+							if (nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
+								dove = 1;
+								//puoi guardare a sinistra
+							}
+							else {
+								dove = 4;
+							}
+						}
+					}
+				}
+				if (how == 2) {//minimo ipotetico
+					if (na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 3)) {
+						dove = 3;
+					}
+					else {
+						if (na.get_zenit() < a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
+							dove = 2;
+							//puoi guardare a destra
+						}
+						else {
+							if (nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
+								dove = 1;
+								//puoi guardare a sinistra
+							}
+							else {
+								dove = 4;
+							}
+						}
+					}
+				}
+
+
+				if (dove != 4) {
+					cont2++;
+				}
+
+			/*
 				if ((how == 1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit()) || ((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
 					//	iterl++;
 					//	contl++;
 					cont2++;
-				}
+				}*/
+
 				else {
 					how = 0;
 				}
@@ -475,7 +525,7 @@ void Persona::kamazenit_lista(int _angolo, int period, int fast_period, int slow
 				double fast = (2 / ((double)(fast_period + 1)));
 				double slow = (2 /( (double)(slow_period + 1)));
 				double sc = ERi_zenit(_angolo, cont, period)*(fast - slow) + slow;
-				double res = (b.get_zenit() + sc * (a.get_zenit() - b.get_zenit()));
+				double res = (b.get_zenit() + pow(sc,2) * (a.get_zenit() - b.get_zenit()));
 				(*iterl).set_zenit(res);
 			//	cout << sc << endl;
 			}	
@@ -503,7 +553,7 @@ void Persona::kamaazimut_lista(int _angolo, int period, int fast_period, int slo
 				double fast = (2 / ((double)(fast_period + 1)));
 				double slow = (2 / ((double)(slow_period + 1)));
 				double sc = ERi_azimut(_angolo, cont, period)*(fast - slow) + slow;
-				double res = (b.get_azimut() + sc * (a.get_azimut() - b.get_azimut()));
+				double res = (b.get_azimut() + pow(sc,2) * (a.get_azimut() - b.get_azimut()));
 				(*iterl).set_azimut(res);
 				//	cout << sc << endl;
 			}
@@ -513,6 +563,34 @@ void Persona::kamaazimut_lista(int _angolo, int period, int fast_period, int slo
 	else {
 		cout << "Angolo " << _angolo << " non trovato." << endl;
 	}
+}
+
+void Persona::media_mobile_angoli(int _angolo, int _finestra) {
+	map<int, list < Angolo> >::iterator iter;
+	list<Angolo>::iterator liter;
+	list<Angolo>::iterator liter2;
+	double sum_zenit;
+	double sum_azimut;
+	iter = sequenzaangolo.find(_angolo);
+	if (iter != sequenzaangolo.end()) { //ho trovato l'angolo
+		int s = (iter->second).size();
+		liter = iter->second.begin();
+		for (int i = 0; i < (s - _finestra); ++i) {
+			sum_azimut = 0;
+			sum_zenit = 0;
+			liter2 = liter;
+			for (int i = 0; i < _finestra; ++i) {
+				sum_zenit = sum_zenit + (*liter2).get_zenit();
+				sum_azimut = sum_azimut + (*liter2).get_azimut();
+				++liter2;
+			}
+			(*liter).set_azimut(sum_azimut / _finestra);
+			(*liter).set_zenit(sum_zenit / _finestra);
+			++liter;
+		}
+	}
+	else
+		cout << "Angolo non trovato!" << endl;
 }
 
 long double Persona::ERi_zenit(int _angolo,int i,int n) {

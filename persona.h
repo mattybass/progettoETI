@@ -26,10 +26,9 @@ private:
     set<int> framedaanalizzare; //Frame da analizzare, merge dei due set delle map.
     
     //Funzioni
+public:
     void popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
     void popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
-    void screma_frame_zenit();
-public:
 	Persona(string nome_file);
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
     void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
@@ -44,6 +43,7 @@ public:
 	void test_persona(int n);
 	void kamazenit_lista(int _angolo,int period=10, int fast_period=2,int slow_period=30);
 	void kamaazimut_lista(int _angolo, int period = 10, int fast_period = 2, int slow_period = 30);
+	void media_mobile_angoli(int _angolo, int _finestra);
     
     friend ostream& operator <<(ostream& os, const Persona& p);
 };
