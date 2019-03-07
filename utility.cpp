@@ -64,7 +64,6 @@ double angolo_XZ(Coordinata &c1,Coordinata &c2){
     return angolo;	
 }
 
-
 double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3){
     double angoloc1c2=angolo_XY(c1,c2);
     double angoloc2c3=angolo_XY(c3,c2);
@@ -93,78 +92,72 @@ double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3){
     return zenit;
 }
 
-float medialista(list<int> _lista){
-    float media =0;
-    list<int>::iterator iter;
-    int index=0;
-    int somma=0;
-    
-    for (iter=_lista.begin(); iter!=_lista.end(); ++iter) {
-        ++index;
-        somma=somma+(*iter);
-    }
-    media=(float)somma/index;
-
-    return media;
-}
-
-float devst_lista(list<int> _lista) {
-	float devst = 0,media;
-	list<int>::iterator iter;
-	int n = 0;
-//	int somma = 0;
-	media = medialista(_lista);
+double media_zenit(list<Angolo> _lista) {
+	double mediazenit = 0;
+	list<Angolo>::iterator iter;
+	int index = 0;
+	double sommazenit = 0;
 
 	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
-		++n;
-		devst = devst + pow(*iter - media, 2);
+		++index;
+		sommazenit = sommazenit + iter->get_zenit();
 	}
-	devst = (float)devst / n;
 
-	return devst;
+	mediazenit = (double)sommazenit / index;
+
+	return mediazenit;
+
 }
 
+double media_azimut(list<Angolo> _lista) {
+	double mediaazimut = 0;
+	list<Angolo>::iterator iter;
+	int index = 0;
+	double sommaazimut = 0;
 
-pair<float,float> medialista(list<Angolo> _lista){
-    float mediazenit =0;
-    float mediaazimut=0;
-    list<Angolo>::iterator iter;
-    int index=0;
-    float sommazenit=0;
-    float sommaazimut=0;
-    
-    for (iter=_lista.begin(); iter!=_lista.end(); ++iter) {
-        ++index;
-        sommazenit=sommazenit + iter->get_zenit();
-        sommaazimut=sommaazimut + iter->get_azimut();
-    }
-    
-    mediazenit=(float)sommazenit/index;
-    mediaazimut=(float)sommaazimut/index;
-    
-    return pair<float, float> (mediazenit,mediaazimut);
-    
+	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
+		++index;
+		sommaazimut = sommaazimut + iter->get_azimut();
+	}
+
+	mediaazimut = (double)sommaazimut / index;
+
+	return mediaazimut;
+
 }
 
-pair<float, float> devst_lista(list<Angolo> _lista) {
-	float devst_zenit = 0;
-	float devst_azimut = 0;
+double devst_zenit(list<Angolo> _lista) {
+	double devstzenit = 0;
 	list<Angolo>::iterator iter;
 	int n = 0;
-	float media_zenit=0;
-	float media_azimut=0;
-	media_zenit = ((medialista(_lista)).first);
-	media_azimut = (medialista(_lista)).second;
+	double mediazenit;
+	mediazenit = media_zenit(_lista);
 
 	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
 		++n;
-		devst_zenit = devst_zenit + pow(iter->get_zenit()-media_zenit,2);
-		devst_azimut = devst_azimut + pow(iter->get_azimut() - media_azimut, 2);
+		devstzenit = devstzenit + pow(iter->get_zenit() - mediazenit, 2);
 	}
 
-	devst_zenit = sqrt((float)devst_zenit / n);
-	devst_azimut = sqrt((float)devst_azimut / n);
+	devstzenit = sqrt((double)devstzenit / n);
 
-	return pair<float, float>(devst_zenit, devst_azimut);
+	return devstzenit;
+
+}
+
+double devst_azimut(list<Angolo> _lista) {
+	double devstazimut = 0;
+	list<Angolo>::iterator iter;
+	int n = 0;
+	double mediaazimut;
+	mediaazimut = media_azimut(_lista);
+
+	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
+		++n;
+		devstazimut = devstazimut + pow(iter->get_azimut() - mediaazimut, 2);
+	}
+
+	devstazimut = sqrt((double)devstazimut / n);
+
+	return devstazimut;
 
 }

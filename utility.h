@@ -12,20 +12,16 @@ using namespace std;
 
 class Angolo;
 
-double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3);
-//La cordianta c2 deve essere la coordinata in comune alle due rette.
-
+double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3);//La cordianta c2 deve essere la coordinata in comune alle due rette.
 double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3);
 
-
-
 double angolo_XY(Coordinata &c1,Coordinata &c2);
-
 double angolo_XZ(Coordinata &c1,Coordinata &c2);
 
-pair<float,float> medialista(list<Angolo> _lista); //Calcola la media della lista DI ANGOLO
-pair<float,float> devst_lista(list<Angolo> _lista);
-float devst_lista(list<int> _lista);
-float medialista(list<int> _lista);
+double media_azimut(list<Angolo> _lista); //Calcola la media della lista DI ANGOLO
+double media_zenit(list<Angolo> _lista);
+
+double devst_azimut(list<Angolo> _lista);
+double devst_zenit(list<Angolo> _lista);
 
 #endif

@@ -142,14 +142,14 @@ void Persona::popola_sequenzaangolo(){
     }
 }
 
-void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
+void Persona:: popola_max_min_angolo_zenit(int _angolo){
 	map<int,list<Angolo>>::iterator iter;
 	max_min_angoli_zenit.erase(max_min_angoli_zenit.begin(), max_min_angoli_zenit.end());
  iter= sequenzaangolo.find(_angolo);
     if(iter!=sequenzaangolo.end()){
 		int size = iter->second.size();
-		float mediazenit = medialista(iter->second).first;
-		float devst = devst_lista(iter->second).first;
+		double mediazenit = media_zenit(iter->second);
+		double devst = devst_zenit(iter->second);
 		int max_confronto = (int)200/ devst;
 		int how=0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
 	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
@@ -269,14 +269,14 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
     }
 }
 
-void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut){
+void Persona::popola_max_min_angolo_azimut(int _angolo){
 	map<int, list<Angolo>>::iterator iter;
 	max_min_angoli_azimut.erase(max_min_angoli_azimut.begin(), max_min_angoli_azimut.end());
 	iter = sequenzaangolo.find(_angolo);
 	if (iter != sequenzaangolo.end()) {
 		int size = iter->second.size();
-		float mediaazimut = medialista(iter->second).second;
-		float devst = devst_lista(iter->second).second;
+		double mediaazimut = media_azimut(iter->second);
+		double devst = devst_azimut(iter->second);
 		int max_confronto = (int)500 / devst;
 		int how = 0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
 	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
@@ -439,23 +439,23 @@ void Persona::trova_max_min_zenit(int _angolo, int _finestra) {
 }
 
 void Persona::popola_framedaanalizzare(){
-    popola_max_min_angolo_azimut(3,0.05);
-    popola_max_min_angolo_azimut(2,0.05);
-    popola_max_min_angolo_azimut(1,0.05);
-    popola_max_min_angolo_azimut(8,0.05);
-    popola_max_min_angolo_azimut(6,0.05);
-    popola_max_min_angolo_azimut(11,0.05);
-    popola_max_min_angolo_azimut(12,0.05);
-    popola_max_min_angolo_azimut(9,0.05);
+    popola_max_min_angolo_azimut(3);
+    popola_max_min_angolo_azimut(2);
+    popola_max_min_angolo_azimut(1);
+    popola_max_min_angolo_azimut(8);
+    popola_max_min_angolo_azimut(6);
+    popola_max_min_angolo_azimut(11);
+    popola_max_min_angolo_azimut(12);
+    popola_max_min_angolo_azimut(9);
     
-    popola_max_min_angolo_zenit(3,0.05);
-    popola_max_min_angolo_zenit(2,0.12);
-    popola_max_min_angolo_zenit(1,0.05);
-    popola_max_min_angolo_zenit(8,0.05);
-    popola_max_min_angolo_zenit(6,0.05);
-    popola_max_min_angolo_zenit(11,0.05);
-    popola_max_min_angolo_zenit(12,0.05);
-    popola_max_min_angolo_zenit(9,0.05);
+    popola_max_min_angolo_zenit(3);
+    popola_max_min_angolo_zenit(2);
+    popola_max_min_angolo_zenit(1);
+    popola_max_min_angolo_zenit(8);
+    popola_max_min_angolo_zenit(6);
+    popola_max_min_angolo_zenit(11);
+    popola_max_min_angolo_zenit(12);
+    popola_max_min_angolo_zenit(9);
     
     
     map<int,set<int>>::iterator iter1;

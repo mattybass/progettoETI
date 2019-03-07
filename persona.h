@@ -28,8 +28,8 @@ private:
     
     //Funzioni
 public:
-    void popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
-    void popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
+    void popola_max_min_angolo_zenit(int _angolo); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
+    void popola_max_min_angolo_azimut(int _angolo); //Popola la lista di max min di UN SINGOLO ANGOLO con una tolleranzza specifica.
 	Persona(string nome_file);
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
     void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
