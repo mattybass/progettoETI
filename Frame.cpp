@@ -8,6 +8,10 @@ int Frame::get_numeroframe()const{
     return numeroframe;
 }
 
+map<int, Angolo> Frame::get_angolijoint()const {
+	return angolijoint;
+}
+
 Coordinata Frame::get_coordinata(int _numerojoint){
     Coordinata c(0,0,0);
     map<int,Coordinata>::iterator iter=coordinatejoint.find(_numerojoint);
@@ -47,12 +51,7 @@ void Frame::insert_angolo(int _joint,int a,int b,int c){
 	
 }
 
-
-map<int,Angolo> Frame::get_angolijoint()const{
-    return angolijoint;
-}
-
-void Frame::completa_angoli(){
+void Frame::completa_angolo(){
 	insert_angolo(3,4,3,2);
 	insert_angolo(2,3,2,1);
 	insert_angolo(1,2,1,8);

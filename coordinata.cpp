@@ -1,5 +1,5 @@
 #include "coordinata.h"
-#include <climits>
+
 Coordinata::Coordinata(double _x,double _y,double _z){
     x=_x;
     y=_y;
@@ -26,5 +26,4 @@ double Coordinata::get_z()const{
 
 ostream& operator << (ostream& os,const Coordinata& _punto){
     return os<<"["<<_punto.x<<";"<<_punto.y<<";"<<_punto.z<<"]";
-    
 }

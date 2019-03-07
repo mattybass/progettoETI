@@ -20,9 +20,9 @@ int main(int argc, char** argv) {
 	p.kamaazimut_lista(2, 80, 16, 240);//10,2,30
 	p.stampafile_angoli(2, "k3");*/
 
-	p.media_mobile_angoli(2, 30);
-	p.media_mobile_angoli(2, 30);
-	p.stampafile_angoli(2, "m1");
+	p.mediamobile_angolo(2, 30);
+	p.mediamobile_angolo(2, 30);
+	p.stampaFile_angolo(2, "m1");
 
 
 

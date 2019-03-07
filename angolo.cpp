@@ -7,11 +7,15 @@ Angolo::Angolo(Coordinata& _c1,Coordinata& _c2,Coordinata& _c3, int _numeroframe
     numeroframe=_numeroframe;
 }
 
+//FUNZIONI GET
 double Angolo::get_zenit()const{ return zenit; }
 double Angolo::get_azimut()const{ return azimut; }
+int Angolo::get_numeroframe()const{return numeroframe;}
+
+//FUNZIONI SET
 void Angolo::set_zenit(double z) { zenit = z; }
 void Angolo::set_azimut(double a) { azimut = a; }
-int Angolo::get_numeroframe()const{return numeroframe;}
+
 
 ostream& operator << (ostream& os,const Angolo& _angolo){
    // return os<<"[Azimut: "<<_angolo.azimut<<" Zenit: "<<_angolo.zenit<<"]";

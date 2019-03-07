@@ -1,4 +1,5 @@
 #include "persona.h"
+
 Persona::Persona(string nome_file) {
 	ifstream i(nome_file);
 
@@ -20,12 +21,11 @@ Persona::Persona(string nome_file) {
 		if (line.find("}") != std::string::npos) {
 			exit_value--;
 			if (exit_value == 1 && frame != 0) {
-				completa_angoli(frame);
+				popola_angolo(frame);
 			}
 
 		}
 			
-
 		found = line.find("frame");
 		if (found != std::string::npos) {
 			//estrai frame;
@@ -39,13 +39,8 @@ Persona::Persona(string nome_file) {
 				insert_frame(frame);
 				//cout << "FRAME " << frame << endl;
 			}
-
 		}
 
-		/*		found = line.find("person");
-				if (found != std::string::npos) {
-					//estrai person;
-				}*/
 
 		found = line.find("joint");
 		if (found != std::string::npos) {
@@ -57,7 +52,6 @@ Persona::Persona(string nome_file) {
 				//converto da string a int
 				stringstream s3(estratta);
 				s3 >> joint;
-				//cout << "JOINT " << joint << endl;
 			}
 
 			//estraggo x
@@ -68,7 +62,6 @@ Persona::Persona(string nome_file) {
 				//converto da string a double
 				stringstream s(estratta);
 				s >> x;
-				//cout << endl << "X="<<x;
 			}
 			//estraggo y
 			getline(i, linecoord);
@@ -78,7 +71,6 @@ Persona::Persona(string nome_file) {
 				//converto da string a double
 				stringstream s(estratta);
 				s >> y;
-				//cout << endl << "Y="<<y;
 			}
 
 			//estraggo z
@@ -89,7 +81,6 @@ Persona::Persona(string nome_file) {
 				//converto da string a double
 				stringstream s(estratta);
 				s >> z;
-				//cout << endl << "Z=" << z;
 			}
 			insert_coordinata(frame, joint, z, x, y);
 		}
@@ -98,33 +89,30 @@ Persona::Persona(string nome_file) {
 
 	i.close();
 	popola_sequenzaangolo();
-  //  popola_framedaanalizzare();
-	sequenzaangoloelab = sequenzaangolo;
+	sequenzaAngoloELAB = sequenzaAngolo;
 
 }
 
-
 void Persona::insert_frame(int _numeroframe){
-    sequenzaframe.insert(pair<int,Frame> (_numeroframe,Frame(_numeroframe)));
+    sequenzaFrame.insert(pair<int,Frame> (_numeroframe,Frame(_numeroframe)));
 }
 
 void Persona::insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z){
     map<int,Frame>::iterator iter;
-    iter=sequenzaframe.find(_numeroframe);
-    if(iter!=sequenzaframe.end()){
+    iter=sequenzaFrame.find(_numeroframe);
+    if(iter!=sequenzaFrame.end()){
         iter->second.insert_coordinata(_numerojoint, _x, _y, _z);
     }else{
         cout<<"ERRORE: frame non trovato, coordinata non inserita"<<endl;
     }
 }
 
-
-void Persona::completa_angoli(int _numeroframe){
+void Persona::popola_angolo(int _numeroframe){
     map<int,Frame>::iterator iter;
-    iter=sequenzaframe.find(_numeroframe);
+    iter=sequenzaFrame.find(_numeroframe);
     
-    if(iter!=sequenzaframe.end()){
-        iter->second.completa_angoli();
+    if(iter!=sequenzaFrame.end()){
+        iter->second.completa_angolo();
     }else{
         cout<<"ERRORE: frame non trovato, angoli non creati"<<endl;
     }
@@ -134,274 +122,19 @@ void Persona::popola_sequenzaangolo(){
     map<int,Frame>::iterator iter;
     map<int,Angolo> tmp;
     map<int,Angolo>::iterator itertmp;
-    for (iter=sequenzaframe.begin(); iter!=sequenzaframe.end(); ++iter) {
+    for (iter=sequenzaFrame.begin(); iter!=sequenzaFrame.end(); ++iter) {
         tmp=iter->second.get_angolijoint();
         for(itertmp=tmp.begin();itertmp!=tmp.end();++itertmp){
-            sequenzaangolo[itertmp->first].push_back(itertmp->second);
+            sequenzaAngolo[itertmp->first].push_back(itertmp->second);
         }
     }
 }
 
-void Persona:: popola_max_min_angolo_zenit(int _angolo){
-	map<int,list<Angolo>>::iterator iter;
-	max_min_angoli_zenit.erase(max_min_angoli_zenit.begin(), max_min_angoli_zenit.end());
- iter= sequenzaangolo.find(_angolo);
-    if(iter!=sequenzaangolo.end()){
-		int size = iter->second.size();
-		double mediazenit = media_zenit(iter->second);
-		double devst = devst_zenit(iter->second);
-		int max_confronto = (int)200/ devst;
-		int how=0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
-	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
-
-		
-        list<Angolo>::iterator iterl;
-		list<Angolo>::iterator a_iterl;//after
-		list<Angolo>::iterator b_iterl;//before
-		list<Angolo>::iterator na_iterl;
-		list<Angolo>::iterator nb_iterl;
-
-		//inserisco il primo elemento con max/min relativo??
-		int contl=1,cont1=1,cont2;
-        for(iterl=++(iter->second.begin());iterl!=--(iter->second.end());iterl++){
-		//	cont1 = contl;
-			cont2 = 2;//parte da 2 poich� entro nel while solo nel momento in cui vado ad analizzare le due celle successive o pi�
-			//inizializzo iteratori
-			how = 0;
-			int dove = 0;//sinistra->1 //destra->2 //entrambi->3 //valore iniziale->0 //altro->4
-			a_iterl = iterl;
-			a_iterl++;
-			b_iterl = iterl;
-			b_iterl--;
-			na_iterl = iterl;
-			nb_iterl = iterl;
-			Angolo a = *(a_iterl);
-			Angolo b = *(b_iterl);
-			Angolo na = *(na_iterl);
-			Angolo nb = *(nb_iterl);
-			Angolo n = *(iterl);
-
-
-			if (na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit()) {
-				how = 1;
-			//	iterl++;
-			//	contl++;
-			}
-			if (na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()) {
-				how = 2;
-			//	iterl++;
-			//	contl++;
-			}
-				
-			while (cont2 < (size - cont1) && (cont1-cont2>=0) && cont2 <= max_confronto && how!=0){
-				a_iterl++;	b_iterl--;	
-				//na_iterl++;	nb_iterl--;
-				a = *(a_iterl);	b = *(b_iterl);	na = *(na_iterl);	nb = *(nb_iterl);
-
-				if ((how==1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit())||((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
-				//	iterl++;
-				//	contl++;
-					cont2++;
-				}
-				else {
-					how = 0;
-				}
-			/*	if (how == 1) {//massimo ipotetico
-					if (na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 3)){
-						dove = 3;
-					}
-					else {
-						if (na.get_zenit() > a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
-							dove = 2;
-							//puoi guardare a destra
-						}
-						else {
-							if (nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
-								dove = 1;
-								//puoi guardare a sinistra
-							}
-							else {
-								dove = 4;
-							}
-						}
-					}
-				}
-				if (how == 2) {//minimo ipotetico
-					if (na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 3)) {
-						dove = 3;
-					}
-					else {
-						if (na.get_zenit() < a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
-							dove = 2;
-							//puoi guardare a destra
-						}
-						else {
-							if (nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
-								dove = 1;
-								//puoi guardare a sinistra
-							}
-							else {
-								dove = 4;
-							}
-						}
-					}
-				}
-
-
-				if (dove != 4) {
-					cont2++;
-				}
-				else{
-					how = 0;
-				}
-			*/	
-			}
-			if (how != 0) {
-				max_min_angoli_zenit[_angolo].insert(n.get_numeroframe());
-			}
-
-			cont1++;
-			//contl++;
-		
-        }
-    }else{
-        cout<<"Angolo "<<_angolo<<" non trovato."<<endl;
-    }
-}
-
-void Persona::popola_max_min_angolo_azimut(int _angolo){
-	map<int, list<Angolo>>::iterator iter;
-	max_min_angoli_azimut.erase(max_min_angoli_azimut.begin(), max_min_angoli_azimut.end());
-	iter = sequenzaangolo.find(_angolo);
-	if (iter != sequenzaangolo.end()) {
-		int size = iter->second.size();
-		double mediaazimut = media_azimut(iter->second);
-		double devst = devst_azimut(iter->second);
-		int max_confronto = (int)500 / devst;
-		int how = 0;//massimo->how=1 //minimo->how=2 //cresce o descresce->how=0
-	//	bool exit_value = 0; //massimo o minimo->bool=1 //niente->bool=0
-
-
-		list<Angolo>::iterator iterl;
-		list<Angolo>::iterator a_iterl;//after
-		list<Angolo>::iterator b_iterl;//before
-		list<Angolo>::iterator na_iterl;
-		list<Angolo>::iterator nb_iterl;
-
-		//inserisco il primo elemento con max/min relativo??
-		int contl = 1, cont1 = 1, cont2;
-		for (iterl = ++(iter->second.begin()); iterl != --(iter->second.end()); iterl++) {
-			//	cont1 = contl;
-			cont2 = 2;//parte da 2 poich� entro nel while solo nel momento in cui vado ad analizzare le due celle successive o pi�
-			//inizializzo iteratori
-			how = 0;
-			int dove = 0;//sinistra->1 //destra->2 //entrambi->3 //valore iniziale->0 //altro->4
-			a_iterl = iterl;
-			a_iterl++;
-			b_iterl = iterl;
-			b_iterl--;
-			na_iterl = iterl;
-			nb_iterl = iterl;
-			Angolo a = *(a_iterl);
-			Angolo b = *(b_iterl);
-			Angolo na = *(na_iterl);
-			Angolo nb = *(nb_iterl);
-			Angolo n = *(iterl);
-
-
-			if (na.get_azimut() > a.get_azimut() && nb.get_azimut() > b.get_azimut()) {
-				how = 1;
-				//	iterl++;
-				//	contl++;
-			}
-			if (na.get_azimut() < a.get_azimut() && nb.get_azimut() < b.get_azimut()) {
-				how = 2;
-				//	iterl++;
-				//	contl++;
-			}
-
-			while (cont2 < (size - cont1) && (cont1 - cont2 > 0) && cont2 <= max_confronto && how != 0) {
-				a_iterl++;	b_iterl--;
-				//na_iterl++;	nb_iterl--;
-				a = *(a_iterl);	b = *(b_iterl);	na = *(na_iterl);	nb = *(nb_iterl);
-
-				if (how == 1) {//massimo ipotetico
-					if (na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 3)){
-						dove = 3;
-					}
-					else {
-						if (na.get_zenit() > a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
-							dove = 2;
-							//puoi guardare a destra
-						}
-						else {
-							if (nb.get_zenit() > b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
-								dove = 1;
-								//puoi guardare a sinistra
-							}
-							else {
-								dove = 4;
-							}
-						}
-					}
-				}
-				if (how == 2) {//minimo ipotetico
-					if (na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 3)) {
-						dove = 3;
-					}
-					else {
-						if (na.get_zenit() < a.get_zenit() && (dove == 0 || dove == 2 || dove == 3)) {
-							dove = 2;
-							//puoi guardare a destra
-						}
-						else {
-							if (nb.get_zenit() < b.get_zenit() && (dove == 0 || dove == 1 || dove == 3)) {
-								dove = 1;
-								//puoi guardare a sinistra
-							}
-							else {
-								dove = 4;
-							}
-						}
-					}
-				}
-
-
-				if (dove != 4) {
-					cont2++;
-				}
-
-			/*
-				if ((how == 1 && na.get_zenit() > a.get_zenit() && nb.get_zenit() > b.get_zenit()) || ((how == 2 && na.get_zenit() < a.get_zenit() && nb.get_zenit() < b.get_zenit()))) {
-					//	iterl++;
-					//	contl++;
-					cont2++;
-				}*/
-
-				else {
-					how = 0;
-				}
-
-			}
-			if (how != 0) {
-				max_min_angoli_azimut[_angolo].insert(n.get_numeroframe());
-			}
-
-			cont1++;
-			//contl++;
-
-		}
-	}
-	else {
-		cout << "Angolo " << _angolo << " non trovato." << endl;
-	}
-}
-
-void Persona::trova_max_min_zenit(int _angolo, int _finestra) {
+void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 	map<int, list<Angolo> >::iterator iter;
-	iter = sequenzaangolo.find(_angolo);
+	iter = sequenzaAngolo.find(_angolo);
 
-	if (iter != sequenzaangolo.end()) { //ho trovato l'angolo
+	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
 		list<Angolo>::iterator liter;
 		list<Angolo>::iterator liter2;
 		list<Angolo>::iterator liter3;
@@ -431,58 +164,68 @@ void Persona::trova_max_min_zenit(int _angolo, int _finestra) {
 						max_o_min = 0;
 			}
 			if (max_o_min != 0) {
-				max_min_angoli_zenit[_angolo].insert((*liter).get_numeroframe());
+				maxmin_zenit[_angolo].insert((*liter).get_numeroframe());
 			}
 			++liter;
 		}
 	}
 }
 
-void Persona::popola_framedaanalizzare(){
-    popola_max_min_angolo_azimut(3);
-    popola_max_min_angolo_azimut(2);
-    popola_max_min_angolo_azimut(1);
-    popola_max_min_angolo_azimut(8);
-    popola_max_min_angolo_azimut(6);
-    popola_max_min_angolo_azimut(11);
-    popola_max_min_angolo_azimut(12);
-    popola_max_min_angolo_azimut(9);
-    
-    popola_max_min_angolo_zenit(3);
-    popola_max_min_angolo_zenit(2);
-    popola_max_min_angolo_zenit(1);
-    popola_max_min_angolo_zenit(8);
-    popola_max_min_angolo_zenit(6);
-    popola_max_min_angolo_zenit(11);
-    popola_max_min_angolo_zenit(12);
-    popola_max_min_angolo_zenit(9);
-    
-    
-    map<int,set<int>>::iterator iter1;
-    set<int>::iterator iter2;
-    
-    for(iter1=max_min_angoli_azimut.begin();iter1!=max_min_angoli_azimut.end();++iter1){
-        for(iter2=iter1->second.begin();iter2!=iter1->second.end();++iter2){
-            framedaanalizzare.insert((*iter2));
-        }
-    }
-    
-    for(iter1=max_min_angoli_zenit.begin();iter1!=max_min_angoli_zenit.end();++iter1){
-        for(iter2=iter1->second.begin();iter2!=iter1->second.end();++iter2){
-            framedaanalizzare.insert((*iter2));
-        }
-    }
+void Persona::maxminFind_azimut(int _angolo, int _finestra) {
+	map<int, list<Angolo> >::iterator iter;
+	iter = sequenzaAngolo.find(_angolo);
+
+	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
+		list<Angolo>::iterator liter;
+		list<Angolo>::iterator liter2;
+		list<Angolo>::iterator liter3;
+		liter = iter->second.begin();
+		for (int i = 0; i < _finestra; ++i) {
+			++liter;
+		}
+		int s = (iter->second).size();
+		int max_o_min;
+		for (int i = 0; i < s - _finestra; ++i) {
+			liter2 = liter;
+			liter3 = liter;
+			++liter2;
+			--liter3;
+			max_o_min = 1;
+			for (int i = 0; i < _finestra - 1; ++i) {
+				if (((float)(*liter).get_azimut() > (float)(*liter2).get_azimut()) && ((float)(*liter).get_azimut() > (float)(*liter3).get_azimut()) && max_o_min != 0) {
+					++liter2;
+					--liter3;
+				}
+				else
+					if (((float)(*liter).get_azimut() < (float)(*liter2).get_azimut()) && ((float)(*liter).get_azimut() < (float)(*liter3).get_azimut()) && max_o_min != 0) {
+						++liter2;
+						--liter3;
+					}
+					else
+						max_o_min = 0;
+			}
+			if (max_o_min != 0) {
+				maxmin_azimut[_angolo].insert((*liter).get_numeroframe());
+			}
+			++liter;
+		}
+	}
 }
 
-void Persona::stampa_max(int n) {
+void Persona::maxminFind_angolo(int _angolo, int _finestra) {
+	maxminFind_azimut(_angolo, _finestra);
+	maxminFind_zenit(_angolo, _finestra);
+}
+
+void Persona::stampaConsole_maxmin(int n) {
 	map<int, set<int>>::const_iterator iter1;
 	set<int>::const_iterator iter1a;
 	map<int, set<int>>::const_iterator iter2;
 	set<int>::const_iterator iter2a;
 	cout << "JOINT " << n << ": massimi e minimi" << endl;
 	cout << "zenit-> ";
-	iter1 = max_min_angoli_zenit.find(n);
-	if (iter1 != max_min_angoli_zenit.end()) {
+	iter1 = maxmin_zenit.find(n);
+	if (iter1 != maxmin_zenit.end()) {
 		for (iter1a = iter1->second.begin(); iter1a != iter1->second.end(); ++iter1a) {
 			cout << (*iter1a) << "; ";
 		}
@@ -490,8 +233,8 @@ void Persona::stampa_max(int n) {
 	cout << endl;
 
 	cout << "azimut-> ";
-	iter2 = max_min_angoli_azimut.find(n);
-	if (iter2 != max_min_angoli_azimut.end()) {
+	iter2 = maxmin_azimut.find(n);
+	if (iter2 != maxmin_azimut.end()) {
 		for (iter2a = iter2->second.begin(); iter2a != iter2->second.end(); ++iter2a) {
 			cout << (*iter2a) << "; ";
 		}
@@ -499,13 +242,13 @@ void Persona::stampa_max(int n) {
 	cout << endl;
 }
 
-void Persona::stampa_angoli(int n, bool scelta) {
+void Persona::stampaConsole_angolo(int n, bool scelta) {
 	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	if (scelta == true)
-		miter = sequenzaangolo.find(n);
+		miter = sequenzaAngolo.find(n);
 	else
-		miter = sequenzaangoloelab.find(n);
+		miter = sequenzaAngoloELAB.find(n);
 	cout << "JOINT " << miter->first << ": " << endl;
 	cout << "frame; azimut; zenit" << endl;
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
@@ -513,120 +256,33 @@ void Persona::stampa_angoli(int n, bool scelta) {
 	}
 }
 
-void Persona::stampafile_angoli(int n, string name) {
+void Persona::stampaFile_angolo(int n, string name) {
 	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	ofstream file;
 	string l = name + ".txt";
 	file.open(l.c_str(), ios::out);
-	miter = sequenzaangolo.find(n);
+	miter = sequenzaAngolo.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file << (*liter) << endl;
 	}
 	ofstream file2;
 	string l2 = name + "ELAB.txt";
 	file2.open(l2.c_str(), ios::out);
-	miter = sequenzaangoloelab.find(n);
+	miter = sequenzaAngoloELAB.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file2 << (*liter) << endl;
 	}
 }
 
-ostream& operator <<(ostream& os, const Persona& p) {
-	map<int, set<int>>::const_iterator iter1;
-	set<int>::const_iterator iter1a;
-	map<int, set<int>>::const_iterator iter2;
-	set<int>::const_iterator iter2a;
-
-
-	cout << "Massimi/minimi Azimut joint 1: " << endl;
-	iter2 = p.max_min_angoli_azimut.find(1);
-	if (iter2 != p.max_min_angoli_azimut.end()) {
-		for (iter2a = iter2->second.begin(); iter2a != iter2->second.end(); ++iter2a) {
-			cout << (*iter2a) << "; ";
-		}
-	}
-	return os;
-}
-
-void Persona::test_persona(int n) {
-		float azimut=0, zenit=0;
-		map<int, list<Angolo>>::iterator iter;
-	/*	iter = sequenzaangolo.find(n);
-		if (iter != sequenzaangolo.end()) {
-			azimut = (devst_lista(iter->second)).second;
-			zenit = (devst_lista(iter->second)).first;
-		}
-		cout << endl << endl << "AZIMUT->" << azimut;
-		cout << endl << endl << "ZENIT->" << zenit;*/
-		cout<<ERi_zenit(2, 50, 10);
-		cout << ERi_zenit(2, 500, 10);
-	}
-
-void Persona::kamazenit_lista(int _angolo, int period, int fast_period, int slow_period) {//kaufman's adaptive moving average
-	map<int, list<Angolo>>::iterator iter;
-	list<Angolo>::iterator iterl;
-	list<Angolo>::iterator iterl_b;
-	int cont = 0;
-	iter = sequenzaangoloelab.find(_angolo);
-	if (iter != sequenzaangoloelab.end()) {
-		for (iterl = (iter->second).begin(); iterl != (iter->second).end(); iterl++) {
-			if (cont > period) {
-				iterl_b = iterl;
-				iterl_b--;
-				Angolo a = *(iterl);
-				Angolo b = *(iterl_b);
-				double fast = (2 / ((double)(fast_period + 1)));
-				double slow = (2 /( (double)(slow_period + 1)));
-				double sc = ERi_zenit(_angolo, cont, period)*(fast - slow) + slow;
-				double res = (b.get_zenit() + pow(sc,2) * (a.get_zenit() - b.get_zenit()));
-				(*iterl).set_zenit(res);
-			//	cout << sc << endl;
-			}	
-			cont++;
-		}
-	}
-	else {
-		cout << "Angolo " << _angolo << " non trovato." << endl;
-	} 
-}
-
-void Persona::kamaazimut_lista(int _angolo, int period, int fast_period, int slow_period) {//kaufman's adaptive moving average
-	map<int, list<Angolo>>::iterator iter;
-	list<Angolo>::iterator iterl;
-	list<Angolo>::iterator iterl_b;
-	int cont = 0;
-	iter = sequenzaangoloelab.find(_angolo);
-	if (iter != sequenzaangoloelab.end()) {
-		for (iterl = (iter->second).begin(); iterl != (iter->second).end(); iterl++) {
-			if (cont > period) {
-				iterl_b = iterl;
-				iterl_b--;
-				Angolo a = *(iterl);
-				Angolo b = *(iterl_b);
-				double fast = (2 / ((double)(fast_period + 1)));
-				double slow = (2 / ((double)(slow_period + 1)));
-				double sc = ERi_azimut(_angolo, cont, period)*(fast - slow) + slow;
-				double res = (b.get_azimut() + pow(sc,2) * (a.get_azimut() - b.get_azimut()));
-				(*iterl).set_azimut(res);
-				//	cout << sc << endl;
-			}
-			cont++;
-		}
-	}
-	else {
-		cout << "Angolo " << _angolo << " non trovato." << endl;
-	}
-}
-
-void Persona::media_mobile_angoli(int _angolo, int _finestra) {
+void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 	map<int, list < Angolo> >::iterator iter;
 	list<Angolo>::iterator liter;
 	list<Angolo>::iterator liter2;
 	double sum_zenit;
 	double sum_azimut;
-	iter = sequenzaangolo.find(_angolo);
-	if (iter != sequenzaangolo.end()) { //ho trovato l'angolo
+	iter = sequenzaAngolo.find(_angolo);
+	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
 		int s = (iter->second).size();
 		liter = iter->second.begin();
 		for (int i = 0; i < (s - _finestra); ++i) {
@@ -647,82 +303,22 @@ void Persona::media_mobile_angoli(int _angolo, int _finestra) {
 		cout << "Angolo non trovato!" << endl;
 }
 
-long double Persona::ERi_zenit(int _angolo,int i,int n) {
-	
-	map<int, list<Angolo>>::const_iterator iter;
-	list<Angolo>::const_iterator iterl;
-	list<Angolo>::const_iterator iterl_1;
-	list<Angolo>::const_iterator iterl_n;
-	int cont = 0;
-	long double den=0.0, num;
-	iter = sequenzaangoloelab.find(_angolo);
-	if (iter != sequenzaangoloelab.end()) {
-		cont = 0;
-		//faccio avanzare ad i-n il mio iteratore // fxcodebase.com/wiki/index.php/Kaufman's_Adaptive_Moving_Average_(KAMA)
-		
-		for (iterl = (iter->second).begin(); (iterl != (iter->second).end() && cont < (i-n)); iterl++) {
-			cont++;
+ostream& operator <<(ostream& os, const Persona& p) {
+	map<int, set<int>>::const_iterator iter1;
+	set<int>::const_iterator iter1a;
+	map<int, set<int>>::const_iterator iter2;
+	set<int>::const_iterator iter2a;
+
+
+	cout << "Massimi/minimi Azimut joint 1: " << endl;
+	iter2 = p.maxmin_azimut.find(1);
+	if (iter2 != p.maxmin_azimut.end()) {
+		for (iter2a = iter2->second.begin(); iter2a != iter2->second.end(); ++iter2a) {
+			cout << (*iter2a) << "; ";
 		}
-		Angolo ang_n = *(iterl);
-		Angolo ang = *(iterl);
-		iterl_1 = iterl;
-		iterl_1--;
-		Angolo ang_1 = *(iterl_1);
-		
-		while (iterl != (iter->second).end() && cont<(i)) {
-			ang = *(iterl);
-			iterl_1 = iterl;
-			iterl_1--;
-			ang_1 = *(iterl_1);
-			den = fabs(ang.get_zenit() - ang_1.get_zenit()) + den;
-			iterl++;
-			cont++;
-		}
-		num = fabs(ang.get_zenit() - ang_n.get_zenit());
-		return num / den;
 	}
-	else {
-		cout << "Angolo " << _angolo << " non trovato." << endl;
-		return 0;
-	}
+	return os;
 }
 
-long double Persona::ERi_azimut(int _angolo, int i, int n) {
 
-	map<int, list<Angolo>>::const_iterator iter;
-	list<Angolo>::const_iterator iterl;
-	list<Angolo>::const_iterator iterl_1;
-	list<Angolo>::const_iterator iterl_n;
-	int cont = 0;
-	long double den = 0.0, num;
-	iter = sequenzaangoloelab.find(_angolo);
-	if (iter != sequenzaangoloelab.end()) {
-		cont = 0;
-		//faccio avanzare ad i-n il mio iteratore // fxcodebase.com/wiki/index.php/Kaufman's_Adaptive_Moving_Average_(KAMA)
 
-		for (iterl = (iter->second).begin(); (iterl != (iter->second).end() && cont < (i - n)); iterl++) {
-			cont++;
-		}
-		Angolo ang_n = *(iterl);
-		Angolo ang = *(iterl);
-		iterl_1 = iterl;
-		iterl_1--;
-		Angolo ang_1 = *(iterl_1);
-
-		while (iterl != (iter->second).end() && cont < (i)) {
-			ang = *(iterl);
-			iterl_1 = iterl;
-			iterl_1--;
-			ang_1 = *(iterl_1);
-			den = fabs(ang.get_azimut() - ang_1.get_azimut()) + den;
-			iterl++;
-			cont++;
-		}
-		num = fabs(ang.get_azimut() - ang_n.get_azimut());
-		return num / den;
-	}
-	else {
-		cout << "Angolo " << _angolo << " non trovato." << endl;
-		return 0;
-	}
-}
