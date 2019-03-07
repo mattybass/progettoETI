@@ -91,7 +91,7 @@ Persona::Persona(string nome_file) {
 				s >> z;
 				//cout << endl << "Z=" << z;
 			}
-			insert_coordinata(frame, joint, x, y, z);
+			insert_coordinata(frame, joint, z, x, y);
 		}
 
 	}

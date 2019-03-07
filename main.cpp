@@ -17,15 +17,16 @@ int main(int argc, char** argv) {
 /*	p.stampa_max(3);
 	p.stampa_max(4);
 	p.stampa_max(5);*/
-
+	p.stampafile_angoli(2, "datisperimentali");
 	p.kamazenit_lista(2,20,10,100);
-	p.kamaazimut_lista(2, 20, 10, 100);
+	p.kamaazimut_lista(2, 20, 10, 100);//10,2,30
+	p.stampafile_angoli(2, "datiapprossimati");
 //	p.stampa_angoli(2,);
-	p.stampafile_angoli(2,"beckmatty");
+//	p.stampafile_angoli(2,"beckmatty");
 //	p.test_persona(2);
-	p.popola_max_min_angolo_zenit(2, 5);
-	p.popola_max_min_angolo_azimut(2, 5);
-	p.stampa_max(2);
+//	p.popola_max_min_angolo_zenit(2, 5);
+//	p.popola_max_min_angolo_azimut(2, 5);
+//	p.stampa_max(2);
 
 	return 0;
 }
