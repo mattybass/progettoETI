@@ -21,7 +21,8 @@ class Persona{
 private:
     map<int,Frame> sequenzaframe; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
     map<int,list<Angolo>> sequenzaangolo; //MAP con chaive nome dell'angolo e argomento lista di Angolo. Rappresenta l'andamento temporale dei vari angolii. [Variazione nel empo: NB siamo nel discreto]
-    map<int,set<int>> max_min_angoli_zenit; //MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi che si discostano di una percentuale x dalla media dell'angolo. Per angolo Zenit
+	map<int, list<Angolo>> sequenzaangoloelab;
+	map<int,set<int>> max_min_angoli_zenit; //MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi che si discostano di una percentuale x dalla media dell'angolo. Per angolo Zenit
     map<int,set<int>> max_min_angoli_azimut;//MAP con chiave nome dell'angolo e argomento una set di massimi e minimi relativi che si discostano di una percentuale x dalla media dell'angolo. Per angolo Azimut
     set<int> framedaanalizzare; //Frame da analizzare, merge dei due set delle map.
     
@@ -44,6 +45,7 @@ public:
 	void kamazenit_lista(int _angolo,int period=10, int fast_period=2,int slow_period=30);
 	void kamaazimut_lista(int _angolo, int period = 10, int fast_period = 2, int slow_period = 30);
 	void media_mobile_angoli(int _angolo, int _finestra);
+	void trova_max_min_zenit(int _angolo, int _finestra);
     
     friend ostream& operator <<(ostream& os, const Persona& p);
 };

@@ -98,7 +98,8 @@ Persona::Persona(string nome_file) {
 
 	i.close();
 	popola_sequenzaangolo();
-    popola_framedaanalizzare();
+  //  popola_framedaanalizzare();
+	sequenzaangoloelab = sequenzaangolo;
 
 }
 
@@ -396,6 +397,47 @@ void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut)
 	}
 }
 
+void Persona::trova_max_min_zenit(int _angolo, int _finestra) {
+	map<int, list<Angolo> >::iterator iter;
+	iter = sequenzaangolo.find(_angolo);
+
+	if (iter != sequenzaangolo.end()) { //ho trovato l'angolo
+		list<Angolo>::iterator liter;
+		list<Angolo>::iterator liter2;
+		list<Angolo>::iterator liter3;
+		liter = iter->second.begin();
+		for (int i = 0; i < _finestra; ++i) {
+			++liter;
+		}
+		int s = (iter->second).size();
+		int max_o_min;
+		for (int i = 0; i < s - _finestra; ++i) {
+			liter2 = liter;
+			liter3 = liter;
+			++liter2;
+			--liter3;
+			max_o_min = 1;
+			for (int i = 0; i < _finestra - 1; ++i) {
+				if (((float)(*liter).get_zenit() > (float)(*liter2).get_zenit()) && ((float)(*liter).get_zenit() > (float)(*liter3).get_zenit()) && max_o_min != 0) {
+					++liter2;
+					--liter3;
+				}
+				else
+					if (((float)(*liter).get_zenit() < (float)(*liter2).get_zenit()) && ((float)(*liter).get_zenit() < (float)(*liter3).get_zenit()) && max_o_min != 0) {
+						++liter2;
+						--liter3;
+					}
+					else
+						max_o_min = 0;
+			}
+			if (max_o_min != 0) {
+				max_min_angoli_zenit[_angolo].insert((*liter).get_numeroframe());
+			}
+			++liter;
+		}
+	}
+}
+
 void Persona::popola_framedaanalizzare(){
     popola_max_min_angolo_azimut(3,0.05);
     popola_max_min_angolo_azimut(2,0.05);
@@ -514,8 +556,8 @@ void Persona::kamazenit_lista(int _angolo, int period, int fast_period, int slow
 	list<Angolo>::iterator iterl;
 	list<Angolo>::iterator iterl_b;
 	int cont = 0;
-	iter = sequenzaangolo.find(_angolo);
-	if (iter != sequenzaangolo.end()) {
+	iter = sequenzaangoloelab.find(_angolo);
+	if (iter != sequenzaangoloelab.end()) {
 		for (iterl = (iter->second).begin(); iterl != (iter->second).end(); iterl++) {
 			if (cont > period) {
 				iterl_b = iterl;
@@ -542,8 +584,8 @@ void Persona::kamaazimut_lista(int _angolo, int period, int fast_period, int slo
 	list<Angolo>::iterator iterl;
 	list<Angolo>::iterator iterl_b;
 	int cont = 0;
-	iter = sequenzaangolo.find(_angolo);
-	if (iter != sequenzaangolo.end()) {
+	iter = sequenzaangoloelab.find(_angolo);
+	if (iter != sequenzaangoloelab.end()) {
 		for (iterl = (iter->second).begin(); iterl != (iter->second).end(); iterl++) {
 			if (cont > period) {
 				iterl_b = iterl;
@@ -571,8 +613,8 @@ void Persona::media_mobile_angoli(int _angolo, int _finestra) {
 	list<Angolo>::iterator liter2;
 	double sum_zenit;
 	double sum_azimut;
-	iter = sequenzaangolo.find(_angolo);
-	if (iter != sequenzaangolo.end()) { //ho trovato l'angolo
+	iter = sequenzaangoloelab.find(_angolo);
+	if (iter != sequenzaangoloelab.end()) { //ho trovato l'angolo
 		int s = (iter->second).size();
 		liter = iter->second.begin();
 		for (int i = 0; i < (s - _finestra); ++i) {
@@ -601,8 +643,8 @@ long double Persona::ERi_zenit(int _angolo,int i,int n) {
 	list<Angolo>::const_iterator iterl_n;
 	int cont = 0;
 	long double den=0.0, num;
-	iter = sequenzaangolo.find(_angolo);
-	if (iter != sequenzaangolo.end()) {
+	iter = sequenzaangoloelab.find(_angolo);
+	if (iter != sequenzaangoloelab.end()) {
 		cont = 0;
 		//faccio avanzare ad i-n il mio iteratore // fxcodebase.com/wiki/index.php/Kaufman's_Adaptive_Moving_Average_(KAMA)
 		
@@ -641,8 +683,8 @@ long double Persona::ERi_azimut(int _angolo, int i, int n) {
 	list<Angolo>::const_iterator iterl_n;
 	int cont = 0;
 	long double den = 0.0, num;
-	iter = sequenzaangolo.find(_angolo);
-	if (iter != sequenzaangolo.end()) {
+	iter = sequenzaangoloelab.find(_angolo);
+	if (iter != sequenzaangoloelab.end()) {
 		cont = 0;
 		//faccio avanzare ad i-n il mio iteratore // fxcodebase.com/wiki/index.php/Kaufman's_Adaptive_Moving_Average_(KAMA)
 
