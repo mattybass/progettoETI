@@ -30,8 +30,8 @@ Persona::Persona(string nome_file) {
 		if (found != std::string::npos) {
 			//estrai frame;
 
-			found2 = line.find(str_r, 5); //il primo " è in posizione 4
-			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+			found2 = line.find(str_r, 5); //il primo " ï¿½ in posizione 4
+			if (found2 != std::string::npos) { //questa condizione ï¿½ sempre verificata
 				estratta = line.substr(11, found2 - 11); //substr(inizio,nCaratteri)
 				//converto da string a int
 				stringstream s(estratta);
@@ -51,8 +51,8 @@ Persona::Persona(string nome_file) {
 		if (found != std::string::npos) {
 			//estrai joint;
 
-			found2 = line.find(str_r, 13); //il primo " è in posizione 12
-			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+			found2 = line.find(str_r, 13); //il primo " ï¿½ in posizione 12
+			if (found2 != std::string::npos) { //questa condizione ï¿½ sempre verificata
 				estratta = line.substr(19, found2 - 19); //substr(inizio,nCaratteri)
 				//converto da string a int
 				stringstream s3(estratta);
@@ -62,8 +62,8 @@ Persona::Persona(string nome_file) {
 
 			//estraggo x
 			getline(i, linecoord);
-			found2 = linecoord.find(str_r, 23); //il primo " è in posizione 4
-			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+			found2 = linecoord.find(str_r, 23); //il primo " ï¿½ in posizione 4
+			if (found2 != std::string::npos) { //questa condizione ï¿½ sempre verificata
 				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
 				//converto da string a double
 				stringstream s(estratta);
@@ -72,8 +72,8 @@ Persona::Persona(string nome_file) {
 			}
 			//estraggo y
 			getline(i, linecoord);
-			found2 = linecoord.find(str_r, 23); //il primo " è in posizione 4
-			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+			found2 = linecoord.find(str_r, 23); //il primo " ï¿½ in posizione 4
+			if (found2 != std::string::npos) { //questa condizione ï¿½ sempre verificata
 				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
 				//converto da string a double
 				stringstream s(estratta);
@@ -83,8 +83,8 @@ Persona::Persona(string nome_file) {
 
 			//estraggo z
 			getline(i, linecoord);
-			found2 = linecoord.find(str_r, 23); //il primo " è in posizione 22
-			if (found2 != std::string::npos) { //questa condizione è sempre verificata
+			found2 = linecoord.find(str_r, 23); //il primo " ï¿½ in posizione 22
+			if (found2 != std::string::npos) { //questa condizione ï¿½ sempre verificata
 				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
 				//converto da string a double
 				stringstream s(estratta);
@@ -164,7 +164,7 @@ void Persona:: popola_max_min_angolo_zenit(int _angolo, float _tolleranzazenit){
 		int contl=1,cont1=1,cont2;
         for(iterl=++(iter->second.begin());iterl!=--(iter->second.end());iterl++){
 		//	cont1 = contl;
-			cont2 = 2;//parte da 2 poiché entro nel while solo nel momento in cui vado ad analizzare le due celle successive o più
+			cont2 = 2;//parte da 2 poichï¿½ entro nel while solo nel momento in cui vado ad analizzare le due celle successive o piï¿½
 			//inizializzo iteratori
 			how = 0;
 			int dove = 0;//sinistra->1 //destra->2 //entrambi->3 //valore iniziale->0 //altro->4
@@ -291,7 +291,7 @@ void Persona::popola_max_min_angolo_azimut(int _angolo, float _tolleranzaazimut)
 		int contl = 1, cont1 = 1, cont2;
 		for (iterl = ++(iter->second.begin()); iterl != --(iter->second.end()); iterl++) {
 			//	cont1 = contl;
-			cont2 = 2;//parte da 2 poiché entro nel while solo nel momento in cui vado ad analizzare le due celle successive o più
+			cont2 = 2;//parte da 2 poichï¿½ entro nel while solo nel momento in cui vado ad analizzare le due celle successive o piï¿½
 			//inizializzo iteratori
 			how = 0;
 			int dove = 0;//sinistra->1 //destra->2 //entrambi->3 //valore iniziale->0 //altro->4
