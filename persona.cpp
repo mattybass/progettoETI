@@ -499,24 +499,36 @@ void Persona::stampa_max(int n) {
 	cout << endl;
 }
 
-void Persona::stampa_angoli(int n) {
-	map<int, list<Angolo>>::const_iterator miter;
+void Persona::stampa_angoli(int n, bool scelta) {
+	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
-	miter = sequenzaangolo.find(n);
-	cout <<"JOINT "<< miter->first << ": "<< endl;
+	if (scelta == true)
+		miter = sequenzaangolo.find(n);
+	else
+		miter = sequenzaangoloelab.find(n);
+	cout << "JOINT " << miter->first << ": " << endl;
 	cout << "frame; azimut; zenit" << endl;
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
-		cout << (*liter)<<endl;
+		cout << (*liter) << endl;
 	}
 }
-void Persona::stampafile_angoli(int n,string name) {
-	map<int, list<Angolo>>::const_iterator miter;
+
+void Persona::stampafile_angoli(int n, string name) {
+	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	ofstream file;
-	file.open(name+".txt", ios::out);
+	string l = name + ".txt";
+	file.open(l.c_str(), ios::out);
 	miter = sequenzaangolo.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file << (*liter) << endl;
+	}
+	ofstream file2;
+	string l2 = name + "ELAB.txt";
+	file2.open(l2.c_str(), ios::out);
+	miter = sequenzaangoloelab.find(n);
+	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
+		file2 << (*liter) << endl;
 	}
 }
 
@@ -613,8 +625,8 @@ void Persona::media_mobile_angoli(int _angolo, int _finestra) {
 	list<Angolo>::iterator liter2;
 	double sum_zenit;
 	double sum_azimut;
-	iter = sequenzaangoloelab.find(_angolo);
-	if (iter != sequenzaangoloelab.end()) { //ho trovato l'angolo
+	iter = sequenzaangolo.find(_angolo);
+	if (iter != sequenzaangolo.end()) { //ho trovato l'angolo
 		int s = (iter->second).size();
 		liter = iter->second.begin();
 		for (int i = 0; i < (s - _finestra); ++i) {

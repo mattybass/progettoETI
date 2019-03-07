@@ -9,18 +9,23 @@
 
 
 int main(int argc, char** argv) {
-    Persona p("output_01-03-2019 10_09_52.json");
-//	p.stampa_angoli(2);
-	cout << endl;	
-//	p.stampa_max(1);
-//	p.stampa_max(2);
-/*	p.stampa_max(3);
-	p.stampa_max(4);
-	p.stampa_max(5);*/
-	p.stampafile_angoli(2, "datisperimentali2");
-	p.kamazenit_lista(2,20,5,100);
-	p.kamaazimut_lista(2, 20, 5, 100);//10,2,30
-	p.stampafile_angoli(2, "datiapprossimati2");
+    Persona p("output_01-03-2019 10_09_52.json");	
+
+	
+/*	p.kamazenit_lista(2, 40, 10, 200);
+	p.kamaazimut_lista(2, 40, 10, 100);//10,2,30
+	p.stampafile_angoli(2, "k2");*/
+	
+	/*p.kamazenit_lista(2, 80, 16, 240);
+	p.kamaazimut_lista(2, 80, 16, 240);//10,2,30
+	p.stampafile_angoli(2, "k3");*/
+
+	p.media_mobile_angoli(2, 30);
+	p.media_mobile_angoli(2, 30);
+	p.stampafile_angoli(2, "m1");
+
+
+
 //	p.stampa_angoli(2,);
 //	p.stampafile_angoli(2,"beckmatty");
 //	p.test_persona(2);

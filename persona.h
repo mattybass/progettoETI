@@ -37,7 +37,7 @@ public:
     void popola_sequenzaangolo(); //Da richiamare una volta popolati tutta la map "sequenzaframe" e dopo aver richiamato le varie completa_angoli
     void popola_framedaanalizzare(); // Esegue tutte le funzioni popola_max_min_anogolo necessarie per popoalre le 2 MAP e inoltre popola la set di frame da analizzare.
 	void stampa_max(int n);
-	void stampa_angoli(int n);
+	void stampa_angoli(int n, bool scelta);
 	void stampafile_angoli(int n,string name);
 	long double ERi_zenit(int _angolo, int i, int n);
 	long double ERi_azimut(int _angolo, int i, int n);
