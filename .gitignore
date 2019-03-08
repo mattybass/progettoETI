@@ -2,6 +2,9 @@ ProgettoETI.vcxproj.filters
 ProgettoETI.vcxproj.user
 ProgettoETI.vcxproj
 /Debug
+matlab/*.txt
+matlab/*.fig
+matlab/*.pdf
 *.win
 *.o
 
