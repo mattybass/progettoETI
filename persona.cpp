@@ -104,18 +104,18 @@ double Persona::get_angoloMedia_zenit(int _angolo, int n_frame) {
 	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
 		size = iter->second.size();
 		for (liter = iter->second.begin(); liter != iter->second.end(); liter++) {
+			i++;
 			if ((*liter).get_numeroframe() == n_frame) {
 				l_liter = liter;
 				r_liter = liter;
-				i++;
 				media = (*liter).get_zenit();
-				while ((i + cont < size) && (i - cont > 0) && (cont < 4)) {
+				while ((i + cont < size+1) && (i - cont > 0) && (cont < 4)) {
 					l_liter--;
 					r_liter++;
 					media = media + (*l_liter).get_zenit() + (*r_liter).get_zenit();
 					cont++;
 				}
-				return media = media / (2 * cont + 1);
+				return media = media / ((int)(2 * (cont-1) + 1));
 			}
 		}	
 	}
@@ -133,17 +133,18 @@ double Persona::get_angoloMedia_azimut(int _angolo, int n_frame) {
 	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
 		size = iter->second.size();
 		for (liter = iter->second.begin(); liter != iter->second.end(); liter++) {
+			i++;
 			if ((*liter).get_numeroframe() == n_frame) {
 				l_liter = liter;
 				r_liter = liter;
-				i++;
-				media = (*liter).get_zenit();
-				while ((i + cont < size) && (i - cont > 0) && (cont < 4)) {
+				media = (*liter).get_azimut();
+				while ((i + cont < size+1) && (i - cont > 0) && (cont < 4)) {
 					l_liter--;
 					r_liter++;
 					media = media + (*l_liter).get_azimut() + (*r_liter).get_azimut();
+					cont++;
 				}
-				return media = media / (2 * cont + 1);
+				return media = media / ((int)(2 * (cont-1) + 1));
 			}
 		}
 	}
@@ -292,24 +293,29 @@ void Persona::maxminFind_azimut(int _angolo, int _finestra) {
 
 void Persona::maxminFind_angolo(int _angolo, int _finestra) {
 	maxminFind_zenit(_angolo, _finestra);
-	maxminFind_azimut(_angolo, _finestra);
+//	maxminFind_azimut(_angolo, _finestra);
 }
 
 void Persona::stampaConsole_maxmin(int n) {
 	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	miter = valori_maxmin_zenit.find(n);
-	cout << "JOINT " << miter->first << ": " << endl;
-	cout << "frame; azimut; zenitMAX" << endl;
-	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
-		cout << (*liter) << endl;
-	}
+	//if (miter != valori_maxmin_zenit.end()) {
+		cout << "JOINT " << miter->first << ": " << endl;
+		cout << "frame; azimut; zenitMAX" << endl;
+		for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
+			cout << (*liter) << endl;
+		}
+	//}
+
 	cout << endl;
 	miter = valori_maxmin_azimut.find(n);
-	cout << "JOINT " << miter->first << ": " << endl;
-	cout << "frame; azimutMAX; zenit" << endl;
-	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
-		cout << (*liter) << endl;
+	//if (miter != valori_maxmin_azimut.end()) {
+		cout << "JOINT " << miter->first << ": " << endl;
+		cout << "frame; azimutMAX; zenit" << endl;
+		for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
+			cout << (*liter) << endl;
+	//	}
 	}
 }
 
