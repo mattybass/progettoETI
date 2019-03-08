@@ -1,7 +1,7 @@
 # PROSSIMI PASSI
 ## Funzioni da completare
 Selezione massimi e minimi + inserimento estremi -> Beck
-Determinazione valore nel massimo / minimo -> Mattyspam
-# Relazione ed esposizione
+<\r>Determinazione valore nel massimo / minimo -> Mattyspam
+##  Relazione ed esposizione
 powerpoint
-latex o qualcosa di più accattivante graficamente?
+<\r>latex o qualcosa di più accattivante graficamente?
