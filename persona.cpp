@@ -328,8 +328,14 @@ ostream& operator <<(ostream& os, const Persona& p) {
 
 void Persona::pulisci_max_min(int _angolo) {
 	map<int, set<int>>::iterator iter;
+	map<int, Frame>::iterator iterf;
+	map<int, Frame>::iterator iterf2;
 	set<int>::iterator iter2;
 	set<int>::iterator iter3;
+	map<int, Angolo> temp;
+	map<int, Angolo>::iterator itertemp;
+	map<int, Angolo> temp2;
+	map<int, Angolo>::iterator itertemp2;
 	int frame1, frame2;
 	iter = maxmin_zenit.find(_angolo);
 	if (iter != maxmin_zenit.end()) {
@@ -338,7 +344,19 @@ void Persona::pulisci_max_min(int _angolo) {
 			++iter3;
 			frame1 = *iter2;
 			frame2 = *iter3;
-			if(((frame1-frame2)<20
+			int diffabs = abs(frame1 - frame2);
+			if (diffabs < 20) { //"sono molto vicini" 
+				iterf = sequenzaFrame.find(frame1);
+				iterf2 = sequenzaFrame.find(frame2);
+				temp = (iterf->second).get_angolijoint();
+				itertemp = temp.find(_angolo);
+				temp2 = (iterf2->second).get_angolijoint();
+				itertemp2 = temp.find(_angolo);
+				if ((itertemp->second).get_zenit() > (itertemp2->second).get_zenit())
+					iter->second.erase(frame2);
+				else
+					iter->second.erase(frame1);
+			}
 		}
 
 	}
