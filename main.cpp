@@ -23,6 +23,7 @@ int main(int argc, char** argv) {
 	p.mediamobile_angolo(2, 30);
 	p.mediamobile_angolo(2, 30);
 	p.stampaFile_angolo(2, "m1");
+//	p.maxminFind_angolo(2, 30);
 
 
 

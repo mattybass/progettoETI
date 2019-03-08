@@ -214,7 +214,11 @@ void Persona::maxminFind_azimut(int _angolo, int _finestra) {
 
 void Persona::maxminFind_angolo(int _angolo, int _finestra) {
 	maxminFind_azimut(_angolo, _finestra);
+<<<<<<< Updated upstream
 	maxminFind_zenit(_angolo, _finestra);
+=======
+	//maxminFind_zenit(_angolo, _finestra);
+>>>>>>> Stashed changes
 }
 
 void Persona::stampaConsole_maxmin(int n) {
@@ -260,7 +264,7 @@ void Persona::stampaFile_angolo(int n, string name) {
 	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	ofstream file;
-	string l = name + ".txt";
+	string l = "Matlab/"+name + ".txt";
 	file.open(l.c_str(), ios::out);
 	miter = sequenzaAngolo.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
