@@ -12,10 +12,10 @@ int main(int argc, char** argv) {
     Persona p("spallagomitoModello60fps.json");	
 	p.mediamobile_angolo(2, 30);
 	p.mediamobile_angolo(2, 30);
-	p.maxminFind_angolo(2, 10);
-	p.stampaFile_angolo(2, "modello");
-	//p.pulisci_max_min(2);
+	p.maxminFind_angolo(2, 50);
+	p.pulisci_max_min(2);
 	p.stampaConsole_maxmin(2);
+	
 	system("PAUSE");
 
 	return 0;
