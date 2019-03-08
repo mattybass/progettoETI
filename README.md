@@ -5,5 +5,7 @@ Selezione massimi e minimi + inserimento estremi -> Beck
 Determinazione valore nel massimo / minimo -> Mattyspam
 ##  Relazione ed esposizione
 powerpoint
+
 latex
+
 qualcosa di più accattivante graficamente?
