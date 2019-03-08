@@ -22,8 +22,8 @@ private:
     map<int,Frame> sequenzaFrame; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
     map<int,list<Angolo>> sequenzaAngolo; //MAP: $ joint, lista di Angolo //andamento temporale dei vari angoli
 	map<int, list<Angolo>> sequenzaAngoloELAB;
-	map<int,set<int>> maxmin_zenit; 
-    map<int,set<int>> maxmin_azimut;
+	map<int, list<Angolo>> valori_maxmin_zenit;
+	map<int, list<Angolo>> valori_maxmin_azimut;
     
     //Funzioni
 	void maxminFind_zenit(int _angolo, int _finestra);
@@ -48,9 +48,9 @@ public:
 	void stampaConsole_angolo(int n, bool scelta);
 	void stampaFile_angolo(int n, string name, string percorso_file="matlab");
     
-    friend ostream& operator <<(ostream& os, const Persona& p);
+    //friend ostream& operator <<(ostream& os, const Persona& p);
 };
 
-ostream& operator <<(ostream& os, const Persona& p);
+//ostream& operator <<(ostream& os, const Persona& p);
 
 #endif
