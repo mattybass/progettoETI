@@ -45,7 +45,7 @@ public:
 
 	void mediamobile_angolo(int _angolo, int _finestra);
 	void maxminFind_angolo(int _angolo, int _finestra);
-	void pulisci_max_min(int _angolo);
+	void maxminClean_angolo(int _angolo);
 
 	//STAMPE
 	void stampaConsole_maxmin(int n);

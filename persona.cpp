@@ -411,7 +411,7 @@ void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 		cout << "Angolo non trovato!" << endl;
 }
 
-void Persona::pulisci_max_min(int _angolo) {
+void Persona::maxminClean_angolo(int _angolo) {
 	map<int, list<Angolo>>::iterator iter;
 	iter = valori_maxmin_zenit.find(_angolo);
 	list<Angolo> temp;

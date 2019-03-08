@@ -10,11 +10,15 @@
 
 int main(int argc, char** argv) {
     Persona p("spallagomitoModello60fps.json");	
-	p.mediamobile_angolo(2, 30);
-	p.mediamobile_angolo(2, 30);
-	p.maxminFind_angolo(2, 50);
-	p.pulisci_max_min(2);
-	p.stampaConsole_maxmin(2);
+	p.mediamobile_angolo(3, 30);
+	p.mediamobile_angolo(3, 30);
+	p.maxminFind_angolo(3, 50);
+	p.maxminClean_angolo(3);
+	p.stampaConsole_maxmin(3);
+	p.stampaFile_angolo(3,"modello");
+
+	p.stampaFile_maxmin_zenit(3,"zenit");
+	p.stampaFile_maxmin_azimut(3, "azimut");
 	
 	system("PAUSE");
 
