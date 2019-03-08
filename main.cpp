@@ -17,8 +17,8 @@ int main(int argc, char** argv) {
 	p.stampaConsole_maxmin(3);
 	p.stampaFile_angolo(3,"modello");
 
-	p.stampaFile_maxmin_zenit(3,"zenit");
-	p.stampaFile_maxmin_azimut(3, "azimut");
+	p.stampaFile_maxmin(3,"zenit");
+
 	
 	system("PAUSE");
 

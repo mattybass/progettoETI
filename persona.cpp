@@ -354,25 +354,22 @@ void Persona::stampaFile_angolo(int n, string name, string percorso_file) {
 	}
 }
 
-void Persona::stampaFile_maxmin_zenit(int n, string name, string percorso_file) {
+void Persona::stampaFile_maxmin(int n, string name, string percorso_file) {
 	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	ofstream file;
-	string l = percorso_file + "/" + name + ".txt";
+	string l = percorso_file + "/" + name + "ZENIT.txt";
 	file.open(l.c_str(), ios::out);
 	miter = valori_maxmin_zenit.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file << (*liter) << endl;
 	}
-}
 
-
-void Persona::stampaFile_maxmin_azimut(int n, string name, string percorso_file) {
-	map<int, list<Angolo> >::const_iterator miter;
-	list<Angolo>::const_iterator liter;
-	ofstream file;
-	string l = percorso_file + "/" + name + ".txt";
-	file.open(l.c_str(), ios::out);
+//	map<int, list<Angolo> >::const_iterator miter;
+//	list<Angolo>::const_iterator liter;
+	ofstream file1;
+	string l1 = percorso_file + "/" + name + "AZIMUT.txt";
+	file1.open(l1.c_str(), ios::out);
 	miter = valori_maxmin_azimut.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file << (*liter) << endl;
