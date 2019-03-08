@@ -51,8 +51,8 @@ public:
 	void stampaConsole_maxmin(int n);
 	void stampaConsole_angolo(int n, bool scelta);
 	void stampaFile_angolo(int n, string name, string percorso_file="matlab");
-    
-    //friend ostream& operator <<(ostream& os, const Persona& p);
+	void stampaFile_maxmin_zenit(int n, string name, string percorso_file="matlab");
+	void stampaFile_maxmin_azimut(int n, string name, string percorso_file = "matlab");
 };
 
 //ostream& operator <<(ostream& os, const Persona& p);
