@@ -2,7 +2,8 @@
 #include "utility.h"
 
 Angolo::Angolo(Coordinata& _c1,Coordinata& _c2,Coordinata& _c3, int _numeroframe){
-    azimut = angolo_azimut(_c1, _c2, _c3);
+	maxmin = 0;
+	azimut = angolo_azimut(_c1, _c2, _c3);
     zenit= angolo_zenit(_c1,_c2,_c3);
     numeroframe=_numeroframe;
 }
@@ -15,9 +16,13 @@ int Angolo::get_numeroframe()const{return numeroframe;}
 //FUNZIONI SET
 void Angolo::set_zenit(double z) { zenit = z; }
 void Angolo::set_azimut(double a) { azimut = a; }
-
+void Angolo::set_maxmin(int i) { maxmin = i; }
 
 ostream& operator << (ostream& os,const Angolo& _angolo){
-   // return os<<"[Azimut: "<<_angolo.azimut<<" Zenit: "<<_angolo.zenit<<"]";
-	return os << _angolo.numeroframe << " " << _angolo.azimut << " " << _angolo.zenit;
+	os << _angolo.numeroframe << " " << _angolo.azimut << " " << _angolo.zenit;
+	if (_angolo.maxmin == 1)
+		os << "     Questo angolo e' un max";
+	else if (_angolo.maxmin == -1)
+		os << "     Questo angolo e' un min";
+	return os;
 }

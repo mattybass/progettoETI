@@ -13,6 +13,7 @@ using namespace std;
 
 class Angolo{
 	private:
+		int maxmin;
 		int numeroframe;
 		double zenit; //Altezza (Y-Z)
 		double azimut; //Posizione (X-Y)
@@ -27,7 +28,7 @@ class Angolo{
 		//FUNZIONI SET
 		void set_azimut(double a);
 		void set_zenit(double z);
-
+		void set_maxmin(int i);
 		friend ostream& operator << (ostream& os,const Angolo& _angolo);
 };
 
