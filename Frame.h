@@ -22,7 +22,7 @@ public:
 	//FUNZIONI GET
 	int get_numeroframe()const; //Ritorna il numero di frame
     Coordinata get_coordinata(int _numerojoint); // Ritorna la coordinata relativa ad uno specifico joint
-	map<int,Angolo> get_angolijoint()const; //Ritorna una copia della MAP "angolijoint"   
+	map<int,Angolo> get_angolijoint()const; //Ritorna una copia della MAP "angolijoint"
 
 	//INSERIMENTO DATI
 	void insert_coordinata(int _numerojoint, double _x, double _y, double _z);//Inserisce coordinate nella map di interi coordinata

@@ -3,94 +3,121 @@
 Persona::Persona(string nome_file, string percorso_file) {
 	ifstream i(percorso_file + "/" + nome_file);
 
-	string line, linecoord, estratta;
+string line, linecoord, estratta;
 
-	string str_r = "\"";
-	size_t found, found2;
-    int frame=0;
-    int joint;
-	int exit_value=0; 
-	/*per sapere se posso andare a utilizzare completa_angoli
-	+1 se trovo {, -1 se trovo }*/
-	double x, y, z;
+string str_r = "\"";
+size_t found, found2;
+int frame = 0;
+int joint;
+int exit_value = 0;
+/*per sapere se posso andare a utilizzare completa_angoli
++1 se trovo {, -1 se trovo }*/
+double x, y, z;
 
-	while (getline(i, line)) {
+while (getline(i, line)) {
 
-		if (line.find("{") != std::string::npos)
-			exit_value++;
-		if (line.find("}") != std::string::npos) {
-			exit_value--;
-			if (exit_value == 1 && frame != 0) {
-				popola_angolo(frame);
-			}
-
-		}
-			
-		found = line.find("frame");
-		if (found != std::string::npos) {
-			//estrai frame;
-
-			found2 = line.find(str_r, 5); //il primo " � in posizione 4
-			if (found2 != std::string::npos) { //questa condizione � sempre verificata
-				estratta = line.substr(11, found2 - 11); //substr(inizio,nCaratteri)
-				//converto da string a int
-				stringstream s(estratta);
-				s >> frame;
-				insert_frame(frame);
-				//cout << "FRAME " << frame << endl;
-			}
-		}
-
-
-		found = line.find("joint");
-		if (found != std::string::npos) {
-			//estrai joint;
-
-			found2 = line.find(str_r, 13); //il primo " � in posizione 12
-			if (found2 != std::string::npos) { //questa condizione � sempre verificata
-				estratta = line.substr(19, found2 - 19); //substr(inizio,nCaratteri)
-				//converto da string a int
-				stringstream s3(estratta);
-				s3 >> joint;
-			}
-
-			//estraggo x
-			getline(i, linecoord);
-			found2 = linecoord.find(str_r, 23); //il primo " � in posizione 4
-			if (found2 != std::string::npos) { //questa condizione � sempre verificata
-				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
-				//converto da string a double
-				stringstream s(estratta);
-				s >> x;
-			}
-			//estraggo y
-			getline(i, linecoord);
-			found2 = linecoord.find(str_r, 23); //il primo " � in posizione 4
-			if (found2 != std::string::npos) { //questa condizione � sempre verificata
-				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
-				//converto da string a double
-				stringstream s(estratta);
-				s >> y;
-			}
-
-			//estraggo z
-			getline(i, linecoord);
-			found2 = linecoord.find(str_r, 23); //il primo " � in posizione 22
-			if (found2 != std::string::npos) { //questa condizione � sempre verificata
-				estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
-				//converto da string a double
-				stringstream s(estratta);
-				s >> z;
-			}
-			insert_coordinata(frame, joint, z, x, y);
+	if (line.find("{") != std::string::npos)
+		exit_value++;
+	if (line.find("}") != std::string::npos) {
+		exit_value--;
+		if (exit_value == 1 && frame != 0) {
+			popola_angolo(frame);
 		}
 
 	}
 
-	i.close();
-	popola_sequenzaangolo();
-	sequenzaAngoloELAB = sequenzaAngolo;
+	found = line.find("frame");
+	if (found != std::string::npos) {
+		//estrai frame;
 
+		found2 = line.find(str_r, 5); //il primo " � in posizione 4
+		if (found2 != std::string::npos) { //questa condizione � sempre verificata
+			estratta = line.substr(11, found2 - 11); //substr(inizio,nCaratteri)
+			//converto da string a int
+			stringstream s(estratta);
+			s >> frame;
+			insert_frame(frame);
+			//cout << "FRAME " << frame << endl;
+		}
+	}
+
+
+	found = line.find("joint");
+	if (found != std::string::npos) {
+		//estrai joint;
+
+		found2 = line.find(str_r, 13); //il primo " � in posizione 12
+		if (found2 != std::string::npos) { //questa condizione � sempre verificata
+			estratta = line.substr(19, found2 - 19); //substr(inizio,nCaratteri)
+			//converto da string a int
+			stringstream s3(estratta);
+			s3 >> joint;
+		}
+
+		//estraggo x
+		getline(i, linecoord);
+		found2 = linecoord.find(str_r, 23); //il primo " � in posizione 4
+		if (found2 != std::string::npos) { //questa condizione � sempre verificata
+			estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
+			//converto da string a double
+			stringstream s(estratta);
+			s >> x;
+		}
+		//estraggo y
+		getline(i, linecoord);
+		found2 = linecoord.find(str_r, 23); //il primo " � in posizione 4
+		if (found2 != std::string::npos) { //questa condizione � sempre verificata
+			estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
+			//converto da string a double
+			stringstream s(estratta);
+			s >> y;
+		}
+
+		//estraggo z
+		getline(i, linecoord);
+		found2 = linecoord.find(str_r, 23); //il primo " � in posizione 22
+		if (found2 != std::string::npos) { //questa condizione � sempre verificata
+			estratta = linecoord.substr(22, found2 - 22); //substr(inizio,nCaratteri)
+			//converto da string a double
+			stringstream s(estratta);
+			s >> z;
+		}
+		insert_coordinata(frame, joint, z, x, y);
+	}
+
+}
+
+i.close();
+popola_sequenzaangolo();
+sequenzaAngoloELAB = sequenzaAngolo;
+
+}
+
+double Persona::get_angoloMedia_zenit(int _angolo, int n_frame) {
+	map<int, list<Angolo> >::iterator iter;
+	list<Angolo>::iterator liter;
+	list<Angolo>::iterator r_liter;
+	list<Angolo>::iterator l_liter;
+	int i=0, cont = 1,size;
+	double media;
+	iter = sequenzaAngoloELAB.find(_angolo);
+	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
+		size = iter->second.size();
+		for (liter = iter->second.begin(); liter != iter->second.end(); liter++) {
+			l_liter = liter;
+			r_liter = liter;
+			i++;
+			media = (*liter).get_zenit();
+			while ((i + cont < size) && (i - cont > 0)&&(cont<4)) {
+				l_liter--;
+				r_liter++;
+				media = media + (*l_liter).get_zenit() + (*r_liter).get_zenit();
+			}
+			return media = media / (2 * cont + 1);
+			}
+		
+		}
+	return 0;
 }
 
 void Persona::insert_frame(int _numeroframe){

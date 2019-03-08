@@ -32,6 +32,10 @@ private:
 public:
 	Persona(string nome_file,string percorso_file="json");
 
+	//FUNZIONI GET
+	double get_angoloMedia_zenit(int _angolo, int n_frame);
+	double get_angoloMedia_azimut(int _angolo);
+
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
     void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
