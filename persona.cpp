@@ -132,93 +132,91 @@ void Persona::popola_sequenzaangolo(){
 
 void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 	map<int, list<Angolo> >::iterator iter;
-	iter = sequenzaAngolo.find(_angolo);
+	iter = sequenzaAngoloELAB.find(_angolo);
 
-	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
+	if (iter != sequenzaAngoloELAB.end()) { //ho trovato l'angolo
 		list<Angolo>::iterator liter;
 		list<Angolo>::iterator liter2;
 		list<Angolo>::iterator liter3;
+		int max_o_min = 1;
+		int cont = 0;
 		liter = iter->second.begin();
-		for (int i = 0; i < _finestra; ++i) {
-			++liter;
-		}
-		int s = (iter->second).size();
-		int max_o_min;
-		for (int i = 0; i < s - _finestra; ++i) {
+		++liter;
+		while (liter != (iter->second).end() && max_o_min!=0) {
 			liter2 = liter;
 			liter3 = liter;
 			++liter2;
 			--liter3;
-			max_o_min = 1;
-			for (int i = 0; i < _finestra - 1; ++i) {
-				if (((float)(*liter).get_zenit() > (float)(*liter2).get_zenit()) && ((float)(*liter).get_zenit() > (float)(*liter3).get_zenit()) && max_o_min != 0) {
-					++liter2;
-					--liter3;
+			while (liter2 != (iter->second).end() && liter3 != (iter->second).begin() && cont!=0) {
+				
+				if(((*liter).get_zenit() > (*liter2).get_zenit()) && ((*liter).get_zenit() > (*liter3).get_zenit()) && max_o_min != 0) {
+					
+				}
+				else if (((*liter).get_zenit() < (*liter2).get_zenit()) && ((*liter).get_zenit() < (*liter3).get_zenit()) && max_o_min != 0) {
+				
 				}
 				else
-					if (((float)(*liter).get_zenit() < (float)(*liter2).get_zenit()) && ((float)(*liter).get_zenit() < (float)(*liter3).get_zenit()) && max_o_min != 0) {
-						++liter2;
-						--liter3;
-					}
-					else
-						max_o_min = 0;
+					max_o_min = 0;
+
+				++liter2;
+				--liter3;
+				cont--;
 			}
-			if (max_o_min != 0) {
+			if(max_o_min!=0)
 				maxmin_zenit[_angolo].insert((*liter).get_numeroframe());
-			}
 			++liter;
+			max_o_min = 1;
+			cont = _finestra;
 		}
+		
 	}
 }
 
 void Persona::maxminFind_azimut(int _angolo, int _finestra) {
 	map<int, list<Angolo> >::iterator iter;
-	iter = sequenzaAngolo.find(_angolo);
+	iter = sequenzaAngoloELAB.find(_angolo);
 
-	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
+	if (iter != sequenzaAngoloELAB.end()) { //ho trovato l'angolo
 		list<Angolo>::iterator liter;
 		list<Angolo>::iterator liter2;
 		list<Angolo>::iterator liter3;
+		int max_o_min = 1;
+		int cont = 0;
 		liter = iter->second.begin();
-		for (int i = 0; i < _finestra; ++i) {
-			++liter;
-		}
-		int s = (iter->second).size();
-		int max_o_min;
-		for (int i = 0; i < s - _finestra; ++i) {
+		++liter;
+		while (liter != (iter->second).end()) {
 			liter2 = liter;
 			liter3 = liter;
 			++liter2;
 			--liter3;
-			max_o_min = 1;
-			for (int i = 0; i < _finestra - 1; ++i) {
-				if (((float)(*liter).get_azimut() > (float)(*liter2).get_azimut()) && ((float)(*liter).get_azimut() > (float)(*liter3).get_azimut()) && max_o_min != 0) {
-					++liter2;
-					--liter3;
+			while (liter2 != (iter->second).end() && liter3 != (iter->second).begin() && cont != 0) {
+
+				if (((*liter).get_azimut() > (*liter2).get_azimut()) && ((*liter).get_azimut() > (*liter3).get_azimut()) && max_o_min != 0) {
+
+				}
+				else if (((*liter).get_azimut() < (*liter2).get_azimut()) && ((*liter).get_azimut() < (*liter3).get_azimut()) && max_o_min != 0) {
+
 				}
 				else
-					if (((float)(*liter).get_azimut() < (float)(*liter2).get_azimut()) && ((float)(*liter).get_azimut() < (float)(*liter3).get_azimut()) && max_o_min != 0) {
-						++liter2;
-						--liter3;
-					}
-					else
-						max_o_min = 0;
+					max_o_min = 0;
+
+				++liter2;
+				--liter3;
+				cont--;
 			}
-			if (max_o_min != 0) {
+			if (max_o_min != 0)
 				maxmin_azimut[_angolo].insert((*liter).get_numeroframe());
-			}
 			++liter;
+			max_o_min = 1;
+			cont = _finestra;
 		}
+
 	}
 }
 
 void Persona::maxminFind_angolo(int _angolo, int _finestra) {
-	maxminFind_azimut(_angolo, _finestra);
-<<<<<<< Updated upstream
 	maxminFind_zenit(_angolo, _finestra);
-=======
-	//maxminFind_zenit(_angolo, _finestra);
->>>>>>> Stashed changes
+	maxminFind_azimut(_angolo, _finestra);
 }
 
 void Persona::stampaConsole_maxmin(int n) {
@@ -285,8 +283,8 @@ void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 	list<Angolo>::iterator liter2;
 	double sum_zenit;
 	double sum_azimut;
-	iter = sequenzaAngolo.find(_angolo);
-	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
+	iter = sequenzaAngoloELAB.find(_angolo);
+	if (iter != sequenzaAngoloELAB.end()) { //ho trovato l'angolo
 		int s = (iter->second).size();
 		liter = iter->second.begin();
 		for (int i = 0; i < (s - _finestra); ++i) {
