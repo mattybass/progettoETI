@@ -325,7 +325,7 @@ ostream& operator <<(ostream& os, const Persona& p) {
 	}
 	return os;
 }
-
+/*
 void Persona::pulisci_max_min(int _angolo) {
 	map<int, set<int>>::iterator iter;
 	set<int>::iterator iter2;
@@ -344,7 +344,7 @@ void Persona::pulisci_max_min(int _angolo) {
 	}
 
 
-}
+}*/
 
 
 
