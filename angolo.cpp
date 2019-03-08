@@ -27,9 +27,9 @@ void Angolo::set_maxmin(int i) { maxmin = i; }
 
 ostream& operator << (ostream& os,const Angolo& _angolo){
 	os << _angolo.numeroframe << " " << _angolo.azimut << " " << _angolo.zenit;
-	if (_angolo.maxmin == 1)
+	/*if (_angolo.maxmin == 1)
 		os << "     Questo angolo e' un max";
 	else if (_angolo.maxmin == -1)
-		os << "     Questo angolo e' un min";
+		os << "     Questo angolo e' un min";*/
 	return os;
 }

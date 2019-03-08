@@ -354,6 +354,31 @@ void Persona::stampaFile_angolo(int n, string name, string percorso_file) {
 	}
 }
 
+void Persona::stampaFile_maxmin_zenit(int n, string name, string percorso_file) {
+	map<int, list<Angolo> >::const_iterator miter;
+	list<Angolo>::const_iterator liter;
+	ofstream file;
+	string l = percorso_file + "/" + name + ".txt";
+	file.open(l.c_str(), ios::out);
+	miter = valori_maxmin_zenit.find(n);
+	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
+		file << (*liter) << endl;
+	}
+}
+
+
+void Persona::stampaFile_maxmin_azimut(int n, string name, string percorso_file) {
+	map<int, list<Angolo> >::const_iterator miter;
+	list<Angolo>::const_iterator liter;
+	ofstream file;
+	string l = percorso_file + "/" + name + ".txt";
+	file.open(l.c_str(), ios::out);
+	miter = valori_maxmin_azimut.find(n);
+	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
+		file << (*liter) << endl;
+	}
+}
+
 void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 	map<int, list < Angolo> >::iterator iter;
 	list<Angolo>::iterator liter;
@@ -385,23 +410,6 @@ void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 	else
 		cout << "Angolo non trovato!" << endl;
 }
-
-/*ostream& operator <<(ostream& os, const Persona& p) {
-	map<int, set<int>>::const_iterator iter1;
-	set<int>::const_iterator iter1a;
-	map<int, set<int>>::const_iterator iter2;
-	set<int>::const_iterator iter2a;
-
-
-	cout << "Massimi/minimi Azimut joint 1: " << endl;
-	iter2 = p.maxmin_azimut.find(1);
-	if (iter2 != p.maxmin_azimut.end()) {
-		for (iter2a = iter2->second.begin(); iter2a != iter2->second.end(); ++iter2a) {
-			cout << (*iter2a) << "; ";
-		}
-	}
-	return os;
-}*/
 
 void Persona::pulisci_max_min(int _angolo) {
 	map<int, list<Angolo>>::iterator iter;
