@@ -99,24 +99,54 @@ double Persona::get_angoloMedia_zenit(int _angolo, int n_frame) {
 	list<Angolo>::iterator r_liter;
 	list<Angolo>::iterator l_liter;
 	int i=0, cont = 1,size;
-	double media;
-	iter = sequenzaAngoloELAB.find(_angolo);
+	double media=0.0;
+	iter = sequenzaAngolo.find(_angolo);
 	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
 		size = iter->second.size();
 		for (liter = iter->second.begin(); liter != iter->second.end(); liter++) {
-			l_liter = liter;
-			r_liter = liter;
-			i++;
-			media = (*liter).get_zenit();
-			while ((i + cont < size) && (i - cont > 0)&&(cont<4)) {
-				l_liter--;
-				r_liter++;
-				media = media + (*l_liter).get_zenit() + (*r_liter).get_zenit();
+			if ((*liter).get_numeroframe() == n_frame) {
+				l_liter = liter;
+				r_liter = liter;
+				i++;
+				media = (*liter).get_zenit();
+				while ((i + cont < size) && (i - cont > 0) && (cont < 4)) {
+					l_liter--;
+					r_liter++;
+					media = media + (*l_liter).get_zenit() + (*r_liter).get_zenit();
+					cont++;
+				}
+				return media = media / (2 * cont + 1);
 			}
-			return media = media / (2 * cont + 1);
+		}	
+	}
+	return 0;
+}
+
+double Persona::get_angoloMedia_azimut(int _angolo, int n_frame) {
+	map<int, list<Angolo> >::iterator iter;
+	list<Angolo>::iterator liter;
+	list<Angolo>::iterator r_liter;
+	list<Angolo>::iterator l_liter;
+	int i = 0, cont = 1, size;
+	double media;
+	iter = sequenzaAngolo.find(_angolo);
+	if (iter != sequenzaAngolo.end()) { //ho trovato l'angolo
+		size = iter->second.size();
+		for (liter = iter->second.begin(); liter != iter->second.end(); liter++) {
+			if ((*liter).get_numeroframe() == n_frame) {
+				l_liter = liter;
+				r_liter = liter;
+				i++;
+				media = (*liter).get_zenit();
+				while ((i + cont < size) && (i - cont > 0) && (cont < 4)) {
+					l_liter--;
+					r_liter++;
+					media = media + (*l_liter).get_azimut() + (*r_liter).get_azimut();
+				}
+				return media = media / (2 * cont + 1);
 			}
-		
 		}
+	}
 	return 0;
 }
 
@@ -192,9 +222,13 @@ void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 				cont--;
 			}
 			if (max_o_min != 0) {
+				int n = (*liter).get_numeroframe();
+				Angolo a(get_angoloMedia_azimut(_angolo, n), get_angoloMedia_zenit(_angolo, n), n,tipo_angolo);
+				valori_maxmin_zenit[_angolo].push_back(a); 
+				/*
 				Angolo a = (*liter);
 				a.set_maxmin(tipo_angolo);
-				valori_maxmin_zenit[_angolo].push_back(a);
+				valori_maxmin_zenit[_angolo].push_back(a);*/
 			}
 			++liter;
 			max_o_min = 1;
@@ -239,9 +273,13 @@ void Persona::maxminFind_azimut(int _angolo, int _finestra) {
 				cont--;
 			}
 			if (max_o_min != 0) {
-				Angolo a=(*liter);
+				int n = (*liter).get_numeroframe();
+				Angolo a(get_angoloMedia_azimut(_angolo, n), get_angoloMedia_zenit(_angolo, n), n, tipo_angolo);
+				valori_maxmin_zenit[_angolo].push_back(a);
+				
+				/*Angolo a=(*liter);
 				a.set_maxmin(tipo_angolo);
-				valori_maxmin_azimut[_angolo].push_back(a);
+				valori_maxmin_azimut[_angolo].push_back(a);*/
 			}
 			++liter;
 			max_o_min = 1;

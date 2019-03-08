@@ -34,7 +34,7 @@ public:
 
 	//FUNZIONI GET
 	double get_angoloMedia_zenit(int _angolo, int n_frame);
-	double get_angoloMedia_azimut(int _angolo);
+	double get_angoloMedia_azimut(int _angolo,int n_frame);
 
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.

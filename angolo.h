@@ -18,7 +18,8 @@ class Angolo{
 		double zenit; //Altezza (Y-Z)
 		double azimut; //Posizione (X-Y)
 	public:
-		Angolo(Coordinata& c1,Coordinata& c2,Coordinata& c3,int _numeroframe); //Costruttore 4 parametri
+		Angolo(Coordinata& c1,Coordinata& c2,Coordinata& c3,int _numeroframe); //Costruttore 4 parametri da coordinata
+		Angolo(double _azimut, double _zenit, double _numeroframe, int _maxmin=0); //Costruttore da angolo
 		
 		//FUNZIONI GET
 		double get_zenit()const; //Ritorna l'angolo zenit

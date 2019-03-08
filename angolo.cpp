@@ -8,6 +8,13 @@ Angolo::Angolo(Coordinata& _c1,Coordinata& _c2,Coordinata& _c3, int _numeroframe
     numeroframe=_numeroframe;
 }
 
+Angolo::Angolo(double _azimut, double _zenit, double _numeroframe,int _maxmin) {
+	azimut = _azimut;
+	zenit = _zenit;
+	numeroframe = _numeroframe;
+	maxmin = _maxmin;
+}
+
 //FUNZIONI GET
 double Angolo::get_zenit()const{ return zenit; }
 double Angolo::get_azimut()const{ return azimut; }
