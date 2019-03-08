@@ -30,7 +30,7 @@ private:
 	void maxminFind_azimut(int _angolo, int _finestra);
 
 public:
-	Persona(string nome_file);
+	Persona(string nome_file,string percorso_file="json");
 
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
@@ -45,7 +45,7 @@ public:
 	//STAMPE
 	void stampaConsole_maxmin(int n);
 	void stampaConsole_angolo(int n, bool scelta);
-	void stampaFile_angolo(int n, string name);
+	void stampaFile_angolo(int n, string name, string percorso_file="matlab");
     
     friend ostream& operator <<(ostream& os, const Persona& p);
 };

@@ -1,7 +1,7 @@
 #include "persona.h"
 
-Persona::Persona(string nome_file) {
-	ifstream i(nome_file);
+Persona::Persona(string nome_file, string percorso_file) {
+	ifstream i(percorso_file + "/" + nome_file);
 
 	string line, linecoord, estratta;
 
@@ -258,18 +258,18 @@ void Persona::stampaConsole_angolo(int n, bool scelta) {
 	}
 }
 
-void Persona::stampaFile_angolo(int n, string name) {
+void Persona::stampaFile_angolo(int n, string name, string percorso_file) {
 	map<int, list<Angolo> >::const_iterator miter;
 	list<Angolo>::const_iterator liter;
 	ofstream file;
-	string l = "Matlab/"+name + ".txt";
+	string l = percorso_file + "/" + name + ".txt";
 	file.open(l.c_str(), ios::out);
 	miter = sequenzaAngolo.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file << (*liter) << endl;
 	}
 	ofstream file2;
-	string l2 = name + "ELAB.txt";
+	string l2 = percorso_file + "/" + name + "ELAB.txt";
 	file2.open(l2.c_str(), ios::out);
 	miter = sequenzaAngoloELAB.find(n);
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
