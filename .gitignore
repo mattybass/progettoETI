@@ -1,5 +1,7 @@
-Progetto1.dev
-Progetto1.layout
+ProgettoETI.vcxproj.filters
+ProgettoETI.vcxproj.user
+ProgettoETI.vcxproj
+/Debug
 *.win
 *.o
 
