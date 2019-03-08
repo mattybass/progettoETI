@@ -142,7 +142,7 @@ void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 		int cont = 0;
 		liter = iter->second.begin();
 		++liter;
-		while (liter != (iter->second).end() && max_o_min!=0) {
+		while (liter != (iter->second).end()) {
 			liter2 = liter;
 			liter3 = liter;
 			++liter2;
@@ -281,6 +281,7 @@ void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 	map<int, list < Angolo> >::iterator iter;
 	list<Angolo>::iterator liter;
 	list<Angolo>::iterator liter2;
+	list<Angolo>::iterator liter3;
 	double sum_zenit;
 	double sum_azimut;
 	iter = sequenzaAngoloELAB.find(_angolo);
@@ -288,6 +289,9 @@ void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 		int s = (iter->second).size();
 		liter = iter->second.begin();
 		for (int i = 0; i < (s - _finestra); ++i) {
+			liter3 = liter;
+			for (int i = 0; i < (_finestra / 2); ++i)
+				++liter3;
 			sum_azimut = 0;
 			sum_zenit = 0;
 			liter2 = liter;
@@ -296,8 +300,8 @@ void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 				sum_azimut = sum_azimut + (*liter2).get_azimut();
 				++liter2;
 			}
-			(*liter).set_azimut(sum_azimut / _finestra);
-			(*liter).set_zenit(sum_zenit / _finestra);
+			(*liter3).set_azimut(sum_azimut / _finestra);
+			(*liter3).set_zenit(sum_zenit / _finestra);
 			++liter;
 		}
 	}
@@ -320,6 +324,26 @@ ostream& operator <<(ostream& os, const Persona& p) {
 		}
 	}
 	return os;
+}
+
+void Persona::pulisci_max_min(int _angolo) {
+	map<int, set<int>>::iterator iter;
+	set<int>::iterator iter2;
+	set<int>::iterator iter3;
+	int frame1, frame2;
+	iter = maxmin_zenit.find(_angolo);
+	if (iter != maxmin_zenit.end()) {
+		for (iter2 = (iter->second).begin(); iter2 != (iter->second).end(); ++iter2) {
+			iter3 = iter2;
+			++iter3;
+			frame1 = *iter2;
+			frame2 = *iter3;
+			if(((frame1-frame2)<20
+		}
+
+	}
+
+
 }
 
 
