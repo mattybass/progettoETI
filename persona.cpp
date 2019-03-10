@@ -82,7 +82,7 @@ while (getline(i, line)) {
 			stringstream s(estratta);
 			s >> z;
 		}
-		insert_coordinata(frame, joint, z, x, y);
+		insert_coordinata(frame, joint, x, z, y);
 	}
 
 }
@@ -374,6 +374,17 @@ void Persona::stampaFile_maxmin(int n, string name, string percorso_file) {
 	for (liter = miter->second.begin(); liter != miter->second.end(); liter++) {
 		file << (*liter) << endl;
 	}
+}
+
+void Persona::stampaFile_coordinate(int n, string name, string percorso_file) {
+	map<int, Frame >::iterator miter;
+	ofstream file;
+	string l = percorso_file + "/" + name + ".txt";
+	file.open(l.c_str(), ios::out);
+	for (miter = sequenzaFrame.begin(); miter != sequenzaFrame.end(); miter++) {
+		file << (*miter).second << endl;
+	}
+
 }
 
 void Persona::mediamobile_angolo(int _angolo, int _finestra) {

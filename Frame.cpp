@@ -53,7 +53,7 @@ void Frame::insert_angolo(int _joint,int a,int b,int c){
 
 void Frame::completa_angolo(){
 	insert_angolo(3,4,3,2);
-	insert_angolo(2,3,2,1);
+	insert_angolo(2,1,2,3);
 	insert_angolo(1,2,1,8);
 	insert_angolo(5, 1, 5, 6);
 	insert_angolo(6,5,6,7);
@@ -66,14 +66,17 @@ void Frame::completa_angolo(){
 ostream& operator <<(ostream& os, const Frame& f){
     os<<"Frame: "<<f.numeroframe<<endl;
     map<int,Coordinata>::const_iterator iter;
-    for(iter=f.coordinatejoint.begin();iter!=f.coordinatejoint.end();++iter){
+	iter = f.coordinatejoint.find(3);
+	if (iter != f.coordinatejoint.end())
+		os << iter->second<<endl;
+ /*   for(iter=f.coordinatejoint.begin();iter!=f.coordinatejoint.end();++iter){
         os<<iter->first<<": "<<iter->second<<endl;
     }
     os<<endl;
     map<int,Angolo>::const_iterator iteran;
     for(iteran=f.angolijoint.begin();iteran!=f.angolijoint.end();++iteran){
 		os << iteran->first << ": "<<iteran->second<<endl;
-    }
+    }*/
     return os;
 }
     

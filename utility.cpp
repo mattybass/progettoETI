@@ -8,10 +8,17 @@ double angolo_XY(Coordinata &c1,Coordinata &c2){
         double m= ((c1.get_y()-c2.get_y())/(c1.get_x()-c2.get_x()));
         angolo= atan(m)*180/PI;
         
-        if(angolo>0){
-            if(c1.get_y()<c2.get_y()){
-                angolo+=180;
-            }
+        if(angolo>=0){
+			if (angolo == 0) {
+				if (c1.get_x() < c2.get_x()) {
+					angolo = 180;
+				}
+			}
+			else {
+				if (c1.get_y() < c2.get_y()) {
+					angolo += 180;
+				}
+			}
         }
 		else{
             if(c1.get_y()<c2.get_y()){
@@ -39,10 +46,17 @@ double angolo_XZ(Coordinata &c1,Coordinata &c2){
         double m= ((c1.get_z()-c2.get_z())/(c1.get_x()-c2.get_x()));
         angolo= atan(m)*180/PI;
         
-        if(angolo>0){
-            if(c1.get_z()<c2.get_z()){
-                angolo+=180;
-            }
+        if(angolo>=0){
+			if (angolo == 0) {
+				if (c1.get_x() < c2.get_x()) {
+					angolo = 180;
+				}
+			}
+			else {
+				if (c1.get_z() < c2.get_z()) {
+					angolo += 180;
+				}
+			}
         }
 		else{
             if(c1.get_z()<c2.get_z()){

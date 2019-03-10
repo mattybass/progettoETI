@@ -28,6 +28,7 @@ public:
 	void insert_coordinata(int _numerojoint, double _x, double _y, double _z);//Inserisce coordinate nella map di interi coordinata
     void completa_angolo();//da richiamare dopo l'inserimento di tutte le coordinate, popola la map di stringhe e angoli utilizzando la funzione private "insert_angolo"
     
+	
     friend ostream& operator <<(ostream& os, const Frame& f);
     
     
