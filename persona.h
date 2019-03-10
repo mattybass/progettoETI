@@ -52,7 +52,8 @@ public:
 	void stampaConsole_angolo(int n, bool scelta);
 	void stampaFile_angolo(int n, string name, string percorso_file="matlab");
 	void stampaFile_maxmin(int n, string name, string percorso_file="matlab");
-	void stampaFile_coordinate(int n, string name, string percorso_file = "matlab");
+
+	void processa_angolo(int _angolo);
 };
 
 //ostream& operator <<(ostream& os, const Persona& p);

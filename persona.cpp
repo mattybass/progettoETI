@@ -376,17 +376,6 @@ void Persona::stampaFile_maxmin(int n, string name, string percorso_file) {
 	}
 }
 
-void Persona::stampaFile_coordinate(int n, string name, string percorso_file) {
-	map<int, Frame >::iterator miter;
-	ofstream file;
-	string l = percorso_file + "/" + name + ".txt";
-	file.open(l.c_str(), ios::out);
-	for (miter = sequenzaFrame.begin(); miter != sequenzaFrame.end(); miter++) {
-		file << (*miter).second << endl;
-	}
-
-}
-
 void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 	map<int, list < Angolo> >::iterator iter;
 	list<Angolo>::iterator liter;
@@ -450,6 +439,21 @@ void Persona::maxminClean_angolo(int _angolo) {
 		valori_maxmin_azimut[_angolo] = temp;
 	}
 
+}
+
+void Persona::processa_angolo(int _angolo) {
+	string a;
+	stringstream s;
+	s << _angolo;
+	a=s.str();
+	
+	
+	mediamobile_angolo(_angolo, 30);
+	mediamobile_angolo(_angolo, 30);
+	maxminFind_angolo(_angolo, 50);
+	maxminClean_angolo(_angolo);
+	stampaFile_angolo(_angolo, "joint"+a);
+	stampaFile_maxmin(_angolo, "maxmin"+a);
 }
 
 

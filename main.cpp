@@ -10,15 +10,15 @@
 
 int main(int argc, char** argv) {
     Persona p("spallagomitoModello60fps.json");	
-	p.mediamobile_angolo(2, 30);
-	p.mediamobile_angolo(2, 30);
-	p.maxminFind_angolo(2, 50);
-	p.maxminClean_angolo(2);
-	p.stampaConsole_maxmin(2);
-	p.stampaFile_angolo(2,"modello");
-
-	p.stampaFile_maxmin(2,"zenit");
-	p.stampaFile_coordinate(2, "coord");
+	{	p.processa_angolo(1);	}
+	{	p.processa_angolo(2);	}
+	{	p.processa_angolo(3);	}
+	{	p.processa_angolo(5);	}
+	{	p.processa_angolo(6);	}
+	{	p.processa_angolo(8);	}
+	{	p.processa_angolo(9);	}
+	{	p.processa_angolo(11);	}
+	{	p.processa_angolo(12);	}
 
 /*	Coordinata A(-0.394733, 2.531678,  -0.083642);//2
 	Coordinata B(-0.153494, 2.559698,-0.197415 );//3
