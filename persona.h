@@ -52,6 +52,7 @@ public:
 	//STAMPE
 	void stampaConsole_maxmin(int n);
 	void stampaConsole_angolo(int n, bool scelta);
+    void stampaFile_coordinate(int n, string name, string percorso_file);
 	void stampaFile_angolo(int n, string name, string percorso_file="matlab");
 	void stampaFile_maxmin(int n, string name, string percorso_file="matlab");
 
