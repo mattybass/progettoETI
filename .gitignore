@@ -9,3 +9,17 @@ matlab/*.pdf
 *.o
 
 Progetto1\.exe
+
+\.DS_Store
+
+json/spallagomitoModello60fps\.json
+
+Progetto/Progetto\.xcodeproj/project\.pbxproj
+
+Progetto/Progetto\.xcodeproj/xcuserdata/sergiopovoli\.xcuserdatad/xcschemes/xcschememanagement\.plist
+
+Progetto/Progetto\.xcodeproj/project\.xcworkspace/xcuserdata/sergiopovoli\.xcuserdatad/UserInterfaceState\.xcuserstate
+
+Progetto/Progetto\.xcodeproj/project\.xcworkspace/xcshareddata/IDEWorkspaceChecks\.plist
+
+Progetto/Progetto\.xcodeproj/project\.xcworkspace/contents\.xcworkspacedata

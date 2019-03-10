@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
 
 	
-	system("PAUSE");
+	//system("PAUSE");
 
 	return 0;
 }

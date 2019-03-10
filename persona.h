@@ -21,18 +21,19 @@ class Persona{
 private:
     map<int,Frame> sequenzaFrame; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
     map<int,list<Angolo>> sequenzaAngolo; //MAP: $ joint, lista di Angolo //andamento temporale dei vari angoli
+    map<int,list<Coordinata> > sequenzaCoordinata; //MAP: $ joint, lista di Angolo //andamento temporale delle varie coordinata
 	map<int, list<Angolo>> sequenzaAngoloELAB;
 	map<int, list<Angolo>> valori_maxmin_zenit;
 	map<int, list<Angolo>> valori_maxmin_azimut;
     
-    //Funzioni
+    //Metodi
 	void maxminFind_zenit(int _angolo, int _finestra);
 	void maxminFind_azimut(int _angolo, int _finestra);
 
 public:
 	Persona(string nome_file,string percorso_file="json");
 
-	//FUNZIONI GET
+	//METODI GET
 	double get_angoloMedia_zenit(int _angolo, int n_frame);
 	double get_angoloMedia_azimut(int _angolo,int n_frame);
 
@@ -41,6 +42,7 @@ public:
     void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
     void popola_angolo(int _numeroframe); // Crea e popola la map degli angoli inserita in un determinato frame.
     void popola_sequenzaangolo(); //Da richiamare una volta popolati tutta la map "sequenzaframe" e dopo aver richiamato le varie completa_angoli
+    void popola_sequenzacoordinata(); //Da richiamare una volta popolati tutta la map "sequenzaframe"
     
 
 	void mediamobile_angolo(int _angolo, int _finestra);
