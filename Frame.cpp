@@ -13,10 +13,12 @@ map<int, Angolo> Frame::get_angolijoint()const {
 }
 
 Coordinata Frame::get_coordinata(int _numerojoint){
-    Coordinata c(0,0,0);
-    map<int,Coordinata>::iterator iter=coordinatejoint.find(_numerojoint);
+    Coordinata c;
+    map<int,Coordinata>::const_iterator iter=coordinatejoint.find(_numerojoint);
     if(iter!=coordinatejoint.end()){
         c=iter->second;
+    }else{
+        cout<<"Errore nel get della Coordinata, joint non trovato"<<endl;
     }
     return c;
 }
@@ -27,9 +29,9 @@ void Frame::insert_coordinata(int _numerojoint, double _x, double _y, double _z)
 }
 
 void Frame::insert_angolo(int _joint,int a,int b,int c){
-    map<int,Coordinata>::iterator itera;
-    map<int,Coordinata>::iterator itera2;
-    map<int,Coordinata>::iterator itera3;
+    map<int,Coordinata>::const_iterator itera;
+    map<int,Coordinata>::const_iterator itera2;
+    map<int,Coordinata>::const_iterator itera3;
 	Coordinata c1,c2,c3;
 	
 	itera=coordinatejoint.find(a);
@@ -46,9 +48,13 @@ void Frame::insert_angolo(int _joint,int a,int b,int c){
 	}
 
     if(itera!=coordinatejoint.end() && itera2!=coordinatejoint.end() && itera3!=coordinatejoint.end()){
-		angolijoint.insert(pair<int,Angolo> (_joint,Angolo(c1,c2,c3,numeroframe)));
+        Angolo a(c1,c2,c3,numeroframe);
+		angolijoint.insert(pair<int,Angolo> (_joint,a) );
     }
-	
+}
+
+map<int,Coordinata> Frame::get_coordinatejoit()const{
+    return coordinatejoint;
 }
 
 void Frame::completa_angolo(){
@@ -66,17 +72,12 @@ void Frame::completa_angolo(){
 ostream& operator <<(ostream& os, const Frame& f){
     os<<"Frame: "<<f.numeroframe<<endl;
     map<int,Coordinata>::const_iterator iter;
-	iter = f.coordinatejoint.find(3);
-	if (iter != f.coordinatejoint.end())
-		os << iter->second<<endl;
- /*   for(iter=f.coordinatejoint.begin();iter!=f.coordinatejoint.end();++iter){
+	
+    for(iter=f.coordinatejoint.begin();iter!=f.coordinatejoint.end();++iter){
         os<<iter->first<<": "<<iter->second<<endl;
     }
     os<<endl;
-    map<int,Angolo>::const_iterator iteran;
-    for(iteran=f.angolijoint.begin();iteran!=f.angolijoint.end();++iteran){
-		os << iteran->first << ": "<<iteran->second<<endl;
-    }*/
+    
     return os;
 }
     

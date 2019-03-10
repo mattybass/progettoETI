@@ -82,16 +82,29 @@ while (getline(i, line)) {
 			stringstream s(estratta);
 			s >> z;
 		}
-		insert_coordinata(frame, joint, x, z, y);
+    insert_coordinata(frame, joint, x, z, y);
 	}
-
+}
+    i.close();
+    popola_sequenzaangolo();
+    sequenzaAngoloELAB = sequenzaAngolo;
+    popola_sequenzacoordinata();
 }
 
-i.close();
-popola_sequenzaangolo();
-sequenzaAngoloELAB = sequenzaAngolo;
-
+void Persona::popola_sequenzacoordinata(){
+    map<int,Frame>::const_iterator iterF;
+    map<int,Coordinata>::const_iterator iterC;
+    Coordinata c;
+    map<int,Coordinata> mappa;
+    for(iterF=sequenzaFrame.begin(); iterF!=sequenzaFrame.end();++iterF){
+        mappa=iterF->second.get_coordinatejoit();
+        for(iterC=mappa.begin();iterC!=mappa.end();++iterC){
+            sequenzaCoordinata[iterC->first].push_back(iterC->second);
+        }
+    }
 }
+
+
 
 double Persona::get_angoloMedia_zenit(int _angolo, int n_frame) {
 	map<int, list<Angolo> >::iterator iter;
@@ -377,14 +390,17 @@ void Persona::stampaFile_maxmin(int n, string name, string percorso_file) {
 }
 
 void Persona::stampaFile_coordinate(int n, string name, string percorso_file) {
-	map<int, Frame >::iterator miter;
+	map<int,list<Coordinata> >::const_iterator miter;
+    list<Coordinata>::const_iterator liter;
 	ofstream file;
 	string l = percorso_file + "/" + name + ".txt";
 	file.open(l.c_str(), ios::out);
-	for (miter = sequenzaFrame.begin(); miter != sequenzaFrame.end(); miter++) {
-		file << (*miter).second << endl;
-	}
-
+    miter=sequenzaCoordinata.find(n);
+    if(miter!=sequenzaCoordinata.end()){
+        for(liter=miter->second.begin();liter!=miter->second.end();++liter){
+            file<< liter->get_x() <<" "<<liter->get_y()<<" "<<liter->get_z()<<endl;
+        }
+    }
 }
 
 void Persona::mediamobile_angolo(int _angolo, int _finestra) {
