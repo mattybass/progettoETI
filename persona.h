@@ -16,7 +16,6 @@
 #include "utility.h"
 
 using namespace std;
-
 class Persona{
 private:
     map<int,Frame> sequenzaFrame; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
@@ -47,7 +46,7 @@ public:
 
 	void mediamobile_angolo(int _angolo, int _finestra);
 	void maxminFind_angolo(int _angolo, int _finestra);
-	void maxminClean_angolo(int _angolo);
+	void maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut);
 
 	//STAMPE
 	void stampaConsole_maxmin(int n);
