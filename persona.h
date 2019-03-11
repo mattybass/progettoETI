@@ -22,7 +22,8 @@ private:
     map<int,list<Angolo>> sequenzaAngolo; //MAP: $ joint, lista di Angolo //andamento temporale dei vari angoli
     map<int,list<Coordinata> > sequenzaCoordinata; //MAP: $ joint, lista di Angolo //andamento temporale delle varie coordinata
 	map<int, list<Angolo>> sequenzaAngoloELAB;
-	map<int, list<Angolo>> valori_maxmin_zenit;
+	
+    map<int, list<Angolo>> valori_maxmin_zenit;
 	map<int, list<Angolo>> valori_maxmin_azimut;
     
     //Metodi
@@ -45,6 +46,8 @@ public:
     
 
 	void mediamobile_angolo(int _angolo, int _finestra);
+    void pulisci_errori_seqenzanagolo(int _angolo);//PULISCE ERRRORI PER UN SINGOLO ANGOLO
+    void completa_pulisci();//Richiama pulisci errori
 	void maxminFind_angolo(int _angolo, int _finestra);
 	void maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut);
 

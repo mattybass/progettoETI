@@ -87,8 +87,9 @@ while (getline(i, line)) {
 }
     i.close();
     popola_sequenzaangolo();
-    sequenzaAngoloELAB = sequenzaAngolo;
     popola_sequenzacoordinata();
+    completa_pulisci();
+    sequenzaAngoloELAB = sequenzaAngolo;
 }
 
 void Persona::popola_sequenzacoordinata(){
@@ -498,4 +499,51 @@ void Persona::processa_angolo(int _angolo) {
 }
 
 
+void Persona::pulisci_errori_seqenzanagolo(int _angolo){
+    map<int,list<Angolo>>::iterator iter;
+    list<Angolo>::iterator iter2;
+    list<Angolo>::iterator iter3;
+    map<int,Frame>::iterator iterF;
+    
+    iter=sequenzaAngolo.find(_angolo);
+    
+    if(iter!=sequenzaAngolo.end()){
+        for(iter2=iter->second.begin();iter2!=iter->second.end();++iter2){
+            iter3=iter2;
+            iter3++;
+            int frame=0;
+            if(iter3!=iter->second.end()){
+                double dif=fabs((iter2->get_azimut())-(iter3->get_azimut()));
+                if(dif>100){
+                iter3->set_azimut(iter2->get_azimut());
+                    frame=iter3->get_numeroframe();
+                    iterF=sequenzaFrame.find(frame);
+                    if(iterF!=sequenzaFrame.end()){
+                        iterF->second.set_angolo_azimut(_angolo,(iter2->get_azimut()));
+                    }
+                }
+                double dif2=fabs((iter2->get_zenit())-(iter3->get_zenit()));
+                if(dif2>100){
+                iter3->set_zenit(iter2->get_zenit());
+                    frame=iter3->get_numeroframe();
+                    iterF=sequenzaFrame.find(frame);
+                    if(iterF!=sequenzaFrame.end()){
+                        iterF->second.set_angolo_zenit(_angolo,(iter2->get_zenit()));
+                    }
+                }
+            }
+        }
+    }
+}
 
+void Persona::completa_pulisci(){
+    pulisci_errori_seqenzanagolo(3);
+    pulisci_errori_seqenzanagolo(2);
+    pulisci_errori_seqenzanagolo(1);
+    pulisci_errori_seqenzanagolo(5);
+    pulisci_errori_seqenzanagolo(6);
+    pulisci_errori_seqenzanagolo(8);
+    pulisci_errori_seqenzanagolo(11);
+    pulisci_errori_seqenzanagolo(9);
+    pulisci_errori_seqenzanagolo(12); 
+}

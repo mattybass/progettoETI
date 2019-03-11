@@ -19,6 +19,9 @@ private:
 public:
     explicit Frame(int _numeroframe); //Costruttore ad un parametro esplicito
     
+    void set_angolo_zenit(int n, double nu);
+    void set_angolo_azimut(int n, double nu);
+    
 	//FUNZIONI GET
 	int get_numeroframe()const; //Ritorna il numero di frame
     Coordinata get_coordinata(int _numerojoint); // Ritorna la coordinata relativa ad uno specifico joint

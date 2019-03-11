@@ -10,15 +10,9 @@
 
 int main(int argc, char** argv) {
     Persona p("spallagomitoModello60fps.json");
-    p.stampaFile_angolo(2, "angolo2");
-    p.stampaFile_angolo(3, "angolo3");
-    p.mediamobile_angolo(3, 30);
-    p.mediamobile_angolo(3, 30);
-    p.mediamobile_angolo(3, 30);
-    p.stampaFile_angolo(3, "elab");
-    p.stampaFile_coordinate(4, "coordinata4", "matlab");
-    p.stampaFile_coordinate(3, "coordinata3", "matlab");
-    p.stampaFile_coordinate(2, "coordinata2", "matlab");
-    
+    p.mediamobile_angolo(2, 30);
+    p.mediamobile_angolo(2, 30);
+    p.mediamobile_angolo(2, 30);
+    p.stampaFile_angolo(2, "2");
 	return 0;
 }
