@@ -59,6 +59,7 @@ public:
 	void stampaFile_maxmin(int n, string name, string percorso_file="matlab");
 
 	void processa_angolo(int _angolo);
+    
 };
 
 //ostream& operator <<(ostream& os, const Persona& p);
