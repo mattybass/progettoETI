@@ -547,3 +547,29 @@ void Persona::completa_pulisci(){
     pulisci_errori_seqenzanagolo(9);
     pulisci_errori_seqenzanagolo(12); 
 }
+
+int Persona::get_numeroMaxMin_zenit(int _angolo){
+    map<int, list<Angolo>>::const_iterator iterM;
+    list<Angolo>::const_iterator iterL;
+    int size=0;
+    iterM=valori_maxmin_zenit.find(_angolo);
+    if(iterM!=valori_maxmin_zenit.end()){
+        for(iterL=iterM->second.begin();iterL!=iterM->second.end();++iterL){
+            size++;
+        }
+    }
+ return size;
+}
+
+int Persona::get_numeroMaxMin_azimut(int _angolo){
+    map<int, list<Angolo>>::const_iterator iterM;
+    list<Angolo>::const_iterator iterL;
+    int size=0;
+    iterM=valori_maxmin_azimut.find(_angolo);
+    if(iterM!=valori_maxmin_zenit.end()){
+        for(iterL=iterM->second.begin();iterL!=iterM->second.end();++iterL){
+            size++;
+        }
+    }
+    return size;
+}

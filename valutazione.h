@@ -11,10 +11,13 @@ private:
 	Persona* modello;
 	Persona* paziente;
 	map<int, pair<float,float>> pesi; //i pesi maggiori di un tot determinano quali joint andremo a prendere in considerazione
-	vector<int> AngoliDiscriminanti;
+    float completezzaesercizio;
+	vector<int> angoliDiscriminanti_zenit;
+    vector<int> angoliDiscriminanti_azimut;
 public:
 	Valutazione(Persona* _paz, Persona* _mod);
 	void percentualeEsCompletato();
+    
 };
 #endif
 

@@ -22,7 +22,7 @@ private:
     map<int,list<Angolo>> sequenzaAngolo; //MAP: $ joint, lista di Angolo //andamento temporale dei vari angoli
     map<int,list<Coordinata> > sequenzaCoordinata; //MAP: $ joint, lista di Angolo //andamento temporale delle varie coordinata
 	map<int, list<Angolo>> sequenzaAngoloELAB;
-	
+    
     map<int, list<Angolo>> valori_maxmin_zenit;
 	map<int, list<Angolo>> valori_maxmin_azimut;
     
@@ -36,6 +36,8 @@ public:
 	//METODI GET
 	double get_angoloMedia_zenit(int _angolo, int n_frame);
 	double get_angoloMedia_azimut(int _angolo,int n_frame);
+    int get_numeroMaxMin_zenit(int _angolo);
+    int get_numeroMaxMin_azimut(int _angolo);
 
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
