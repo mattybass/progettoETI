@@ -54,8 +54,10 @@ public:
 	void mediamobile_angolo(int _angolo, int _finestra);
     void pulisci_errori_seqenzanagolo(int _angolo);//PULISCE ERRRORI PER UN SINGOLO ANGOLO
     void completa_pulisci();//Richiama pulisci errori
+    
 	void maxminFind_angolo(int _angolo, int _finestra);
 	void maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut);
+    void maxminBE(int _angolo); //Inserisce il punto di inzio e di fine, s enon giˆ inseriti.
 
 	//STAMPE
 	void stampaConsole_maxmin(int n);
