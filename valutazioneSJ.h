@@ -9,7 +9,6 @@ using namespace std;
 
 class ValutazioneSJ{
 private:
-    int angolo;
     vector<double> deltadist_zenit;
     vector<double> deltatime_zenit;
     double media_deltadist_zenit;
@@ -19,7 +18,7 @@ private:
     double media_deltadist_azimut;
     double media_deltatime_azimut;
 public:
-    ValutazioneSJ(int _angolo);
+    ValutazioneSJ();
     void media_deltadist();
     void media_deltatime();
     void insert_deltadist_zenit(double _n);
@@ -30,6 +29,7 @@ public:
     double get_media_deltadist_azimut();
     double get_media_deltatime_zenit();
     double get_media_deltatime_azimut();
+	void stampa();
 };
 
 void test_valuta();
