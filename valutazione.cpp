@@ -32,3 +32,11 @@ for(iterV=angoliDiscriminanti_azimut.begin();iterV!=angoliDiscriminanti_azimut.e
     }
     completezzaesercizio=(float)(numero_maxminPaziente/numero_maxminModello)*100;
 }
+
+void Valutazione::insert_angolidiscriminati_zenit(int _angolo){
+    angoliDiscriminanti_zenit.push_back(_angolo);
+}
+
+void Valutazione::insert_angolidiscriminati_azimut(int _angolo){
+    angoliDiscriminanti_azimut.push_back(_angolo);
+}
