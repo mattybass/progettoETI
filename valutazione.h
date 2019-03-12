@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "persona.h"
+#include "valutazioneSJ.h"
 using namespace std;
 
 class Valutazione {
@@ -17,8 +18,6 @@ private:
     vector<int> angoliDiscriminanti_azimut;
     //VALUTAZIONI VARIE
     float completezzaesercizio;
-	vector<int> angoliDiscriminanti_zenit;
-    vector<int> angoliDiscriminanti_azimut;
 	map<int, ValutazioneSJ> valutazioneSingleJoint;
 public:
     //COSTRUTTORI
