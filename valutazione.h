@@ -14,10 +14,11 @@ private:
     float completezzaesercizio;
 	vector<int> angoliDiscriminanti_zenit;
     vector<int> angoliDiscriminanti_azimut;
+	map<int, ValutazioneSJ> valutazioneSingleJoint;
 public:
 	Valutazione(Persona* _paz, Persona* _mod);
 	void percentualeEsCompletato();
-    
+	void valutaSingleJoint(int _joint);
 };
 #endif
 

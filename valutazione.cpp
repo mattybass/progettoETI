@@ -18,17 +18,34 @@ Valutazione::Valutazione(Persona* _paz, Persona* _mod) {
 }
 void Valutazione::percentualeEsCompletato() {
     vector<int>::const_iterator iterV;
-    
     int numero_maxminModello=0;
     int numero_maxminPaziente=0;
-for(iterV=angoliDiscriminanti_zenit.begin();iterV!=angoliDiscriminanti_zenit.end();++iterV){
+
+	for(iterV=angoliDiscriminanti_zenit.begin();iterV!=angoliDiscriminanti_zenit.end();++iterV){
         numero_maxminModello=numero_maxminModello+ modello->get_numeroMaxMin_zenit((*iterV));
-        numero_maxminPaziente=numero_maxminPaziente+paziente->get_numeroMaxMin_zenit((*iterV));
-        }
-    
-for(iterV=angoliDiscriminanti_azimut.begin();iterV!=angoliDiscriminanti_azimut.end();++iterV){
+		numero_maxminPaziente=numero_maxminPaziente+paziente->get_numeroMaxMin_zenit((*iterV));
+	}
+
+	for(iterV=angoliDiscriminanti_azimut.begin();iterV!=angoliDiscriminanti_azimut.end();++iterV){
         numero_maxminModello=numero_maxminModello+ modello->get_numeroMaxMin_azimut((*iterV));
-    numero_maxminPaziente=numero_maxminPaziente+paziente->get_numeroMaxMin_azimut((*iterV));
+		numero_maxminPaziente=numero_maxminPaziente+paziente->get_numeroMaxMin_azimut((*iterV));
     }
     completezzaesercizio=(float)(numero_maxminPaziente/numero_maxminModello)*100;
+}
+
+void Valutazione::valutaSingleJoint(int _joint){
+	list<Angolo> listaModellozenit;
+	list<Angolo> listaPazientezenit;
+	list<Angolo> listaModelloazimut;
+	list<Angolo> listaPazienteazimut;
+	list<Angolo>::iterator itermodello; //iteratore che scorre le map di maxmin di zenit e azimut del modello
+	list<Angolo>::iterator iterpaziente; //iteratore che scorre le map di maxmin di zenit e azimut del paziente
+		listaModellozenit = (*modello).get_valorimaxmin_zenit(_joint);
+		listaPazientezenit = (*paziente).get_valorimaxmin_zenit(_joint);
+		listaModelloazimut = (*modello).get_valorimaxmin_azimut(_joint);
+		listaPazienteazimut = (*paziente).get_valorimaxmin_azimut(_joint);
+		//VALUTAZIONE ZENIT
+		itermodello = listaModellozenit.begin();
+		iterpaziente = listaPazientezenit.begin();
+	
 }

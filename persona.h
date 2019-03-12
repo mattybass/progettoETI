@@ -38,6 +38,10 @@ public:
 	double get_angoloMedia_azimut(int _angolo,int n_frame);
     int get_numeroMaxMin_zenit(int _angolo);
     int get_numeroMaxMin_azimut(int _angolo);
+	list<Angolo> get_valorimaxmin_zenit(int _angolo)const;
+	list<Angolo> get_valorimaxmin_azimut(int _angolo)const;
+	bool jointpresente_zenit(int _joint); //funzione che controlla se è presente quel joint nella map di valori max min e ritorna true se si 
+	bool jointpresente_azimut(int _joint);
 
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.

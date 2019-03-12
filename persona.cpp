@@ -548,6 +548,37 @@ void Persona::completa_pulisci(){
     pulisci_errori_seqenzanagolo(12); 
 }
 
+list<Angolo> Persona::get_valorimaxmin_zenit(int _angolo)const {
+	map<int, list<Angolo>>::const_iterator iter;
+	iter = valori_maxmin_zenit.find(_angolo);
+	return iter->second;
+}
+
+list<Angolo> Persona::get_valorimaxmin_azimut(int _angolo)const {
+	map<int, list<Angolo>>::const_iterator iter;
+	iter = valori_maxmin_azimut.find(_angolo);
+	return iter->second;
+}
+
+bool Persona::jointpresente_zenit(int _joint) {
+	map<int, list<Angolo>>::const_iterator iter;
+	iter = valori_maxmin_zenit.find(_joint);
+	if (iter != valori_maxmin_zenit.end())
+		return true;
+	else
+		return false;
+}
+
+bool Persona::jointpresente_azimut(int _joint) {
+	map<int, list<Angolo>>::const_iterator iter;
+	iter = valori_maxmin_azimut.find(_joint);
+	if (iter != valori_maxmin_azimut.end())
+		return true;
+	else
+		return false;
+}
+
+
 int Persona::get_numeroMaxMin_zenit(int _angolo){
     map<int, list<Angolo>>::const_iterator iterM;
     list<Angolo>::const_iterator iterL;
