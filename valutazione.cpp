@@ -49,3 +49,11 @@ void Valutazione::valutaSingleJoint(int _joint){
 		iterpaziente = listaPazientezenit.begin();
 	
 }
+
+void Valutazione::insert_angolidiscriminati_zenit(int _angolo){
+    angoliDiscriminanti_zenit.push_back(_angolo);
+}
+
+void Valutazione::insert_angolidiscriminati_azimut(int _angolo){
+    angoliDiscriminanti_azimut.push_back(_angolo);
+}
