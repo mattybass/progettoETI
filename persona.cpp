@@ -379,8 +379,6 @@ void Persona::stampaFile_maxmin(int n, string name, string percorso_file) {
 		file << (*liter) << endl;
 	}
 
-//	map<int, list<Angolo> >::const_iterator miter;
-//	list<Angolo>::const_iterator liter;
 	ofstream file1;
 	string l1 = percorso_file + "/" + name + "AZIMUT.txt";
 	file1.open(l1.c_str(), ios::out);

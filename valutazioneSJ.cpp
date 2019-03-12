@@ -1,8 +1,7 @@
 #include "valutazioneSJ.h"
 
 
-ValutazioneSJ::ValutazioneSJ(int _angolo){
-    angolo=_angolo;
+ValutazioneSJ::ValutazioneSJ(){
     media_deltadist_zenit=0;
     media_deltatime_azimut=0;
     media_deltatime_azimut=0;
@@ -91,25 +90,13 @@ double ValutazioneSJ::get_media_deltatime_azimut(){
     return media_deltatime_azimut;
 }
 
+void ValutazioneSJ::stampa() {
+	vector<double>::iterator iter;
+	for (iter = deltadist_zenit.begin(); iter != deltadist_zenit.end(); ++iter) {
+		cout << *iter << endl;
+	}
+}
+
 void test_valuta(){
-    ValutazioneSJ s(1);
-    s.insert_deltadist_azimut(3);
-    s.insert_deltadist_azimut(4);
-    s.insert_deltadist_azimut(5);
-    s.insert_deltadist_zenit(3);
-    s.insert_deltadist_zenit(5);
-    s.insert_deltadist_zenit(1);
-    s.insert_deltatime_zenit(3);
-    s.insert_deltatime_zenit(4);
-    s.insert_deltatime_zenit(5);
-    s.insert_deltatime_azimut(3);
-    s.insert_deltatime_azimut(5);
-    s.insert_deltatime_azimut(1);
-    s.media_deltatime();
-    s.media_deltadist();
-    cout<< s.get_media_deltadist_zenit()<<endl;
-    cout<< s.get_media_deltatime_zenit()<<endl;
-    cout<< s.get_media_deltadist_azimut()<<endl;
-    cout<< s.get_media_deltatime_azimut()<<endl;
     
 }

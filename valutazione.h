@@ -28,6 +28,9 @@ public:
     //METODI DI VALUTAZIONE
 	void percentualeEsCompletato();
 	void valutaSingleJoint(int _joint);
+
+	//METODI DI TEST
+	void stampavalutazione();
 };
 #endif
 
