@@ -8,13 +8,13 @@ Valutazione::Valutazione(Persona* _paz, Persona* _mod) {
 	//nel sistema da parte del medico.
 	pesi[1] = pair<float,float>(0.05,0.05);
 	pesi[2] = pair<float,float>(0.35,0.15);
-	pesi[3] = 0.3;
-	pesi[5] = 0.1;
-	pesi[6] = 0.0;
-	pesi[8] = 0.0;
-	pesi[9] = 0.0;
-	pesi[11] = 0.0;
-	pesi[12] = 0.0;
+	pesi[3] = pair<float, float>(0.15, 0.15);
+	pesi[5] = pair<float, float>(0.05, 0.05);
+	pesi[6] = pair<float, float>(0.0, 0.0);
+	pesi[8] = pair<float, float>(0.0, 0.0);
+	pesi[9] = pair<float, float>(0.0, 0.0);
+	pesi[11] = pair<float, float>(0.0, 0.0);
+	pesi[12] = pair<float, float>(0.0, 0.0);
 }
 void Valutazione::percentualeEsCompletato() {
 
