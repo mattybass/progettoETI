@@ -602,3 +602,6 @@ int Persona::get_numeroMaxMin_azimut(int _angolo){
     }
     return size;
 }
+
+void Persona::maxminBE(int _angolo){
+}
