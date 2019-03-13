@@ -65,42 +65,49 @@ void ValutazioneSJ::insert_deltatimepaziente_azimut(double _n) {
 void ValutazioneSJ::stampa() {
 	vector<double>::iterator iter;
 	int i = 0;
-	cout << "Zenit" << endl;
-	cout << "Spazio" << endl;
+	cout << endl << endl << "Zenit" << endl;
+	cout << "Misure Spaziali" << endl;
 	for (iter = deltadist_zenit.begin(); iter!= deltadist_zenit.end(); ++iter) {
+		++i;
+		cout << "Punto chiave " << i <<" -->";
 		cout << *iter << endl;
 	}
+	i = 0;
+	cout << endl << "Misure di velocita" << endl;
 	cout << "Velocita modello" << endl;
 	for (iter = deltatimemodello_zenit.begin(); iter != deltatimemodello_zenit.end(); ++iter) {
-		cout << "Movimento " << i << endl;
-		cout << *iter << endl;
 		++i;
+		cout << "Movimento " << i << " -->";
+		cout << *iter << endl;
 	}
 	i = 0;
 	cout << "Velocita paziente" << endl;
 	for (iter = deltatimepaziente_zenit.begin(); iter != deltatimepaziente_zenit.end(); ++iter) {
-		cout << "Movimento " << i << endl;
-		cout << *iter << endl;
 		++i;
+		cout << "Movimento " << i << " -->";
+		cout << *iter << endl;
 	}
-	cout << "Azimut" << endl;
-	cout << "Spazio" << endl;
+	cout << endl << "Azimut" << endl;
+	cout << "Misure Spaziali" << endl;
 	for (iter = deltadist_azimut.begin(); iter != deltadist_azimut.end(); ++iter) {
+		++i;
+		cout << "Punto chiave " << i << " -->";
 		cout << *iter << endl;
 	}
 	i = 0;
+	cout << endl << "Misure di velocita" << endl;
 	cout << "Velocita modello" << endl;
 	for (iter = deltatimemodello_azimut.begin(); iter != deltatimemodello_azimut.end(); ++iter) {
-		cout << "Movimento " << i << endl;
-		cout << *iter << endl;
 		++i;
+		cout << "Movimento " << i << " -->";
+		cout << *iter << endl;
 	}
 	i = 0;
 	cout << "Velocita paziente" << endl;
 	for (iter = deltatimepaziente_azimut.begin(); iter != deltatimepaziente_azimut.end(); ++iter) {
-		cout << "Movimento " << i << endl;
-		cout << *iter << endl;
 		++i;
+		cout << "Movimento " << i << " -->";
+		cout << *iter << endl;
 	}
 }
 

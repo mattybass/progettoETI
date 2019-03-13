@@ -30,7 +30,9 @@ void Valutazione::percentualeEsCompletato() {
         numero_maxminModello=numero_maxminModello+ modello->get_numeroMaxMin_azimut((*iterV));
 		numero_maxminPaziente=numero_maxminPaziente+paziente->get_numeroMaxMin_azimut((*iterV));
     }
-    completezzaesercizio=(float)(numero_maxminPaziente/numero_maxminModello)*100;
+	if (numero_maxminModello != 0) {
+		completezzaesercizio = (float)(numero_maxminPaziente / numero_maxminModello) * 100;
+	}
 }
 
 void Valutazione::insert_angolidiscriminati_zenit(int _angolo) {
@@ -51,7 +53,9 @@ void Valutazione::valutaSingleJoint(int _joint){
 	list<Angolo>::iterator iterpaziente; //iteratore che scorre le map di maxmin di zenit e azimut del paziente
 	list<Angolo>::iterator itermodello2;
 	list<Angolo>::iterator iterpaziente2;
-	
+	int nframemodello, nframepaziente;
+	nframemodello = (*modello).get_numeroFramePerSecondo();
+	nframepaziente = (*paziente).get_numeroFramePerSecondo();
 	//ZENIT bisogna fare in modo di inserire punto di inizio e punto di fine
 	listaModellozenit = (*modello).get_valorimaxmin_zenit(_joint);
 	listaPazientezenit = (*paziente).get_valorimaxmin_zenit(_joint);
@@ -59,7 +63,7 @@ void Valutazione::valutaSingleJoint(int _joint){
 	iterpaziente = listaPazientezenit.begin();
 	double diff = 0.0;
 	while (iterpaziente != listaPazientezenit.end()&&itermodello!=listaModellozenit.end()) { //TODO TOGLIERE DOPO CON CONDIZIONE ENTRA SE <=
-		diff = abs((*itermodello).get_zenit() - (*iterpaziente).get_zenit());
+		diff = (*itermodello).get_zenit() - (*iterpaziente).get_zenit();
 		valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff);
 		++iterpaziente;
 		++itermodello;
@@ -70,12 +74,12 @@ void Valutazione::valutaSingleJoint(int _joint){
 	iterpaziente2 = iterpaziente;
 	itermodello2++;
 	iterpaziente2++;
-	int num_frame_movimento = 0; //conta il numero di frame che intercorrono tra una posizione chiave e un'altra
+	double secondi_movimento = 0; //conta il numero di secondi che passano tra una posizione chiave e un'altra
     while (iterpaziente2!=listaPazientezenit.end()&&itermodello2!=listaModellozenit.end()) { 
-		num_frame_movimento = (*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe();
-		valutazioneSingleJoint[_joint].insert_deltatimemodello_zenit(num_frame_movimento);
-		num_frame_movimento = (*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe();
-		valutazioneSingleJoint[_joint].insert_deltatimepaziente_zenit(num_frame_movimento);
+		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
+		valutazioneSingleJoint[_joint].insert_deltatimemodello_zenit(secondi_movimento);
+		secondi_movimento = (double)((*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe())/(double)nframepaziente;
+		valutazioneSingleJoint[_joint].insert_deltatimepaziente_zenit(secondi_movimento);
 		++itermodello;
 		++itermodello2;
 		++iterpaziente;
@@ -88,8 +92,8 @@ void Valutazione::valutaSingleJoint(int _joint){
 	itermodello = listaModelloazimut.begin();
 	iterpaziente = listaPazienteazimut.begin();
 	while (iterpaziente != listaPazienteazimut.end()&&itermodello!=listaModelloazimut.end()) {
-		diff = abs((*itermodello).get_azimut() - (*iterpaziente).get_azimut());
-		valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);
+		diff = (*itermodello).get_azimut() - (*iterpaziente).get_azimut(); //una misura positiva significa non arrivare di diff gradi alla posizione
+		valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);      //una negativa significa superarla di diff gradi
 		itermodello++;
 		iterpaziente;;
 	}
@@ -100,10 +104,10 @@ void Valutazione::valutaSingleJoint(int _joint){
 	itermodello2++;
 	iterpaziente2++;
 	while (iterpaziente2 != listaPazienteazimut.end()&&itermodello2!=listaModelloazimut.end()) {
-		num_frame_movimento = (*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe();
-		valutazioneSingleJoint[_joint].insert_deltatimemodello_azimut(num_frame_movimento);
-		num_frame_movimento = (*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe();
-		valutazioneSingleJoint[_joint].insert_deltatimepaziente_azimut(num_frame_movimento);
+		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
+		valutazioneSingleJoint[_joint].insert_deltatimemodello_azimut(secondi_movimento);
+		secondi_movimento = (double)((*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe())/(double)nframepaziente;
+		valutazioneSingleJoint[_joint].insert_deltatimepaziente_azimut(secondi_movimento);
 		++itermodello;
 		++itermodello2;
 		++iterpaziente;
@@ -113,6 +117,8 @@ void Valutazione::valutaSingleJoint(int _joint){
 
 void Valutazione::stampavalutazione() {
 	map<int, ValutazioneSJ>::iterator iter;
+	percentualeEsCompletato();
+	cout << "Esercizio completato al " << completezzaesercizio << "%!"<<endl;
 	for (iter = valutazioneSingleJoint.begin(); iter != valutazioneSingleJoint.end(); ++iter) {
 		(iter->second).stampa();
 	}

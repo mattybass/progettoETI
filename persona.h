@@ -18,6 +18,7 @@
 using namespace std;
 class Persona{
 private:
+	int framepersec;
     map<int,Frame> sequenzaFrame; //Contiene tutti i frame ordinati tramite una chiave: il numero progressivo.
     map<int,list<Angolo>> sequenzaAngolo; //MAP: $ joint, lista di Angolo //andamento temporale dei vari angoli
     map<int,list<Coordinata> > sequenzaCoordinata; //MAP: $ joint, lista di Angolo //andamento temporale delle varie coordinata
@@ -31,13 +32,14 @@ private:
 	void maxminFind_azimut(int _angolo, int _finestra);
 
 public:
-	Persona(string nome_file,string percorso_file="json");
+	Persona(int _framesec, string nome_file,string percorso_file="json");
 
 	//METODI GET
 	double get_angoloMedia_zenit(int _angolo, int n_frame);
 	double get_angoloMedia_azimut(int _angolo,int n_frame);
     int get_numeroMaxMin_zenit(int _angolo);
     int get_numeroMaxMin_azimut(int _angolo);
+	int get_numeroFramePerSecondo()const;
 	list<Angolo> get_valorimaxmin_zenit(int _angolo)const;
 	list<Angolo> get_valorimaxmin_azimut(int _angolo)const;
 	bool jointpresente_zenit(int _joint); //funzione che controlla se è presente quel joint nella map di valori max min e ritorna true se si 

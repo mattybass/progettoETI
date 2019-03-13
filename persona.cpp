@@ -1,6 +1,7 @@
 #include "persona.h"
 
-Persona::Persona(string nome_file, string percorso_file) {
+Persona::Persona(int _framesec, string nome_file, string percorso_file) {
+	framepersec = _framesec;
 	ifstream i(percorso_file + "/" + nome_file);
 
 string line, linecoord, estratta;
@@ -601,6 +602,10 @@ int Persona::get_numeroMaxMin_azimut(int _angolo){
         }
     }
     return size;
+}
+
+int Persona::get_numeroFramePerSecondo()const {
+	return framepersec;
 }
 
 void Persona::maxminBE(int _angolo){
