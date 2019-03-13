@@ -10,11 +10,11 @@
 
 
 int main(int argc, char** argv) {
-	Persona p("spallagomitoModello60fps.json");
+	Persona p("modellomattyspalla.json");
 	p.processa_angolo(2);
-	Persona p2("spallagomitoModello60fps.json");
+	Persona p2("B2movim.json");
 	p2.processa_angolo(2);
-	Valutazione v(&p, &p2);
+	Valutazione v(&p2, &p);
 	v.valutaSingleJoint(2);
 	v.stampavalutazione();
     return 0;

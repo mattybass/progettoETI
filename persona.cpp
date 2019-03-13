@@ -492,7 +492,7 @@ void Persona::processa_angolo(int _angolo) {
 	maxminClean_angolo(_angolo,5,15);
 	stampaFile_angolo(_angolo, "joint"+a);
 	stampaFile_maxmin(_angolo, "maxmin"+a);
-    stampaConsole_maxmin(2);
+    stampaConsole_maxmin(_angolo);
     
 }
 

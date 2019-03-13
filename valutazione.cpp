@@ -49,6 +49,8 @@ void Valutazione::valutaSingleJoint(int _joint){
 	list<Angolo> listaPazienteazimut;
 	list<Angolo>::iterator itermodello; //iteratore che scorre le map di maxmin di zenit e azimut del modello
 	list<Angolo>::iterator iterpaziente; //iteratore che scorre le map di maxmin di zenit e azimut del paziente
+	list<Angolo>::iterator itermodello2;
+	list<Angolo>::iterator iterpaziente2;
 	
 	//ZENIT bisogna fare in modo di inserire punto di inizio e punto di fine
 	listaModellozenit = (*modello).get_valorimaxmin_zenit(_joint);
@@ -56,55 +58,59 @@ void Valutazione::valutaSingleJoint(int _joint){
 	itermodello = listaModellozenit.begin();
 	iterpaziente = listaPazientezenit.begin();
 	double diff = 0.0;
-	int diff_temp = 0;
-	if (listaPazientezenit.size() == listaModellozenit.size()) {
-		//c'è lo stesso numero di max e min
-		while (itermodello != listaModellozenit.end()){ //una vale l'altra in quanto hanno la stessa dimensione
-			diff = abs((*itermodello).get_zenit() - (*iterpaziente).get_zenit());
-			diff_temp = (*itermodello).get_numeroframe() - (*iterpaziente).get_numeroframe();
-			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff);
-			valutazioneSingleJoint[_joint].insert_deltatime_zenit(diff_temp);
-			itermodello++;
-			iterpaziente++;
-		}
+	while (iterpaziente != listaPazientezenit.end()&&itermodello!=listaModellozenit.end()) { //TODO TOGLIERE DOPO CON CONDIZIONE ENTRA SE <=
+		diff = abs((*itermodello).get_zenit() - (*iterpaziente).get_zenit());
+		valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff);
+		++iterpaziente;
+		++itermodello;
 	}
-	else {  //vuol dire che l'esercizio non è stato completato!
-		while (iterpaziente != listaPazientezenit.end()) { //una vale l'altra in quanto hanno la stessa dimensione
-			diff = abs((*itermodello).get_zenit() - (*iterpaziente).get_zenit());
-			diff_temp = (*itermodello).get_numeroframe() - (*iterpaziente).get_numeroframe();
-			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff);
-			valutazioneSingleJoint[_joint].insert_deltatime_zenit(diff_temp);
-			itermodello++;
-			iterpaziente++;
-		}
+	itermodello = listaModellozenit.begin();
+	iterpaziente = listaPazientezenit.begin();
+	itermodello2 = itermodello;
+	iterpaziente2 = iterpaziente;
+	itermodello2++;
+	iterpaziente2++;
+	int num_frame_movimento = 0; //conta il numero di frame che intercorrono tra una posizione chiave e un'altra
+    while (iterpaziente2!=listaPazientezenit.end()&&itermodello2!=listaModellozenit.end()) { 
+		num_frame_movimento = (*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe();
+		valutazioneSingleJoint[_joint].insert_deltatimemodello_zenit(num_frame_movimento);
+		num_frame_movimento = (*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe();
+		valutazioneSingleJoint[_joint].insert_deltatimepaziente_zenit(num_frame_movimento);
+		++itermodello;
+		++itermodello2;
+		++iterpaziente;
+		++iterpaziente2;
 	}
+
 	//AZIMUT
 	listaModelloazimut = (*modello).get_valorimaxmin_azimut(_joint);
 	listaPazienteazimut = (*paziente).get_valorimaxmin_azimut(_joint);
 	itermodello = listaModelloazimut.begin();
 	iterpaziente = listaPazienteazimut.begin();
-	if (listaPazienteazimut.size() == listaModelloazimut.size()) {
-		//c'è lo stesso numero di max e min
-		while (itermodello != listaModelloazimut.end()) { //una vale l'altra in quanto hanno la stessa dimensione
-			diff = abs((*itermodello).get_azimut() - (*iterpaziente).get_azimut());
-			diff_temp = (*itermodello).get_numeroframe() - (*iterpaziente).get_numeroframe();
-			valutazioneSingleJoint[_joint].insert_deltatime_azimut(diff_temp);
-			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);
-			itermodello++;
-			iterpaziente++;
-		}
+	while (iterpaziente != listaPazienteazimut.end()&&itermodello!=listaModelloazimut.end()) {
+		diff = abs((*itermodello).get_azimut() - (*iterpaziente).get_azimut());
+		valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);
+		itermodello++;
+		iterpaziente;;
 	}
-	else {
-		while (iterpaziente != listaPazienteazimut.end()) { //qua ho imposto che ci siano meno max min nella lista del paziente 
-			diff = abs((*itermodello).get_azimut() - (*iterpaziente).get_azimut());
-			diff_temp = (*itermodello).get_numeroframe() - (*iterpaziente).get_numeroframe();
-			valutazioneSingleJoint[_joint].insert_deltatime_azimut(diff_temp);
-			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);
-			itermodello++;
-			iterpaziente++;
-		}
+	itermodello = listaModelloazimut.begin();
+	iterpaziente = listaPazienteazimut.begin();
+	itermodello2 = itermodello;
+	iterpaziente2 = iterpaziente;
+	itermodello2++;
+	iterpaziente2++;
+	while (iterpaziente2 != listaPazienteazimut.end()&&itermodello2!=listaModelloazimut.end()) {
+		num_frame_movimento = (*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe();
+		valutazioneSingleJoint[_joint].insert_deltatimemodello_azimut(num_frame_movimento);
+		num_frame_movimento = (*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe();
+		valutazioneSingleJoint[_joint].insert_deltatimepaziente_azimut(num_frame_movimento);
+		++itermodello;
+		++itermodello2;
+		++iterpaziente;
+		++iterpaziente2;
 	}
 }
+
 void Valutazione::stampavalutazione() {
 	map<int, ValutazioneSJ>::iterator iter;
 	for (iter = valutazioneSingleJoint.begin(); iter != valutazioneSingleJoint.end(); ++iter) {
