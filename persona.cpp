@@ -609,4 +609,12 @@ int Persona::get_numeroFramePerSecondo()const {
 }
 
 void Persona::maxminBE(int _angolo){
+    map<int,list<Angolo>>::const_iterator iterM;
+    list<Angolo>::const_iterator iterL;
+    iterM=sequenzaAngolo.find(_angolo);
+    if(iterM!=sequenzaAngolo.end()){
+    }else{
+        cout<<"Errore"<<endl;
+    }
+    
 }
