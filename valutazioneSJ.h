@@ -31,6 +31,4 @@ public:
     double get_media_deltatime_azimut();
 	void stampa();
 };
-
-void test_valuta();
 #endif

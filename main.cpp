@@ -11,15 +11,9 @@
 
 int main(int argc, char** argv) {
 	Persona p("spallagomitoModello60fps.json");
-	p.mediamobile_angolo(2, 30);
-	p.mediamobile_angolo(2, 30);
-	p.maxminFind_angolo(2, 50);
-	p.maxminClean_angolo(2, 5, 20);
+	p.processa_angolo(2);
 	Persona p2("spallagomitoModello60fps.json");
-	p2.mediamobile_angolo(2, 30);
-	p2.mediamobile_angolo(2, 30);
-	p2.maxminFind_angolo(2, 50);
-	p2.maxminClean_angolo(2, 5, 20);
+	p2.processa_angolo(2);
 	Valutazione v(&p, &p2);
 	v.valutaSingleJoint(2);
 	v.stampavalutazione();

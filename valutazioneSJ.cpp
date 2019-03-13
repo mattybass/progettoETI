@@ -86,17 +86,28 @@ double ValutazioneSJ::get_media_deltatime_zenit(){
     return media_deltatime_zenit;
 }
 
-double ValutazioneSJ::get_media_deltatime_azimut(){
-    return media_deltatime_azimut;
+double ValutazioneSJ::get_media_deltatime_azimut() {
+	return media_deltatime_azimut;
 }
-
 void ValutazioneSJ::stampa() {
 	vector<double>::iterator iter;
-	for (iter = deltadist_zenit.begin(); iter != deltadist_zenit.end(); ++iter) {
+	cout << "Zenit" << endl;
+	cout << "Spazio" << endl;
+	for (iter = deltadist_zenit.begin(); iter!= deltadist_zenit.end(); ++iter) {
+		cout << *iter << endl;
+	}
+	cout << "Velocita" << endl;
+	for (iter = deltatime_zenit.begin(); iter != deltatime_zenit.end(); ++iter) {
+		cout << *iter << endl;
+	}
+	cout << "Azimut" << endl;
+	cout << "Spazio" << endl;
+	for (iter = deltadist_azimut.begin(); iter != deltadist_azimut.end(); ++iter) {
+		cout << *iter << endl;
+	}
+	cout << "Velocita" << endl;
+	for (iter = deltatime_azimut.begin(); iter != deltatime_azimut.end(); ++iter) {
 		cout << *iter << endl;
 	}
 }
 
-void test_valuta(){
-    
-}
