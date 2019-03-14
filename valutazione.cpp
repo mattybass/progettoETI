@@ -61,10 +61,20 @@ void Valutazione::valutaSingleJoint(int _joint){
 	itermodello = listaModellozenit.begin();
 	iterpaziente = listaPazientezenit.begin();
 	double diff = 0.0;
+    float percentuale=0.0;
 	
 	while (iterpaziente != listaPazientezenit.end()&&itermodello!=listaModellozenit.end()) { //TODO TOGLIERE DOPO CON CONDIZIONE ENTRA SE <=
 		diff = (*itermodello).get_zenit() - (*iterpaziente).get_zenit();
-		valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff);
+        percentuale=(((float)(iterpaziente->get_zenit())/(float)(itermodello->get_zenit()))*100.0);
+        
+        if(percentuale>100.0){
+            if(percentuale>200.0){
+                percentuale=0;
+            }else{
+                percentuale=percentuale-100.0;
+            }
+        }
+		valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff,percentuale);
 		++iterpaziente;
 		++itermodello;
 	}
@@ -96,18 +106,27 @@ void Valutazione::valutaSingleJoint(int _joint){
 	
 	while (iterpaziente != listaPazienteazimut.end()&&itermodello!=listaModelloazimut.end()) {
 		diff = (*itermodello).get_azimut() - (*iterpaziente).get_azimut(); //una misura positiva significa non arrivare di diff gradi alla posizione
-		valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);      //una negativa significa superarla di diff gradi
-		++itermodello;
-		++iterpaziente;
-	}
-	
+        percentuale=(((float)(iterpaziente->get_zenit())/(float)(itermodello->get_zenit()))*100.0);
+        
+            if(percentuale>100.0){
+                if(percentuale>200.0){
+                    percentuale=0;
+                }else{
+                    percentuale=percentuale-100.0;
+                }
+            }
+            valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff,percentuale);      //una negativa significa superarla di diff gradi
+            ++itermodello;
+            ++iterpaziente;
+
+    }
 	itermodello = listaModelloazimut.begin();
 	iterpaziente = listaPazienteazimut.begin();
 	itermodello2 = itermodello;
 	iterpaziente2 = iterpaziente;
 	++itermodello2;
 	++iterpaziente2;
-	
+
 	while (iterpaziente2 != listaPazienteazimut.end()&&itermodello2!=listaModelloazimut.end()) {
 		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
 		valutazioneSingleJoint[_joint].insert_duratamovimentimodello_azimut(secondi_movimento);
