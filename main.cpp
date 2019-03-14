@@ -15,7 +15,10 @@ int main(int argc, char** argv) {
 	Persona p2(60,"B2movim.json");
 	p2.processa_angolo(2);
 	Valutazione v(&p2, &p);
+	v.insert_angolidiscriminati_zenit(2);
 	v.valutaSingleJoint(2);
 	v.stampavalutazione();
+	system("PAUSE");
+
     return 0;
 }

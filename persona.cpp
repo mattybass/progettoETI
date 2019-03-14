@@ -498,7 +498,7 @@ void Persona::processa_angolo(int _angolo) {
 }
 
 
-void Persona::pulisci_errori_seqenzanagolo(int _angolo){
+void Persona::pulisci_errori_seqenzanagolo(int _angolo){ //todo correggere sergio 
     map<int,list<Angolo>>::iterator iter;
     list<Angolo>::iterator iter2;
     list<Angolo>::iterator iter3;
