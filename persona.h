@@ -27,7 +27,7 @@ private:
     map<int, list<Angolo>> valori_maxmin_zenit;
 	map<int, list<Angolo>> valori_maxmin_azimut;
     
-    //Metodi
+    //METODI RICERCA MAX E MIN
 	void maxminFind_zenit(int _angolo, int _finestra);
 	void maxminFind_azimut(int _angolo, int _finestra);
 
@@ -42,8 +42,8 @@ public:
 	int get_numeroFramePerSecondo()const;
 	list<Angolo> get_valorimaxmin_zenit(int _angolo)const;
 	list<Angolo> get_valorimaxmin_azimut(int _angolo)const;
-	bool jointpresente_zenit(int _joint); //funzione che controlla se è presente quel joint nella map di valori max min e ritorna true se si 
-	bool jointpresente_azimut(int _joint);
+	bool jointpresente_zenit(int _joint); //todo eliminare tanto ci sono sempre almeno inizio e fine 
+	bool jointpresente_azimut(int _joint); //idem
 
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
@@ -56,7 +56,8 @@ public:
 	void mediamobile_angolo(int _angolo, int _finestra);
     void pulisci_errori_sequenzaangolo(int _angolo);//Pulisce gli errori 358/360, 1/2.
     void completa_pulisci();//Richiama pulisci errori
-    
+
+	void pulisci_punti_non_mediati(int _angolo);
 	void maxminFind_angolo(int _angolo, int _finestra);
 	void maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut);
     void maxminBE(int _angolo); //Inserisce il punto di inzio e di fine, s enon giˆ inseriti.
