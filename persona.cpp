@@ -213,7 +213,6 @@ void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 		list<Angolo>::iterator liter;
 		list<Angolo>::iterator liter2;
 		list<Angolo>::iterator liter3;
-		map<int, Frame> miter;
 		int max_o_min = 1;
 		int tipo_angolo = 0;
 		int cont = 0;
@@ -237,16 +236,13 @@ void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 
 				++liter2;
 				--liter3;
-				cont--;
+				--cont;
 			}
 			if (max_o_min != 0) {
 				int n = (*liter).get_numeroframe();
 				Angolo a(get_angoloMedia_azimut(_angolo, n), get_angoloMedia_zenit(_angolo, n), n,tipo_angolo);
 				valori_maxmin_zenit[_angolo].push_back(a); 
-				/*
-				Angolo a = (*liter);
-				a.set_maxmin(tipo_angolo);
-				valori_maxmin_zenit[_angolo].push_back(a);*/
+				
 			}
 			++liter;
 			max_o_min = 1;
