@@ -117,9 +117,52 @@ void ValutazioneSJ::elaboradati() {
 
 
 void ValutazioneSJ::insert_deltatime_zenit(){
+    vector<double>::const_iterator iterVM;
+    vector<double>::const_iterator iterVP;
+    double differenza;
+    float percentuale;
     
+    iterVM=duratamovimentimodello_zenit.begin();
+    iterVP=duratamovimentipaziente_zenit.begin();
+    while(iterVM!=duratamovimentimodello_zenit.end()&&iterVP!=duratamovimentipaziente_zenit.end()){
+        differenza=(*iterVM)-(*iterVP);
+        percentuale=(((float)(*iterVP)/(float)(*iterVM))*100.0);
+        
+        if(percentuale>100.0){
+            if(percentuale>200.0){
+                percentuale=0;
+            }else{
+                percentuale=percentuale-100.0;
+            }
+        }
+        deltatime_zenit.push_back(pair<double,float> (differenza,percentuale));
+        ++iterVM;
+        ++iterVP;
+    }
 }
 
 void ValutazioneSJ::insert_deltatime_azimut(){
+    vector<double>::const_iterator iterVM;
+    vector<double>::const_iterator iterVP;
+    double differenza;
+    float percentuale;
+    
+    iterVM=duratamovimentimodello_azimut.begin();
+    iterVP=duratamovimentipaziente_azimut.begin();
+    while(iterVM!=duratamovimentimodello_azimut.end()&&iterVP!=duratamovimentipaziente_azimut.end()){
+        differenza=(*iterVM)-(*iterVP);
+        percentuale=(((float)(*iterVP)/(float)(*iterVM))*100.0);
+        
+        if(percentuale>100.0){
+            if(percentuale>200.0){
+                percentuale=0;
+            }else{
+                percentuale=percentuale-100.0;
+            }
+        }
+        deltatime_azimut.push_back(pair<double,float> (differenza,percentuale));
+        ++iterVM;
+        ++iterVP;
+    }
     
 }
