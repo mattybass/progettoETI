@@ -57,7 +57,7 @@ public:
     void pulisci_errori_sequenzaangolo(int _angolo);//Pulisce gli errori 358/360, 1/2.
     void completa_pulisci();//Richiama pulisci errori
 
-	void pulisci_punti_non_mediati(int _angolo);
+	
 	void maxminFind_angolo(int _angolo, int _finestra);
 	void maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut);
     void maxminBE(int _angolo); //Inserisce il punto di inzio e di fine, s enon giˆ inseriti.
