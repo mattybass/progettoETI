@@ -54,7 +54,7 @@ public:
     
 
 	void mediamobile_angolo(int _angolo, int _finestra);
-    void pulisci_errori_seqenzanagolo(int _angolo);//PULISCE ERRRORI PER UN SINGOLO ANGOLO
+    void pulisci_errori_sequenzaangolo(int _angolo);//Pulisce gli errori 358/360, 1/2.
     void completa_pulisci();//Richiama pulisci errori
 
 	void pulisci_punti_non_mediati(int _angolo);

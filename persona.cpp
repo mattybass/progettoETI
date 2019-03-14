@@ -560,7 +560,7 @@ void Persona::processa_angolo(int _angolo) {
 }
 
 
-void Persona::pulisci_errori_seqenzanagolo(int _angolo){ //todo correggere sergio 
+void Persona::pulisci_errori_sequenzaangolo(int _angolo){
     map<int,list<Angolo>>::iterator iter;
     list<Angolo>::iterator iter2;
     list<Angolo>::iterator iter3;
@@ -598,15 +598,15 @@ void Persona::pulisci_errori_seqenzanagolo(int _angolo){ //todo correggere sergi
 }
 
 void Persona::completa_pulisci(){
-    pulisci_errori_seqenzanagolo(3);
-    pulisci_errori_seqenzanagolo(2);
-    pulisci_errori_seqenzanagolo(1);
-    pulisci_errori_seqenzanagolo(5);
-    pulisci_errori_seqenzanagolo(6);
-    pulisci_errori_seqenzanagolo(8);
-    pulisci_errori_seqenzanagolo(11);
-    pulisci_errori_seqenzanagolo(9);
-    pulisci_errori_seqenzanagolo(12); 
+    pulisci_errori_sequenzaangolo(3);
+    pulisci_errori_sequenzaangolo(2);
+    pulisci_errori_sequenzaangolo(1);
+    pulisci_errori_sequenzaangolo(5);
+    pulisci_errori_sequenzaangolo(6);
+    pulisci_errori_sequenzaangolo(8);
+    pulisci_errori_sequenzaangolo(11);
+    pulisci_errori_sequenzaangolo(9);
+    pulisci_errori_sequenzaangolo(12);
 }
 
 list<Angolo> Persona::get_valorimaxmin_zenit(int _angolo)const {
@@ -671,4 +671,12 @@ int Persona::get_numeroFramePerSecondo()const {
 }
 
 void Persona::maxminBE(int _angolo){
+    map<int,list<Angolo>>::const_iterator iterM;
+    list<Angolo>::const_iterator iterL;
+    iterM=sequenzaAngolo.find(_angolo);
+    if(iterM!=sequenzaAngolo.end()){
+    }else{
+        cout<<"Errore"<<endl;
+    }
+    
 }

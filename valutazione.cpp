@@ -43,7 +43,7 @@ void Valutazione::insert_angolidiscriminati_azimut(int _angolo) {
 }
 
 void Valutazione::valutaSingleJoint(int _joint){
-	//in questa funzione bisogna entrare se il numero di max min del paziente è minore o uguale a quello del modello
+	//in questa funzione bisogna entrare se il numero di max min del paziente ï¿½ minore o uguale a quello del modello
 	list<Angolo> listaModellozenit;
 	list<Angolo> listaPazientezenit;
 	list<Angolo> listaModelloazimut;
@@ -79,9 +79,9 @@ void Valutazione::valutaSingleJoint(int _joint){
 	double secondi_movimento = 0; //conta il numero di secondi che passano tra una posizione chiave e un'altra
     while (iterpaziente2!=listaPazientezenit.end()&&itermodello2!=listaModellozenit.end()) { 
 		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
-		valutazioneSingleJoint[_joint].insert_deltatimemodello_zenit(secondi_movimento);
+		valutazioneSingleJoint[_joint].insert_duratamovimentimodello_zenit(secondi_movimento);
 		secondi_movimento = (double)((*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe())/(double)nframepaziente;
-		valutazioneSingleJoint[_joint].insert_deltatimepaziente_zenit(secondi_movimento);
+		valutazioneSingleJoint[_joint].insert_duratamovimentipaziente_zenit(secondi_movimento);
 		++itermodello;
 		++itermodello2;
 		++iterpaziente;
@@ -110,9 +110,9 @@ void Valutazione::valutaSingleJoint(int _joint){
 	
 	while (iterpaziente2 != listaPazienteazimut.end()&&itermodello2!=listaModelloazimut.end()) {
 		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
-		valutazioneSingleJoint[_joint].insert_deltatimemodello_azimut(secondi_movimento);
+		valutazioneSingleJoint[_joint].insert_duratamovimentimodello_azimut(secondi_movimento);
 		secondi_movimento = (double)((*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe())/(double)nframepaziente;
-		valutazioneSingleJoint[_joint].insert_deltatimepaziente_azimut(secondi_movimento);
+		valutazioneSingleJoint[_joint].insert_duratamovimentipaziente_azimut(secondi_movimento);
 		++itermodello;
 		++itermodello2;
 		++iterpaziente;
