@@ -219,7 +219,6 @@ void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 		int tipo_angolo = 0;
 		int cont = 0;
 		liter = iter->second.begin();
-		cout << (*liter).get_numeroframe();
 		++liter;
 		while (liter != (iter->second).end()) {
 			liter2 = liter;
