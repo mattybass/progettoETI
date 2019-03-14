@@ -94,7 +94,7 @@ void Valutazione::valutaSingleJoint(int _joint){
 		diff = (*itermodello).get_azimut() - (*iterpaziente).get_azimut(); //una misura positiva significa non arrivare di diff gradi alla posizione
 		valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);      //una negativa significa superarla di diff gradi
 		itermodello++;
-		iterpaziente;;
+		iterpaziente++;
 	}
 	itermodello = listaModelloazimut.begin();
 	iterpaziente = listaPazienteazimut.begin();
