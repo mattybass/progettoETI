@@ -43,7 +43,7 @@ void Valutazione::insert_angolidiscriminati_azimut(int _angolo) {
 }
 
 void Valutazione::valutaSingleJoint(int _joint){
-	//in questa funzione bisogna entrare se il numero di max min del paziente è minore o uguale a quello del modello
+	//in questa funzione bisogna entrare se il numero di max min del paziente ï¿½ minore o uguale a quello del modello
 	list<Angolo> listaModellozenit;
 	list<Angolo> listaPazientezenit;
 	list<Angolo> listaModelloazimut;
@@ -61,18 +61,21 @@ void Valutazione::valutaSingleJoint(int _joint){
 	itermodello = listaModellozenit.begin();
 	iterpaziente = listaPazientezenit.begin();
 	double diff = 0.0;
+	
 	while (iterpaziente != listaPazientezenit.end()&&itermodello!=listaModellozenit.end()) { //TODO TOGLIERE DOPO CON CONDIZIONE ENTRA SE <=
 		diff = (*itermodello).get_zenit() - (*iterpaziente).get_zenit();
 		valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff);
 		++iterpaziente;
 		++itermodello;
 	}
+
 	itermodello = listaModellozenit.begin();
 	iterpaziente = listaPazientezenit.begin();
 	itermodello2 = itermodello;
 	iterpaziente2 = iterpaziente;
-	itermodello2++;
-	iterpaziente2++;
+	++itermodello2;
+	++iterpaziente2;
+
 	double secondi_movimento = 0; //conta il numero di secondi che passano tra una posizione chiave e un'altra
     while (iterpaziente2!=listaPazientezenit.end()&&itermodello2!=listaModellozenit.end()) { 
 		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
@@ -90,18 +93,21 @@ void Valutazione::valutaSingleJoint(int _joint){
 	listaPazienteazimut = (*paziente).get_valorimaxmin_azimut(_joint);
 	itermodello = listaModelloazimut.begin();
 	iterpaziente = listaPazienteazimut.begin();
+	
 	while (iterpaziente != listaPazienteazimut.end()&&itermodello!=listaModelloazimut.end()) {
 		diff = (*itermodello).get_azimut() - (*iterpaziente).get_azimut(); //una misura positiva significa non arrivare di diff gradi alla posizione
 		valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff);      //una negativa significa superarla di diff gradi
-		itermodello++;
-		iterpaziente++;
+		++itermodello;
+		++iterpaziente;
 	}
+	
 	itermodello = listaModelloazimut.begin();
 	iterpaziente = listaPazienteazimut.begin();
 	itermodello2 = itermodello;
 	iterpaziente2 = iterpaziente;
-	itermodello2++;
-	iterpaziente2++;
+	++itermodello2;
+	++iterpaziente2;
+	
 	while (iterpaziente2 != listaPazienteazimut.end()&&itermodello2!=listaModelloazimut.end()) {
 		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
 		valutazioneSingleJoint[_joint].insert_deltatimemodello_azimut(secondi_movimento);
