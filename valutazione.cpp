@@ -22,16 +22,15 @@ void Valutazione::percentualeEsCompletato() {
     int numero_maxminPaziente=0;
 
 	for(iterV=angoliDiscriminanti_zenit.begin();iterV!=angoliDiscriminanti_zenit.end();++iterV){
-        numero_maxminModello=numero_maxminModello+ modello->get_numeroMaxMin_zenit((*iterV));
-		numero_maxminPaziente=numero_maxminPaziente+paziente->get_numeroMaxMin_zenit((*iterV));
+		numero_maxminModello+=modello->get_numeroMaxMin_zenit((*iterV));
+		numero_maxminPaziente+=paziente->get_numeroMaxMin_zenit((*iterV));
 	}
-
 	for(iterV=angoliDiscriminanti_azimut.begin();iterV!=angoliDiscriminanti_azimut.end();++iterV){
-        numero_maxminModello=numero_maxminModello+ modello->get_numeroMaxMin_azimut((*iterV));
-		numero_maxminPaziente=numero_maxminPaziente+paziente->get_numeroMaxMin_azimut((*iterV));
+        numero_maxminModello+=modello->get_numeroMaxMin_azimut((*iterV));
+		numero_maxminPaziente+=paziente->get_numeroMaxMin_azimut((*iterV));
     }
-	if (numero_maxminModello != 0) {
-		completezzaesercizio = (float)(numero_maxminPaziente / numero_maxminModello) * 100;
+    if (numero_maxminModello != 0){
+		completezzaesercizio = ((float)numero_maxminPaziente / (float)numero_maxminModello) * 100;
 	}
 }
 
