@@ -12,8 +12,8 @@ void ValutazioneSJ::media_deltadist(){
     float percenutale=0.0;
     int counter=deltadist_zenit.size();
     for(iterV=deltadist_zenit.begin();iterV!=deltadist_zenit.end();++iterV){
-        somma=somma+(iterV->first);
-        percenutale=percenutale+(iterV->second);
+        somma=somma+fabs((iterV->first));
+        percenutale=percenutale+(fabs((iterV->second)));
     }
     if(counter!=0){
         media_deltadist_zenit=(double)somma/counter;
@@ -27,8 +27,8 @@ void ValutazioneSJ::media_deltadist(){
     float percentuale1=0.0;
     int counter1=deltadist_azimut.size();
     for(iterV=deltadist_azimut.begin();iterV!=deltadist_azimut.end();++iterV){
-        somma1=somma1+(iterV->first);
-        percentuale1=percentuale1+(iterV->second);
+        somma1=somma1+fabs((iterV->first));
+        percentuale1=percentuale1+fabs((iterV->second));
     }
     if(counter1!=0){
         media_deltadist_azimut=(double)somma1/counter1;
