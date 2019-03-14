@@ -46,19 +46,19 @@ double ValutazioneSJ::get_media_deltadist_zenit() {
 double ValutazioneSJ::get_media_deltadist_azimut() {
 	return media_deltadist_azimut;
 }
-void ValutazioneSJ::insert_deltatimemodello_zenit(double _n){
-        deltatimemodello_zenit.push_back(_n);
+void ValutazioneSJ::insert_duratamovimentimodello_zenit(double _n){
+        duratamovimentimodello_zenit.push_back(_n);
     
 }
-void ValutazioneSJ::insert_deltatimepaziente_zenit(double _n) {
-	deltatimepaziente_zenit.push_back(_n);
+void ValutazioneSJ::insert_duratamovimentipaziente_zenit(double _n) {
+	duratamovimentipaziente_zenit.push_back(_n);
 
 }
-void ValutazioneSJ::insert_deltatimemodello_azimut(double _n){
-        deltatimemodello_azimut.push_back(_n);
+void ValutazioneSJ::insert_duratamovimentimodello_azimut(double _n){
+        duratamovimentimodello_azimut.push_back(_n);
 }
-void ValutazioneSJ::insert_deltatimepaziente_azimut(double _n) {
-	deltatimepaziente_azimut.push_back(_n);
+void ValutazioneSJ::insert_duratamovimentipaziente_azimut(double _n) {
+	duratamovimentipaziente_azimut.push_back(_n);
 }
 
 
@@ -75,14 +75,14 @@ void ValutazioneSJ::stampa() {
 	i = 0;
 	cout << endl << "Misure di velocita" << endl;
 	cout << "Velocita modello" << endl;
-	for (iter = deltatimemodello_zenit.begin(); iter != deltatimemodello_zenit.end(); ++iter) {
+	for (iter = duratamovimentimodello_zenit.begin(); iter != duratamovimentimodello_zenit.end(); ++iter) {
 		++i;
 		cout << "Movimento " << i << " -->";
 		cout << *iter << endl;
 	}
 	i = 0;
 	cout << "Velocita paziente" << endl;
-	for (iter = deltatimepaziente_zenit.begin(); iter != deltatimepaziente_zenit.end(); ++iter) {
+	for (iter = duratamovimentipaziente_zenit.begin(); iter != duratamovimentipaziente_zenit.end(); ++iter) {
 		++i;
 		cout << "Movimento " << i << " -->";
 		cout << *iter << endl;
@@ -97,14 +97,14 @@ void ValutazioneSJ::stampa() {
 	i = 0;
 	cout << endl << "Misure di velocita" << endl;
 	cout << "Velocita modello" << endl;
-	for (iter = deltatimemodello_azimut.begin(); iter != deltatimemodello_azimut.end(); ++iter) {
+	for (iter = duratamovimentimodello_azimut.begin(); iter != duratamovimentimodello_azimut.end(); ++iter) {
 		++i;
 		cout << "Movimento " << i << " -->";
 		cout << *iter << endl;
 	}
 	i = 0;
 	cout << "Velocita paziente" << endl;
-	for (iter = deltatimepaziente_azimut.begin(); iter != deltatimepaziente_azimut.end(); ++iter) {
+	for (iter = duratamovimentipaziente_azimut.begin(); iter != duratamovimentipaziente_azimut.end(); ++iter) {
 		++i;
 		cout << "Movimento " << i << " -->";
 		cout << *iter << endl;
@@ -115,3 +115,11 @@ void ValutazioneSJ::elaboradati() {
 
 }
 
+
+void ValutazioneSJ::insert_deltatime_zenit(){
+    
+}
+
+void ValutazioneSJ::insert_deltatime_azimut(){
+    
+}
