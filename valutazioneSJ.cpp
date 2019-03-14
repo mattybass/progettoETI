@@ -9,25 +9,33 @@ ValutazioneSJ::ValutazioneSJ(){
 void ValutazioneSJ::media_deltadist(){
     vector<pair<double,float>>::const_iterator iterV;
     int somma=0;
+    float percenutale=0.0;
     int counter=deltadist_zenit.size();
     for(iterV=deltadist_zenit.begin();iterV!=deltadist_zenit.end();++iterV){
         somma=somma+(iterV->first);
+        percenutale=percenutale+(iterV->second);
     }
     if(counter!=0){
         media_deltadist_zenit=(double)somma/counter;
+        media_deltadist_zenit_percento=(float)percenutale/counter;
     }else{
         media_deltadist_zenit=0;
+        media_deltadist_zenit_percento=0.0;
     }
     
     int somma1=0;
+    float percentuale1=0.0;
     int counter1=deltadist_azimut.size();
     for(iterV=deltadist_azimut.begin();iterV!=deltadist_azimut.end();++iterV){
         somma1=somma1+(iterV->first);
+        percentuale1=percentuale1+(iterV->second);
     }
     if(counter1!=0){
         media_deltadist_azimut=(double)somma1/counter1;
+        media_deltadist_azimut_percento=(float)percentuale1/counter1;
     }else{
         media_deltadist_azimut=0;
+        media_deltadist_azimut_percento=0.0;
     }
     
 }
@@ -164,6 +172,40 @@ void ValutazioneSJ::insert_deltatime_azimut(){
         deltatime_azimut.push_back(pair<double,float> (differenza,percentuale));
         ++iterVM;
         ++iterVP;
+    }
+    
+}
+
+void ValutazioneSJ::media_deltatime(){
+    vector<pair<double,float>>::const_iterator iterV;
+    int somma=0;
+    float percenutale=0.0;
+    int counter=deltatime_zenit.size();
+    for(iterV=deltatime_zenit.begin();iterV!=deltatime_zenit.end();++iterV){
+        somma=somma+(iterV->first);
+        percenutale=percenutale+(iterV->second);
+    }
+    if(counter!=0){
+        media_deltatime_zenit=(double)somma/counter;
+        media_deltadist_zenit_percento=(float)percenutale/counter;
+    }else{
+        media_deltatime_zenit=0;
+        media_deltadist_zenit_percento=0.0;
+    }
+    
+    int somma1=0;
+    float percentuale1=0.0;
+    int counter1=deltatime_azimut.size();
+    for(iterV=deltatime_azimut.begin();iterV!=deltatime_azimut.end();++iterV){
+        somma1=somma1+(iterV->first);
+        percentuale1=percentuale1+(iterV->second);
+    }
+    if(counter1!=0){
+        media_deltatime_azimut=(double)somma1/counter1;
+        media_deltatime_azimut_percento=(float)percentuale1/counter1;
+    }else{
+        media_deltatime_azimut=0;
+        media_deltatime_azimut_percento=0.0;
     }
     
 }

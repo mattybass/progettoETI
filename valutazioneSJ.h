@@ -9,14 +9,16 @@ using namespace std;
 
 class ValutazioneSJ{
 private:
-    vector<pair<double,float>> deltadist_zenit;
+    //ZENIT
+    vector<pair<double,float>> deltadist_zenit; //Vector con pair. First= differenza distanze, Second= percentuale sulla differenza
     vector<double> duratamovimentimodello_zenit;
 	vector<double> duratamovimentipaziente_zenit;
-    vector<pair<double,float>> deltatime_zenit;
-    double media_deltadist_zenit;
-    float media_deltadist_zenit_percento;
-    double media_deltatime_zenit;
-    float media_deltatime_zenit_percento;
+    vector<pair<double,float>> deltatime_zenit;//Vector con pair. First= differenza tempo, Second= percentuale sulla differenza
+    double media_deltadist_zenit; //Media differenze distanze
+    float media_deltadist_zenit_percento; //Percentuale media sulle differenze distanze
+    double media_deltatime_zenit; //Media differenze tempo
+    float media_deltatime_zenit_percento; //Percentuale media sulle differenze tempo
+    //AZIMUT
     vector<pair<double,float>> deltadist_azimut;
     vector<double> duratamovimentimodello_azimut;
 	vector<double> duratamovimentipaziente_azimut;
@@ -31,6 +33,7 @@ public:
     void insert_deltadist_zenit(double _n, float _p);
     void insert_deltadist_azimut(double _n, float _p);
 	void media_deltadist();
+    void media_deltatime();
 	double get_media_deltadist_zenit();
 	double get_media_deltadist_azimut();
 	//Metodi valutazione velocità
@@ -43,6 +46,6 @@ public:
    
 	//Metodi di valutazione
 	void elaboradati(); //funzione che in base ai vettori presenti in questa classe fornisce delle considerazioni
-	void stampa();
+	void stampa(); //DA RIFARE
 };
 #endif
