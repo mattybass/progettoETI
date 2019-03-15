@@ -42,6 +42,7 @@ public:
 	int get_numeroFramePerSecondo()const;
 	list<Angolo> get_valorimaxmin_zenit(int _angolo)const;
 	list<Angolo> get_valorimaxmin_azimut(int _angolo)const;
+	Angolo return_angolo(int _angolo, int _nframe);
 
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.

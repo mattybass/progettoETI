@@ -1,5 +1,9 @@
 #include "valutazioneRJ.h"
 
+void ValutazioneRJ::misura_scostamenti_RJ() {
+
+}
+
 ValutazioneRJ::ValutazioneRJ(int _jointindagato){
     jointindagato=_jointindagato;
 }
