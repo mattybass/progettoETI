@@ -15,6 +15,15 @@ Valutazione::Valutazione(Persona* _paz, Persona* _mod) {
 	pesi[9] = pair<float, float>(0.0, 0.0);
 	pesi[11] = pair<float, float>(0.0, 0.0);
 	pesi[12] = pair<float, float>(0.0, 0.0);
+	numeri_angoli.insert(1);
+	numeri_angoli.insert(2);
+	numeri_angoli.insert(3);
+	numeri_angoli.insert(5);
+	numeri_angoli.insert(6);
+	numeri_angoli.insert(8);
+	numeri_angoli.insert(9);
+	numeri_angoli.insert(11);
+	numeri_angoli.insert(12);
 }
 void Valutazione::percentualeEsCompletato() {
     vector<int>::const_iterator iterV;
@@ -136,6 +145,32 @@ void Valutazione::valutaSingleJoint(int _joint){
 		++itermodello2;
 		++iterpaziente;
 		++iterpaziente2;
+	}
+}
+
+void Valutazione::valutaRelationJoint(int _joint) {
+	list<Angolo> listaPazientezenit;
+	list<Angolo> listaPazienteazimut;
+	list<Angolo>::iterator itermodello; 
+	list<Angolo>::iterator iterpaziente;
+	set<int>::iterator iter; //lo uso per scorrere il set contenente i numeri di angoli da elaborare
+	double diff = 0.0;
+	int n_frame = 0;
+	int n_joint = 0;
+	listaPazientezenit = (*paziente).get_valorimaxmin_zenit(_joint);
+	listaPazienteazimut = (*paziente).get_valorimaxmin_azimut(_joint);
+	//ZENIT
+	for (iterpaziente = listaPazientezenit.begin(); iterpaziente != listaPazientezenit.end(); ++iterpaziente) {
+		int n = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
+		//devo passare alla valutazione degli angoli restanti!
+		numeri_angoli.erase(_joint); //elimino il joint sul quale mi sono focalizzato
+		for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
+			n_joint = *iter;
+			Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
+			Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
+			diff = 
+		}
+
 	}
 }
 

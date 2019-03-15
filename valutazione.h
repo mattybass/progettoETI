@@ -3,8 +3,10 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <set>
 #include "persona.h"
 #include "valutazioneSJ.h"
+#include "valutazioneRJ.h"
 using namespace std;
 
 class Valutazione {
@@ -18,7 +20,9 @@ private:
     vector<int> angoliDiscriminanti_azimut;
     //VALUTAZIONI VARIE
     float completezzaesercizio;
+	set<int> numeri_angoli;
 	map<int, ValutazioneSJ> valutazioneSingleJoint;
+	map<int, ValutazioneRJ> valutazioneRelazioneJoint;
 public:
     //COSTRUTTORI
 	Valutazione(Persona* _paz, Persona* _mod);
@@ -28,6 +32,7 @@ public:
     //METODI DI VALUTAZIONE
 	void percentualeEsCompletato();
 	void valutaSingleJoint(int _joint);
+	void valutaRelationJoint(int _joint); //deve essere passato il joint di cui si vule fare la valutazione!
 
 	//METODI DI TEST
 	void stampavalutazione();

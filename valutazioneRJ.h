@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <map>
 using namespace std;
 /*
 TODO
@@ -16,9 +17,13 @@ TODO
 class ValutazioneRJ {
 private:
 	//ZENIT
-
+	map<int, vector<double>> deltadistZenitRJ; //chiave tutti i joint meno quello indagato e vettori di scostamento tra max e min
 	//AZIMUT
-public:
+	map<int, vector<double>> deltadistAzimut;  //idem
+
+public: 
+	void misura_scostamenti_RJ(); 
+
 };
 
 
