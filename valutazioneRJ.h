@@ -15,22 +15,13 @@ TODO
 */
 
 class ValutazioneRJ {
-private:
-	//ZENIT
-
-	//AZIMUT
-public:
-};
-
-
-#endif
 
 private:
 	//ZENIT
 	map<int, vector<double>> deltadistZenitRJ; //chiave tutti i joint meno quello indagato e vettori di scostamento tra max e min
 	//AZIMUT
 	map<int, vector<double>> deltadistAzimut;  //idem
-private:
+    
     int jointindagato;
 	//ZENIT
     map<int,float> pesired_zenit; //Map che sar� popolata con la i pesi redistibuiti per ogni angolo. ZENIT
@@ -41,8 +32,7 @@ public:
     //INSERT
     void insert_pesiredzenit(int _n, float _p);
     void insert_pesiredazimut(int _n, float _p);
-};
-public: 
+
 	void misura_scostamenti_RJ(); 
 
 };

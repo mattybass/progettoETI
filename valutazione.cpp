@@ -169,7 +169,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 			n_joint = *iter;
 			Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
 			Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
-			diff = 
+            diff = 3;
 		}
 
 	}
@@ -220,8 +220,11 @@ void Valutazione::popola_pesiRJ(int _angolo){
         pesoprecA=iterM->second.second;
         pesoredistribuitoA=pesoprecA/sommacalcoloA;
         pesoredistribuitoZ=pesoprecZ/sommacalcoloZ;
-        
-        
+        map<int, ValutazioneRJ>::iterator iterM1;
+        iterM1=valutazioneRelazioneJoint.find(_angolo);
+        if(iterM1!=valutazioneRelazioneJoint.end()){
+            iterM1->second.
+        }
     }
     
    
