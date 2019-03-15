@@ -1,5 +1,6 @@
 #include "valutazione.h"
 
+
 Valutazione::Valutazione(Persona* _paz, Persona* _mod) {
 	paziente = _paz;
 	modello = _mod;
@@ -146,4 +147,48 @@ void Valutazione::stampavalutazione() {
 	for (iter = valutazioneSingleJoint.begin(); iter != valutazioneSingleJoint.end(); ++iter) {
 		(iter->second).stampa();
 	}
+}
+
+map<int, pair<float,float>> Valutazione:: get_pesi()const{
+    return pesi;
+}
+
+void Valutazione::popola_pesiRJ(int _angolo){
+    map<int, pair<float,float>>::const_iterator iterM;
+    float sommaazimut=0.0;
+    float sommazenit=0.0;
+    float sommacalcoloZ=0.0;
+    float sommacalcoloA=0.0;
+    float pesoprecZ=0.0;
+    float pesoprecA=0.0;
+    float pesoredistribuitoA=0.0;
+    float pesoredistribuitoZ=0.0;
+    //Calcolo sommaazimut;
+    for(iterM=pesi.begin();iterM!=pesi.end();++iterM){
+        sommaazimut=sommaazimut+iterM->second.second;
+    }
+    //Calcolo sommazenit;
+    for(iterM=pesi.begin();iterM!=pesi.end();++iterM){
+        sommazenit=sommazenit+iterM->second.first;
+    }
+    
+    iterM=pesi.find(_angolo);
+    if(iterM!=pesi.end()){
+        pesoprecZ=iterM->second.first;
+        pesoprecA=iterM->second.second;
+        sommacalcoloZ=sommazenit-pesoprecZ;
+        sommacalcoloA=sommaazimut-pesoprecA;
+    }
+    
+    for(iterM=pesi.begin();iterM!=pesi.end();++iterM){
+        pesoprecZ=iterM->second.first;
+        pesoprecA=iterM->second.second;
+        pesoredistribuitoA=pesoprecA/sommacalcoloA;
+        pesoredistribuitoZ=pesoprecZ/sommacalcoloZ;
+        
+        
+    }
+    
+   
+    //
 }

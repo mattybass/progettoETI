@@ -27,6 +27,7 @@ private:
     float media_deltadist_azimut_percento;
     double media_deltatime_azimut;
     float media_deltatime_azimut_percento;
+
 public:
     ValutazioneSJ();
     //Metodi valutazione spaziale

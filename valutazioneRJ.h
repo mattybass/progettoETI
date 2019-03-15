@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <map>
 using namespace std;
 /*
 TODO
@@ -15,10 +16,16 @@ TODO
 
 class ValutazioneRJ {
 private:
+    int jointindagato;
 	//ZENIT
-
+    map<int,float> pesired_zenit; //Map che sarˆ popolata con la i pesi redistibuiti per ogni angolo. ZENIT
 	//AZIMUT
+    map<int,float> pesired_azimut; //Map che sarˆ popolata con la i pesi redistibuiti per ogni angolo. AZIMUT
 public:
+    ValutazioneRJ(int _jointindagato);
+    //INSERT
+    void insert_pesiredzenit(int _n, float _p);
+    void insert_pesiredazimut(int _n, float _p);
 };
 
 
