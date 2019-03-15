@@ -223,10 +223,9 @@ void Valutazione::popola_pesiRJ(int _angolo){
         map<int, ValutazioneRJ>::iterator iterM1;
         iterM1=valutazioneRelazioneJoint.find(_angolo);
         if(iterM1!=valutazioneRelazioneJoint.end()){
-            iterM1->second.
+            iterM1->second.insert_pesiredazimut(iterM->first, pesoredistribuitoA);
+            iterM1->second.insert_pesiredazimut(iterM->first, pesoredistribuitoZ);
         }
     }
     
-   
-    //
 }
