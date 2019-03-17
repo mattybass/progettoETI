@@ -150,38 +150,111 @@ void Valutazione::valutaSingleJoint(int _joint){
 }
 
 void Valutazione::valutaRelationJoint(int _joint) {
+	//NB! questa funzione deve essere eseguita se il numero di max min del paziente è <= del numero max min del modello!
 	list<Angolo> listaPazientezenit;
 	list<Angolo> listaPazienteazimut;
-	list<Angolo>::iterator itermodello; 
+	list<Angolo> listaModellozenit;
+	list<Angolo>::iterator itermodello;
+	list<Angolo>::iterator itermodello2;
 	list<Angolo>::iterator iterpaziente;
 	set<int>::iterator iter; //lo uso per scorrere il set contenente i numeri di angoli da elaborare
-	double diff = 0.0;
-	int n_frame = 0;
-	int n_joint = 0;
+	double diff;
+	int frame_iniz_modello, frame_fin_modello;
+	int n_frame, n_joint;
 	listaPazientezenit = (*paziente).get_valorimaxmin_zenit(_joint);
 	listaPazienteazimut = (*paziente).get_valorimaxmin_azimut(_joint);
+	listaModellozenit = (*modello).get_valorimaxmin_zenit(_joint);
+	frame_iniz_modello = (*(listaModellozenit.begin())).get_numeroframe();
+	itermodello2 = listaModellozenit.end();
+	--itermodello2;
+	frame_fin_modello = (*itermodello2).get_numeroframe();
+	numeri_angoli.erase(_joint); //elimino il joint sul quale mi sono focalizzato
 	//ZENIT
 	for (iterpaziente = listaPazientezenit.begin(); iterpaziente != listaPazientezenit.end(); ++iterpaziente) {
-		int n = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
-		//devo passare alla valutazione degli angoli restanti!
-		numeri_angoli.erase(_joint); //elimino il joint sul quale mi sono focalizzato
-		for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
-			n_joint = *iter;
-			Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
-			Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
-            diff = 3;
+		int n_frame = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
+		
+		if (n_frame > frame_iniz_modello&&n_frame < frame_fin_modello) {
+			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
+				n_joint = *iter;
+				Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
+				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
+				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
+				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff);
+			}
+		}
+		else if (n_frame < frame_iniz_modello) { //vuol dire che il frame di inizio del paziente è antecedente a quello del modello
+			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
+				n_joint = *iter;
+				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_iniz_modello); //confronto con il punto iniziale del modello
+				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
+				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
+				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff);
+			}
+		}
+		else if (n_frame > frame_fin_modello) {
+			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
+				n_joint = *iter;
+				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_fin_modello); //angolo del modello corrispondente al punto chiave del paziente
+				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
+				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
+				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff);
+			}
 		}
 
 	}
+	//AZIMUT
+	for (iterpaziente = listaPazienteazimut.begin(); iterpaziente != listaPazienteazimut.end(); ++iterpaziente) {
+		int n_frame = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
+		//devo passare alla valutazione degli angoli restanti!
+		if (n_frame > frame_iniz_modello&&n_frame < frame_fin_modello) {
+			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
+				n_joint = *iter;
+				Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
+				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
+				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
+				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff);
+			}
+		}
+		else if (n_frame < frame_iniz_modello) { //vuol dire che il frame di inizio del paziente è antecedente a quello del modello
+			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
+				n_joint = *iter;
+				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_iniz_modello); //confronto con il punto iniziale del modello
+				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
+				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
+				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff);
+			}
+		}
+		else if (n_frame > frame_fin_modello) {
+			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
+				n_joint = *iter;
+				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_fin_modello); //angolo del modello corrispondente al punto chiave del paziente
+				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
+				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
+				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff);
+			}
+		}
+
+	}
+	//a questo punto ho finito le liste di max e min per il mio joint, quindi lo riaggiungo al set cosi che possa essere riutilizzata
+	numeri_angoli.insert(_joint);
+
 }
 
 void Valutazione::stampavalutazione() {
-	map<int, ValutazioneSJ>::iterator iter;
+	map<int, ValutazioneSJ>::iterator iterSJ;
+	map<int, ValutazioneRJ>::iterator iterRJ;
 	percentualeEsCompletato();
 	cout << "Esercizio completato al " << completezzaesercizio << "%!"<<endl;
-	for (iter = valutazioneSingleJoint.begin(); iter != valutazioneSingleJoint.end(); ++iter) {
-		(iter->second).stampa();
+	for (iterSJ = valutazioneSingleJoint.begin(); iterSJ != valutazioneSingleJoint.end(); ++iterSJ) {
+		(iterSJ->second).stampa();
 	}
+	cout << endl<<endl<<"Valutazione posizione altri joint rispetto al modello!"<<endl;
+	for (iterRJ = valutazioneRelazioneJoint.begin(); iterRJ != valutazioneRelazioneJoint.end(); ++iterRJ) {
+		cout << "Relazione del joint " << iterRJ->first << " con gli altri" << endl;
+		(iterRJ->second).calcola_media_discostamento();
+		(iterRJ->second).stampa();
+	}
+
 }
 
 map<int, pair<float,float>> Valutazione:: get_pesi()const{
