@@ -30,9 +30,9 @@ private:
     float media_deltatime_azimut_percento;
 
     //GENERALI
-     float accuratezza_azimut;
-    float accuratezza_zenit;
-    float accuratezza;
+    float accuratezza_azimut; //50 e 50 tra diff e velocita
+    float accuratezza_zenit; //50 e 50 tra diff e velocita
+    float accuratezza; // 50 e 50 tra le due precedenti
 public:
     ValutazioneSJ();
     //Metodi valutazione spaziale
