@@ -253,3 +253,13 @@ void ValutazioneSJ::calcola_accuratezza(){
     
         accuratezza=(accuratezza_zenit+accuratezza_azimut)/2;
 }
+
+float ValutazioneSJ::get_accuratezza_azimut()const{
+    return accuratezza_azimut;
+}
+float ValutazioneSJ::get_accuratezza_zenit()const{
+    return accuratezza_zenit;
+}
+float ValutazioneSJ::get_accuratezza()const{
+    return accuratezza;
+}

@@ -30,7 +30,7 @@ private:
     float media_deltatime_azimut_percento;
 
     //GENERALI
-     float accuratezza_azimut;
+    float accuratezza_azimut;
     float accuratezza_zenit;
     float accuratezza;
 public:
@@ -63,7 +63,9 @@ public:
     float get_media_deltadist_azimut_percento()const;
     double get_media_deltatime_azimut()const;
     float get_media_deltatime_azimut_percento()const;
-    
+    float get_accuratezza_azimut()const;
+    float get_accuratezza_zenit()const;
+    float get_accuratezza()const;
 	//Metodi di valutazione
 	void elaboradati(); //funzione che in base ai vettori presenti in questa classe fornisce delle considerazioni
 	void stampa(); //DA RIFARE
