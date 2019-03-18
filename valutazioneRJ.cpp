@@ -1,5 +1,5 @@
 #include "valutazioneRJ.h"
-
+//CONTROLLATE
 void ValutazioneRJ::insert_pesiredzenit(int _n, float _p){
     pesired_zenit.insert(pair<int,float> (_n,_p));
 }
@@ -11,6 +11,7 @@ void ValutazioneRJ::insert_pesiredazimut(int _n, float _p){
 void ValutazioneRJ::insert_deltadist_zenit(int _joint, double _diff, float _perc) {
 	(deltadistZenitRJ[_joint]).push_back(pair<double,float> (_diff,_perc));
 }
+
 void ValutazioneRJ::insert_deltadist_azimut(int _joint, double _diff, float _perc) {
 	(deltadistAzimutRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
 }
@@ -18,8 +19,6 @@ void ValutazioneRJ::insert_deltadist_azimut(int _joint, double _diff, float _per
 void ValutazioneRJ::calcola_media_discostamento() {
 	map<int, vector<pair<double, float>>>::iterator miter;
 	vector<pair<double, float>>::iterator viter;
-	vector<pair<double, float>>::iterator viterinizio;
-	vector<pair<double, float>>::iterator viterfine;
 	int i = 0;
 	double sum = 0.0;
 	float sumperc = 0.0;
@@ -30,8 +29,10 @@ void ValutazioneRJ::calcola_media_discostamento() {
 			sumperc+= (*viter).second;
 			++i;
 		}
-		media_deltadist_zenit[miter->first].first = sum / i;
-		media_deltadist_zenit[miter->first].second = sumperc / i;
+		if (i != 0) {
+			media_deltadist_zenit[miter->first].first = sum / i;
+			media_deltadist_zenit[miter->first].second = sumperc / i;
+		}
 		sum = 0.0;
 		sumperc = 0.0;
 		i = 0;
@@ -43,8 +44,10 @@ void ValutazioneRJ::calcola_media_discostamento() {
 			sumperc+= (*viter).second;
 			++i;
 		}
-		media_deltadist_azimut[miter->first].first = sum / i;
-		media_deltadist_azimut[miter->first].second = sumperc / i;
+		if (i != 0) {
+			media_deltadist_azimut[miter->first].first = sum / i;
+			media_deltadist_azimut[miter->first].second = sumperc / i;
+		}
 		sum = 0.0;
 		sumperc = 0.0;
 		i = 0;
@@ -97,92 +100,85 @@ void ValutazioneRJ::stampa() {
 	
 }
 
-void ValutazioneRJ::calcola_mediapesata(){
-  mediapesata=0.0;
-    int angolo=0;
-    float peso=0.0;
-    map<int,pair<double,float>>::const_iterator iterM;
-    map<int, float>::const_iterator iterP;
-    for(iterM=media_deltadist_zenit.begin();iterM!=media_deltadist_zenit.end();++iterM){
-        angolo=iterM->first;
-        iterP=pesired_zenit.find(angolo);
-        if(iterP!=pesired_zenit.end()){
-            peso=iterP->second;
-            mediapesata+=peso*(iterM->second.second/100.0);
-        }
-    }
-    for(iterM=media_deltadist_azimut.begin();iterM!=media_deltadist_azimut.end();++iterM){
-        angolo=iterM->first;
-        iterP=pesired_azimut.find(angolo);
-        if(iterP!=pesired_azimut.end()){
-            peso=iterP->second;
-            mediapesata+=peso*(iterM->second.second/100.0);
-        }
-    }
-}
-
 map<int, vector<pair<double,float>>> ValutazioneRJ::get_deltadistZenitRJ()const{
     return deltadistZenitRJ;
 }
+
 map<int, pair<double, float>> ValutazioneRJ::get_media_deltadist_zenit()const{
     return media_deltadist_zenit;
 }
+
 map<int, float> ValutazioneRJ::get_pesired_zenit()const{
     return pesired_zenit;
 }
+
 map<int, vector<pair<double, float>>> ValutazioneRJ::get_deltadistAzimutRJ()const{
     return deltadistAzimutRJ;
 }
+
 map<int, pair<double, float>> ValutazioneRJ::get_media_deltadist_azimut()const{
     return media_deltadist_azimut;
 }
+
 map<int,float> ValutazioneRJ::get_pesired_azimut()const{
     return pesired_azimut;
 }
-float ValutazioneRJ::get_mediapesata()const{
-    return mediapesata;
+
+float ValutazioneRJ::get_accuratezza()const{
+    return accuratezza;
 }
 
-void ValutazioneRJ::calcola_accuratezza_azimut(){
+void ValutazioneRJ::calcola_accuratezza(){
     map<int, pair<double, float>>::const_iterator iterM;
     map<int,float>::const_iterator iterP;
-    int angolo=0;
-    float sommapesi=0.0;
-    float somma=0.0;
-    for(iterP=pesired_azimut.begin();iterP!=pesired_azimut.end();++iterP){
-        sommapesi+=iterP->second;
-    }
-    for(iterM=media_deltadist_azimut.begin();iterM!=media_deltadist_azimut.end();++iterM){
-        angolo=iterM->first;
-        iterP=pesired_azimut.find(angolo);
-        if(iterP!=pesired_azimut.end()){
-            somma=somma+(((iterM->second.second)/100.0)*iterP->second);
-        }
-    }
-    accuratezza_azimut=somma/sommapesi;
+	float temp = 0.0;
+	float sum = 0.0;
+	iterM = media_deltadist_zenit.begin();
+	iterP = pesired_zenit.begin();
+	cout << media_deltadist_zenit.size();
+	cout << pesired_zenit.size();
+	while (iterM != media_deltadist_zenit.end() && iterP != pesired_zenit.end())
+	{
+		sum += iterP->second;
+		temp += ((iterM->second.second) / 100)*iterP->second;
+		++iterM;
+		++iterP;
+	}
+	accuratezza_zenit = temp / sum; //media ponderata accuratezza zenit tra 0 e 1
+	temp = 0.0;
+	sum = 0.0;
+	iterM = media_deltadist_azimut.begin();
+	iterP = pesired_azimut.begin();
+	while (iterM != media_deltadist_azimut.end() && iterP != pesired_azimut.end())
+	{
+		sum += iterP->second;
+		temp += ((iterM->second.second) / 100)*iterP->second;
+		++iterM;
+		++iterP;
+	}
+    accuratezza_azimut = temp / sum; //media ponderata accuratezza zenit tra 0 e 1
+	accuratezza = (0.5*accuratezza_zenit) + (0.5*accuratezza_azimut);
 }
-void ValutazioneRJ::calcola_accuratezza_zenit(){
-    map<int, pair<double, float>>::const_iterator iterM;
-    map<int,float>::const_iterator iterP;
-    int angolo=0;
-    float sommapesi=0.0;
-    float somma=0.0;
-    for(iterP=pesired_zenit.begin();iterP!=pesired_zenit.end();++iterP){
-        sommapesi+=iterP->second;
-    }
-    for(iterM=media_deltadist_zenit.begin();iterM!=media_deltadist_zenit.end();++iterM){
-        angolo=iterM->first;
-        iterP=pesired_zenit.find(angolo);
-        if(iterP!=pesired_zenit.end()){
-            somma=somma+(((iterM->second.second)/100.0)*iterP->second);
-        }
-    }
-    accuratezza_zenit=((somma/sommapesi)*100);
-}
+
 
 float ValutazioneRJ::get_accuratezza_azimut()const{
-    return get_accuratezza_azimut();
+    return accuratezza_azimut;
 }
+
 float ValutazioneRJ::get_accuratezza_zenit()const{
-    return get_accuratezza_zenit();
+    return accuratezza_zenit;
+}
+
+void ValutazioneRJ::test() {
+	map<int, float>::iterator iter;
+	cout << "ZENIT" << endl;
+	for (iter = pesired_zenit.begin(); iter != pesired_zenit.end(); ++iter) {
+		cout << "Peso joint " << iter->first << " = " << iter->second << endl;
+	}
+	cout << "Accuratezza zenit " << accuratezza_zenit << endl;
+	cout << "AZIMUT" << endl;
+	for (iter = pesired_azimut.begin(); iter != pesired_azimut.end(); ++iter) {
+		cout << "Peso joint " << iter->first << " = " << iter->second << endl;
+	}
+	cout << "Accuratezza azimut " << accuratezza_azimut << endl;
 }

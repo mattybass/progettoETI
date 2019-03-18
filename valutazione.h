@@ -10,8 +10,7 @@
 
 /*
 TODO 
-- eliminare dipendenza temporale sul calcolo medie con valutazione massimi minimi modello!
-
+- risolvere problema calcolo zenit nei joint con peso zero
 */
 
 using namespace std;
@@ -48,6 +47,7 @@ public:
 
 	//METODI DI TEST
 	void stampavalutazione();
+	void test();
 };
 #endif
 

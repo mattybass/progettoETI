@@ -18,6 +18,7 @@ private:
     float media_deltadist_zenit_percento; //Percentuale media sulle differenze distanze
     double media_deltatime_zenit; //Media differenze tempo
     float media_deltatime_zenit_percento; //Percentuale media sulle differenze tempo
+	float accuratezza_zenit;
    
     //AZIMUT
     vector<pair<double,float>> deltadist_azimut;
@@ -28,11 +29,11 @@ private:
     float media_deltadist_azimut_percento;
     double media_deltatime_azimut;
     float media_deltatime_azimut_percento;
+	float accuratezza_azimut;
 
     //GENERALI
-    float accuratezza_azimut; //50 e 50 tra diff e velocita
-    float accuratezza_zenit; //50 e 50 tra diff e velocita
-    float accuratezza; // 50 e 50 tra le due precedenti
+     float accuratezza; 
+
 public:
     ValutazioneSJ();
     //Metodi valutazione spaziale
@@ -67,7 +68,7 @@ public:
     float get_accuratezza_zenit()const;
     float get_accuratezza()const;
 	//Metodi di valutazione
-	void elaboradati(); //funzione che in base ai vettori presenti in questa classe fornisce delle considerazioni
+	
 	void stampa(); //DA RIFARE
 };
 #endif

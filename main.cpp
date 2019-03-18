@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
 	Persona p2(60,"B2movim.json");
 	p2.processa_esercizio();
 	Valutazione v(&p2, &p);
-	cout << v.valutaTotale();
+	v.test();
 	system("PAUSE");
 
     return 0;

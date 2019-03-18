@@ -163,6 +163,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 	int frame_iniz_modello, frame_fin_modello;
 	int n_frame, n_joint;
 	float percentuale = 0.0;
+	int n_frame_mod, n_frame_paz;
 	listaPaziente = (*paziente).get_valorimaxmin_zenit(_joint);
 	listaModello = (*modello).get_valorimaxmin_zenit(_joint);
 	frame_iniz_modello = (*(listaModello.begin())).get_numeroframe();
@@ -173,8 +174,13 @@ void Valutazione::valutaRelationJoint(int _joint) {
 	//ZENIT
 	itermodello = listaModello.begin();
 	for (iterpaziente = listaPaziente.begin(); iterpaziente != listaPaziente.end(); ++iterpaziente) {
-		int n_frame_paz = (*iterpaziente).get_numeroframe();  //frame del primo punto chiave
-		int n_frame_mod = (*itermodello).get_numeroframe();  
+		    n_frame_paz = (*iterpaziente).get_numeroframe();  //frame del primo punto chiave
+			if (itermodello != listaModello.end()) {
+				n_frame_mod = (*itermodello).get_numeroframe();
+				++itermodello;
+			}
+		else //se esco tengo il punto finale ! sarebbe da non entrarci proprio in questa funzione!
+			n_frame_mod = frame_fin_modello;
 		if (n_frame_paz > frame_iniz_modello&&n_frame_paz < frame_fin_modello) {
 			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
 				n_joint = *iter;
@@ -192,7 +198,6 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				}
 				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff,percentuale);
 			}
-			++itermodello;
 		}
 		else if (n_frame_paz < frame_iniz_modello) { //vuol dire che il frame di inizio del paziente è antecedente a quello del modello
 			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
@@ -241,8 +246,13 @@ void Valutazione::valutaRelationJoint(int _joint) {
 	itermodello = listaModello.begin();
 	//AZIMUT
 	for (iterpaziente = listaPaziente.begin(); iterpaziente != listaPaziente.end(); ++iterpaziente) {
-		int n_frame_paz = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
-		int n_frame_mod = (*itermodello).get_numeroframe();
+			n_frame_paz = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
+		if (itermodello != listaModello.end()){
+			n_frame_mod = (*itermodello).get_numeroframe();
+			++itermodello;
+		}
+		else //se esco tengo il punto finale ! sarebbe da non entrarci proprio in questa funzione!
+			n_frame_mod = frame_fin_modello;
 		//devo passare alla valutazione degli angoli restanti!
 		if (n_frame_paz > frame_iniz_modello&&n_frame_paz < frame_fin_modello) {
 			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
@@ -261,7 +271,6 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				}
 				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff, percentuale);
 			}
-			++itermodello;
 		}
 		else if (n_frame_paz < frame_iniz_modello) { //vuol dire che il frame di inizio del paziente è antecedente a quello del modello
 			for (iter = numeri_angoli.begin(); iter != numeri_angoli.end(); ++iter) {
@@ -301,6 +310,9 @@ void Valutazione::valutaRelationJoint(int _joint) {
 		}
 
 	}
+	popola_pesiRJ(_joint);
+	valutazioneRelazioneJoint[_joint].calcola_media_discostamento();
+	valutazioneRelazioneJoint[_joint].calcola_accuratezza();
 	//a questo punto ho finito le liste di max e min per il mio joint, quindi lo riaggiungo al set cosi che possa essere riutilizzata
 	numeri_angoli.insert(_joint);
 
@@ -329,44 +341,23 @@ map<int, pair<float,float>> Valutazione:: get_pesi()const{
 
 void Valutazione::popola_pesiRJ(int _angolo){
     map<int, pair<float,float>>::const_iterator iterM;
-    float sommaazimut=0.0;
-    float sommazenit=0.0;
-    float sommacalcoloZ=0.0;
-    float sommacalcoloA=0.0;
-    float pesoprecZ=0.0;
-    float pesoprecA=0.0;
+	float somma = 0.0;
     float pesoredistribuitoA=0.0;
     float pesoredistribuitoZ=0.0;
-    //Calcolo sommaazimut;
-    for(iterM=pesi.begin();iterM!=pesi.end();++iterM){
-        sommaazimut=sommaazimut+iterM->second.second;
-    }
-    //Calcolo sommazenit;
-    for(iterM=pesi.begin();iterM!=pesi.end();++iterM){
-        sommazenit=sommazenit+iterM->second.first;
-    }
+
+	pair<float, float> temp = pesi.find(_angolo)->second;
+	pesi.erase(_angolo); //elimino da pesi l'angolo che sto considerando
     
-    iterM=pesi.find(_angolo);
-    if(iterM!=pesi.end()){
-        pesoprecZ=iterM->second.first;
-        pesoprecA=iterM->second.second;
-        sommacalcoloZ=sommazenit-pesoprecZ;
-        sommacalcoloA=sommaazimut-pesoprecA;
+	for(iterM=pesi.begin();iterM!=pesi.end();++iterM){
+		somma += iterM->second.second + iterM->second.first;
     }
-    
-    for(iterM=pesi.begin();iterM!=pesi.end();++iterM){
-        pesoprecZ=iterM->second.first;
-        pesoprecA=iterM->second.second;
-        pesoredistribuitoA=pesoprecA/sommacalcoloA;
-        pesoredistribuitoZ=pesoprecZ/sommacalcoloZ;
-        map<int, ValutazioneRJ>::iterator iterM1;
-        iterM1=valutazioneRelazioneJoint.find(_angolo);
-        if(iterM1!=valutazioneRelazioneJoint.end()){
-            iterM1->second.insert_pesiredazimut(iterM->first, pesoredistribuitoA);
-            iterM1->second.insert_pesiredazimut(iterM->first, pesoredistribuitoZ);
-        }
-    }
-    
+	for (iterM = pesi.begin(); iterM != pesi.end(); ++iterM) {
+		pesoredistribuitoZ = (iterM->second.first) / somma;
+		pesoredistribuitoA = (iterM->second.second)/ somma;
+		valutazioneRelazioneJoint[_angolo].insert_pesiredzenit(iterM->first, pesoredistribuitoZ);
+		valutazioneRelazioneJoint[_angolo].insert_pesiredazimut(iterM->first, pesoredistribuitoA);
+	}
+	pesi[_angolo] = temp; //riaggiungo l'angolo per eventuali altri calcoli!
 }
 
 float Valutazione::valutaTotale(){
@@ -378,6 +369,7 @@ float Valutazione::valutaTotale(){
 	float sum_RJ = 0.0;
 	float peso_zenit;
 	float peso_azimut;
+	float ritorno;
 	for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
 		peso_zenit = iter->second.first;
 		peso_azimut = iter->second.second;
@@ -386,7 +378,26 @@ float Valutazione::valutaTotale(){
 		iter_SJ = valutazioneSingleJoint.find(iter->first);
 		iter_RJ = valutazioneRelazioneJoint.find(iter->first);
 		sum_SJ += ((iter_SJ->second).get_accuratezza_zenit()*peso_zenit) + ((iter_SJ->second).get_accuratezza_azimut()*peso_azimut);
-		//sum_RJ += ((iter_RJ->second).ge)
-		return 0.5*(sum_SJ / 9);//+0.5(sum_RJ/9)
+		sum_RJ += ((iter_RJ->second).get_accuratezza_zenit()*peso_zenit) + ((iter_RJ->second).get_accuratezza_azimut()*peso_azimut);
+	}
+	ritorno = (0.5*(sum_SJ / 9) + 0.5*(sum_RJ / 9));
+	return ritorno;
+}
+
+void Valutazione::test() {
+	valutaRelationJoint(1);
+	valutaRelationJoint(2);
+	valutaRelationJoint(3);
+	valutaRelationJoint(5);
+	valutaRelationJoint(6);
+	valutaRelationJoint(8);
+	valutaRelationJoint(9);
+	valutaRelationJoint(11);
+	valutaRelationJoint(12);
+
+	map<int, ValutazioneRJ>::iterator iter;
+	for (iter = valutazioneRelazioneJoint.begin(); iter != valutazioneRelazioneJoint.end(); ++iter) {
+		cout << "Pesi ridistribuiti joint " << iter->first << endl;
+		iter->second.test();
 	}
 }

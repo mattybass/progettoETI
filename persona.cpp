@@ -511,9 +511,9 @@ void Persona::processa_angolo(int _angolo) {
 	mediamobile_angolo(_angolo, 30);
 	maxminFind_angolo(_angolo, 50);
 	maxminClean_angolo(_angolo,5,15);
-	stampaFile_angolo(_angolo, "joint"+a);
-	stampaFile_maxmin(_angolo, "maxmin"+a);
-    stampaConsole_maxmin(_angolo);
+	//stampaFile_angolo(_angolo, "joint"+a);
+	//stampaFile_maxmin(_angolo, "maxmin"+a);
+    //stampaConsole_maxmin(_angolo);
 }
 
 void Persona::pulisci_errori_sequenzaangolo(int _angolo){
