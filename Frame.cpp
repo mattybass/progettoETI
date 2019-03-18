@@ -102,6 +102,5 @@ void Frame::set_angolo_azimut(int n, double nu){
 Angolo Frame::restituisci_angolo(int _angolo)const {
 	map<int, Angolo>::const_iterator iter;
 	iter = angolijoint.find(_angolo);
-    if(iter!=angolijoint.end())
 	return iter->second;
 }
