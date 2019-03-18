@@ -368,3 +368,7 @@ void Valutazione::popola_pesiRJ(int _angolo){
     }
     
 }
+
+float Valutazione::valutaTotale()
+	
+}
