@@ -574,6 +574,7 @@ list<Angolo> Persona::get_valorimaxmin_zenit(int _angolo)const {
 list<Angolo> Persona::get_valorimaxmin_azimut(int _angolo)const {
 	map<int, list<Angolo>>::const_iterator iter;
 	iter = valori_maxmin_azimut.find(_angolo);
+	if (iter != valori_maxmin_azimut.end())
 	return iter->second;
 }
 
@@ -599,3 +600,14 @@ Angolo Persona::return_angolo(int _angolo, int _nframe)const {
 	return (iter->second).restituisci_angolo(_angolo);
 }
 
+void Persona::processa_esercizio(){
+	processa_angolo(1);
+	processa_angolo(2);
+	processa_angolo(3);
+	processa_angolo(5);
+	processa_angolo(6);
+	processa_angolo(8);
+	processa_angolo(9);
+	processa_angolo(11);
+	processa_angolo(12);
+}

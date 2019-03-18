@@ -69,6 +69,7 @@ public:
 	void stampaFile_maxmin(int n, string name, string percorso_file="matlab");
 
 	void processa_angolo(int _angolo);
+	void processa_esercizio();
     
 };
 
