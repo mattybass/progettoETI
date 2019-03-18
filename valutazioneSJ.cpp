@@ -209,3 +209,40 @@ void ValutazioneSJ::media_deltatime(){
     }
     
 }
+
+vector<pair<double,float>> ValutazioneSJ::get_deltadist_zenit()const{
+    return deltadist_zenit;
+}
+vector<pair<double,float>> ValutazioneSJ::get_deltatime_zenit()const{
+    return deltatime_zenit;
+}
+double ValutazioneSJ::get_media_deltadist_zenit()const{
+    return media_deltadist_zenit;
+}
+float ValutazioneSJ::get_media_deltadist_zenit_percento()const{
+    return media_deltadist_zenit_percento;
+}
+double ValutazioneSJ::get_media_deltatime_zenit()const{
+    return media_deltatime_zenit;
+}
+float ValutazioneSJ::get_media_deltatime_zenit_percento()const{
+    return media_deltatime_zenit_percento;
+}
+vector<pair<double,float>> ValutazioneSJ::get_deltadist_azimut()const{
+    return deltadist_azimut;
+}
+vector<pair<double,float>> ValutazioneSJ::get_deltatime_azimut()const{
+    return deltatime_azimut;
+}
+double ValutazioneSJ::get_media_deltadist_azimut()const{
+    return media_deltadist_azimut;
+}
+float ValutazioneSJ::get_media_deltadist_azimut_percento()const{
+    return media_deltadist_azimut_percento;
+}
+double ValutazioneSJ::get_media_deltatime_azimut()const{
+    return media_deltatime_azimut;
+}
+float ValutazioneSJ::get_media_deltatime_azimut_percento()const{
+    return media_deltatime_azimut_percento;
+}
