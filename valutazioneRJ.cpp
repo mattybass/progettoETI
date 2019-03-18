@@ -71,7 +71,7 @@ void ValutazioneRJ::stampa() {
 			}
 		}
 		cout << "Media scostamento zenit --> " << media_deltadist_zenit[iter->first].first << endl;
-		cout << "Media scostamento zenit percentuale --> " << media_deltadist_zenit[iter->first].second << endl;
+		cout << "Media accuratezza esercizio zenit --> " << media_deltadist_zenit[iter->first].second << endl;
 		i = 1;
 		cout << endl << endl;
 	}
@@ -90,7 +90,7 @@ void ValutazioneRJ::stampa() {
 			}
 		}
 		cout << "Media scostamento azimut --> " << media_deltadist_azimut[iter->first].first << endl;
-		cout << "Media scostamento azimut percentuale --> " << media_deltadist_zenit[iter->first].second << endl;
+		cout << "Media accuratezza esercizio azimut --> " << media_deltadist_zenit[iter->first].second << endl;
 		i = 1;
 		cout << endl << endl;
 	}
