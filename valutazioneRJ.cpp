@@ -86,3 +86,6 @@ void ValutazioneRJ::stampa() {
 	
 }
 
+void ValutazioneRJ::calcola_mediapesata(){
+    
+}
