@@ -100,18 +100,28 @@ void ValutazioneRJ::calcola_mediapesata(){
 }
 
 void ValutazioneRJ::insert_deltadist_zenit(int _joint, double _diff, float _perc) {
-	(deltadistZenitRJ[_joint]).push_back(pair<double,float> (_diff,_perc));
-void ValutazioneRJ::insert_deltadist_azimut(int _joint, double _diff, float _perc) {
+	(deltadistZenitRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
+}
+
+void ValutazioneRJ::insert_deltadist_azimut(int _joint, double _diff, float _perc){
 	(deltadistAzimutRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
+}
+
 void ValutazioneRJ::stampa() {
 	map<int, vector<pair<double, float>>>::iterator iter;
 	vector<pair<double, float>>::iterator viter;
-	map<int, pair<double,float>>::iterator miter;
+	map<int, pair<double, float>>::iterator miter;
+}
 void ValutazioneRJ::insert_deltadist_zenit(int _joint, double _diff, float _perc) {
-	(deltadistZenitRJ[_joint]).push_back(pair<double,float> (_diff,_perc));
+	(deltadistZenitRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
+}
+
 void ValutazioneRJ::insert_deltadist_azimut(int _joint, double _diff, float _perc) {
 	(deltadistAzimutRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
+}
+
 void ValutazioneRJ::stampa() {
 	map<int, vector<pair<double, float>>>::iterator iter;
 	vector<pair<double, float>>::iterator viter;
-	map<int, pair<double,float>>::iterator miter;
+	map<int, pair<double, float>>::iterator miter;
+}
