@@ -12,22 +12,19 @@ class ValutazioneRJ {
 
 private:
 	//ZENIT
-	map<int, vector<double>> deltadistZenitRJ; //chiave tutti i joint meno quello indagato e vettori di scostamento tra max e min
-	map<int,double> media_deltadist_zenit; //chiave numero joint, secondo elemento media discostamenti modello/paziente
-	map<int, float> pesired_zenit; //Map che sarà popolata con la i pesi redistibuiti per ogni angolo.
-    float mediapesata;
+	map<int, vector<pair<double,float>>> deltadistZenitRJ; //chiave tutti i joint meno quello indagato e vettori di scostamento tra max e min
+	map<int, pair<double, float>> media_deltadist_zenit; //chiave numero joint, secondo elemento media discostamenti modello/paziente
+	map<int, float> pesired_zenit; //Map che sarà popolata con la i pesi redistibuiti per ogni angolo. 
     //AZIMUT
-	map<int, vector<double>> deltadistAzimutRJ;  
-	map<int,double> media_deltadist_azimut;
-    map<int,float> pesired_azimut;
-
+	map<int, vector<pair<double, float>>> deltadistAzimutRJ;
+	map<int, pair<double, float>> media_deltadist_azimut;
+    map<int,float> pesired_azimut; 
 public:
     //INSERT
     void insert_pesiredzenit(int _n, float _p);
     void insert_pesiredazimut(int _n, float _p);
-    void insert_deltadist_zenit(int _joint, double _diff);
-	void insert_deltadist_azimut(int _joint, double _diff);
-    void calcola_mediapesata();
+	void insert_deltadist_zenit(int _joint, double _diff, float _perc);
+	void insert_deltadist_azimut(int _joint, double _diff, float _perc);
 	//PROCESS
 	void calcola_media_discostamento();
 	//TEST
