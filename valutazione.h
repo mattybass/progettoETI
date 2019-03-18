@@ -27,6 +27,7 @@ private:
     vector<int> angoliDiscriminanti_azimut;
     //VALUTAZIONI VARIE
     float completezzaesercizio;
+	float accuratezzaEsercizio;
 	set<int> numeri_angoli;
 	map<int, ValutazioneSJ> valutazioneSingleJoint;
 	map<int, ValutazioneRJ> valutazioneRelazioneJoint;
@@ -43,6 +44,7 @@ public:
 	void valutaSingleJoint(int _joint);
     void popola_pesiRJ(int _angolo);
 	void valutaRelationJoint(int _joint); //deve essere passato il joint di cui si vule fare la valutazione!
+	float valutaTotale();
 
 	//METODI DI TEST
 	void stampavalutazione();
