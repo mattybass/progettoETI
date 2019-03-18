@@ -29,6 +29,7 @@ public:
     void calcola_mediapesata();
 	//PROCESS
 	void calcola_media_discostamento();
+	void calcola_mediapesata();
 	//TEST
 	void stampa();
 };

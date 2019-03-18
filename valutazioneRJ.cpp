@@ -27,24 +27,26 @@ void ValutazioneRJ::calcola_media_discostamento() {
 	for (miter = deltadistZenitRJ.begin(); miter != deltadistZenitRJ.end(); ++miter) {
 		for (viter = miter->second.begin(); viter !=  miter->second.end(); ++viter) {
 			sum += (*viter).first;
-			sumperc = (*viter).second;
+			sumperc+= (*viter).second;
 			++i;
 		}
 		media_deltadist_zenit[miter->first].first = sum / i;
 		media_deltadist_zenit[miter->first].second = sumperc / i;
 		sum = 0.0;
+		sumperc = 0.0;
 		i = 0;
 	}
 	//AZIMUT
 	for (miter = deltadistAzimutRJ.begin(); miter != deltadistAzimutRJ.end(); ++miter) {
 		for (viter = miter->second.begin(); viter != miter->second.end(); ++viter) {
 			sum += (*viter).first;
-			sumperc = (*viter).second;
+			sumperc+= (*viter).second;
 			++i;
 		}
 		media_deltadist_azimut[miter->first].first = sum / i;
 		media_deltadist_azimut[miter->first].second = sumperc / i;
 		sum = 0.0;
+		sumperc = 0.0;
 		i = 0;
 	}
 }

@@ -180,7 +180,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
-				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				percentuale = (((float)(ang_paziente.get_zenit() / (float)(ang_modello.get_zenit())))*100.0);
 				if (percentuale > 100.0) {
 					if (percentuale > 200.0) {
 						percentuale = 0;
@@ -198,7 +198,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_iniz_modello); //confronto con il punto iniziale del modello
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
-				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				percentuale = (((float)(ang_paziente.get_zenit() / (float)(ang_modello.get_zenit())))*100.0);
 				if (percentuale > 100.0) {
 					if (percentuale > 200.0) {
 						percentuale = 0;
@@ -216,7 +216,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_fin_modello); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
-				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				percentuale = (((float)(ang_paziente.get_zenit() / (float)(ang_modello.get_zenit())))*100.0);
 				if (percentuale > 100.0) {
 					if (percentuale > 200.0) {
 						percentuale = 0;
@@ -246,7 +246,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
-				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				percentuale = (((float)(ang_paziente.get_azimut() / (float)(ang_modello.get_azimut())))*100.0);
 				if (percentuale > 100.0) {
 					if (percentuale > 200.0) {
 						percentuale = 0;
@@ -264,7 +264,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_iniz_modello); //confronto con il punto iniziale del modello
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
-				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				percentuale = (((float)(ang_paziente.get_azimut() / (float)(ang_modello.get_azimut())))*100.0);
 				if (percentuale > 100.0) {
 					if (percentuale > 200.0) {
 						percentuale = 0;
@@ -282,7 +282,7 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_fin_modello); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
-				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				percentuale = (((float)(ang_paziente.get_azimut() / (float)(ang_modello.get_azimut())))*100.0);
 				if (percentuale > 100.0) {
 					if (percentuale > 200.0) {
 						percentuale = 0;
