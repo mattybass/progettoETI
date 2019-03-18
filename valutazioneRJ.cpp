@@ -122,13 +122,23 @@ void ValutazioneRJ::calcola_mediapesata(){
 }
 
 map<int, vector<pair<double,float>>> ValutazioneRJ::get_deltadistZenitRJ()const{
-    return get_deltadistZenitRJ;
+    return deltadistZenitRJ;
 }
-map<int, pair<double, float>> get_media_deltadist_zenit()const{
+map<int, pair<double, float>> ValutazioneRJ::get_media_deltadist_zenit()const{
     return media_deltadist_zenit;
 }
-map<int, float> get_pesired_zenit()const;
-map<int, vector<pair<double, float>>> get_deltadistAzimutRJ()const;
-map<int, pair<double, float>> get_media_deltadist_azimut()const;
-map<int,float> get_pesired_azimut()const;
-float get_mediapesata()const;
+map<int, float> ValutazioneRJ::get_pesired_zenit()const{
+    return pesired_zenit;
+}
+map<int, vector<pair<double, float>>> ValutazioneRJ::get_deltadistAzimutRJ()const{
+    return deltadistAzimutRJ;
+}
+map<int, pair<double, float>> ValutazioneRJ::get_media_deltadist_azimut()const{
+    return media_deltadist_azimut;
+}
+map<int,float> ValutazioneRJ::get_pesired_azimut()const{
+    return pesired_azimut;
+}
+float ValutazioneRJ::get_mediapesata()const{
+    return mediapesata;
+}
