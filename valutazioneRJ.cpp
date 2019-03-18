@@ -108,7 +108,7 @@ void ValutazioneRJ::calcola_mediapesata(){
         iterP=pesired_zenit.find(angolo);
         if(iterP!=pesired_zenit.end()){
             peso=iterP->second;
-            mediapesata+=peso*iterM->second.second;
+            mediapesata+=peso*(iterM->second.second/100.0);
         }
     }
     for(iterM=media_deltadist_azimut.begin();iterM!=media_deltadist_azimut.end();++iterM){
@@ -116,7 +116,7 @@ void ValutazioneRJ::calcola_mediapesata(){
         iterP=pesired_azimut.find(angolo);
         if(iterP!=pesired_azimut.end()){
             peso=iterP->second;
-            mediapesata+=peso*iterM->second.second;
+            mediapesata+=peso*(iterM->second.second/100.0);
         }
     }
 }
@@ -141,4 +141,48 @@ map<int,float> ValutazioneRJ::get_pesired_azimut()const{
 }
 float ValutazioneRJ::get_mediapesata()const{
     return mediapesata;
+}
+
+void ValutazioneRJ::calcola_accuratezza_azimut(){
+    map<int, pair<double, float>>::const_iterator iterM;
+    map<int,float>::const_iterator iterP;
+    int angolo=0;
+    float sommapesi=0.0;
+    float somma=0.0;
+    for(iterP=pesired_azimut.begin();iterP!=pesired_azimut.end();++iterP){
+        sommapesi+=iterP->second;
+    }
+    for(iterM=media_deltadist_azimut.begin();iterM!=media_deltadist_azimut.end();++iterM){
+        angolo=iterM->first;
+        iterP=pesired_azimut.find(angolo);
+        if(iterP!=pesired_azimut.end()){
+            somma=somma+(((iterM->second.second)/100.0)*iterP->second);
+        }
+    }
+    accuratezza_azimut=somma/sommapesi;
+}
+void ValutazioneRJ::calcola_accuratezza_zenit(){
+    map<int, pair<double, float>>::const_iterator iterM;
+    map<int,float>::const_iterator iterP;
+    int angolo=0;
+    float sommapesi=0.0;
+    float somma=0.0;
+    for(iterP=pesired_zenit.begin();iterP!=pesired_zenit.end();++iterP){
+        sommapesi+=iterP->second;
+    }
+    for(iterM=media_deltadist_zenit.begin();iterM!=media_deltadist_zenit.end();++iterM){
+        angolo=iterM->first;
+        iterP=pesired_zenit.find(angolo);
+        if(iterP!=pesired_zenit.end()){
+            somma=somma+(((iterM->second.second)/100.0)*iterP->second);
+        }
+    }
+    accuratezza_zenit=((somma/sommapesi)*100);
+}
+
+float ValutazioneRJ::get_accuratezza_azimut()const{
+    return get_accuratezza_azimut();
+}
+float ValutazioneRJ::get_accuratezza_zenit()const{
+    return get_accuratezza_zenit();
 }

@@ -19,6 +19,8 @@ private:
 	map<int, vector<pair<double, float>>> deltadistAzimutRJ;
 	map<int, pair<double, float>> media_deltadist_azimut;
     map<int,float> pesired_azimut;
+    float accuratezza_azimut;
+    float accuratezza_zenit;
     float mediapesata;
 public:
     //INSERT
@@ -27,6 +29,8 @@ public:
 	void insert_deltadist_zenit(int _joint, double _diff, float _perc);
 	void insert_deltadist_azimut(int _joint, double _diff, float _perc);
     void calcola_mediapesata();
+    void calcola_accuratezza_azimut();
+    void calcola_accuratezza_zenit();
 	//PROCESS
 	void calcola_media_discostamento();
     //GET
@@ -42,6 +46,8 @@ public:
     
     map<int,float> get_pesired_azimut()const;
     float get_mediapesata()const;
+    float get_accuratezza_azimut()const;
+    float get_accuratezza_zenit()const;
 	//TEST
 	void stampa();
 };
