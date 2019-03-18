@@ -120,3 +120,15 @@ void ValutazioneRJ::calcola_mediapesata(){
         }
     }
 }
+
+map<int, vector<pair<double,float>>> ValutazioneRJ::get_deltadistZenitRJ()const{
+    return get_deltadistZenitRJ;
+}
+map<int, pair<double, float>> get_media_deltadist_zenit()const{
+    return media_deltadist_zenit;
+}
+map<int, float> get_pesired_zenit()const;
+map<int, vector<pair<double, float>>> get_deltadistAzimutRJ()const;
+map<int, pair<double, float>> get_media_deltadist_azimut()const;
+map<int,float> get_pesired_azimut()const;
+float get_mediapesata()const;

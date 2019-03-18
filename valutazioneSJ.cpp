@@ -246,3 +246,10 @@ double ValutazioneSJ::get_media_deltatime_azimut()const{
 float ValutazioneSJ::get_media_deltatime_azimut_percento()const{
     return media_deltatime_azimut_percento;
 }
+
+void ValutazioneSJ::calcola_accuratezza(){
+    accuratezza_azimut=(media_deltadist_azimut_percento+media_deltatime_azimut_percento)/2;
+    accuratezza_zenit=(media_deltadist_zenit_percento+media_deltatime_zenit_percento)/2;
+    
+        accuratezza=(accuratezza_zenit+accuratezza_azimut)/2;
+}

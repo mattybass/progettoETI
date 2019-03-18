@@ -29,7 +29,14 @@ public:
     void calcola_mediapesata();
 	//PROCESS
 	void calcola_media_discostamento();
-	void calcola_mediapesata();
+    //GET
+    map<int, vector<pair<double,float>>> get_deltadistZenitRJ()const;
+    map<int, pair<double, float>> get_media_deltadist_zenit()const;
+    map<int, float> get_pesired_zenit()const;
+    map<int, vector<pair<double, float>>> get_deltadistAzimutRJ()const;
+    map<int, pair<double, float>> get_media_deltadist_azimut()const;
+    map<int,float> get_pesired_azimut()const;
+    float get_mediapesata()const;
 	//TEST
 	void stampa();
 };

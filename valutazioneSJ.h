@@ -18,6 +18,7 @@ private:
     float media_deltadist_zenit_percento; //Percentuale media sulle differenze distanze
     double media_deltatime_zenit; //Media differenze tempo
     float media_deltatime_zenit_percento; //Percentuale media sulle differenze tempo
+   
     //AZIMUT
     vector<pair<double,float>> deltadist_azimut;
     vector<double> duratamovimentimodello_azimut;
@@ -28,6 +29,10 @@ private:
     double media_deltatime_azimut;
     float media_deltatime_azimut_percento;
 
+    //GENERALI
+     float accuratezza_azimut;
+    float accuratezza_zenit;
+    float accuratezza;
 public:
     ValutazioneSJ();
     //Metodi valutazione spaziale
@@ -44,6 +49,7 @@ public:
 	void insert_duratamovimentipaziente_azimut(double _n);
     void insert_deltatime_zenit();
     void insert_deltatime_azimut();
+    void calcola_accuratezza();
    //Metodi GET
     vector<pair<double,float>> get_deltadist_zenit()const;
     vector<pair<double,float>> get_deltatime_zenit()const;
