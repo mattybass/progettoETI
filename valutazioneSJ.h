@@ -44,7 +44,20 @@ public:
 	void insert_duratamovimentipaziente_azimut(double _n);
     void insert_deltatime_zenit();
     void insert_deltatime_azimut();
-   
+   //Metodi GET
+    vector<pair<double,float>> get_deltadist_zenit()const;
+    vector<pair<double,float>> get_deltatime_zenit()const;
+    double get_media_deltadist_zenit()const;
+    float get_media_deltadist_zenit_percento()const;
+    double get_media_deltatime_zenit()const;
+    float get_media_deltatime_zenit_percento()const;
+    vector<pair<double,float>> get_deltadist_azimut()const;
+    vector<pair<double,float>> get_deltatime_azimut()const;
+    double get_media_deltadist_azimut()const;
+    float get_media_deltadist_azimut_percento()const;
+    double get_media_deltatime_azimut()const;
+    float get_media_deltatime_azimut_percento()const;
+    
 	//Metodi di valutazione
 	void elaboradati(); //funzione che in base ai vettori presenti in questa classe fornisce delle considerazioni
 	void stampa(); //DA RIFARE

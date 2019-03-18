@@ -596,7 +596,6 @@ int Persona::get_numeroFramePerSecondo()const {
 Angolo Persona::return_angolo(int _angolo, int _nframe)const {
 	map<int, Frame>::const_iterator iter;
 	iter = sequenzaFrame.find(_nframe); //ho il frame che mi interessa!
-	if(iter!=sequenzaFrame.end())
 	return (iter->second).restituisci_angolo(_angolo);
 }
 
