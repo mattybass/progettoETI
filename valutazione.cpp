@@ -81,7 +81,7 @@ void Valutazione::valutaSingleJoint(int _joint){
             if(percentuale>200.0){
                 percentuale=0;
             }else{
-                percentuale=percentuale-100.0;
+				percentuale = 200 - percentuale;
             }
         }
 		valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff,percentuale);
@@ -122,7 +122,7 @@ void Valutazione::valutaSingleJoint(int _joint){
                 if(percentuale>200.0){
                     percentuale=0;
                 }else{
-                    percentuale=percentuale-100.0;
+                    percentuale=200-percentuale;
                 }
             }
             valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff,percentuale);      //una negativa significa superarla di diff gradi
@@ -151,26 +151,27 @@ void Valutazione::valutaSingleJoint(int _joint){
 
 void Valutazione::valutaRelationJoint(int _joint) {
 	//NB! questa funzione deve essere eseguita se il numero di max min del paziente è <= del numero max min del modello!
-	list<Angolo> listaPazientezenit;
-	list<Angolo> listaPazienteazimut;
-	list<Angolo> listaModellozenit;
+	list<Angolo> listaPaziente;
+	list<Angolo> listaModello;
 	list<Angolo>::iterator itermodello;
 	list<Angolo>::iterator itermodello2;
+	list<Angolo>::iterator iterpazienteinizio;
+	list<Angolo>::iterator iterpazientefine;
 	list<Angolo>::iterator iterpaziente;
 	set<int>::iterator iter; //lo uso per scorrere il set contenente i numeri di angoli da elaborare
 	double diff;
 	int frame_iniz_modello, frame_fin_modello;
 	int n_frame, n_joint;
-	listaPazientezenit = (*paziente).get_valorimaxmin_zenit(_joint);
-	listaPazienteazimut = (*paziente).get_valorimaxmin_azimut(_joint);
-	listaModellozenit = (*modello).get_valorimaxmin_zenit(_joint);
-	frame_iniz_modello = (*(listaModellozenit.begin())).get_numeroframe();
-	itermodello2 = listaModellozenit.end();
+	float percentuale = 0.0;
+	listaPaziente = (*paziente).get_valorimaxmin_zenit(_joint);
+	listaModello = (*modello).get_valorimaxmin_zenit(_joint);
+	frame_iniz_modello = (*(listaModello.begin())).get_numeroframe();
+	itermodello2 = listaModello.end();
 	--itermodello2;
 	frame_fin_modello = (*itermodello2).get_numeroframe();
 	numeri_angoli.erase(_joint); //elimino il joint sul quale mi sono focalizzato
 	//ZENIT
-	for (iterpaziente = listaPazientezenit.begin(); iterpaziente != listaPazientezenit.end(); ++iterpaziente) {
+	for (iterpaziente = listaPaziente.begin(); iterpaziente != listaPaziente.end(); ++iterpaziente) {
 		int n_frame = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
 		
 		if (n_frame > frame_iniz_modello&&n_frame < frame_fin_modello) {
@@ -179,7 +180,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
-				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff);
+				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				if (percentuale > 100.0) {
+					if (percentuale > 200.0) {
+						percentuale = 0;
+					}
+					else {
+						percentuale = 200 - percentuale;
+					}
+				}
+				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff,percentuale);
 			}
 		}
 		else if (n_frame < frame_iniz_modello) { //vuol dire che il frame di inizio del paziente è antecedente a quello del modello
@@ -188,7 +198,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_iniz_modello); //confronto con il punto iniziale del modello
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
-				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff);
+				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				if (percentuale > 100.0) {
+					if (percentuale > 200.0) {
+						percentuale = 0;
+					}
+					else {
+						percentuale = 200 - percentuale;
+					}
+				}
+				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff,percentuale);
 			}
 		}
 		else if (n_frame > frame_fin_modello) {
@@ -197,13 +216,28 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_fin_modello); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_zenit() - ang_paziente.get_zenit());
-				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff);
+				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				if (percentuale > 100.0) {
+					if (percentuale > 200.0) {
+						percentuale = 0;
+					}
+					else {
+						percentuale = 200 - percentuale;
+					}
+				}
+				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(n_joint, diff,percentuale);
 			}
 		}
 
 	}
+	listaPaziente = (*paziente).get_valorimaxmin_azimut(_joint);
+	listaModello = (*modello).get_valorimaxmin_azimut(_joint);
+	frame_iniz_modello = (*(listaModello.begin())).get_numeroframe();
+	itermodello2 = listaModello.end();
+	--itermodello2;
+	frame_fin_modello = (*itermodello2).get_numeroframe();
 	//AZIMUT
-	for (iterpaziente = listaPazienteazimut.begin(); iterpaziente != listaPazienteazimut.end(); ++iterpaziente) {
+	for (iterpaziente = listaPaziente.begin(); iterpaziente != listaPaziente.end(); ++iterpaziente) {
 		int n_frame = (*iterpaziente).get_numeroframe(); //frame del primo punto chiave
 		//devo passare alla valutazione degli angoli restanti!
 		if (n_frame > frame_iniz_modello&&n_frame < frame_fin_modello) {
@@ -212,7 +246,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, n_frame); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
-				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff);
+				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				if (percentuale > 100.0) {
+					if (percentuale > 200.0) {
+						percentuale = 0;
+					}
+					else {
+						percentuale = 200 - percentuale;
+					}
+				}
+				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff, percentuale);
 			}
 		}
 		else if (n_frame < frame_iniz_modello) { //vuol dire che il frame di inizio del paziente è antecedente a quello del modello
@@ -221,7 +264,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_iniz_modello); //confronto con il punto iniziale del modello
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
-				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff);
+				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				if (percentuale > 100.0) {
+					if (percentuale > 200.0) {
+						percentuale = 0;
+					}
+					else {
+						percentuale = 200 - percentuale;
+					}
+				}
+				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff,percentuale);
 			}
 		}
 		else if (n_frame > frame_fin_modello) {
@@ -230,7 +282,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				Angolo ang_modello = (*modello).return_angolo(n_joint, frame_fin_modello); //angolo del modello corrispondente al punto chiave del paziente
 				Angolo ang_paziente = (*paziente).return_angolo(n_joint, n_frame); //angolo del paziente corrispondente al punto chiave del paziente
 				diff = abs(ang_modello.get_azimut() - ang_paziente.get_azimut());
-				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff);
+				percentuale = (((float)(ang_modello.get_zenit() / (float)(ang_paziente.get_zenit()))*100.0));
+				if (percentuale > 100.0) {
+					if (percentuale > 200.0) {
+						percentuale = 0;
+					}
+					else {
+						percentuale = 200 - percentuale;
+					}
+				}
+				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(n_joint, diff,percentuale);
 			}
 		}
 

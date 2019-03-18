@@ -8,6 +8,12 @@
 #include "valutazioneSJ.h"
 #include "valutazioneRJ.h"
 
+/*
+TODO 
+- eliminare dipendenza temporale sul calcolo medie con valutazione massimi minimi modello!
+
+*/
+
 using namespace std;
 
 class Valutazione {
