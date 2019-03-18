@@ -27,6 +27,7 @@ public:
 	void insert_deltadist_azimut(int _joint, double _diff, float _perc);
 	//PROCESS
 	void calcola_media_discostamento();
+	void calcola_mediapesata();
 	//TEST
 	void stampa();
 };
