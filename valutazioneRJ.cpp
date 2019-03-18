@@ -96,32 +96,25 @@ void ValutazioneRJ::stampa() {
 }
 
 void ValutazioneRJ::calcola_mediapesata(){
-    
-}
-
-void ValutazioneRJ::insert_deltadist_zenit(int _joint, double _diff, float _perc) {
-	(deltadistZenitRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
-}
-
-void ValutazioneRJ::insert_deltadist_azimut(int _joint, double _diff, float _perc){
-	(deltadistAzimutRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
-}
-
-void ValutazioneRJ::stampa() {
-	map<int, vector<pair<double, float>>>::iterator iter;
-	vector<pair<double, float>>::iterator viter;
-	map<int, pair<double, float>>::iterator miter;
-}
-void ValutazioneRJ::insert_deltadist_zenit(int _joint, double _diff, float _perc) {
-	(deltadistZenitRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
-}
-
-void ValutazioneRJ::insert_deltadist_azimut(int _joint, double _diff, float _perc) {
-	(deltadistAzimutRJ[_joint]).push_back(pair<double, float>(_diff, _perc));
-}
-
-void ValutazioneRJ::stampa() {
-	map<int, vector<pair<double, float>>>::iterator iter;
-	vector<pair<double, float>>::iterator viter;
-	map<int, pair<double, float>>::iterator miter;
+  mediapesata=0.0;
+    int angolo=0;
+    float peso=0.0;
+    map<int,pair<double,float>>::const_iterator iterM;
+    map<int, float>::const_iterator iterP;
+    for(iterM=media_deltadist_zenit.begin();iterM!=media_deltadist_zenit.end();++iterM){
+        angolo=iterM->first;
+        iterP=pesired_zenit.find(angolo);
+        if(iterP!=pesired_zenit.end()){
+            peso=iterP->second;
+            mediapesata+=peso*iterM->second.second;
+        }
+    }
+    for(iterM=media_deltadist_azimut.begin();iterM!=media_deltadist_azimut.end();++iterM){
+        angolo=iterM->first;
+        iterP=pesired_azimut.find(angolo);
+        if(iterP!=pesired_azimut.end()){
+            peso=iterP->second;
+            mediapesata+=peso*iterM->second.second;
+        }
+    }
 }

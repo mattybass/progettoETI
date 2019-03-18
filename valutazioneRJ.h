@@ -18,13 +18,15 @@ private:
     //AZIMUT
 	map<int, vector<pair<double, float>>> deltadistAzimutRJ;
 	map<int, pair<double, float>> media_deltadist_azimut;
-    map<int,float> pesired_azimut; 
+    map<int,float> pesired_azimut;
+    float mediapesata;
 public:
     //INSERT
     void insert_pesiredzenit(int _n, float _p);
     void insert_pesiredazimut(int _n, float _p);
 	void insert_deltadist_zenit(int _joint, double _diff, float _perc);
 	void insert_deltadist_azimut(int _joint, double _diff, float _perc);
+    void calcola_mediapesata();
 	//PROCESS
 	void calcola_media_discostamento();
 	//TEST
