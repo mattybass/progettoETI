@@ -399,8 +399,8 @@ void Persona::stampaFile_coordinate(int n, string name, string percorso_file) {
     }
 }
 
-void Persona::mediamobile_angolo(int _angolo, int _finestra) {  //ORA è FATTA IN MODO CHE FA UNA SPECIE DI MEDIA ANCHE SUI PUNTI INIZIALI E FINALI 
-	map<int, list < Angolo> >::iterator iter;					//LA FINESTRA SI ADATTA ALL'INIZIO E ALLA FINE
+void Persona::mediamobile_angolo(int _angolo, int _finestra) {  
+	map<int, list < Angolo> >::iterator iter;					
 	list<Angolo>::iterator liter;
 	list<Angolo>::iterator liter2;
 	list<Angolo>::iterator liter3;

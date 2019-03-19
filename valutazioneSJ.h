@@ -69,7 +69,7 @@ public:
     float get_accuratezza_zenit()const;
     float get_accuratezza()const;
 	//Metodi di valutazione
-	ofstream stampa_file_accurato(string percorso_file, string name);
+	void stampa_file_accurato(ofstream file);
 	void stampa(); //DA RIFARE
 };
 #endif

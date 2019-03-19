@@ -6,7 +6,6 @@
 #include "persona.h"
 #include "valutazione.h"
 
-
 int main(int argc, char** argv) {
 	
     Persona p(60,"modellomattyspalla.json");
@@ -15,7 +14,7 @@ int main(int argc, char** argv) {
 	p2.processa_esercizio();
 	Valutazione v(&p2, &p);
 	v.valutaTotale();
-	v.stampavalutazione("ProgettoETI","valutazioni");
+	v.stampavalutazione("matlab","valutazioni");
 	system("PAUSE");
 
     return 0;

@@ -319,22 +319,23 @@ void Valutazione::valutaRelationJoint(int _joint) {
 }
 
 void Valutazione::stampavalutazione(string percorso_file, string name) {
-	ofstream file;
-	map<int, pair<float, float>>::iterator iter;
 	string l = percorso_file + "/" + name + ".txt";
-	file.open(l.c_str(), ios::out);
-	for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
-		if ((iter->second.first + iter->second.second) > 0.3) //stampo la valutazione approfondita anche considerazioni su velocità
-		{
-			file << "Relazione approfondita sull'articolazione numero " << iter->first << endl;
-			valutazioneSingleJoint[iter->first].stampa_file_accurato(percorso_file, name);
-		}
-		else {//stampo la valutazione non approfondita solo accuratezze SJ e RJ
+	ofstream file;
+	file.open(l);
+	map<int, pair<float, float>>::iterator iter;
+
+		for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
+			/*if ((iter->second.first + iter->second.second) > 0.3) //stampo la valutazione approfondita anche considerazioni su velocità
+			{
+				file << "Relazione approfondita sull'articolazione numero " << iter->first << endl;
+				valutazioneSingleJoint[iter->first].stampa_file_accurato(percorso_file, name);
+			}
+			else {//stampo la valutazione non approfondita solo accuratezze SJ e RJ*/
 			file << "Relazione non approfondita sull'articolazione numero " << iter->first << endl;
+
 		}
-			
-	}
-	//file<<
+		file.close();
+	
 
 }
 

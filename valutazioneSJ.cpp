@@ -278,11 +278,9 @@ void ValutazioneSJ::stampa() {
 	}
 }
 
-ofstream ValutazioneSJ::stampa_file_accurato(string percorso_file, string name) {
+void ValutazioneSJ::stampa_file_accurato(ofstream file) {
 	vector<pair<double, float>>::iterator iter;
 	int i = 0;
-	ofstream file;
-	string l = percorso_file + "/" + name + ".txt";
 	file << "ZENIT" << endl;
 	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " che in percentuale risulta --> " << media_deltadist_zenit_percento << endl;
 	file << "Valutazione approfondita scostamenti" << endl;
@@ -330,6 +328,5 @@ ofstream ValutazioneSJ::stampa_file_accurato(string percorso_file, string name) 
 			file << "La posizione " << i << " è corretta!" << endl;
 		++i;
 	}
-	return file;
 }
 

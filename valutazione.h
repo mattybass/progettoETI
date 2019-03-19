@@ -4,14 +4,10 @@
 #include <vector>
 #include <string>
 #include <set>
+#include <fstream>
 #include "persona.h"
 #include "valutazioneSJ.h"
 #include "valutazioneRJ.h"
-
-/*
-TODO 
-- risolvere problema calcolo zenit nei joint con peso zero
-*/
 
 using namespace std;
 
