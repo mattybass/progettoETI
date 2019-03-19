@@ -8,7 +8,6 @@
 #include <list>
 #include <set>
 #include <cmath>
-#include <fstream>
 #include <sstream>
 
 #include "angolo.h"

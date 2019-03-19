@@ -278,3 +278,58 @@ void ValutazioneSJ::stampa() {
 	}
 }
 
+ofstream ValutazioneSJ::stampa_file_accurato(string percorso_file, string name) {
+	vector<pair<double, float>>::iterator iter;
+	int i = 0;
+	ofstream file;
+	string l = percorso_file + "/" + name + ".txt";
+	file << "ZENIT" << endl;
+	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " che in percentuale risulta --> " << media_deltadist_zenit_percento << endl;
+	file << "Valutazione approfondita scostamenti" << endl;
+	for (iter = deltadist_zenit.begin(); iter != deltadist_zenit.end(); ++iter) {
+		if (iter == deltadist_zenit.begin()) {//considerazione su punto iniziale
+			if ((*iter).second < 50)//Da controllare il 50!!
+				file << "La posizione iniziale non è stata raggiunta correttamente!" << endl;
+			else if((*iter).second<90)
+				file << "La posizione iniziale è sbagliata ma l'errore è contenuto!" << endl;
+			else
+				file << "La posizione iniziale è corretta!" << endl;
+			++i;
+		}
+		else if (iter == (deltadist_zenit.end())--) {//considerazione su punto finale
+			if ((*iter).second < 50)//Da controllare il 50!!
+				file << "La posizione finale non è stata raggiunta correttamente!" << endl;
+			else if ((*iter).second < 90)
+				file << "La posizione finale è sbagliata ma l'errore è contenuto!" << endl;
+			else
+				file << "La posizione finale è corretta!" << endl;
+			++i;
+		}
+		else {//punti interni
+			if ((*iter).second < 50)//Da controllare il 50!!
+				file << "La posizione "<<i<<" non è stata raggiunta correttamente!" << endl;
+			else if ((*iter).second < 90)
+				file << "La posizione " << i << " è sbagliata ma l'errore è contenuto!" << endl;
+			else
+				file << "La posizione " << i << " è corretta!" << endl;
+			++i;
+		}
+	}
+	if (media_deltatime_zenit < -1)
+		file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
+	else if(media_deltatime_zenit > 1)
+		file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
+
+	file << "Valutazione approfondita velocità" << endl;
+	for (iter = deltatime_zenit.begin(); iter != deltatime_zenit.end(); ++iter) {
+		if ((*iter).second < 50)//Da controllare il 50!!
+			file << "La posizione " << i << " non è stata raggiunta correttamente!" << endl;
+		else if ((*iter).second < 90)
+			file << "La posizione " << i << " è sbagliata ma l'errore è contenuto!" << endl;
+		else
+			file << "La posizione " << i << " è corretta!" << endl;
+		++i;
+	}
+	return file;
+}
+

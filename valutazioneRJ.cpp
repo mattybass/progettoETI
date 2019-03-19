@@ -57,9 +57,8 @@ void ValutazioneRJ::calcola_media_discostamento() {
 void ValutazioneRJ::stampa() {
 	map<int, vector<pair<double, float>>>::iterator iter;
 	vector<pair<double, float>>::iterator viter;
-	map<int, pair<double,float>>::iterator miter;
 	int i = 1;
-	//zenit
+	//ZENIT
 	cout <<endl<<endl<< "Lista scostamenti zenit!" <<endl;
 	for (iter = deltadistZenitRJ.begin(); iter != deltadistZenitRJ.end(); ++iter) {
 		cout << "Joint indagato = " << iter->first << endl;
@@ -78,7 +77,7 @@ void ValutazioneRJ::stampa() {
 		i = 1;
 		cout << endl << endl;
 	}
-	//azimut
+	//AZIMUT
 	cout << endl << "Lista scostamenti azimut!" << endl;
 	for (iter = deltadistAzimutRJ.begin(); iter != deltadistAzimutRJ.end(); ++iter) {
 		cout << "Joint indagato = " << iter->first << endl;
@@ -135,8 +134,6 @@ void ValutazioneRJ::calcola_accuratezza(){
 	float sum = 0.0;
 	iterM = media_deltadist_zenit.begin();
 	iterP = pesired_zenit.begin();
-	cout << media_deltadist_zenit.size();
-	cout << pesired_zenit.size();
 	while (iterM != media_deltadist_zenit.end() && iterP != pesired_zenit.end())
 	{
 		sum += iterP->second;
@@ -160,7 +157,6 @@ void ValutazioneRJ::calcola_accuratezza(){
 	accuratezza = (0.5*accuratezza_zenit) + (0.5*accuratezza_azimut);
 }
 
-
 float ValutazioneRJ::get_accuratezza_azimut()const{
     return accuratezza_azimut;
 }
@@ -171,14 +167,5 @@ float ValutazioneRJ::get_accuratezza_zenit()const{
 
 void ValutazioneRJ::test() {
 	map<int, float>::iterator iter;
-	cout << "ZENIT" << endl;
-	for (iter = pesired_zenit.begin(); iter != pesired_zenit.end(); ++iter) {
-		cout << "Peso joint " << iter->first << " = " << iter->second << endl;
-	}
-	cout << "Accuratezza zenit " << accuratezza_zenit << endl;
-	cout << "AZIMUT" << endl;
-	for (iter = pesired_azimut.begin(); iter != pesired_azimut.end(); ++iter) {
-		cout << "Peso joint " << iter->first << " = " << iter->second << endl;
-	}
-	cout << "Accuratezza azimut " << accuratezza_azimut << endl;
+	cout << "Accuratezza generale " << accuratezza << endl;
 }

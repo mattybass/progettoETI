@@ -318,20 +318,23 @@ void Valutazione::valutaRelationJoint(int _joint) {
 
 }
 
-void Valutazione::stampavalutazione() {
-	map<int, ValutazioneSJ>::iterator iterSJ;
-	map<int, ValutazioneRJ>::iterator iterRJ;
-	percentualeEsCompletato();
-	cout << "Esercizio completato al " << completezzaesercizio << "%!"<<endl;
-	for (iterSJ = valutazioneSingleJoint.begin(); iterSJ != valutazioneSingleJoint.end(); ++iterSJ) {
-		(iterSJ->second).stampa();
+void Valutazione::stampavalutazione(string percorso_file, string name) {
+	ofstream file;
+	map<int, pair<float, float>>::iterator iter;
+	string l = percorso_file + "/" + name + ".txt";
+	file.open(l.c_str(), ios::out);
+	for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
+		if ((iter->second.first + iter->second.second) > 0.3) //stampo la valutazione approfondita anche considerazioni su velocità
+		{
+			file << "Relazione approfondita sull'articolazione numero " << iter->first << endl;
+			valutazioneSingleJoint[iter->first].stampa_file_accurato(percorso_file, name);
+		}
+		else {//stampo la valutazione non approfondita solo accuratezze SJ e RJ
+			file << "Relazione non approfondita sull'articolazione numero " << iter->first << endl;
+		}
+			
 	}
-	cout << endl<<endl<<"Valutazione posizione altri joint rispetto al modello!"<<endl;
-	for (iterRJ = valutazioneRelazioneJoint.begin(); iterRJ != valutazioneRelazioneJoint.end(); ++iterRJ) {
-		cout << "Relazione del joint " << iterRJ->first << " con gli altri" << endl;
-		(iterRJ->second).calcola_media_discostamento();
-		(iterRJ->second).stampa();
-	}
+	//file<<
 
 }
 
@@ -363,41 +366,38 @@ void Valutazione::popola_pesiRJ(int _angolo){
 float Valutazione::valutaTotale(){
 	map<int, pair<float, float>>::iterator iter; //serve per scorrere la map di pesi
 	set<int>::iterator siter;
-	map<int, ValutazioneSJ>::iterator iter_SJ;
-	map<int, ValutazioneRJ>::iterator iter_RJ;
 	float sum_SJ = 0.0;
 	float sum_RJ = 0.0;
 	float peso_zenit;
 	float peso_azimut;
-	float ritorno;
+	percentualeEsCompletato();
+	valutaSingleJoint(1);
+	valutaRelationJoint(1);
+	valutaSingleJoint(2);
+	valutaRelationJoint(2);
+	valutaSingleJoint(3);
+	valutaRelationJoint(3);
+	valutaSingleJoint(5);
+	valutaRelationJoint(5);
+	valutaSingleJoint(6);
+	valutaRelationJoint(6);
+	valutaSingleJoint(8);
+	valutaRelationJoint(8);
+	valutaSingleJoint(9);
+	valutaRelationJoint(9);
+	valutaSingleJoint(11);
+	valutaRelationJoint(11);
+	valutaSingleJoint(12);
+	valutaRelationJoint(12);
+
 	for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
 		peso_zenit = iter->second.first;
 		peso_azimut = iter->second.second;
-		valutaSingleJoint(iter->first);
-		valutaRelationJoint(iter->first);
-		iter_SJ = valutazioneSingleJoint.find(iter->first);
-		iter_RJ = valutazioneRelazioneJoint.find(iter->first);
-		sum_SJ += ((iter_SJ->second).get_accuratezza_zenit()*peso_zenit) + ((iter_SJ->second).get_accuratezza_azimut()*peso_azimut);
-		sum_RJ += ((iter_RJ->second).get_accuratezza_zenit()*peso_zenit) + ((iter_RJ->second).get_accuratezza_azimut()*peso_azimut);
+		sum_SJ += valutazioneSingleJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneSingleJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
+		sum_SJ += valutazioneRelazioneJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneRelazioneJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
 	}
-	ritorno = (0.5*(sum_SJ / 9) + 0.5*(sum_RJ / 9));
-	return ritorno;
+	cout << sum_SJ;
+	cout << sum_RJ;
+	return (0.75*(sum_SJ) + 0.25*(sum_RJ));
 }
 
-void Valutazione::test() {
-	valutaRelationJoint(1);
-	valutaRelationJoint(2);
-	valutaRelationJoint(3);
-	valutaRelationJoint(5);
-	valutaRelationJoint(6);
-	valutaRelationJoint(8);
-	valutaRelationJoint(9);
-	valutaRelationJoint(11);
-	valutaRelationJoint(12);
-
-	map<int, ValutazioneRJ>::iterator iter;
-	for (iter = valutazioneRelazioneJoint.begin(); iter != valutazioneRelazioneJoint.end(); ++iter) {
-		cout << "Pesi ridistribuiti joint " << iter->first << endl;
-		iter->second.test();
-	}
-}

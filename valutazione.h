@@ -36,18 +36,16 @@ public:
     //SET & INSERT
     void insert_angolidiscriminati_zenit(int _angolo);
     void insert_angolidiscriminati_azimut(int _angolo);
+	void popola_pesiRJ(int _angolo);
     //GET
     map<int, pair<float,float>> get_pesi()const;
     //METODI DI VALUTAZIONE
 	void percentualeEsCompletato();
 	void valutaSingleJoint(int _joint);
-    void popola_pesiRJ(int _angolo);
 	void valutaRelationJoint(int _joint); //deve essere passato il joint di cui si vuole fare la valutazione!
 	float valutaTotale();
-
-	//METODI DI TEST
-	void stampavalutazione();
-	void test();
+    //METODI DI TEST
+	void stampavalutazione(string percorso_file, string name); //stampa un file txt contenente tutte le valutazioni
 };
 #endif
 

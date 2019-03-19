@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <fstream>
 using namespace std;
 
 class ValutazioneSJ{
@@ -68,7 +69,7 @@ public:
     float get_accuratezza_zenit()const;
     float get_accuratezza()const;
 	//Metodi di valutazione
-	
+	ofstream stampa_file_accurato(string percorso_file, string name);
 	void stampa(); //DA RIFARE
 };
 #endif
