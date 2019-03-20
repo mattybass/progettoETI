@@ -82,62 +82,46 @@ double angolo_azimut(Coordinata& c1, Coordinata& c2, Coordinata& c3){
     double angoloc1c2=angolo_XY(c1,c2);
     double angoloc2c3=angolo_XY(c3,c2);
     
-//DIFFERENZA TRA I DUE ANGOLI = AZIMUT
-    double azimut;
-      
-    azimut=angoloc2c3-angoloc1c2;
+    double azimut=angoloc2c3-angoloc1c2;
     if(azimut<0){
-        azimut=360+azimut;
+        azimut+=360;
     }
-    
     return azimut;
 }
 
 double angolo_zenit(Coordinata& c1, Coordinata& c2, Coordinata& c3){
     double angoloc1c2=angolo_XZ(c1,c2);
     double angoloc2c3=angolo_XZ(c3,c2);
-    
-//DIFFERENZA TRA I DUE ANGOLI = AZIMUT
+   
     double zenit=angoloc2c3-angoloc1c2;
     if(zenit<0){
         zenit+=360;
     }
-    
     return zenit;
 }
 
 double media_zenit(list<Angolo> _lista) {
 	double mediazenit = 0;
 	list<Angolo>::iterator iter;
-	int index = 0;
+	int index = _lista.size();
 	double sommazenit = 0;
-
 	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
-		++index;
-		sommazenit = sommazenit + iter->get_zenit();
+		sommazenit += iter->get_zenit();
 	}
-
 	mediazenit = (double)sommazenit / index;
-
 	return mediazenit;
-
 }
 
 double media_azimut(list<Angolo> _lista) {
 	double mediaazimut = 0;
 	list<Angolo>::iterator iter;
-	int index = 0;
+	int index = _lista.size();
 	double sommaazimut = 0;
-
 	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
-		++index;
-		sommaazimut = sommaazimut + iter->get_azimut();
+		sommaazimut += iter->get_azimut();
 	}
-
 	mediaazimut = (double)sommaazimut / index;
-
 	return mediaazimut;
-
 }
 
 double devst_zenit(list<Angolo> _lista) {

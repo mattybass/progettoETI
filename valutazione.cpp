@@ -161,7 +161,7 @@ void Valutazione::valutaSingleJoint(int _joint){
 	valutazioneSingleJoint[_joint].insert_deltatime_azimut();
 	valutazioneSingleJoint[_joint].insert_deltatime_zenit();
 	valutazioneSingleJoint[_joint].media_deltatime();
-	//valutazioneSingleJoint[_joint].calcola_accuratezza();
+	valutazioneSingleJoint[_joint].calcola_accuratezza();
 }
 
 void Valutazione::valutaRelationJoint(int _joint) {

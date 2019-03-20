@@ -445,75 +445,70 @@ void Persona::mediamobile_angolo(int _angolo, int _finestra) {
 }
 
 void Persona::maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut) {
-	map<int, list<Angolo>>::iterator iter;
-    map<int, list<Angolo>>::iterator iter2;
-    iter2=sequenzaAngoloELAB.find(_angolo);
-    double mean_zenit = media_zenit(iter2->second);
-	iter = valori_maxmin_zenit.find(_angolo);
+	map<int, list<Angolo>>::iterator miter;
+    map<int, list<Angolo>>::iterator miter2;
+	list<Angolo>::iterator iter2;
+    miter2=sequenzaAngoloELAB.find(_angolo);
+    double mean_zenit = media_zenit(miter2->second);
+	miter = valori_maxmin_zenit.find(_angolo);
+	list<Angolo>::iterator inizio;
+	list<Angolo>::iterator fine;
 	list<Angolo> temp;
-
 	//PULISCO ZENIT
-	if (iter != valori_maxmin_zenit.end()){ //ho trovato l angolo
-		list<Angolo>::iterator iter2;
-		list<Angolo>::iterator inizio;
-        list<Angolo>::iterator fine;
-		inizio = (iter->second).begin();
-        fine = (iter->second).end();
+	if (miter != valori_maxmin_zenit.end()){ //ho trovato l angolo
+		inizio = (miter->second).begin();
+        fine = (miter->second).end();
         fine--;
-		Angolo iniziale = (*inizio);
-		Angolo finale = (*fine);
+		Angolo iniziale = *inizio;
+		Angolo finale = *fine;
 		int i = (*inizio).get_numeroframe();
         int j = (*fine).get_numeroframe();
-		for (iter2 = (iter->second).begin(); iter2 != (iter->second).end(); ++iter2) {
+
+		for (iter2 = inizio; iter2 != fine; ++iter2) {
 			if ((*iter2).get_numeroframe() > (i + 15) && (*iter2).get_numeroframe() < (j - 15) &&(((iter2->get_zenit())>mean_zenit+_tolleranzazenit)||((iter2->get_zenit())<mean_zenit-_tolleranzazenit)))
 				temp.push_back(*iter2);
 		}
+
 		temp.push_front(iniziale);
 		temp.push_back(finale);
-		valori_maxmin_zenit.erase(iter);
+		valori_maxmin_zenit.erase(miter);
 		valori_maxmin_zenit[_angolo] = temp;
 	}
-	iter = valori_maxmin_azimut.find(_angolo);
 	temp.clear();
+
+
+	miter = valori_maxmin_azimut.find(_angolo);
 	//PULISCO AZIMUT
-	if (iter != valori_maxmin_azimut.end()) { //ho trovato l angolo
+	if (miter != valori_maxmin_azimut.end()) { //ho trovato l angolo
 		list<Angolo>::iterator iter2;
-        map<int, list<Angolo>>::iterator iter3;
-        iter3=sequenzaAngoloELAB.find(_angolo);
-        double mean_azimut = media_azimut(iter3->second);
+        double mean_azimut = media_azimut(miter2->second);
 		list<Angolo>::iterator inizio;
         list<Angolo>::iterator fine;
-		inizio = (iter->second).begin();
-        fine = (iter->second).end();
+		inizio = (miter->second).begin();
+        fine = (miter->second).end();
         fine--;
-		Angolo iniziale = (*inizio);
-		Angolo finale = (*fine);
+		Angolo iniziale = *inizio;
+		Angolo finale = *fine;
 		int i = (*inizio).get_numeroframe();
         int j = (*fine).get_numeroframe();
-		for (iter2 = (iter->second).begin(); iter2 != (iter->second).end(); ++iter2) {
+		for (iter2 = inizio; iter2 != fine; ++iter2) {
 			if ((*iter2).get_numeroframe() > (i + 15)&&(*iter2).get_numeroframe()<(j-15)&&(((iter2->get_azimut())>mean_azimut+_tolleranzaazimut)||((iter2->get_azimut())<mean_azimut-_tolleranzaazimut)))
 				temp.push_back(*iter2);
 		}
 		temp.push_front(iniziale);
 		temp.push_back(finale);
-		valori_maxmin_azimut.erase(iter);
+		valori_maxmin_azimut.erase(miter);
 		valori_maxmin_azimut[_angolo] = temp;
 	}
 
 }
 
 void Persona::processa_angolo(int _angolo) {
-	string a;
-	stringstream s;
-	s << _angolo;
-	a=s.str();
+	pulisci_errori_sequenzaangolo(_angolo);
 	mediamobile_angolo(_angolo, 30);
 	mediamobile_angolo(_angolo, 30);
 	maxminFind_angolo(_angolo, 50);
 	maxminClean_angolo(_angolo,5,15);
-	//stampaFile_angolo(_angolo, "joint"+a);
-	//stampaFile_maxmin(_angolo, "maxmin"+a);
-    //stampaConsole_maxmin(_angolo);
 }
 
 void Persona::pulisci_errori_sequenzaangolo(int _angolo){
@@ -523,8 +518,8 @@ void Persona::pulisci_errori_sequenzaangolo(int _angolo){
     map<int,Frame>::iterator iterF;
 	int frame = 0;  
 	double dif;
-	iter=sequenzaAngolo.find(_angolo);
-    if(iter!=sequenzaAngolo.end()){
+	iter=sequenzaAngoloELAB.find(_angolo);
+    if(iter!=sequenzaAngoloELAB.end()){
         for(iter2=iter->second.begin();iter2!=iter->second.end();++iter2){
             iter3=iter2;
             iter3++;
@@ -574,7 +569,6 @@ list<Angolo> Persona::get_valorimaxmin_zenit(int _angolo)const {
 list<Angolo> Persona::get_valorimaxmin_azimut(int _angolo)const {
 	map<int, list<Angolo>>::const_iterator iter;
 	iter = valori_maxmin_azimut.find(_angolo);
-	if (iter != valori_maxmin_azimut.end())
 	return iter->second;
 }
 
