@@ -41,7 +41,6 @@ public:
     void insert_deltadist_zenit(double _n, float _p);
     void insert_deltadist_azimut(double _n, float _p);
 	void media_deltadist();
-    void media_deltatime();
 	double get_media_deltadist_zenit();
 	double get_media_deltadist_azimut();
 	//Metodi valutazione velocit�
@@ -51,6 +50,7 @@ public:
 	void insert_duratamovimentipaziente_azimut(double _n);
     void insert_deltatime_zenit();
     void insert_deltatime_azimut();
+	void media_deltatime();
     void calcola_accuratezza();
    //Metodi GET
     vector<pair<double,float>> get_deltadist_zenit()const;
@@ -69,7 +69,8 @@ public:
     float get_accuratezza_zenit()const;
     float get_accuratezza()const;
 	//Metodi di valutazione
-	void stampa_file_accurato(ofstream file);
-	void stampa(); //DA RIFARE
+	void stampa_file_accurato(ofstream& _file);
+	void stampa(); 
+	
 };
 #endif

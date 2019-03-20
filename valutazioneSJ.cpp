@@ -53,7 +53,7 @@ void ValutazioneSJ::calcola_accuratezza() {
 	accuratezza_azimut = (media_deltadist_azimut_percento + media_deltatime_azimut_percento) / 2;
 	accuratezza_zenit = (media_deltadist_zenit_percento + media_deltatime_zenit_percento) / 2;
 
-	accuratezza = (accuratezza_zenit + accuratezza_azimut) / 2;
+	//accuratezza = (accuratezza_zenit + accuratezza_azimut) / 2;
 }
 
 float ValutazioneSJ::get_accuratezza_azimut()const {
@@ -78,7 +78,7 @@ ValutazioneSJ::ValutazioneSJ(){
 	accuratezza = 0;
 }
 
-void ValutazioneSJ::media_deltadist() {
+void ValutazioneSJ::media_deltadist() { //valori coerenti
 	vector<pair<double, float>>::const_iterator iterV;
 	int somma = 0;
 	float percentuale = 0.0;
@@ -86,7 +86,7 @@ void ValutazioneSJ::media_deltadist() {
 	//ZENIT
 	for (iterV = deltadist_zenit.begin(); iterV != deltadist_zenit.end(); ++iterV) {
 		somma += fabs((iterV->first));
-		percentuale += (fabs((iterV->second)));
+		percentuale += fabs((iterV->second));
 	}
 	if (counter != 0) {
 		media_deltadist_zenit = (double)somma / counter;
@@ -174,7 +174,6 @@ void ValutazioneSJ::insert_deltatime_azimut(){
     vector<double>::const_iterator iterVP;
     double differenza;
     float percentuale;
-    
     iterVM=duratamovimentimodello_azimut.begin();
     iterVP=duratamovimentipaziente_azimut.begin();
     while(iterVM!=duratamovimentimodello_azimut.end()&&iterVP!=duratamovimentipaziente_azimut.end()){
@@ -191,7 +190,6 @@ void ValutazioneSJ::insert_deltatime_azimut(){
         ++iterVM;
         ++iterVP;
     }
-    
 }
 
 void ValutazioneSJ::media_deltatime(){
@@ -201,12 +199,14 @@ void ValutazioneSJ::media_deltatime(){
     int counter=deltatime_zenit.size();
     //ZENIT
 	for(iterV=deltatime_zenit.begin();iterV!=deltatime_zenit.end();++iterV){
-        somma+=(iterV->first);
-        percentuale+=(iterV->second);
+        somma+=fabs((*iterV).first);
+        percentuale+=((*iterV).second);
     }
     if(counter!=0){
-        media_deltatime_zenit=(double)somma/counter;
+		media_deltatime_zenit=(double)somma/counter;
         media_deltadist_zenit_percento=(float)percentuale/counter;
+		cout << media_deltatime_zenit << endl;
+		cout<<media_deltadist_zenit_percento << endl;
     }else{
         media_deltatime_zenit=0;
         media_deltadist_zenit_percento=0.0;
@@ -216,8 +216,8 @@ void ValutazioneSJ::media_deltatime(){
 	percentuale = 0.0;
 	counter = deltatime_azimut.size();
     for(iterV=deltatime_azimut.begin();iterV!=deltatime_azimut.end();++iterV){
-        somma+=(iterV->first);
-        percentuale+=(iterV->second);
+        somma+=fabs((*iterV).first);
+        percentuale+=((*iterV).second);
     }
     if(counter!=0){
         media_deltatime_azimut=(double)somma/counter;
@@ -278,7 +278,7 @@ void ValutazioneSJ::stampa() {
 	}
 }
 
-void ValutazioneSJ::stampa_file_accurato(ofstream file) {
+void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	vector<pair<double, float>>::iterator iter;
 	int i = 0;
 	file << "ZENIT" << endl;
@@ -329,4 +329,3 @@ void ValutazioneSJ::stampa_file_accurato(ofstream file) {
 		++i;
 	}
 }
-

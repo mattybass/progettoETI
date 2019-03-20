@@ -62,18 +62,20 @@ void Valutazione::valutaSingleJoint(int _joint){
 	list<Angolo>::iterator iterpaziente; //iteratore che scorre le map di maxmin di zenit e azimut del paziente
 	list<Angolo>::iterator itermodello2;
 	list<Angolo>::iterator iterpaziente2;
+	list<Angolo>::iterator itermodellofine;
+	map<int, ValutazioneSJ>::iterator miter;
 	int nframemodello, nframepaziente;
 	nframemodello = (*modello).get_numeroFramePerSecondo();
 	nframepaziente = (*paziente).get_numeroFramePerSecondo();
-	//ZENIT bisogna fare in modo di inserire punto di inizio e punto di fine
 	listaModellozenit = (*modello).get_valorimaxmin_zenit(_joint);
 	listaPazientezenit = (*paziente).get_valorimaxmin_zenit(_joint);
 	itermodello = listaModellozenit.begin();
 	iterpaziente = listaPazientezenit.begin();
+	itermodellofine = listaModellozenit.end();
+	itermodellofine--;
 	double diff = 0.0;
     float percentuale=0.0;
-	
-	while (iterpaziente != listaPazientezenit.end()&&itermodello!=listaModellozenit.end()) { //TODO TOGLIERE DOPO CON CONDIZIONE ENTRA SE <=
+	while (iterpaziente != listaPazientezenit.end()) { 
 		diff = (*itermodello).get_zenit() - (*iterpaziente).get_zenit();
         percentuale=(((float)(iterpaziente->get_zenit())/(float)(itermodello->get_zenit()))*100.0);
         
@@ -86,6 +88,7 @@ void Valutazione::valutaSingleJoint(int _joint){
         }
 		valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff,percentuale);
 		++iterpaziente;
+		if(itermodello!=itermodellofine)//se arriva alla fine resta sul punto finale
 		++itermodello;
 	}
 
@@ -97,13 +100,15 @@ void Valutazione::valutaSingleJoint(int _joint){
 	++iterpaziente2;
 
 	double secondi_movimento = 0; //conta il numero di secondi che passano tra una posizione chiave e un'altra
-    while (iterpaziente2!=listaPazientezenit.end()&&itermodello2!=listaModellozenit.end()) { 
+    while (iterpaziente2!=listaPazientezenit.end()) { 
 		secondi_movimento = (double)((*itermodello2).get_numeroframe() - (*itermodello).get_numeroframe())/(double)nframemodello;
 		valutazioneSingleJoint[_joint].insert_duratamovimentimodello_zenit(secondi_movimento);
 		secondi_movimento = (double)((*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe())/(double)nframepaziente;
 		valutazioneSingleJoint[_joint].insert_duratamovimentipaziente_zenit(secondi_movimento);
-		++itermodello;
-		++itermodello2;
+		if (itermodello2 != itermodellofine) {//si blocca sull'ultimo movimento
+			++itermodello;
+			++itermodello2;
+		}
 		++iterpaziente;
 		++iterpaziente2;
 	}
@@ -113,10 +118,12 @@ void Valutazione::valutaSingleJoint(int _joint){
 	listaPazienteazimut = (*paziente).get_valorimaxmin_azimut(_joint);
 	itermodello = listaModelloazimut.begin();
 	iterpaziente = listaPazienteazimut.begin();
+	itermodellofine = listaModelloazimut.end();
+	--itermodellofine;
 	
 	while (iterpaziente != listaPazienteazimut.end()&&itermodello!=listaModelloazimut.end()) {
 		diff = (*itermodello).get_azimut() - (*iterpaziente).get_azimut(); //una misura positiva significa non arrivare di diff gradi alla posizione
-        percentuale=(((float)(iterpaziente->get_zenit())/(float)(itermodello->get_zenit()))*100.0);
+        percentuale=(((float)(iterpaziente->get_azimut())/(float)(itermodello->get_azimut()))*100.0);
         
             if(percentuale>100.0){
                 if(percentuale>200.0){
@@ -126,7 +133,8 @@ void Valutazione::valutaSingleJoint(int _joint){
                 }
             }
             valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff,percentuale);      //una negativa significa superarla di diff gradi
-            ++itermodello;
+			if (itermodello != itermodellofine)//se arriva alla fine resta sul punto finale
+				++itermodello;
             ++iterpaziente;
 
     }
@@ -142,11 +150,18 @@ void Valutazione::valutaSingleJoint(int _joint){
 		valutazioneSingleJoint[_joint].insert_duratamovimentimodello_azimut(secondi_movimento);
 		secondi_movimento = (double)((*iterpaziente2).get_numeroframe() - (*iterpaziente).get_numeroframe())/(double)nframepaziente;
 		valutazioneSingleJoint[_joint].insert_duratamovimentipaziente_azimut(secondi_movimento);
-		++itermodello;
-		++itermodello2;
+		if (itermodello2 != itermodellofine) {//si blocca sull'ultimo movimento
+			++itermodello;
+			++itermodello2;
+		}
 		++iterpaziente;
 		++iterpaziente2;
 	}
+	valutazioneSingleJoint[_joint].media_deltadist();//calcola la media di scostamenti
+	valutazioneSingleJoint[_joint].insert_deltatime_azimut();
+	valutazioneSingleJoint[_joint].insert_deltatime_zenit();
+	valutazioneSingleJoint[_joint].media_deltatime();
+	//valutazioneSingleJoint[_joint].calcola_accuratezza();
 }
 
 void Valutazione::valutaRelationJoint(int _joint) {
@@ -323,23 +338,22 @@ void Valutazione::stampavalutazione(string percorso_file, string name) {
 	ofstream file;
 	file.open(l);
 	map<int, pair<float, float>>::iterator iter;
-
-		for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
-			/*if ((iter->second.first + iter->second.second) > 0.3) //stampo la valutazione approfondita anche considerazioni su velocità
+    for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
+			if ((iter->second.first + iter->second.second) > 0.3) //stampo la valutazione approfondita anche considerazioni su velocità
 			{
 				file << "Relazione approfondita sull'articolazione numero " << iter->first << endl;
-				valutazioneSingleJoint[iter->first].stampa_file_accurato(percorso_file, name);
+				valutazioneSingleJoint[iter->first].stampa_file_accurato(file);
 			}
-			else {//stampo la valutazione non approfondita solo accuratezze SJ e RJ*/
+			else //stampo la valutazione non approfondita solo accuratezze SJ e RJ
 			file << "Relazione non approfondita sull'articolazione numero " << iter->first << endl;
 
-		}
-		file.close();
+	}
+	file.close();
 	
 
 }
 
-map<int, pair<float,float>> Valutazione:: get_pesi()const{
+map<int, pair<float,float>> Valutazione::get_pesi()const{
     return pesi;
 }
 
@@ -366,7 +380,6 @@ void Valutazione::popola_pesiRJ(int _angolo){
 
 float Valutazione::valutaTotale(){
 	map<int, pair<float, float>>::iterator iter; //serve per scorrere la map di pesi
-	set<int>::iterator siter;
 	float sum_SJ = 0.0;
 	float sum_RJ = 0.0;
 	float peso_zenit;
@@ -390,15 +403,12 @@ float Valutazione::valutaTotale(){
 	valutaRelationJoint(11);
 	valutaSingleJoint(12);
 	valutaRelationJoint(12);
-
 	for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
 		peso_zenit = iter->second.first;
 		peso_azimut = iter->second.second;
 		sum_SJ += valutazioneSingleJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneSingleJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
-		sum_SJ += valutazioneRelazioneJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneRelazioneJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
+		//sum_RJ += valutazioneRelazioneJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneRelazioneJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
 	}
-	cout << sum_SJ;
-	cout << sum_RJ;
-	return (0.75*(sum_SJ) + 0.25*(sum_RJ));
+	return (0.75*(sum_SJ)); //+ 0.25*(sum_RJ));
 }
 
