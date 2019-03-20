@@ -19,7 +19,7 @@ class Angolo{
 		double azimut; //Posizione (X-Y)
 	public:
 		Angolo(Coordinata& c1,Coordinata& c2,Coordinata& c3,int _numeroframe); //Costruttore 4 parametri da coordinata
-		Angolo(double _azimut, double _zenit, int _numeroframe, int _maxmin=0); //Costruttore da angolo
+		Angolo(double _azimut, double _zenit, int _numeroframe, int _maxmin=0); //Costruttore di angolo
 		
 		//FUNZIONI GET
 		double get_zenit()const; //Ritorna l'angolo zenit

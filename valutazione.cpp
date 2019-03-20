@@ -7,9 +7,9 @@ Valutazione::Valutazione(Persona* _paz, Persona* _mod) {
 	//creo map per l'esercizio che andremo a valutare
 	//ogni esercizio prevede una map diversa, quindi bisognerebbe prevedere un inserimento iniziale
 	//nel sistema da parte del medico.
-	pesi[1] = pair<float,float>(0.05,0.05);
-	pesi[2] = pair<float,float>(0.35,0.15);
-	pesi[3] = pair<float, float>(0.15, 0.15);
+	pesi[1] = pair<float,float>(0.1,0.05);
+	pesi[2] = pair<float,float>(0.5,0.10);
+	pesi[3] = pair<float, float>(0.1, 0.05);
 	pesi[5] = pair<float, float>(0.05, 0.05);
 	pesi[6] = pair<float, float>(0.0, 0.0);
 	pesi[8] = pair<float, float>(0.0, 0.0);
@@ -165,7 +165,6 @@ void Valutazione::valutaSingleJoint(int _joint){
 }
 
 void Valutazione::valutaRelationJoint(int _joint) {
-	//NB! questa funzione deve essere eseguita se il numero di max min del paziente è <= del numero max min del modello!
 	list<Angolo> listaPaziente;
 	list<Angolo> listaModello;
 	list<Angolo>::iterator itermodello;
@@ -380,8 +379,8 @@ void Valutazione::popola_pesiRJ(int _angolo){
 
 float Valutazione::valutaTotale(){
 	map<int, pair<float, float>>::iterator iter; //serve per scorrere la map di pesi
-	float sum_SJ = 0.0;
-	float sum_RJ = 0.0;
+	double sum_SJ = 0.0;
+	double sum_RJ = 0.0;
 	float peso_zenit;
 	float peso_azimut;
 	percentualeEsCompletato();
@@ -407,8 +406,8 @@ float Valutazione::valutaTotale(){
 		peso_zenit = iter->second.first;
 		peso_azimut = iter->second.second;
 		sum_SJ += valutazioneSingleJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneSingleJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
-		//sum_RJ += valutazioneRelazioneJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneRelazioneJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
+		sum_RJ += valutazioneRelazioneJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneRelazioneJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
 	}
-	return (0.75*(sum_SJ)); //+ 0.25*(sum_RJ));
+	return 0.75*(sum_SJ)+0.25*(sum_RJ);
 }
 

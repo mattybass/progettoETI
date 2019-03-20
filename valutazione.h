@@ -11,6 +11,11 @@
 
 using namespace std;
 
+/*
+TODO
+-confronto fare con angolo media di mattybass
+*/
+
 class Valutazione {
 private:
     //DATA

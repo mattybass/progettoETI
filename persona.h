@@ -43,20 +43,14 @@ public:
 	list<Angolo> get_valorimaxmin_azimut(int _angolo)const;
 	Angolo return_angolo(int _angolo, int _nframe)const;
 
-
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
     void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
     void popola_angolo(int _numeroframe); // Crea e popola la map degli angoli inserita in un determinato frame.
     void popola_sequenzaangolo(); //Da richiamare una volta popolati tutta la map "sequenzaframe" e dopo aver richiamato le varie completa_angoli
     void popola_sequenzacoordinata(); //Da richiamare una volta popolati tutta la map "sequenzaframe"
-    
-
 	void mediamobile_angolo(int _angolo, int _finestra);
-    void pulisci_errori_sequenzaangolo(int _angolo);//Pulisce gli errori 358/360, 1/2.
-    void completa_pulisci();//Richiama pulisci errori
-
-	
+    void pulisci_errori_sequenzaangolo(int _angolo);//Pulisce gli errori causati dal processo di elaborazione joint della zedcam (salti troppo veloci di angolo) 
 	void maxminFind_angolo(int _angolo, int _finestra); //INSERISCE I MASSIMI E I MINIMI E IL VALORE INIZIALE E FINALE!
 	void maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut);
 

@@ -20,7 +20,6 @@ private:
     double media_deltatime_zenit; //Media differenze tempo
     float media_deltatime_zenit_percento; //Percentuale media sulle differenze tempo
 	float accuratezza_zenit;
-   
     //AZIMUT
     vector<pair<double,float>> deltadist_azimut;
     vector<double> duratamovimentimodello_azimut;
@@ -31,28 +30,23 @@ private:
     double media_deltatime_azimut;
     float media_deltatime_azimut_percento;
 	float accuratezza_azimut;
-
-    //GENERALI
-     float accuratezza; 
+	//GENERALI
+    float accuratezza; 
 
 public:
     ValutazioneSJ();
-    //Metodi valutazione spaziale
+    //INSERT
     void insert_deltadist_zenit(double _n, float _p);
     void insert_deltadist_azimut(double _n, float _p);
-	void media_deltadist();
-	double get_media_deltadist_zenit();
-	double get_media_deltadist_azimut();
-	//Metodi valutazione velocit�
 	void insert_duratamovimentimodello_zenit(double _n);
 	void insert_duratamovimentipaziente_zenit(double _n);
-    void insert_duratamovimentimodello_azimut(double _n);
+	void insert_duratamovimentimodello_azimut(double _n);
 	void insert_duratamovimentipaziente_azimut(double _n);
-    void insert_deltatime_zenit();
-    void insert_deltatime_azimut();
-	void media_deltatime();
-    void calcola_accuratezza();
-   //Metodi GET
+	void insert_deltatime_zenit();
+	void insert_deltatime_azimut();
+    //GET
+	double get_media_deltadist_zenit();
+	double get_media_deltadist_azimut();
     vector<pair<double,float>> get_deltadist_zenit()const;
     vector<pair<double,float>> get_deltatime_zenit()const;
     double get_media_deltadist_zenit()const;
@@ -68,9 +62,12 @@ public:
     float get_accuratezza_azimut()const;
     float get_accuratezza_zenit()const;
     float get_accuratezza()const;
-	//Metodi di valutazione
+	//PROCESS
+	void media_deltadist();
+	void media_deltatime();
+	void calcola_accuratezza();
+	//PRINT
 	void stampa_file_accurato(ofstream& _file);
 	void stampa(); 
-	
 };
 #endif

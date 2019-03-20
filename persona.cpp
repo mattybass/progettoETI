@@ -89,8 +89,7 @@ while (getline(i, line)) {
     i.close();
     popola_sequenzaangolo();
     popola_sequenzacoordinata();
-    completa_pulisci();
-    sequenzaAngoloELAB = sequenzaAngolo;
+	sequenzaAngoloELAB = sequenzaAngolo;
 }
 
 void Persona::popola_sequenzacoordinata(){
@@ -105,8 +104,6 @@ void Persona::popola_sequenzacoordinata(){
         }
     }
 }
-
-
 
 double Persona::get_angoloMedia_zenit(int _angolo, int n_frame) {
 	map<int, list<Angolo> >::iterator iter;
@@ -258,7 +255,6 @@ void Persona::maxminFind_zenit(int _angolo, int _finestra) {
 void Persona::maxminFind_azimut(int _angolo, int _finestra) {
 	map<int, list<Angolo> >::iterator iter;
 	iter = sequenzaAngoloELAB.find(_angolo);
-
 	if (iter != sequenzaAngoloELAB.end()) { //ho trovato l'angolo
 		list<Angolo>::iterator liter;
 		list<Angolo>::iterator liter2;
@@ -546,18 +542,6 @@ void Persona::pulisci_errori_sequenzaangolo(int _angolo){
             }
         }
     }
-}
-
-void Persona::completa_pulisci(){
-    pulisci_errori_sequenzaangolo(3);
-    pulisci_errori_sequenzaangolo(2);
-    pulisci_errori_sequenzaangolo(1);
-    pulisci_errori_sequenzaangolo(5);
-    pulisci_errori_sequenzaangolo(6);
-    pulisci_errori_sequenzaangolo(8);
-    pulisci_errori_sequenzaangolo(11);
-    pulisci_errori_sequenzaangolo(9);
-    pulisci_errori_sequenzaangolo(12);
 }
 
 list<Angolo> Persona::get_valorimaxmin_zenit(int _angolo)const {
