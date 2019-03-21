@@ -4,7 +4,6 @@
 Valutazione::Valutazione(Persona* _paz, Persona* _mod) {
 	paziente = _paz;
 	modello = _mod;
-	//creo map per l'esercizio che andremo a valutare
 	//ogni esercizio prevede una map diversa, quindi bisognerebbe prevedere un inserimento iniziale
 	//nel sistema da parte del medico.
 	pesi[1] = pair<float,float>(0.1,0.05);
@@ -26,6 +25,7 @@ Valutazione::Valutazione(Persona* _paz, Persona* _mod) {
 	numeri_angoli.insert(11);
 	numeri_angoli.insert(12);
 }
+
 void Valutazione::percentualeEsCompletato() {
     vector<int>::const_iterator iterV;
     int numero_maxminModello=0;
@@ -332,27 +332,28 @@ void Valutazione::valutaRelationJoint(int _joint) {
 
 }
 
-void Valutazione::stampavalutazione(string percorso_file, string name) {
+void Valutazione::stampavalutazione(string percorso_file, string name, float peso_stampa) {
 	string l = percorso_file + "/" + name + ".txt";
 	ofstream file;
 	file.open(l);
 	map<int, pair<float, float>>::iterator iter;
     for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
-			if ((iter->second.first + iter->second.second) > 0.3) //stampo la valutazione approfondita anche considerazioni su velocità
+			if ((iter->second.first + iter->second.second) > peso_stampa) //peso stampa serve per far capire di quali joint si vuole la relazione approfondita e quali no
 			{
-				file << "Relazione approfondita sull'articolazione numero " << iter->first << endl;
+				file << "RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO " << iter->first << endl;
 				valutazioneSingleJoint[iter->first].stampa_file_accurato(file);
+				file << endl;
 				valutazioneRelazioneJoint[iter->first].stampa_file_accurato(file);
 			}
-			else {//stampo la valutazione non approfondita solo accuratezze SJ e RJ
-				file << "Relazione non approfondita sull'articolazione numero " << iter->first << endl;
+			else {
+				file << "RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO " << iter->first <<endl;
 				valutazioneSingleJoint[iter->first].stampa_file_non_accurato(file);
+				file << endl;
+				valutazioneRelazioneJoint[iter->first].stampa_file_non_accurato(file);
 			}
 			file << endl;
 	}
 	file.close();
-	
-
 }
 
 map<int, pair<float,float>> Valutazione::get_pesi()const{

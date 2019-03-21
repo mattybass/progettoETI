@@ -34,6 +34,7 @@ private:
     float accuratezza; 
 
 public:
+	//COSTRUTTORE
     ValutazioneSJ();
     //INSERT
     void insert_deltadist_zenit(double _n, float _p);

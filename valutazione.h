@@ -14,6 +14,8 @@ using namespace std;
 /*
 TODO
 -confronto fare con angolo media di mattybass
+BUG VALUTAZIONI 
+-azimut su joint 1 valutazione singola
 */
 
 class Valutazione {
@@ -46,7 +48,7 @@ public:
 	void valutaRelationJoint(int _joint); //deve essere passato il joint di cui si vuole fare la valutazione!
 	float valutaTotale();
     //METODI DI TEST
-	void stampavalutazione(string percorso_file, string name); //stampa un file txt contenente tutte le valutazioni
+	void stampavalutazione(string percorso_file, string name, float peso_stampa); //stampa un file txt contenente tutte le valutazioni
 };
 #endif
 

@@ -15,12 +15,11 @@ Angolo::Angolo(double _azimut, double _zenit, int _numeroframe,int _maxmin) {
 	maxmin = _maxmin;
 }
 
-//FUNZIONI GET
+//METODI GET
 double Angolo::get_zenit()const{ return zenit; }
 double Angolo::get_azimut()const{ return azimut; }
 int Angolo::get_numeroframe()const{return numeroframe;}
-
-//FUNZIONI SET
+//METODI SET
 void Angolo::set_zenit(double z) { zenit = z; }
 void Angolo::set_azimut(double a) { azimut = a; }
 void Angolo::set_maxmin(int i) { maxmin = i; }
