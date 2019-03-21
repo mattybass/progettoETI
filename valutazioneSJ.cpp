@@ -85,7 +85,7 @@ void ValutazioneSJ::media_deltadist() { //valori coerenti
 	int counter = deltadist_zenit.size();
 	//ZENIT
 	for (iterV = deltadist_zenit.begin(); iterV != deltadist_zenit.end(); ++iterV) {
-		somma += abs((iterV->first));
+		somma += ((iterV->first));
 		percentuale += fabs((iterV->second));
 	}
 	if (counter != 0) {
@@ -101,7 +101,7 @@ void ValutazioneSJ::media_deltadist() { //valori coerenti
 	percentuale = 0.0;
 	counter = deltadist_azimut.size();
 	for (iterV = deltadist_azimut.begin(); iterV != deltadist_azimut.end(); ++iterV) {
-		somma += abs((iterV->first));
+		somma += ((iterV->first));
 		percentuale += fabs((iterV->second));
 	}
 	if (counter != 0) {
@@ -430,4 +430,12 @@ void ValutazioneSJ::stampa_file_non_accurato(ofstream& file) {
 		file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
 	else
 		file << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
+}
+
+void ValutazioneSJ::set_diffpunti_azimut(int _diff) {
+	diffpuntiazimut = _diff;
+}
+
+void ValutazioneSJ::set_diffpunti_zenit(int _diff) {
+	diffpuntizenit = _diff;
 }

@@ -38,7 +38,6 @@ while (getline(i, line)) {
 			stringstream s(estratta);
 			s >> frame;
 			insert_frame(frame);
-			//cout << "FRAME " << frame << endl;
 		}
 	}
 
@@ -165,11 +164,11 @@ double Persona::get_angoloMedia_azimut(int _angolo, int n_frame) {
 	return 0;
 }
 
-void Persona::insert_frame(int _numeroframe){
+void Persona::insert_frame(int _numeroframe){//prima funzione richiamata dal costruttore di persona, crea un frame con il numeroframe 
     sequenzaFrame.insert(pair<int,Frame> (_numeroframe,Frame(_numeroframe)));
 }
 
-void Persona::insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z){
+void Persona::insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z){//Seconda funzione richiamata
     map<int,Frame>::iterator iter;
     iter=sequenzaFrame.find(_numeroframe);
     if(iter!=sequenzaFrame.end()){
@@ -179,7 +178,7 @@ void Persona::insert_coordinata(int _numeroframe,int _numerojoint,double _x, dou
     }
 }
 
-void Persona::popola_angolo(int _numeroframe){
+void Persona::popola_angolo(int _numeroframe){ //terza funzione richiamata
     map<int,Frame>::iterator iter;
     iter=sequenzaFrame.find(_numeroframe);
     
@@ -190,7 +189,7 @@ void Persona::popola_angolo(int _numeroframe){
     }
 }
 
-void Persona::popola_sequenzaangolo(){
+void Persona::popola_sequenzaangolo(){ //terza funzione richiamata 
     map<int,Frame>::iterator iter;
     map<int,Angolo> tmp;
     map<int,Angolo>::iterator itertmp;

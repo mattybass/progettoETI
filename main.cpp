@@ -7,8 +7,7 @@
 #include "valutazione.h"
 
 int main(int argc, char** argv) {
-	
-    Persona p(60,"modellomattyspalla.json");
+	Persona p(60,"modellomattyspalla.json");
 	p.processa_esercizio();
 	Persona p2(60,"Bprova2.json");
 	p2.processa_esercizio();

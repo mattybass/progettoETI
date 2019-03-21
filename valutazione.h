@@ -14,6 +14,7 @@ using namespace std;
 /*
 TODO
 -confronto fare con angolo media di mattybass
+-provare a rifare valutaRelationJoint() e valutaSingleJoint()!
 BUG VALUTAZIONI 
 -azimut su joint 1 valutazione singola
 */

@@ -25,7 +25,6 @@ Coordinata Frame::get_coordinata(int _numerojoint){
 
 void Frame::insert_coordinata(int _numerojoint, double _x, double _y, double _z){
     coordinatejoint.insert(pair<int,Coordinata> (_numerojoint, Coordinata(_x,_y,_z)));
-    
 }
 
 void Frame::insert_angolo(int _joint,int a,int b,int c){
@@ -61,7 +60,7 @@ void Frame::completa_angolo(){
 	insert_angolo(3,4,3,2);
 	insert_angolo(2,1,2,3);
 	insert_angolo(1,2,1,8);
-	insert_angolo(5, 1, 5, 6);
+	insert_angolo(5,1,5,6);
 	insert_angolo(6,5,6,7);
 	insert_angolo(8,1,8,9);
 	insert_angolo(11,1,11,12);
