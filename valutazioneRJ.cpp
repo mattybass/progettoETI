@@ -127,7 +127,7 @@ float ValutazioneRJ::get_accuratezza()const{
     return accuratezza;
 }
 
-void ValutazioneRJ::calcola_accuratezza(){
+void ValutazioneRJ::calcola_accuratezza(){  //DA CONTROLLAREEEEE
     map<int, pair<double, float>>::const_iterator iterM;
     map<int,float>::const_iterator iterP;
 	float temp = 0.0;
@@ -168,4 +168,82 @@ float ValutazioneRJ::get_accuratezza_zenit()const{
 void ValutazioneRJ::test() {
 	map<int, float>::iterator iter;
 	cout << "Accuratezza generale " << accuratezza << endl;
+}
+
+void ValutazioneRJ::stampa_file_accurato(ofstream& file) {
+	file << "METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI " << endl;
+	file << "ZENIT" << endl;
+	map<int, pair<double, float>>::iterator iter;
+	vector<pair<double, float>>::iterator viter;
+	int i = 0;
+	for (iter = media_deltadist_zenit.begin(); iter != media_deltadist_zenit.end(); ++iter) {
+		file << "Media discostamento da angolo modello articolazione "<<iter->first<<" -- > " << media_deltadist_zenit[iter->first].first << " percentuale accuratezza media-- > " << media_deltadist_zenit[iter->first].second << endl;
+		file << "Valutazione approfondita scostamenti" << endl;
+		for (viter = deltadistZenitRJ[iter->first].begin(); viter != deltadistZenitRJ[iter->first].end(); ++viter) {
+			if (viter == deltadistZenitRJ[iter->first].begin()) {//considerazione su punto iniziale
+				if ((*viter).second < 50)//Da controllare il 50!!
+					file << "La posizione iniziale non è stata raggiunta correttamente!" << endl;
+				else if ((*viter).second < 90)
+					file << "La posizione iniziale è sbagliata ma l'errore è contenuto!" << endl;
+				else
+					file << "La posizione iniziale è corretta!" << endl;
+				++i;
+			}
+			else if (viter == --(deltadistZenitRJ[iter->first].end())) {//considerazione su punto finale
+				if ((*viter).second < 50)//Da controllare il 50!!
+					file << "La posizione finale non è stata raggiunta correttamente!" << endl;
+				else if ((*viter).second < 90)
+					file << "La posizione finale è sbagliata ma l'errore è contenuto!" << endl;
+				else
+					file << "La posizione finale è corretta!" << endl;
+			}
+			else {//punti interni
+				if ((*viter).second < 50)//Da controllare il 50!!
+					file << "La posizione " << i << " non è stata raggiunta correttamente!" << endl;
+				else if ((*viter).second < 90)
+					file << "La posizione " << i << " è sbagliata ma l'errore è contenuto!" << endl;
+				else
+					file << "La posizione " << i << " è corretta!" << endl;
+				++i;
+			}
+			i = 0;
+		}
+		file << endl;
+	}
+
+	file << "AZIMUT" << endl;
+	for (iter = media_deltadist_azimut.begin(); iter != media_deltadist_azimut.end(); ++iter) {
+		file << "Media discostamento da angolo modello articolazione " << iter->first << " -- > " << media_deltadist_azimut[iter->first].first << " percentuale accuratezza media-- > " << media_deltadist_azimut[iter->first].second << endl;
+		file << "Valutazione approfondita scostamenti" << endl;
+		for (viter = deltadistAzimutRJ[iter->first].begin(); viter != deltadistAzimutRJ[iter->first].end(); ++viter) {
+			if (viter == deltadistAzimutRJ[iter->first].begin()) {//considerazione su punto iniziale
+				if ((*viter).second < 50)//Da controllare il 50!!
+					file << "La posizione iniziale non è stata raggiunta correttamente!" << endl;
+				else if ((*viter).second < 90)
+					file << "La posizione iniziale è sbagliata ma l'errore è contenuto!" << endl;
+				else
+					file << "La posizione iniziale è corretta!" << endl;
+				++i;
+			}
+			else if (viter == --(deltadistAzimutRJ[iter->first].end())) {//considerazione su punto finale
+				if ((*viter).second < 50)//Da controllare il 50!!
+					file << "La posizione finale non è stata raggiunta correttamente!" << endl;
+				else if ((*viter).second < 90)
+					file << "La posizione finale è sbagliata ma l'errore è contenuto!" << endl;
+				else
+					file << "La posizione finale è corretta!" << endl;
+			}
+			else {//punti interni
+				if ((*viter).second < 50)//Da controllare il 50!!
+					file << "La posizione " << i << " non è stata raggiunta correttamente!" << endl;
+				else if ((*viter).second < 90)
+					file << "La posizione " << i << " è sbagliata ma l'errore è contenuto!" << endl;
+				else
+					file << "La posizione " << i << " è corretta!" << endl;
+				++i;
+			}
+			i = 0;
+		}
+		file << endl;
+	}
 }

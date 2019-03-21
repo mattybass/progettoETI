@@ -67,7 +67,8 @@ public:
 	void media_deltatime();
 	void calcola_accuratezza();
 	//PRINT
-	void stampa_file_accurato(ofstream& _file);
+	void stampa_file_accurato(ofstream& _file);//funzione che stampa sul file tutti i valori comprese le valutazioni sui singoli movimenti
+	void stampa_file_non_accurato(ofstream& _file);//funzione che stampa sul file solo i valori medi senza tener conto dei singoli movimenti
 	void stampa(); 
 };
 #endif

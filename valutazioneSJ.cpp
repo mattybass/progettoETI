@@ -297,8 +297,9 @@ void ValutazioneSJ::stampa() {
 void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	vector<pair<double, float>>::iterator iter;
 	int i = 0;
+	file << "METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE" << endl;
 	file << "ZENIT" << endl;
-	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " che in percentuale risulta --> " << media_deltadist_zenit_percento << endl<<endl;
+	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " percentuale accuratezza media --> " << media_deltadist_zenit_percento << endl<<endl;
 	file << "Valutazione approfondita scostamenti" << endl;
 	for (iter = deltadist_zenit.begin(); iter != deltadist_zenit.end(); ++iter) {
 		if (iter == deltadist_zenit.begin()) {//considerazione su punto iniziale
@@ -351,4 +352,82 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 			file << "Il movimento " << i << " è stato effettuato con la corretta velocità!" << endl;
 		++i;
 	}
+	file << endl<<endl;
+
+	file << "AZIMUT" << endl;
+	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " percentuale accuratezza media --> " << media_deltadist_zenit_percento << endl << endl;
+	file << "Valutazione approfondita scostamenti" << endl;
+	for (iter = deltadist_azimut.begin(); iter != deltadist_azimut.end(); ++iter) {
+		if (iter == deltadist_azimut.begin()) {//considerazione su punto iniziale
+			if ((*iter).second < 50)//Da controllare il 50!!
+				file << "La posizione iniziale non è stata raggiunta correttamente!" << endl;
+			else if ((*iter).second < 90)
+				file << "La posizione iniziale è sbagliata ma l'errore è contenuto!" << endl;
+			else
+				file << "La posizione iniziale è corretta!" << endl;
+			++i;
+		}
+		else if (iter == --(deltadist_azimut.end())) {//considerazione su punto finale
+			if ((*iter).second < 50)//Da controllare il 50!!
+				file << "La posizione finale non è stata raggiunta correttamente!" << endl;
+			else if ((*iter).second < 90)
+				file << "La posizione finale è sbagliata ma l'errore è contenuto!" << endl;
+			else
+				file << "La posizione finale è corretta!" << endl;
+			++i;
+		}
+		else {//punti interni
+			if ((*iter).second < 50)//Da controllare il 50!!
+				file << "La posizione " << i << " non è stata raggiunta correttamente!" << endl;
+			else if ((*iter).second < 90)
+				file << "La posizione " << i << " è sbagliata ma l'errore è contenuto!" << endl;
+			else
+				file << "La posizione " << i << " è corretta!" << endl;
+			++i;
+		}
+	}
+	file << endl;
+	i = 1;
+	if (media_deltatime_azimut < -1)
+		file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
+	else if (media_deltatime_azimut > 1)
+		file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
+	else
+		file << endl << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
+	file << endl << "Valutazione approfondita velocità" << endl;
+	for (iter = deltatime_azimut.begin(); iter != deltatime_azimut.end(); ++iter) {
+		if ((*iter).second < -0.5)
+			file << "Il movimento " << i << " è stato effettuato in maniera leggermente lenta!" << endl;
+		else if ((*iter).second < -1)
+			file << "Il movimento " << i << " è stato effettuato in maniera molto lenta!" << endl;
+		else if ((*iter).second > 0.5)
+			file << "Il movimento " << i << " è stato eseguito in maniera leggermente veloce" << endl;
+		else if ((*iter).second > 1)
+			file << "Il movimento " << i << " è stato eseguito in maniera molto veloce" << endl;
+		else
+			file << "Il movimento " << i << " è stato effettuato con la corretta velocità!" << endl;
+		++i;
+	}
+	file << endl;
+
+}
+
+void ValutazioneSJ::stampa_file_non_accurato(ofstream& file) {
+	file << "METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE" << endl;
+	file << "ZENIT" << endl;
+	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " percentuale accuratezza media --> " << media_deltadist_zenit_percento << endl;
+	if (media_deltatime_zenit < -1)
+		file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
+	else if (media_deltatime_zenit > 1)
+		file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
+	else
+		file << endl << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
+	file << "AZIMUT" << endl;
+	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " percentuale accuratezza media --> " << media_deltadist_zenit_percento << endl;
+	if (media_deltatime_azimut < -1)
+		file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
+	else if (media_deltatime_azimut > 1)
+		file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
+	else
+		file << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
 }

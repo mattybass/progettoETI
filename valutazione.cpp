@@ -342,10 +342,13 @@ void Valutazione::stampavalutazione(string percorso_file, string name) {
 			{
 				file << "Relazione approfondita sull'articolazione numero " << iter->first << endl;
 				valutazioneSingleJoint[iter->first].stampa_file_accurato(file);
+				valutazioneRelazioneJoint[iter->first].stampa_file_accurato(file);
 			}
-			else //stampo la valutazione non approfondita solo accuratezze SJ e RJ
-			file << "Relazione non approfondita sull'articolazione numero " << iter->first << endl;
-
+			else {//stampo la valutazione non approfondita solo accuratezze SJ e RJ
+				file << "Relazione non approfondita sull'articolazione numero " << iter->first << endl;
+				valutazioneSingleJoint[iter->first].stampa_file_non_accurato(file);
+			}
+			file << endl;
 	}
 	file.close();
 	

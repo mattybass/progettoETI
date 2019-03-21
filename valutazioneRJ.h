@@ -6,6 +6,7 @@
 #include <vector>
 #include <cmath>
 #include <map>
+#include <fstream>
 using namespace std;
 
 class ValutazioneRJ {
@@ -43,8 +44,11 @@ public:
     float get_accuratezza()const;
     float get_accuratezza_azimut()const;
     float get_accuratezza_zenit()const;
-	//TEST
+	//STAMPA
 	void stampa();
+	void stampa_file_accurato(ofstream& file);
+	void stampa_file_non_accurato(ofstream& file);
+	//TEST
 	void test();
 };
 
