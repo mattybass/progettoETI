@@ -25,7 +25,7 @@ void ValutazioneRJ::calcola_media_discostamento() {
 	//ZENIT
 	for (miter = deltadistZenitRJ.begin(); miter != deltadistZenitRJ.end(); ++miter) {
 		for (viter = miter->second.begin(); viter !=  miter->second.end(); ++viter) {
-			sum += (*viter).first;
+			sum += fabs((*viter).first);
 			sumperc+= (*viter).second;
 			++i;
 		}
@@ -40,7 +40,7 @@ void ValutazioneRJ::calcola_media_discostamento() {
 	//AZIMUT
 	for (miter = deltadistAzimutRJ.begin(); miter != deltadistAzimutRJ.end(); ++miter) {
 		for (viter = miter->second.begin(); viter != miter->second.end(); ++viter) {
-			sum += (*viter).first;
+			sum += fabs((*viter).first);
 			sumperc+= (*viter).second;
 			++i;
 		}
@@ -137,11 +137,11 @@ void ValutazioneRJ::calcola_accuratezza(){  //DA CONTROLLAREEEEE
 	while (iterM != media_deltadist_zenit.end() && iterP != pesired_zenit.end())
 	{
 		sum += iterP->second;
-		temp += ((iterM->second.second) / 100)*iterP->second;
+		temp += (iterM->second.second)*iterP->second;
 		++iterM;
 		++iterP;
 	}
-	accuratezza_zenit = temp / sum; //media ponderata accuratezza zenit tra 0 e 1
+	accuratezza_zenit = temp / sum ; //media ponderata accuratezza zenit tra 0 e 1
 	temp = 0.0;
 	sum = 0.0;
 	iterM = media_deltadist_azimut.begin();
@@ -149,12 +149,12 @@ void ValutazioneRJ::calcola_accuratezza(){  //DA CONTROLLAREEEEE
 	while (iterM != media_deltadist_azimut.end() && iterP != pesired_azimut.end())
 	{
 		sum += iterP->second;
-		temp += ((iterM->second.second) / 100)*iterP->second;
+		temp += (iterM->second.second)*iterP->second;
 		++iterM;
 		++iterP;
 	}
     accuratezza_azimut = temp / sum; //media ponderata accuratezza zenit tra 0 e 1
-	accuratezza = (0.5*accuratezza_zenit) + (0.5*accuratezza_azimut);
+	accuratezza = (0.75*accuratezza_zenit) + (0.25*accuratezza_azimut);
 }
 
 float ValutazioneRJ::get_accuratezza_azimut()const{
