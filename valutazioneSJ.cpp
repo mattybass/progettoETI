@@ -75,6 +75,8 @@ ValutazioneSJ::ValutazioneSJ(){
 	accuratezza_azimut = 0;
     accuratezza_zenit = 0;
 	accuratezza = 0;
+	diffpuntiazimut = 0;
+	diffpuntizenit = 0;
 }
 
 void ValutazioneSJ::media_deltadist() { //valori coerenti
@@ -305,12 +307,14 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	}
 	file << endl;
 	i = 1;
-	if (media_deltatime_zenit < -0.5)
-		file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
-	else if (media_deltatime_zenit > 0.5)
-		file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
-	else
-		file <<endl<< "La velocità di esecuzione dell'esercizio è corretta!" << endl;
+	if (deltatime_zenit.size() != 0) {
+		if (media_deltatime_zenit < -0.5)
+			file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
+		else if (media_deltatime_zenit > 0.5)
+			file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
+		else
+			file << endl << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
+	}
 	file <<endl<< "Valutazione approfondita velocità" << endl;
 	if (deltatime_zenit.size() != 0) {
 		for (iter = deltatime_zenit.begin(); iter != deltatime_zenit.end(); ++iter) {
@@ -373,12 +377,14 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	}
 	file << endl;
 	i = 1;
-	if (media_deltatime_azimut < -0.5)
-		file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
-	else if (media_deltatime_azimut > 0.5)
-		file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
-	else
-		file << endl << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
+	if (deltatime_azimut.size() != 0) {
+		if (media_deltatime_azimut < -0.5)
+			file << "L'esercizio è stato svolto complessivamente in modo più lento rispetto al modello!" << endl;
+		else if (media_deltatime_azimut > 0.5)
+			file << "L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!" << endl;
+		else
+			file << endl << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
+	}
 	file << endl << "Valutazione approfondita velocità" << endl;
 	if (deltatime_azimut.size() != 0) {
 		for (iter = deltatime_azimut.begin(); iter != deltatime_azimut.end(); ++iter) {

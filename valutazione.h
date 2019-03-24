@@ -12,11 +12,6 @@
 
 using namespace std;
 
-/*
-TODO
--fixare bug movimento angolo che ha solo inizio e fine
-*/
-
 class Valutazione {
 private:
     //DATA

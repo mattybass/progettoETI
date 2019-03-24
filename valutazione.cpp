@@ -39,9 +39,7 @@ void Valutazione::percentualeEsCompletato() {
         numero_maxminModello+=modello->get_numeroMaxMin_azimut(*iterV);
 		numero_maxminPaziente+=paziente->get_numeroMaxMin_azimut(*iterV);
     }
-    if (numero_maxminModello != 0){
-		completezzaesercizio = ((float)numero_maxminPaziente / (float)numero_maxminModello) * 100;
-	}
+	completezzaesercizio = ((float)numero_maxminPaziente / (float)numero_maxminModello) * 100;
 }
 
 void Valutazione::insert_angolidiscriminati_zenit(int _angolo) {
@@ -108,7 +106,7 @@ float Valutazione::valutaTotale(){
 	double sum_RJ = 0.0;
 	float peso_zenit;
 	float peso_azimut;
-	insert_angolidiscriminati_zenit(2);
+	insert_angolidiscriminati_azimut(1);
 	percentualeEsCompletato();
 	valutaSingleJoint(1);
 	valutaRelationJoint(1);
@@ -151,20 +149,20 @@ void Valutazione::valutaRelationJoint(int _joint) {
 	double diff;
 	float percentuale;
 	//ZENIT
-	listaPaziente = (*paziente).get_valorimaxmin_zenit(_joint); //contiene i punti chiave che devo confrontare sugli altri angoli!
+	listaPaziente = (*paziente).get_valorimaxmin_zenit(_joint); 
 	listaModello = (*modello).get_valorimaxmin_zenit(_joint);
 	sizemod = listaModello.size();
 	sizepaz = listaPaziente.size();
-	if(sizemod==2){//significa che nel modello questo è un angolo stazionario! confronto solo angolo iniziale e finale 
-		if (sizepaz == 2) {//situazione top! passo al confronto diretto di inizio e fine di tutti gli altri joint
+	if(sizemod==2){ 
+		if (sizepaz == 2) {
 			itermodello = listaModello.begin();
 			iterpaziente = listaPaziente.begin();
-			while (iterpaziente != listaPaziente.end() && itermodello != listaModello.end()) {//vado avanti finchè ho punti!
+			while (iterpaziente != listaPaziente.end() && itermodello != listaModello.end()) {
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-					diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-					percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+					diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+					percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 					percentuale = normalizza_percentuale(percentuale);
 					valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 				}
@@ -182,16 +180,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 			}
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 			}
@@ -208,16 +206,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 			}
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 			}
@@ -232,16 +230,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 			}
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 			}
@@ -253,8 +251,8 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-					diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframemodello);
-					percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframemodello) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
+					diff = (*modello).get_angoloMedia_zenit(*siter, nframemodello) - (*paziente).get_angoloMedia_zenit(*siter, nframepaziente);
+					percentuale = ((float)(*paziente).get_angoloMedia_zenit(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_zenit(*siter, nframemodello)) * 100;
 					percentuale = normalizza_percentuale(percentuale);
 					valutazioneRelazioneJoint[_joint].insert_deltadist_zenit(*siter, diff, percentuale);
 				}
@@ -276,8 +274,8 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-					diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-					percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+					diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+					percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 					percentuale = normalizza_percentuale(percentuale);
 					valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 				}
@@ -295,16 +293,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 			}
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 			}
@@ -321,16 +319,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 			}
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 			}
@@ -345,16 +343,16 @@ void Valutazione::valutaRelationJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 			}
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+				diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+				percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 			}
@@ -366,8 +364,8 @@ void Valutazione::valutaRelationJoint(int _joint) {
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				for (siter = numeri_angoli.begin(); siter != numeri_angoli.end(); ++siter) {
-					diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframemodello);
-					percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframemodello) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
+					diff = (*modello).get_angoloMedia_azimut(*siter, nframemodello) - (*paziente).get_angoloMedia_azimut(*siter, nframepaziente);
+					percentuale = ((float)(*paziente).get_angoloMedia_azimut(*siter, nframepaziente) / (float)(*modello).get_angoloMedia_azimut(*siter, nframemodello)) * 100;
 					percentuale = normalizza_percentuale(percentuale);
 					valutazioneRelazioneJoint[_joint].insert_deltadist_azimut(*siter, diff, percentuale);
 				}
@@ -397,6 +395,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
 	double diff = 0.0;
     float percentuale=0.0;
 	int nframepaziente, nframemodello;
+	int n;
 	//ZENIT
 	if (listaModello.size() == 2) {//significa che quell'angolo è stazionario nel modello!
 		if (listaPaziente.size() == 2) {//passo a considerare punto iniziale e finale
@@ -406,7 +405,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-				percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+				percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
 				++iterpaziente;
@@ -415,7 +414,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			
 		}
 		else {
-			int n = listaPaziente.size() - listaModello.size();
+			n = listaPaziente.size() - listaModello.size();
 			itermodello = listaModello.begin(); //contiene il punto iniziale modello
 			iterpaziente = listaPaziente.begin(); //contiene il punto iniziale paziente
 			itermodello2 = listaModello.end();
@@ -425,14 +424,14 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
 
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 
 			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
@@ -441,7 +440,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
     }
 	else {
 		if (listaPaziente.size() == 2) {
-			int n = listaPaziente.size() - listaModello.size();
+			n = listaPaziente.size() - listaModello.size();
 			itermodello = listaModello.begin(); //contiene il punto iniziale modello
 			iterpaziente = listaPaziente.begin(); //contiene il punto iniziale paziente
 			itermodello2 = listaModello.end();
@@ -452,14 +451,14 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
 
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
 
@@ -468,7 +467,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
 		else {
 			itermodello = listaModello.begin();
 			iterpaziente = listaPaziente.begin();
-			int n = listaPaziente.size() - listaModello.size();
+			n = listaPaziente.size() - listaModello.size();
 			itermodello2 = listaModello.end();
 			iterpaziente2 = listaPaziente.end();
 			--itermodello2;
@@ -477,14 +476,14 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
 			//VALUTAZIONE SU PUNTO FINALE
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
 			++itermodello;
@@ -495,7 +494,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				diff = modello->get_angoloMedia_zenit(_joint, nframemodello) - paziente->get_angoloMedia_zenit(_joint, nframepaziente);
-				percentuale = (((float)(modello->get_angoloMedia_zenit(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)))*100.0);
+				percentuale = (((float)(paziente->get_angoloMedia_zenit(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_zenit(_joint, nframemodello)))*100.0);
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneSingleJoint[_joint].insert_deltadist_zenit(diff, percentuale);
 				++iterpaziente;
@@ -536,7 +535,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-				percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+				percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
 				++iterpaziente;
@@ -544,7 +543,7 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			}
 		}
 		else {
-			int n = listaPaziente.size() - listaModello.size();
+		    n = listaPaziente.size() - listaModello.size();
 			itermodello = listaModello.begin(); //contiene il punto iniziale modello
 			iterpaziente = listaPaziente.begin(); //contiene il punto iniziale paziente
 			itermodello2 = listaModello.end();
@@ -555,22 +554,23 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
 
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
+
 			valutazioneSingleJoint[_joint].set_diffpunti_azimut(n); //setto il valore di punti in più sul paziente
 		}
 	}
 	else {
 		if (listaPaziente.size() == 2) {
-			int n = listaPaziente.size() - listaModello.size();
+			n = listaPaziente.size() - listaModello.size();
 			itermodello = listaModello.begin(); //contiene il punto iniziale modello
 			iterpaziente = listaPaziente.begin(); //contiene il punto iniziale paziente
 			itermodello2 = listaModello.end();
@@ -581,20 +581,21 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
 
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
 
 			valutazioneSingleJoint[_joint].set_diffpunti_azimut(n); //setto il valore di punti in meno sul paziente
 		}
 		else {
+			n = listaPaziente.size() - listaModello.size();
 			itermodello = listaModello.begin();
 			iterpaziente = listaPaziente.begin();
 			itermodello2 = listaModello.end();
@@ -605,36 +606,34 @@ void Valutazione::valutaSingleJoint(int _joint) {
 			nframepaziente = iterpaziente->get_numeroframe();
 			nframemodello = itermodello->get_numeroframe();
 			diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
 
 			nframepaziente = iterpaziente2->get_numeroframe();
 			nframemodello = itermodello2->get_numeroframe();
 			diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-			percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+			percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 			percentuale = normalizza_percentuale(percentuale);
 			valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
 			
-			int n = listaPaziente.size() - listaModello.size();
 			++iterpaziente;
 			++itermodello;
 			--iterpaziente2;
 			--itermodello2;
-			while (iterpaziente != iterpaziente2 && itermodello != itermodello2) {  //confronta solo tanti punti chiave quanti sono quelli del modello
+			while (iterpaziente != iterpaziente2 && itermodello != itermodello2) { 
 				nframepaziente = iterpaziente->get_numeroframe();
 				nframemodello = itermodello->get_numeroframe();
 				diff = modello->get_angoloMedia_azimut(_joint, nframemodello) - paziente->get_angoloMedia_azimut(_joint, nframepaziente);
-				percentuale = (((float)(modello->get_angoloMedia_azimut(_joint, nframemodello)) / (float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)))*100.0);
+				percentuale = (((float)(paziente->get_angoloMedia_azimut(_joint, nframepaziente)) / (float)(modello->get_angoloMedia_azimut(_joint, nframemodello)))*100.0);
 				percentuale = normalizza_percentuale(percentuale);
 				valutazioneSingleJoint[_joint].insert_deltadist_azimut(diff, percentuale);
 				++iterpaziente;
 				++itermodello;
 			}
-			valutazioneSingleJoint[_joint].set_diffpunti_azimut(n); //setto il valore di punti in più o in meno sul paziente
+			valutazioneSingleJoint[_joint].set_diffpunti_azimut(n);
 		}
 	}
-	//per ora la velocita la calcolo come prima
 	itermodello = listaModello.begin();
 	iterpaziente = listaPaziente.begin();
 	itermodello2 = itermodello;
