@@ -23,7 +23,7 @@ double media_zenit(list<Angolo> _lista);
 
 double devst_azimut(list<Angolo> _lista);
 double devst_zenit(list<Angolo> _lista);
-
+float normalizza_percentuale(float _perc);
 
 
 #endif

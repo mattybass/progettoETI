@@ -159,3 +159,15 @@ double devst_azimut(list<Angolo> _lista) {
 	return devstazimut;
 
 }
+
+float normalizza_percentuale(float _perc) {
+	if (_perc > 100.0) {
+		if (_perc > 200.0) {
+			_perc = 0;
+		}
+		else {
+			_perc = 200 - _perc;
+		}
+	}
+	return _perc;
+}

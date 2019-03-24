@@ -1,6 +1,5 @@
 #include "valutazioneSJ.h"
 
-//CONTROLLATE
 vector<pair<double, float>> ValutazioneSJ::get_deltadist_zenit()const {
 	return deltadist_zenit;
 }
@@ -50,8 +49,8 @@ float ValutazioneSJ::get_media_deltatime_azimut_percento()const {
 }
 
 void ValutazioneSJ::calcola_accuratezza() {
-	accuratezza_azimut = (media_deltadist_azimut_percento + media_deltatime_azimut_percento) / 2;
-	accuratezza_zenit = (media_deltadist_zenit_percento + media_deltatime_zenit_percento) / 2;
+	accuratezza_azimut = (media_deltadist_azimut_percento + media_deltatime_azimut_percento)/2;
+	accuratezza_zenit = (media_deltadist_zenit_percento + media_deltatime_zenit_percento)/2;
 
 	accuratezza = (accuratezza_zenit + accuratezza_azimut) / 2;
 }
@@ -85,34 +84,24 @@ void ValutazioneSJ::media_deltadist() { //valori coerenti
 	int counter = deltadist_zenit.size();
 	//ZENIT
 	for (iterV = deltadist_zenit.begin(); iterV != deltadist_zenit.end(); ++iterV) {
-		somma += ((iterV->first));
-		percentuale += fabs((iterV->second));
+		somma += abs(iterV->first);
+		percentuale += iterV->second;
 	}
-	if (counter != 0) {
-		media_deltadist_zenit = somma / (double)counter;
-		media_deltadist_zenit_percento = percentuale / (float)counter;
-	}
-	else {
-		media_deltadist_zenit = 0;
-		media_deltadist_zenit_percento = 0.0;
-	}
+	media_deltadist_zenit = somma / (double)counter;
+	media_deltadist_zenit_percento = percentuale / (float)counter;
+	
 	//AZIMUT
 	somma = 0;
 	percentuale = 0.0;
 	counter = deltadist_azimut.size();
 	for (iterV = deltadist_azimut.begin(); iterV != deltadist_azimut.end(); ++iterV) {
-		somma += ((iterV->first));
-		percentuale += fabs((iterV->second));
+		somma += fabs(iterV->first);
+		percentuale += iterV->second;
 	}
-	if (counter != 0) {
-		media_deltadist_azimut = somma / (double)counter;
-		media_deltadist_azimut_percento = percentuale / (float)counter;
+	
+	media_deltadist_azimut = somma / (double)counter;
+	media_deltadist_azimut_percento = percentuale / (float)counter;
 	}
-	else {
-		media_deltadist_azimut = 0.0;
-		media_deltadist_azimut_percento = 0.0;
-	}
-}
 
 void ValutazioneSJ::insert_deltadist_zenit(double _n, float _p) {
 	deltadist_zenit.push_back(pair<double, float>(_n, _p));
@@ -154,19 +143,11 @@ void ValutazioneSJ::insert_deltatime_zenit(){
     iterVM=duratamovimentimodello_zenit.begin();
     iterVP=duratamovimentipaziente_zenit.begin();
 	if (duratamovimentipaziente_zenit.size() > 1 && duratamovimentimodello_zenit.size()>1) {//non tengo in considerazione il caso in cui l'angolo rimanga fermo 
-		while (iterVP != duratamovimentipaziente_zenit.end()) {
+		while (iterVM != duratamovimentimodello_zenit.end() && iterVP != duratamovimentipaziente_zenit.end()) {
 			differenza = (*iterVM) - (*iterVP);
 			percentuale = ((float)(*iterVP) / (float)(*iterVM))*100.0;
-			if (percentuale > 100.0) {
-				if (percentuale > 200.0) {
-					percentuale = 0;
-				}
-				else {
-					percentuale = 200 - percentuale;
-				}
-			}
+			percentuale = normalizza_percentuale(percentuale);
 			deltatime_zenit.push_back(pair<double, float>(differenza, percentuale));
-			if(iterVM!=--(duratamovimentimodello_zenit.end())) //ancoro sull'ultimo movimento
 			++iterVM;
 			++iterVP;
 		}
@@ -189,16 +170,8 @@ void ValutazioneSJ::insert_deltatime_azimut(){
 		while (iterVM != duratamovimentimodello_azimut.end() && iterVP != duratamovimentipaziente_azimut.end()) {
 			differenza = (*iterVM) - (*iterVP);
 			percentuale = ((float)(*iterVP) / (float)(*iterVM))*100.0;
-			if (percentuale > 100.0) {
-				if (percentuale > 200.0) {
-					percentuale = 0;
-				}
-				else {
-					percentuale = 200 - percentuale;
-				}
-			}
+			percentuale = normalizza_percentuale(percentuale);
 			deltatime_azimut.push_back(pair<double, float>(differenza, percentuale));
-			if(iterVM!=--(duratamovimentimodello_azimut.end()))
 			++iterVM;
 			++iterVP;
 		}
@@ -216,7 +189,7 @@ void ValutazioneSJ::media_deltatime(){
     int counter=deltatime_zenit.size();
     //ZENIT
 	for(iterV=deltatime_zenit.begin();iterV!=deltatime_zenit.end();++iterV){
-        somma+=((*iterV).first); //non uso il valore assoluto perchè voglio avere una media di velocità positiva o negativa
+        somma+=(*iterV).first; //non uso il valore assoluto perchè voglio avere una media di velocità positiva o negativa
         percentuale+=(*iterV).second;
     }
     if(counter!=0){
@@ -231,7 +204,7 @@ void ValutazioneSJ::media_deltatime(){
 	percentuale = 0.0;
 	counter = deltatime_azimut.size();
     for(iterV=deltatime_azimut.begin();iterV!=deltatime_azimut.end();++iterV){
-        somma+=((*iterV).first); //non uso il valore assoluto perchè voglio avere una media di velocità positiva o negativa
+        somma+=(*iterV).first; //non uso il valore assoluto perchè voglio avere una media di velocità positiva o negativa
         percentuale+=((*iterV).second);
     }
     if(counter!=0){
@@ -298,7 +271,16 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	vector<pair<double, float>>::iterator iter;
 	int i = 0;
 	file << "METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE" << endl;
+
 	file << "ZENIT" << endl;
+	if (diffpuntizenit < 0) {
+		file << "Su questa articolazione, per quanto riguarda lo zenit, sono stati effettuati meno movimenti di quelli previsti dall'esercizio!" << endl;
+	}
+	else if (diffpuntizenit > 0) {
+		file << "Su questa articolazione, per quanto riguarda lo zenit, sono stati effettuati più movimenti di quelli previsti dall'esercizio!" << endl;
+	}
+	else
+		file << "Su questa articolazione, per quanto riguarda lo zenit, è stato effettuato il corretto numero di movimenti!" << endl;
 	file << "Media discostamento da angolo modello --> " << media_deltadist_zenit << " percentuale accuratezza media --> " << media_deltadist_zenit_percento << endl<<endl;
 	file << "Valutazione approfondita scostamenti" << endl;
 	for (iter = deltadist_zenit.begin(); iter != deltadist_zenit.end(); ++iter) {
@@ -355,6 +337,14 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	file << endl<<endl;
 	i = 0;
 	file << "AZIMUT" << endl;
+	if (diffpuntiazimut < 0) {
+		file << "Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati meno movimenti di quelli previsti dall'esercizio!" << endl;
+	}
+	else if (diffpuntiazimut > 0) {
+		file << "Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati più movimenti di quelli previsti dall'esercizio!" << endl;
+	}
+	else
+		file << "Su questa articolazione, per quanto riguarda l'azimut, è stato effettuato il corretto numero di movimenti!" << endl;
 	file << "Media discostamento da angolo modello --> " << media_deltadist_azimut << " percentuale accuratezza media --> " << media_deltadist_azimut_percento << endl << endl;
 	file << "Valutazione approfondita scostamenti" << endl;
 	for (iter = deltadist_azimut.begin(); iter != deltadist_azimut.end(); ++iter) {

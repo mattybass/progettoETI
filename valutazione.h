@@ -8,15 +8,13 @@
 #include "persona.h"
 #include "valutazioneSJ.h"
 #include "valutazioneRJ.h"
+#include "utility.h"
 
 using namespace std;
 
 /*
 TODO
--confronto fare con angolo media di mattybass su valutazioneSJ!
--stampare su file il fatto che ci sono più o meno punti chiave e quindi movimenti ecc ecc
-BUG VALUTAZIONI 
--azimut su joint 1 valutazione singola
+-fixare bug movimento angolo che ha solo inizio e fine
 */
 
 class Valutazione {

@@ -6,6 +6,7 @@
 #include <vector>
 #include <cmath>
 #include <fstream>
+#include "utility.h"
 using namespace std;
 
 class ValutazioneSJ{
