@@ -84,7 +84,7 @@ void ValutazioneSJ::media_deltadist() { //valori coerenti
 	int counter = deltadist_zenit.size();
 	//ZENIT
 	for (iterV = deltadist_zenit.begin(); iterV != deltadist_zenit.end(); ++iterV) {
-		somma += abs(iterV->first);
+		somma += fabs(iterV->first);
 		percentuale += iterV->second;
 	}
 	media_deltadist_zenit = somma / (double)counter;
@@ -152,11 +152,6 @@ void ValutazioneSJ::insert_deltatime_zenit(){
 			++iterVP;
 		}
 	}
-	else
-	{
-		deltatime_zenit.push_back(pair<double,float>(0, 100)); //metto il massimo perchè non posso tenere considerazione di una costante nella valutazione dei movimenti..
-	}
-	
 }
 
 void ValutazioneSJ::insert_deltatime_azimut(){
@@ -175,10 +170,6 @@ void ValutazioneSJ::insert_deltatime_azimut(){
 			++iterVM;
 			++iterVP;
 		}
-	}
-	else
-	{
-		deltatime_azimut.push_back(pair<double, float>(0, 100)); //metto il massimo perchè non posso tenere considerazione di una costante nella valutazione dei movimenti..
 	}
 }
 
@@ -321,19 +312,23 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	else
 		file <<endl<< "La velocità di esecuzione dell'esercizio è corretta!" << endl;
 	file <<endl<< "Valutazione approfondita velocità" << endl;
-	for (iter = deltatime_zenit.begin(); iter != deltatime_zenit.end(); ++iter) {
-		if ((*iter).first < -0.5)
-			file << "Il movimento " << i << " è stato effettuato in maniera leggermente lenta!" << endl;
-		else if ((*iter).first < -1)
-			file << "Il movimento " << i << " è stato effettuato in maniera molto lenta!" << endl;
-	    else if ((*iter).first > 0.5)
-			file << "Il movimento " << i << " è stato eseguito in maniera leggermente veloce" << endl;
-		else if ((*iter).first > 1)
-			file << "Il movimento " << i << " è stato eseguito in maniera molto veloce" << endl;
-		else
-			file << "Il movimento " << i << " è stato effettuato con la corretta velocità!" << endl;
-		++i;
+	if (deltatime_zenit.size() != 0) {
+		for (iter = deltatime_zenit.begin(); iter != deltatime_zenit.end(); ++iter) {
+			if ((*iter).first < -0.5)
+				file << "Il movimento " << i << " è stato effettuato in maniera leggermente lenta!" << endl;
+			else if ((*iter).first < -1)
+				file << "Il movimento " << i << " è stato effettuato in maniera molto lenta!" << endl;
+			else if ((*iter).first > 0.5)
+				file << "Il movimento " << i << " è stato eseguito in maniera leggermente veloce" << endl;
+			else if ((*iter).first > 1)
+				file << "Il movimento " << i << " è stato eseguito in maniera molto veloce" << endl;
+			else
+				file << "Il movimento " << i << " è stato effettuato con la corretta velocità!" << endl;
+			++i;
+		}
 	}
+	else
+		file << "Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)" << endl;
 	file << endl<<endl;
 	i = 0;
 	file << "AZIMUT" << endl;
@@ -385,19 +380,23 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 	else
 		file << endl << "La velocità di esecuzione dell'esercizio è corretta!" << endl;
 	file << endl << "Valutazione approfondita velocità" << endl;
-	for (iter = deltatime_azimut.begin(); iter != deltatime_azimut.end(); ++iter) {
-		if ((*iter).first < -0.5)
-			file << "Il movimento " << i << " è stato effettuato in maniera leggermente lenta!" << endl;
-		else if ((*iter).first < -1)
-			file << "Il movimento " << i << " è stato effettuato in maniera molto lenta!" << endl;
-		else if ((*iter).first > 0.5)
-			file << "Il movimento " << i << " è stato eseguito in maniera leggermente veloce" << endl;
-		else if ((*iter).first > 1)
-			file << "Il movimento " << i << " è stato eseguito in maniera molto veloce" << endl;
-		else
-			file << "Il movimento " << i << " è stato effettuato con la corretta velocità!" << endl;
-		++i;
+	if (deltatime_azimut.size() != 0) {
+		for (iter = deltatime_azimut.begin(); iter != deltatime_azimut.end(); ++iter) {
+			if ((*iter).first < -0.5)
+				file << "Il movimento " << i << " è stato effettuato in maniera leggermente lenta!" << endl;
+			else if ((*iter).first < -1)
+				file << "Il movimento " << i << " è stato effettuato in maniera molto lenta!" << endl;
+			else if ((*iter).first > 0.5)
+				file << "Il movimento " << i << " è stato eseguito in maniera leggermente veloce" << endl;
+			else if ((*iter).first > 1)
+				file << "Il movimento " << i << " è stato eseguito in maniera molto veloce" << endl;
+			else
+				file << "Il movimento " << i << " è stato effettuato con la corretta velocità!" << endl;
+			++i;
+		}
 	}
+	else
+		file << "Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)" << endl;
 	file << endl;
 
 }
