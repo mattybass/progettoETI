@@ -1,5 +1,4 @@
 #include "valutazioneRJ.h"
-//CONTROLLATE
 void ValutazioneRJ::insert_pesiredzenit(int _n, float _p){
     pesired_zenit.insert(pair<int,float> (_n,_p));
 }

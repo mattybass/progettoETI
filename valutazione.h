@@ -45,5 +45,3 @@ public:
 	void stampavalutazione(string percorso_file, string name, float peso_stampa); //stampa un file txt contenente tutte le valutazioni
 };
 #endif
-
-

@@ -81,7 +81,6 @@ ostream& operator <<(ostream& os, const Frame& f){
 }
     
     
-
 void Frame::set_angolo_zenit(int n, double nu){
     map<int,Angolo>::iterator iter;
     iter=angolijoint.find(n);

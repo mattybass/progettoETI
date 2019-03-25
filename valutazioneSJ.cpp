@@ -335,6 +335,7 @@ void ValutazioneSJ::stampa_file_accurato(ofstream& file) {
 		file << "Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)" << endl;
 	file << endl<<endl;
 	i = 0;
+
 	file << "AZIMUT" << endl;
 	if (diffpuntiazimut < 0) {
 		file << "Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati meno movimenti di quelli previsti dall'esercizio!" << endl;

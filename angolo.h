@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
-
 #include "coordinata.h"
 
 #define PI 3.14159265
