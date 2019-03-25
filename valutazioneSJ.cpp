@@ -190,7 +190,7 @@ void ValutazioneSJ::media_deltatime(){
         media_deltatime_zenit_percento=percentuale/ (float)counter;
     }else{
         media_deltatime_zenit=0;
-        media_deltatime_zenit_percento=0.0;
+        media_deltatime_zenit_percento=100.0;
     }
     //AZIMUT
 	somma = 0;
@@ -205,7 +205,7 @@ void ValutazioneSJ::media_deltatime(){
         media_deltatime_azimut_percento=percentuale/ (float)counter;
     }else{
         media_deltatime_azimut=0;
-        media_deltatime_azimut_percento=0.0;
+        media_deltatime_azimut_percento=100.0;
     }
 }
 

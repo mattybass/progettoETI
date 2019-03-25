@@ -106,7 +106,7 @@ float Valutazione::valutaTotale(){
 	double sum_RJ = 0.0;
 	float peso_zenit;
 	float peso_azimut;
-	insert_angolidiscriminati_azimut(1);
+	insert_angolidiscriminati_zenit(2);
 	percentualeEsCompletato();
 	valutaSingleJoint(1);
 	valutaRelationJoint(1);
@@ -132,7 +132,7 @@ float Valutazione::valutaTotale(){
 		sum_SJ += valutazioneSingleJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneSingleJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
 		sum_RJ += valutazioneRelazioneJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneRelazioneJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
 	}
-	return 0.8*(sum_SJ)+0.20*(sum_RJ);
+	return 0.8*(sum_SJ)+0.2*(sum_RJ);
 }
 
 void Valutazione::valutaRelationJoint(int _joint) {
@@ -390,12 +390,12 @@ void Valutazione::valutaSingleJoint(int _joint) {
 	int fpsmodello, fpspaziente; //numero frame per secondo di modello e paziente
 	fpsmodello = (*modello).get_numeroFramePerSecondo();
 	fpspaziente = (*paziente).get_numeroFramePerSecondo();
-	listaModello = (*modello).get_valorimaxmin_zenit(_joint);
-	listaPaziente = (*paziente).get_valorimaxmin_zenit(_joint);
 	double diff = 0.0;
     float percentuale=0.0;
 	int nframepaziente, nframemodello;
 	int n;
+	listaModello = (*modello).get_valorimaxmin_zenit(_joint);
+	listaPaziente = (*paziente).get_valorimaxmin_zenit(_joint);
 	//ZENIT
 	if (listaModello.size() == 2) {//significa che quell'angolo è stazionario nel modello!
 		if (listaPaziente.size() == 2) {//passo a considerare punto iniziale e finale

@@ -499,7 +499,7 @@ void Persona::maxminClean_angolo(int _angolo, double _tolleranzazenit, double _t
 }
 
 void Persona::processa_angolo(int _angolo) {
-	pulisci_errori_sequenzaangolo(_angolo); //probabilmente si può anche togliere, controllare!
+	pulisci_errori_sequenzaangolo(_angolo); 
 	mediamobile_angolo(_angolo, 30);
 	mediamobile_angolo(_angolo, 30);
 	maxminFind_angolo(_angolo, 50);
