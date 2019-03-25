@@ -5,7 +5,7 @@
 2) Sergio Povoli @UniTN mat. 185790
 3) Riccardo Ricci @UniTN mat. 181398
 ### How to use:
-L'algortimo funziona prendedno in ouput 2 file JSON contenuti nella cartella "Json", e produce un file txt nella cartella "Output". Inoltre per un'analisi tecnica del lavoro svolto è possibile richiamare i metodi di stampa dell'andamento dei vari angoli e farli processare da degli script di Matlab per vederne il grafico [quest'ulitmi sono contenuti nella cartella "matlab"].
+L'algortimo funziona prendendo in ouput 2 file JSON contenuti nella cartella "Json", e produce un file txt nella cartella "Output". Inoltre per un'analisi tecnica del lavoro svolto è possibile richiamare i metodi di stampa dell'andamento dei vari angoli e farli processare da degli script di Matlab per vederne il grafico [quest'ultimi sono contenuti nella cartella "matlab"].
 
 Si raccomanda perciò di includere nel progetto anche le cartelle:
 1) Json
