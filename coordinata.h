@@ -23,7 +23,5 @@ class Coordinata{
     
 		friend ostream& operator << (ostream& os,const Coordinata& _punto);
 };
-
 ostream& operator << (ostream& os,const Coordinata& _punto);
-
 #endif

@@ -32,7 +32,6 @@ private:
 
 public:
 	Persona(int _framesec, string nome_file,string percorso_file="json");
-
 	//METODI GET
 	double get_angoloMedia_zenit(int _angolo, int n_frame);
 	double get_angoloMedia_azimut(int _angolo,int n_frame);
@@ -42,7 +41,6 @@ public:
 	list<Angolo> get_valorimaxmin_zenit(int _angolo)const;
 	list<Angolo> get_valorimaxmin_azimut(int _angolo)const;
 	Angolo return_angolo(int _angolo, int _nframe)const;
-
 	//USO PER LETTURA ED INSERIMENTO DATI
 	void insert_frame(int _numeroframe); //Crea un frame vuoto e lo inserisce nella map.
     void insert_coordinata(int _numeroframe,int _numerojoint,double _x, double _y, double _z); //Inserisce una coordinata ad un detrimanto joint in un frame specifico.
@@ -53,14 +51,13 @@ public:
     void pulisci_errori_sequenzaangolo(int _angolo);//Pulisce gli errori causati dal processo di elaborazione joint della zedcam (salti troppo veloci di angolo) 
 	void maxminFind_angolo(int _angolo, int _finestra); //INSERISCE I MASSIMI E I MINIMI E IL VALORE INIZIALE E FINALE!
 	void maxminClean_angolo(int _angolo, double _tolleranzazenit, double _tolleranzaazimut);
-
 	//STAMPE
 	void stampaConsole_maxmin(int n);
 	void stampaConsole_angolo(int n, bool scelta);
     void stampaFile_coordinate(int n, string name, string percorso_file);
 	void stampaFile_angolo(int n, string name, string percorso_file="matlab");
 	void stampaFile_maxmin(int n, string name, string percorso_file="matlab");
-
+	//PROCESSING
 	void processa_angolo(int _angolo);
 	void processa_esercizio();
     

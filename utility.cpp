@@ -1,7 +1,6 @@
 #include "utility.h"
 #include "angolo.h"
 
-
 double angolo_XY(Coordinata &c1,Coordinata &c2){
 	double angolo;
 	if(c1.get_x()-c2.get_x()!=0){
@@ -122,42 +121,6 @@ double media_azimut(list<Angolo> _lista) {
 	}
 	mediaazimut = (double)sommaazimut / index;
 	return mediaazimut;
-}
-
-double devst_zenit(list<Angolo> _lista) {
-	double devstzenit = 0;
-	list<Angolo>::iterator iter;
-	int n = 0;
-	double mediazenit;
-	mediazenit = media_zenit(_lista);
-
-	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
-		++n;
-		devstzenit = devstzenit + pow(iter->get_zenit() - mediazenit, 2);
-	}
-
-	devstzenit = sqrt((double)devstzenit / n);
-
-	return devstzenit;
-
-}
-
-double devst_azimut(list<Angolo> _lista) {
-	double devstazimut = 0;
-	list<Angolo>::iterator iter;
-	int n = 0;
-	double mediaazimut;
-	mediaazimut = media_azimut(_lista);
-
-	for (iter = _lista.begin(); iter != _lista.end(); ++iter) {
-		++n;
-		devstazimut = devstazimut + pow(iter->get_azimut() - mediaazimut, 2);
-	}
-
-	devstazimut = sqrt((double)devstazimut / n);
-
-	return devstazimut;
-
 }
 
 float normalizza_percentuale(float _perc) {

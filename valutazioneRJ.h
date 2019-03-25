@@ -51,5 +51,4 @@ public:
 	//TEST
 	void test();
 };
-
 #endif

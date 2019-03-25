@@ -12,8 +12,7 @@ private:
     int numeroframe;
     map<int,Coordinata> coordinatejoint; //MAP: $->numero di joint, coordinata relativa
     map<int,Angolo> angolijoint; ////MAP: &->numero angolo, valore angolo
-
-	//FUNZIONI
+	//METODI
     void insert_angolo(int _joint,int a,int b,int c); //Funzione che trasforma 3 coordiante in un'angolo, usata nella funzione public "void completa_angolo();"
 
 public:
@@ -22,7 +21,7 @@ public:
     void set_angolo_zenit(int n, double nu);
     void set_angolo_azimut(int n, double nu);
     
-	//FUNZIONI GET
+	//METODI GET
 	int get_numeroframe()const; //Ritorna il numero di frame
     Coordinata get_coordinata(int _numerojoint); // Ritorna la coordinata relativa ad uno specifico joint
 	map<int,Angolo> get_angolijoint()const; //Ritorna una copia della MAP "angolijoint"

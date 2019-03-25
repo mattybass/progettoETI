@@ -21,8 +21,7 @@ private:
     double media_deltatime_zenit; //Media differenze tempo
     float media_deltatime_zenit_percento; //Percentuale media sulle differenze tempo
 	float accuratezza_zenit;
-	int diffpuntizenit; //attributo che indica quanti punti chiave di differenza ci sono tra puntichiavepaziente-puntichiavemodello! condizione top sono uguali!
-	                    //con questo attributo penso di riuscire almeno a capire se ci sono stati punti sballati sul paziente e quindi andro a considerare solo inizio e fine
+	int diffpuntizenit; 
     //AZIMUT
     vector<pair<double,float>> deltadist_azimut;
     vector<double> duratamovimentimodello_azimut;
@@ -36,7 +35,6 @@ private:
 	int diffpuntiazimut;
 	//GENERALI
     float accuratezza; 
-
 public:
 	//COSTRUTTORE
     ValutazioneSJ();
