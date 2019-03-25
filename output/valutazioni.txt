@@ -1,117 +1,35 @@
 Esercizio completato al 100%!
 Percentuale accuratezza esercizio globale --> 81.2172
 
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 1
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 1
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, sono stati effettuati più movimenti di quelli previsti dall'esercizio!
 Media discostamento da angolo modello --> 4.43242 percentuale accuratezza media --> 98.3813
 
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
-
+La velocità di esecuzione dell'esercizio è corretta!
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 175.642 percentuale accuratezza media --> 50.6107
-
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
+La velocità di esecuzione dell'esercizio è corretta!
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 6.27431 || Percentuale accuratezza media --> 96.4195
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 0.934851 || Percentuale accuratezza media --> 99.6356
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 4.35921 || Percentuale accuratezza media --> 97.6866
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 3.28535 || Percentuale accuratezza media --> 98.0341
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 2.66846 || Percentuale accuratezza media --> 98.5154
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 1.5115 || Percentuale accuratezza media --> 99.1974
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 1.64995 || Percentuale accuratezza media --> 99.0721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 48.2271 || Percentuale accuratezza media --> 60.8685
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 48.5793 || Percentuale accuratezza media --> 79.2584
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 55.0268 || Percentuale accuratezza media --> 25.6646
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 29.9893 || Percentuale accuratezza media --> 79.7098
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 27.4532 || Percentuale accuratezza media --> 83.2713
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 17.0553 || Percentuale accuratezza media --> 93.6507
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 14.2778 || Percentuale accuratezza media --> 91.1336
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 
 RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 2
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
@@ -270,791 +188,212 @@ La posizione iniziale è sbagliata ma l'errore è contenuto!
 La posizione finale è corretta!
 
 
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 3
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 3
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, sono stati effettuati più movimenti di quelli previsti dall'esercizio!
 Media discostamento da angolo modello --> 6.27431 percentuale accuratezza media --> 96.4195
-
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!
-
-Valutazione approfondita velocità
-Il movimento 1 è stato effettuato in maniera leggermente lenta!
-Il movimento 2 è stato eseguito in maniera leggermente veloce
-
-
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati più movimenti di quelli previsti dall'esercizio!
 Media discostamento da angolo modello --> 48.2271 percentuale accuratezza media --> 60.8685
-
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 L'esercizio è stato svolto complessivamente in modo più veloce rispetto al modello!
-
-Valutazione approfondita velocità
-Il movimento 1 è stato eseguito in maniera leggermente veloce
-Il movimento 2 è stato eseguito in maniera leggermente veloce
-
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 1 -- > Media discostamento da angolo modello = 4.43242 || Percentuale accuratezza media --> 98.3813
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 0.934851 || Percentuale accuratezza media --> 99.6356
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 4.35921 || Percentuale accuratezza media --> 97.6866
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 3.28535 || Percentuale accuratezza media --> 98.0341
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 2.66846 || Percentuale accuratezza media --> 98.5154
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 1.5115 || Percentuale accuratezza media --> 99.1974
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 1.64995 || Percentuale accuratezza media --> 99.0721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 1 -- > Media discostamento da angolo modello = 175.642 || Percentuale accuratezza media --> 50.6107
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 48.5793 || Percentuale accuratezza media --> 79.2584
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 55.0268 || Percentuale accuratezza media --> 25.6646
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 29.9893 || Percentuale accuratezza media --> 79.7098
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 27.4532 || Percentuale accuratezza media --> 83.2713
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 17.0553 || Percentuale accuratezza media --> 93.6507
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 14.2778 || Percentuale accuratezza media --> 91.1336
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
 
-
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 5
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 5
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 0.934851 percentuale accuratezza media --> 99.6356
 
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
-
+La velocità di esecuzione dell'esercizio è corretta!
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 48.5793 percentuale accuratezza media --> 79.2584
-
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
+La velocità di esecuzione dell'esercizio è corretta!
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 1 -- > Media discostamento da angolo modello = 4.43242 || Percentuale accuratezza media --> 98.3813
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 6.27431 || Percentuale accuratezza media --> 96.4195
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 4.35921 || Percentuale accuratezza media --> 97.6866
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 3.28535 || Percentuale accuratezza media --> 98.0341
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 2.66846 || Percentuale accuratezza media --> 98.5154
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 1.5115 || Percentuale accuratezza media --> 99.1974
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 1.64995 || Percentuale accuratezza media --> 99.0721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 1 -- > Media discostamento da angolo modello = 175.642 || Percentuale accuratezza media --> 50.6107
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 48.2271 || Percentuale accuratezza media --> 60.8685
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 55.0268 || Percentuale accuratezza media --> 25.6646
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 29.9893 || Percentuale accuratezza media --> 79.7098
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 27.4532 || Percentuale accuratezza media --> 83.2713
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 17.0553 || Percentuale accuratezza media --> 93.6507
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 14.2778 || Percentuale accuratezza media --> 91.1336
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
 
-
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 6
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 6
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 4.35921 percentuale accuratezza media --> 97.6866
 
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
-
+La velocità di esecuzione dell'esercizio è corretta!
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati più movimenti di quelli previsti dall'esercizio!
 Media discostamento da angolo modello --> 55.0268 percentuale accuratezza media --> 25.6646
-
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
+La velocità di esecuzione dell'esercizio è corretta!
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 1 -- > Media discostamento da angolo modello = 4.43242 || Percentuale accuratezza media --> 98.3813
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 6.27431 || Percentuale accuratezza media --> 96.4195
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 0.934851 || Percentuale accuratezza media --> 99.6356
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 3.28535 || Percentuale accuratezza media --> 98.0341
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 2.66846 || Percentuale accuratezza media --> 98.5154
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 1.5115 || Percentuale accuratezza media --> 99.1974
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 1.64995 || Percentuale accuratezza media --> 99.0721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 1 -- > Media discostamento da angolo modello = 175.642 || Percentuale accuratezza media --> 50.6107
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 48.2271 || Percentuale accuratezza media --> 60.8685
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 48.5793 || Percentuale accuratezza media --> 79.2584
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 29.9893 || Percentuale accuratezza media --> 79.7098
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 27.4532 || Percentuale accuratezza media --> 83.2713
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 17.0553 || Percentuale accuratezza media --> 93.6507
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 14.2778 || Percentuale accuratezza media --> 91.1336
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
 
-
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 8
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 8
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 3.28535 percentuale accuratezza media --> 98.0341
 
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
-
+La velocità di esecuzione dell'esercizio è corretta!
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati meno movimenti di quelli previsti dall'esercizio!
 Media discostamento da angolo modello --> 29.9893 percentuale accuratezza media --> 79.7098
-
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
+La velocità di esecuzione dell'esercizio è corretta!
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 1 -- > Media discostamento da angolo modello = 4.43242 || Percentuale accuratezza media --> 98.3813
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 6.27431 || Percentuale accuratezza media --> 96.4195
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 0.934851 || Percentuale accuratezza media --> 99.6356
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 4.35921 || Percentuale accuratezza media --> 97.6866
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 2.66846 || Percentuale accuratezza media --> 98.5154
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 1.5115 || Percentuale accuratezza media --> 99.1974
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 1.64995 || Percentuale accuratezza media --> 99.0721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 1 -- > Media discostamento da angolo modello = 175.642 || Percentuale accuratezza media --> 50.6107
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 48.2271 || Percentuale accuratezza media --> 60.8685
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 48.5793 || Percentuale accuratezza media --> 79.2584
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 55.0268 || Percentuale accuratezza media --> 25.6646
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 27.4532 || Percentuale accuratezza media --> 83.2713
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 17.0553 || Percentuale accuratezza media --> 93.6507
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 14.2778 || Percentuale accuratezza media --> 91.1336
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
 
-
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 9
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 9
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 2.66846 percentuale accuratezza media --> 98.5154
 
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
-
+La velocità di esecuzione dell'esercizio è corretta!
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati meno movimenti di quelli previsti dall'esercizio!
 Media discostamento da angolo modello --> 27.4532 percentuale accuratezza media --> 83.2713
-
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
+La velocità di esecuzione dell'esercizio è corretta!
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 1 -- > Media discostamento da angolo modello = 4.43242 || Percentuale accuratezza media --> 98.3813
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 6.27431 || Percentuale accuratezza media --> 96.4195
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 0.934851 || Percentuale accuratezza media --> 99.6356
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 4.35921 || Percentuale accuratezza media --> 97.6866
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 3.28535 || Percentuale accuratezza media --> 98.0341
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 1.5115 || Percentuale accuratezza media --> 99.1974
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 1.64995 || Percentuale accuratezza media --> 99.0721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 1 -- > Media discostamento da angolo modello = 175.642 || Percentuale accuratezza media --> 50.6107
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 48.2271 || Percentuale accuratezza media --> 60.8685
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 48.5793 || Percentuale accuratezza media --> 79.2584
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 55.0268 || Percentuale accuratezza media --> 25.6646
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 29.9893 || Percentuale accuratezza media --> 79.7098
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 17.0553 || Percentuale accuratezza media --> 93.6507
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 14.2778 || Percentuale accuratezza media --> 91.1336
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
 
-
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 11
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 11
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 1.5115 percentuale accuratezza media --> 99.1974
 
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
-
+La velocità di esecuzione dell'esercizio è corretta!
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, sono stati effettuati meno movimenti di quelli previsti dall'esercizio!
 Media discostamento da angolo modello --> 17.0553 percentuale accuratezza media --> 93.6507
-
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
+La velocità di esecuzione dell'esercizio è corretta!
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 1 -- > Media discostamento da angolo modello = 4.43242 || Percentuale accuratezza media --> 98.3813
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 6.27431 || Percentuale accuratezza media --> 96.4195
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 0.934851 || Percentuale accuratezza media --> 99.6356
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 4.35921 || Percentuale accuratezza media --> 97.6866
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 3.28535 || Percentuale accuratezza media --> 98.0341
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 2.66846 || Percentuale accuratezza media --> 98.5154
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 1.64995 || Percentuale accuratezza media --> 99.0721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 1 -- > Media discostamento da angolo modello = 175.642 || Percentuale accuratezza media --> 50.6107
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 48.2271 || Percentuale accuratezza media --> 60.8685
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 48.5793 || Percentuale accuratezza media --> 79.2584
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 55.0268 || Percentuale accuratezza media --> 25.6646
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 29.9893 || Percentuale accuratezza media --> 79.7098
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 27.4532 || Percentuale accuratezza media --> 83.2713
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 12 -- > Media discostamento da angolo modello = 14.2778 || Percentuale accuratezza media --> 91.1336
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
 
-
-RELAZIONE APPROFONDITA SULL'ARTICOLAZIONE NUMERO 12
+RELAZIONE NON APPROFONDITA SULL'ARTICOLAZIONE NUMERO 12
 METRICHE RELATIVE ALLA SINGOLA ARTICOLAZIONE
 ZENIT
-Su questa articolazione, per quanto riguarda lo zenit, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 1.64995 percentuale accuratezza media --> 99.0721
 
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
-
+La velocità di esecuzione dell'esercizio è corretta!
 AZIMUT
-Su questa articolazione, per quanto riguarda l'azimut, è stato effettuato il corretto numero di movimenti!
 Media discostamento da angolo modello --> 14.2778 percentuale accuratezza media --> 91.1336
-
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
-
-Valutazione approfondita velocità
-Per questa articolazione non possono essere effettuate misure di velocità! (o nel paziente o nel modello l'angolo è statico)
-
+La velocità di esecuzione dell'esercizio è corretta!
 
 METRICHE RELATIVE AI MOVIMENTI CONGIUNTI DELLE ALTRE ARTICOLAZIONI 
 ZENIT
 Articolazione 1 -- > Media discostamento da angolo modello = 4.43242 || Percentuale accuratezza media --> 98.3813
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 9.0916 || Percentuale accuratezza media --> 90.1022
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 6.27431 || Percentuale accuratezza media --> 96.4195
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 0.934851 || Percentuale accuratezza media --> 99.6356
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 4.35921 || Percentuale accuratezza media --> 97.6866
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 3.28535 || Percentuale accuratezza media --> 98.0341
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 2.66846 || Percentuale accuratezza media --> 98.5154
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 1.5115 || Percentuale accuratezza media --> 99.1974
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 AZIMUT
 Articolazione 1 -- > Media discostamento da angolo modello = 175.642 || Percentuale accuratezza media --> 50.6107
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 2 -- > Media discostamento da angolo modello = 15.2412 || Percentuale accuratezza media --> 91.721
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 3 -- > Media discostamento da angolo modello = 48.2271 || Percentuale accuratezza media --> 60.8685
-Valutazione approfondita scostamenti
-La posizione iniziale non è stata raggiunta correttamente!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 5 -- > Media discostamento da angolo modello = 48.5793 || Percentuale accuratezza media --> 79.2584
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 6 -- > Media discostamento da angolo modello = 55.0268 || Percentuale accuratezza media --> 25.6646
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale non è stata raggiunta correttamente!
-
 Articolazione 8 -- > Media discostamento da angolo modello = 29.9893 || Percentuale accuratezza media --> 79.7098
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è corretta!
-
 Articolazione 9 -- > Media discostamento da angolo modello = 27.4532 || Percentuale accuratezza media --> 83.2713
-Valutazione approfondita scostamenti
-La posizione iniziale è sbagliata ma l'errore è contenuto!
-La posizione finale è sbagliata ma l'errore è contenuto!
-
 Articolazione 11 -- > Media discostamento da angolo modello = 17.0553 || Percentuale accuratezza media --> 93.6507
-Valutazione approfondita scostamenti
-La posizione iniziale è corretta!
-La posizione finale è corretta!
-
 
