@@ -55,7 +55,8 @@ void Valutazione::stampavalutazione(string percorso_file, string name, float pes
 	ofstream file;
 	file.open(l);
 	map<int, pair<float, float>>::iterator iter;
-	file << "Esercizio completato al " << completezzaesercizio <<"%!"<< endl<<endl;
+	file << "Esercizio completato al " << completezzaesercizio << "%!" << endl;
+	file << "Percentuale accuratezza esercizio globale --> " << accuratezzaEsercizio << endl << endl;
     for (iter = pesi.begin(); iter != pesi.end(); ++iter) {
 			if ((iter->second.first + iter->second.second) >= peso_stampa) //peso stampa serve per far capire di quali joint si vuole la relazione approfondita e quali no
 			{
@@ -100,7 +101,7 @@ void Valutazione::popola_pesiRJ(int _angolo){
 	pesi[_angolo] = temp; //riaggiungo l'angolo per eventuali altri calcoli!
 }
 
-float Valutazione::valutaTotale(){
+void Valutazione::valutaTotale(){
 	map<int, pair<float, float>>::iterator iter; //serve per scorrere la map di pesi
 	double sum_SJ = 0.0;
 	double sum_RJ = 0.0;
@@ -132,7 +133,7 @@ float Valutazione::valutaTotale(){
 		sum_SJ += valutazioneSingleJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneSingleJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
 		sum_RJ += valutazioneRelazioneJoint[iter->first].get_accuratezza_azimut()*peso_azimut + valutazioneRelazioneJoint[iter->first].get_accuratezza_zenit()*peso_zenit;
 	}
-	return 0.8*(sum_SJ)+0.2*(sum_RJ);
+	accuratezzaEsercizio = 0.8*(sum_SJ)+0.2*(sum_RJ);
 }
 
 void Valutazione::valutaRelationJoint(int _joint) {

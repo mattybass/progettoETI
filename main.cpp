@@ -9,11 +9,12 @@
 int main(int argc, char** argv) {
 	Persona p(60,"modellomattyspalla.json");
 	p.processa_esercizio();
-	Persona p2(60,"B2movim.json");
+	Persona p2(60,"Bprova2.json");
 	p2.processa_esercizio();
 	Valutazione v(&p2, &p);
-	cout<<v.valutaTotale();
-	v.stampavalutazione("matlab", "valutazioni", 0);
+	v.valutaTotale();
+	v.stampavalutazione("output", "valutazioni", 0);
+	cout << "ELABORAZIONE COMPLETATA!" << endl;
 	system("PAUSE");
 	return 0;
 }

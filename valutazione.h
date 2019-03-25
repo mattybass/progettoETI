@@ -40,7 +40,7 @@ public:
 	void percentualeEsCompletato();
 	void valutaSingleJoint(int _joint);
 	void valutaRelationJoint(int _joint); //deve essere passato il joint di cui si vuole fare la valutazione!
-	float valutaTotale();
+	void valutaTotale();
     //METODI DI TEST
 	void stampavalutazione(string percorso_file, string name, float peso_stampa); //stampa un file txt contenente tutte le valutazioni
 };
