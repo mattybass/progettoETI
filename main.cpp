@@ -11,6 +11,7 @@ int main(int argc, char** argv) {
 	p.processa_esercizio();
 	Persona p2(60,"Paziente_corretto.json");
 	p2.processa_esercizio();
+	p.stampaFile_maxmin(2,"");
 	Valutazione v(&p2, &p);
 	v.valutaTotale();
 	v.stampavalutazione("output", "valutazioni", 0.3);
